@@ -1,0 +1,77 @@
+<svg viewBox="0 0 200 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    .bar1 { animation: growBar1 2s ease-out infinite; }
+    .bar2 { animation: growBar2 2s ease-out 0.2s infinite; }
+    .bar3 { animation: growBar3 2s ease-out 0.4s infinite; }
+    .bar4 { animation: growBar4 2s ease-out 0.6s infinite; }
+    .coin { animation: coinPulse 2s ease-in-out infinite; }
+    .coin-symbol { animation: symbolPulse 2s ease-in-out infinite; }
+    .arrow { animation: arrowMove 2s ease-in-out infinite; }
+    .trend-line { animation: drawLine 2s ease-out infinite; }
+    
+    @keyframes growBar1 {
+      0%, 100% { transform: scaleY(0.7); }
+      50% { transform: scaleY(1); }
+    }
+    @keyframes growBar2 {
+      0%, 100% { transform: scaleY(0.6); }
+      50% { transform: scaleY(1); }
+    }
+    @keyframes growBar3 {
+      0%, 100% { transform: scaleY(0.5); }
+      50% { transform: scaleY(1); }
+    }
+    @keyframes growBar4 {
+      0%, 100% { transform: scaleY(0.8); }
+      50% { transform: scaleY(1); }
+    }
+    @keyframes coinPulse {
+      0%, 100% { transform: scale(1); filter: drop-shadow(0 2px 8px rgba(91, 192, 235, 0.3)); }
+      50% { transform: scale(1.08); filter: drop-shadow(0 4px 12px rgba(91, 192, 235, 0.5)); }
+    }
+    @keyframes symbolPulse {
+      0%, 100% { opacity: 0.9; }
+      50% { opacity: 1; }
+    }
+    @keyframes arrowMove {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-5px); }
+    }
+    @keyframes drawLine {
+      0%, 100% { stroke-dashoffset: 0; }
+      50% { stroke-dashoffset: -15; }
+    }
+  </style>
+  
+  <!-- Chart bars -->
+  <g transform="translate(15, 165)">
+    <rect class="bar1" x="5" y="-60" width="22" height="60" rx="4" fill="#C5E8F7" style="transform-origin: 16px 165px;"/>
+    <rect class="bar2" x="35" y="-85" width="22" height="85" rx="4" fill="#A3DAF3" style="transform-origin: 46px 165px;"/>
+    <rect class="bar3" x="65" y="-110" width="22" height="110" rx="4" fill="#7FCBEC" style="transform-origin: 76px 165px;"/>
+    <rect class="bar4" x="95" y="-75" width="22" height="75" rx="4" fill="#5BC0EB" style="transform-origin: 106px 165px;"/>
+  </g>
+  
+  <!-- Trend line -->
+  <path class="trend-line" d="M30 130 Q55 100, 85 70 T140 40" stroke="#5BC0EB" stroke-width="3" stroke-linecap="round" stroke-dasharray="8,4" fill="none"/>
+  
+  <!-- Arrow up -->
+  <g class="arrow" style="transform-origin: 150px 55px;">
+    <path d="M142 60 L150 35 L158 60" stroke="#5BC0EB" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+    <path d="M150 35 L150 80" stroke="#5BC0EB" stroke-width="3.5" stroke-linecap="round"/>
+  </g>
+  
+  <!-- Coin -->
+  <g class="coin" style="transform-origin: 155px 130px;">
+    <circle cx="155" cy="130" r="26" fill="url(#coinGradient)" stroke="#5BC0EB" stroke-width="2.5"/>
+    <circle cx="155" cy="130" r="19" fill="none" stroke="rgba(255,255,255,0.5)" stroke-width="2"/>
+  </g>
+  <text class="coin-symbol" x="155" y="140" text-anchor="middle" fill="#FFFFFF" font-size="26" font-weight="700">₽</text>
+  
+  <!-- Gradient -->
+  <defs>
+    <linearGradient id="coinGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#5BC0EB"/>
+      <stop offset="100%" style="stop-color:#3AA8D8"/>
+    </linearGradient>
+  </defs>
+</svg>

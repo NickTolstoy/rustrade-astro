@@ -1,0 +1,130 @@
+---
+// Partners/Trust Section Component
+
+const partners = [
+  { name: "Газпром", logo: "/img/partners/gazprom.png" },
+  { name: "Татнефть", logo: "/img/partners/tatneft.png" },
+  { name: "Уральская Сталь", logo: "/img/partners/ural_steel.png" },
+  { name: "УРАЛХИМ", logo: "/img/partners/uralchem.png" },
+  { name: "Северсталь", logo: "/img/partners/severstal.png" },
+  { name: "СИБУР", logo: "/img/partners/sibur.png" },
+  { name: "Роснефть", logo: "/img/partners/rosneft.png" },
+  { name: "Segezha Group", logo: "/img/partners/segezha.png" },
+  { name: "ЕвроХим", logo: "/img/partners/Evrohim.svg" },
+  { name: "Лукойл", logo: "/img/partners/LUK_OIL.svg" },
+  { name: "НЛМК", logo: "/img/partners/NLMK.svg" },
+  { name: "Губахинский Кокс", logo: "/img/partners/Gubahinskiy Koks.svg" }
+];
+---
+
+<section class="partners-section">
+  <div class="block-header">
+    <h2>Нам доверяют</h2>
+  </div>
+  
+  <div class="marquee-container">
+    <div class="marquee-track">
+      {/* First set of partners */}
+      {partners.map(partner => (
+        <div class="partner-item">
+          <div class="partner-logo">
+            <img src={partner.logo} alt={partner.name} />
+          </div>
+        </div>
+      ))}
+      {/* Duplicate set for seamless loop */}
+      {partners.map(partner => (
+        <div class="partner-item">
+          <div class="partner-logo">
+            <img src={partner.logo} alt={partner.name} />
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .partners-section {
+    margin-bottom: var(--space-8);
+  }
+
+  .block-header {
+    margin-bottom: var(--space-6);
+  }
+
+  .block-header h2 {
+    font-size: var(--text-3xl);
+    margin-bottom: var(--space-3);
+  }
+
+  .marquee-container {
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+    padding: var(--space-4) 0;
+    mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+    -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+  }
+
+  .marquee-track {
+    display: flex;
+    gap: var(--space-8);
+    width: max-content;
+    animation: scroll 40s linear infinite;
+  }
+
+  .marquee-track:hover {
+    animation-play-state: paused;
+  }
+
+  .partner-item {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .partner-logo {
+    padding: var(--space-4) var(--space-8);
+    background: var(--color-white);
+    border: 1px solid var(--color-border);
+    border-radius: 20px;
+    transition: all 0.3s ease;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 200px;
+  }
+
+  .partner-logo img {
+    max-height: 100%;
+    max-width: 100%;
+    object-fit: contain;
+    filter: grayscale(100%);
+    transition: all 0.3s ease;
+    opacity: 0.7;
+  }
+
+  .partner-item:hover .partner-logo {
+    border-color: var(--color-accent);
+    transform: scale(1.05);
+    box-shadow: var(--shadow-sm);
+  }
+  
+  .partner-item:hover .partner-logo img {
+    filter: grayscale(0%);
+    opacity: 1;
+  }
+
+  @keyframes scroll {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+</style>
+

@@ -1,0 +1,229 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 260" id="metalGears">
+  <defs>
+    <!-- Металлические градиенты -->
+    <linearGradient id="metalBody" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#E8EAEC"/>
+      <stop offset="25%" stop-color="#C5C9CD"/>
+      <stop offset="50%" stop-color="#9DA3AA"/>
+      <stop offset="75%" stop-color="#C5C9CD"/>
+      <stop offset="100%" stop-color="#E8EAEC"/>
+    </linearGradient>
+    
+    <linearGradient id="metalDark" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#6B7280"/>
+      <stop offset="30%" stop-color="#4B5563"/>
+      <stop offset="70%" stop-color="#374151"/>
+      <stop offset="100%" stop-color="#4B5563"/>
+    </linearGradient>
+    
+    <linearGradient id="metalRim" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#9CA3AF"/>
+      <stop offset="20%" stop-color="#6B7280"/>
+      <stop offset="80%" stop-color="#4B5563"/>
+      <stop offset="100%" stop-color="#374151"/>
+    </linearGradient>
+    
+    <linearGradient id="metalCenter" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#F3F4F6"/>
+      <stop offset="40%" stop-color="#D1D5DB"/>
+      <stop offset="60%" stop-color="#9CA3AF"/>
+      <stop offset="100%" stop-color="#6B7280"/>
+    </linearGradient>
+    
+    <linearGradient id="metalHole" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#374151"/>
+      <stop offset="50%" stop-color="#1F2937"/>
+      <stop offset="100%" stop-color="#111827"/>
+    </linearGradient>
+    
+    <linearGradient id="toothGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#9CA3AF"/>
+      <stop offset="50%" stop-color="#6B7280"/>
+      <stop offset="100%" stop-color="#4B5563"/>
+    </linearGradient>
+    
+    <radialGradient id="metalShine" cx="30%" cy="30%" r="60%">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.35"/>
+      <stop offset="100%" stop-color="#FFFFFF" stop-opacity="0"/>
+    </radialGradient>
+    
+    <filter id="gearShadow" x="-50%" y="-50%" width="200%" height="200%">
+      <feDropShadow dx="3" dy="5" stdDeviation="6" flood-color="#1F2937" flood-opacity="0.35"/>
+    </filter>
+  </defs>
+  
+  <!-- Большая шестерня (центр сцепления) -->
+  <g id="gear1" filter="url(#gearShadow)">
+    <g id="teeth1"></g>
+    <circle cx="125" cy="105" r="55" fill="url(#metalBody)"/>
+    <circle cx="125" cy="105" r="55" fill="none" stroke="url(#metalRim)" stroke-width="6"/>
+    <circle cx="125" cy="105" r="40" fill="url(#metalDark)"/>
+    <circle cx="125" cy="105" r="36" fill="url(#metalBody)"/>
+    <circle cx="125" cy="105" r="18" fill="url(#metalCenter)"/>
+    <circle cx="125" cy="105" r="16" fill="none" stroke="url(#metalRim)" stroke-width="2.5"/>
+    <circle cx="125" cy="105" r="7" fill="url(#metalHole)"/>
+    <circle cx="125" cy="105" r="5" fill="#111827"/>
+    <circle cx="125" cy="105" r="52" fill="url(#metalShine)"/>
+  </g>
+  
+  <!-- Средняя шестерня (сцеплена с большой справа-снизу) -->
+  <g id="gear2" filter="url(#gearShadow)">
+    <g id="teeth2"></g>
+    <circle cx="225" cy="145" r="42" fill="url(#metalBody)"/>
+    <circle cx="225" cy="145" r="42" fill="none" stroke="url(#metalRim)" stroke-width="5"/>
+    <circle cx="225" cy="145" r="30" fill="url(#metalDark)"/>
+    <circle cx="225" cy="145" r="26" fill="url(#metalBody)"/>
+    <circle cx="225" cy="145" r="13" fill="url(#metalCenter)"/>
+    <circle cx="225" cy="145" r="11" fill="none" stroke="url(#metalRim)" stroke-width="2"/>
+    <circle cx="225" cy="145" r="5" fill="url(#metalHole)"/>
+    <circle cx="225" cy="145" r="3.5" fill="#111827"/>
+    <circle cx="225" cy="145" r="40" fill="url(#metalShine)"/>
+  </g>
+  
+  <!-- Маленькая шестерня (сцеплена с большой снизу-слева) -->
+  <g id="gear3" filter="url(#gearShadow)">
+    <g id="teeth3"></g>
+    <circle cx="100" cy="205" r="30" fill="url(#metalBody)"/>
+    <circle cx="100" cy="205" r="30" fill="none" stroke="url(#metalRim)" stroke-width="4"/>
+    <circle cx="100" cy="205" r="21" fill="url(#metalDark)"/>
+    <circle cx="100" cy="205" r="17" fill="url(#metalBody)"/>
+    <circle cx="100" cy="205" r="9" fill="url(#metalCenter)"/>
+    <circle cx="100" cy="205" r="7" fill="none" stroke="url(#metalRim)" stroke-width="1.5"/>
+    <circle cx="100" cy="205" r="3.5" fill="url(#metalHole)"/>
+    <circle cx="100" cy="205" r="2" fill="#111827"/>
+    <circle cx="100" cy="205" r="28" fill="url(#metalShine)"/>
+  </g>
+
+  <script type="text/javascript"><![CDATA[
+    (function() {
+      function generateTeeth(cx, cy, baseRadius, toothCount, toothHeight, toothTopWidth, toothBaseWidth) {
+        let path = '';
+        const angleStep = (Math.PI * 2) / toothCount;
+        const halfToothAngle = (toothBaseWidth / baseRadius) / 2;
+        const halfTopAngle = (toothTopWidth / (baseRadius + toothHeight)) / 2;
+        
+        for (let i = 0; i < toothCount; i++) {
+          const angle = i * angleStep - Math.PI / 2;
+          
+          const valley1Angle = angle - angleStep / 2 + halfToothAngle;
+          const vx1 = cx + baseRadius * Math.cos(valley1Angle);
+          const vy1 = cy + baseRadius * Math.sin(valley1Angle);
+          
+          const base1Angle = angle - halfToothAngle;
+          const bx1 = cx + baseRadius * Math.cos(base1Angle);
+          const by1 = cy + baseRadius * Math.sin(base1Angle);
+          
+          const top1Angle = angle - halfTopAngle;
+          const tx1 = cx + (baseRadius + toothHeight) * Math.cos(top1Angle);
+          const ty1 = cy + (baseRadius + toothHeight) * Math.sin(top1Angle);
+          
+          const top2Angle = angle + halfTopAngle;
+          const tx2 = cx + (baseRadius + toothHeight) * Math.cos(top2Angle);
+          const ty2 = cy + (baseRadius + toothHeight) * Math.sin(top2Angle);
+          
+          const base2Angle = angle + halfToothAngle;
+          const bx2 = cx + baseRadius * Math.cos(base2Angle);
+          const by2 = cy + baseRadius * Math.sin(base2Angle);
+          
+          const valley2Angle = angle + angleStep / 2 - halfToothAngle;
+          const vx2 = cx + baseRadius * Math.cos(valley2Angle);
+          const vy2 = cy + baseRadius * Math.sin(valley2Angle);
+          
+          if (i === 0) {
+            path += `M ${vx1.toFixed(2)} ${vy1.toFixed(2)} `;
+          }
+          
+          path += `A ${baseRadius} ${baseRadius} 0 0 1 ${bx1.toFixed(2)} ${by1.toFixed(2)} `;
+          path += `L ${tx1.toFixed(2)} ${ty1.toFixed(2)} `;
+          path += `L ${tx2.toFixed(2)} ${ty2.toFixed(2)} `;
+          path += `L ${bx2.toFixed(2)} ${by2.toFixed(2)} `;
+          path += `A ${baseRadius} ${baseRadius} 0 0 1 ${vx2.toFixed(2)} ${vy2.toFixed(2)} `;
+        }
+        
+        path += 'Z';
+        return path;
+      }
+      
+      function createTeeth() {
+        const teeth1 = document.getElementById('teeth1');
+        const teeth2 = document.getElementById('teeth2');
+        const teeth3 = document.getElementById('teeth3');
+        
+        // Большая: 30 зубьев
+        if (teeth1) {
+          const path1 = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+          path1.setAttribute('d', generateTeeth(125, 105, 55, 30, 10, 5, 9));
+          path1.setAttribute('fill', 'url(#toothGrad)');
+          path1.setAttribute('stroke', '#374151');
+          path1.setAttribute('stroke-width', '0.5');
+          teeth1.appendChild(path1);
+        }
+        
+        // Средняя: 24 зуба (сцепляется с большой)
+        if (teeth2) {
+          const path2 = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+          path2.setAttribute('d', generateTeeth(225, 145, 42, 24, 8, 4, 7));
+          path2.setAttribute('fill', 'url(#toothGrad)');
+          path2.setAttribute('stroke', '#374151');
+          path2.setAttribute('stroke-width', '0.5');
+          teeth2.appendChild(path2);
+        }
+        
+        // Маленькая: 18 зубьев (сцепляется с большой)
+        if (teeth3) {
+          const path3 = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+          path3.setAttribute('d', generateTeeth(100, 205, 30, 18, 7, 4, 6));
+          path3.setAttribute('fill', 'url(#toothGrad)');
+          path3.setAttribute('stroke', '#374151');
+          path3.setAttribute('stroke-width', '0.5');
+          teeth3.appendChild(path3);
+        }
+      }
+      
+      let angle1 = 0, angle2 = 0, angle3 = 0;
+      let lastTime = 0;
+      
+      function animate(currentTime) {
+        if (!lastTime) lastTime = currentTime;
+        const delta = (currentTime - lastTime) / 1000;
+        lastTime = currentTime;
+        
+        // Скорости синхронизированы по передаточному числу
+        const speed = 15;
+        angle1 += delta * speed;
+        angle2 -= delta * speed * (30/24); // Противоположное направление
+        angle3 -= delta * speed * (30/18); // Противоположное направление
+        
+        const gear1 = document.getElementById('gear1');
+        const gear2 = document.getElementById('gear2');
+        const gear3 = document.getElementById('gear3');
+        
+        if (gear1) {
+          gear1.style.transform = `rotate(${angle1}deg)`;
+          gear1.style.transformOrigin = '125px 105px';
+        }
+        if (gear2) {
+          gear2.style.transform = `rotate(${angle2}deg)`;
+          gear2.style.transformOrigin = '225px 145px';
+        }
+        if (gear3) {
+          gear3.style.transform = `rotate(${angle3}deg)`;
+          gear3.style.transformOrigin = '100px 205px';
+        }
+        
+        requestAnimationFrame(animate);
+      }
+      
+      function init() {
+        createTeeth();
+        requestAnimationFrame(animate);
+      }
+      
+      if (document.readyState === 'complete') {
+        init();
+      } else {
+        window.addEventListener('load', init);
+      }
+    })();
+  ]]></script>
+</svg>

@@ -1,0 +1,122 @@
+<svg viewBox="0 0 200 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    .main-drop { animation: drop-bounce 2.5s ease-in-out infinite; transform-origin: center; }
+    @keyframes drop-bounce {
+      0%, 100% { transform: translateY(0) scale(1); }
+      30% { transform: translateY(-8px) scale(1.02); }
+      60% { transform: translateY(4px) scale(0.98); }
+    }
+    .drop-shine { animation: shine-move 3s ease-in-out infinite; }
+    @keyframes shine-move {
+      0%, 100% { opacity: 0.4; transform: translate(0, 0); }
+      50% { opacity: 0.8; transform: translate(2px, -2px); }
+    }
+    .ripple-wave { animation: ripple-expand 2.5s ease-out infinite; transform-origin: center; }
+    .ripple-wave:nth-child(2) { animation-delay: 0.4s; }
+    .ripple-wave:nth-child(3) { animation-delay: 0.8s; }
+    @keyframes ripple-expand {
+      0% { transform: scale(0.6); opacity: 1; }
+      100% { transform: scale(1.4); opacity: 0; }
+    }
+    .wave-bottom { animation: wave-sway 3s ease-in-out infinite; }
+    @keyframes wave-sway {
+      0%, 100% { transform: translateX(0); }
+      50% { transform: translateX(5px); }
+    }
+    .salt-crystal { animation: crystal-float 4s ease-in-out infinite; }
+    .salt-crystal:nth-child(2) { animation-delay: 0.5s; }
+    .salt-crystal:nth-child(3) { animation-delay: 1s; }
+    @keyframes crystal-float {
+      0%, 100% { transform: translateY(0) rotate(0deg); opacity: 0.6; }
+      50% { transform: translateY(-5px) rotate(10deg); opacity: 1; }
+    }
+    .label-fresh { animation: label-glow 3s ease-in-out infinite; }
+    .label-sea { animation: label-glow 3s ease-in-out 1.5s infinite; }
+    @keyframes label-glow {
+      0%, 100% { opacity: 0.7; }
+      50% { opacity: 1; }
+    }
+    .divider { animation: divider-pulse 2s ease-in-out infinite; }
+    @keyframes divider-pulse {
+      0%, 100% { stroke-opacity: 0.4; }
+      50% { stroke-opacity: 0.8; }
+    }
+  </style>
+  
+  <!-- Разделительная линия -->
+  <line class="divider" x1="100" y1="15" x2="100" y2="165" stroke="#2A2D2E" stroke-width="2" stroke-dasharray="8,4"/>
+  
+  <!-- Левая сторона - Пресная вода -->
+  <g transform="translate(0, 0)">
+    <!-- Большая капля пресной воды -->
+    <g class="main-drop" style="transform-origin: 50px 70px;">
+      <path d="M50 20C50 20 25 55 25 80C25 96.5685 38.4315 110 55 110C71.5685 110 85 96.5685 85 80C85 55 50 20 50 20Z" 
+            stroke="#5BC0EB" stroke-width="2.5" fill="#5BC0EB" fill-opacity="0.2"/>
+      <!-- Блик на капле -->
+      <ellipse class="drop-shine" cx="40" cy="60" rx="8" ry="14" fill="white" fill-opacity="0.5"/>
+    </g>
+    
+    <!-- Волны воды снизу -->
+    <g class="wave-bottom" style="transform-origin: 50px 140px;">
+      <path d="M10 145C20 138 30 152 40 145C50 138 60 152 70 145C80 138 90 152 95 148" 
+            stroke="#5BC0EB" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+      <path d="M15 158C25 151 35 165 45 158C55 151 65 165 75 158C85 151 92 162 95 160" 
+            stroke="#5BC0EB" stroke-width="2" stroke-linecap="round" fill="none" opacity="0.5"/>
+    </g>
+    
+    <!-- Рябь под каплей -->
+    <ellipse class="ripple-wave" cx="55" cy="120" rx="18" ry="5" stroke="#5BC0EB" stroke-width="1.5" fill="none"/>
+    <ellipse class="ripple-wave" cx="55" cy="120" rx="12" ry="3" stroke="#5BC0EB" stroke-width="1.5" fill="none"/>
+    <ellipse class="ripple-wave" cx="55" cy="120" rx="6" ry="2" stroke="#5BC0EB" stroke-width="1.5" fill="none"/>
+    
+    <!-- Метка H₂O -->
+    <g class="label-fresh">
+      <rect x="30" y="125" width="44" height="18" rx="4" fill="#5BC0EB" fill-opacity="0.15"/>
+      <text x="52" y="138" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" font-weight="600" fill="#2A2D2E">H₂O</text>
+    </g>
+  </g>
+  
+  <!-- Правая сторона - Морская вода -->
+  <g transform="translate(100, 0)">
+    <!-- Большая капля морской воды -->
+    <g class="main-drop" style="transform-origin: 50px 70px;">
+      <path d="M50 20C50 20 25 55 25 80C25 96.5685 38.4315 110 55 110C71.5685 110 85 96.5685 85 80C85 55 50 20 50 20Z" 
+            stroke="#2A8BA8" stroke-width="2.5" fill="#2A8BA8" fill-opacity="0.25"/>
+      <!-- Блик на капле -->
+      <ellipse class="drop-shine" cx="40" cy="60" rx="8" ry="14" fill="white" fill-opacity="0.4"/>
+      
+      <!-- Кристаллы соли внутри -->
+      <g class="salt-crystal" style="transform-origin: 45px 75px;">
+        <rect x="42" y="72" width="6" height="6" rx="1" fill="white" fill-opacity="0.7" transform="rotate(15, 45, 75)"/>
+      </g>
+      <g class="salt-crystal" style="transform-origin: 55px 85px;">
+        <rect x="52" y="82" width="5" height="5" rx="1" fill="white" fill-opacity="0.6" transform="rotate(-10, 55, 85)"/>
+      </g>
+      <g class="salt-crystal" style="transform-origin: 60px 65px;">
+        <rect x="58" y="63" width="4" height="4" rx="1" fill="white" fill-opacity="0.5" transform="rotate(25, 60, 65)"/>
+      </g>
+    </g>
+    
+    <!-- Волны воды снизу (более тёмные) -->
+    <g class="wave-bottom" style="transform-origin: 50px 140px;">
+      <path d="M5 145C15 138 25 152 35 145C45 138 55 152 65 145C75 138 85 152 90 148" 
+            stroke="#2A8BA8" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+      <path d="M10 158C20 151 30 165 40 158C50 151 60 165 70 158C80 151 87 162 90 160" 
+            stroke="#2A8BA8" stroke-width="2" stroke-linecap="round" fill="none" opacity="0.5"/>
+    </g>
+    
+    <!-- Рябь под каплей -->
+    <ellipse class="ripple-wave" cx="55" cy="120" rx="18" ry="5" stroke="#2A8BA8" stroke-width="1.5" fill="none"/>
+    <ellipse class="ripple-wave" cx="55" cy="120" rx="12" ry="3" stroke="#2A8BA8" stroke-width="1.5" fill="none"/>
+    
+    <!-- Метка NaCl -->
+    <g class="label-sea">
+      <rect x="28" y="125" width="48" height="18" rx="4" fill="#2A8BA8" fill-opacity="0.15"/>
+      <text x="52" y="138" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" font-weight="600" fill="#2A2D2E">NaCl</text>
+    </g>
+  </g>
+  
+  <!-- Общие метки сверху -->
+  <text x="50" y="12" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#5BC0EB" font-weight="500">Пресная</text>
+  <text x="150" y="12" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#2A8BA8" font-weight="500">Морская</text>
+</svg>

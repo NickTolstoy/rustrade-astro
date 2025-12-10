@@ -1,0 +1,274 @@
+---
+import { newsCategories } from '@/data/news';
+import type { Lang } from '@/i18n';
+import { getBaseUrl } from '@/i18n';
+
+interface Props {
+  slug: string;
+  title: string;
+  excerpt: string;
+  image: string;
+  thumbnail?: string;
+  date: string;
+  category: 'company' | 'articles' | 'industry';
+  readTime?: number;
+  featured?: boolean;
+  lang: Lang;
+  city: string;
+  loading?: 'eager' | 'lazy';
+}
+
+const { 
+  slug, 
+  title, 
+  excerpt, 
+  image, 
+  thumbnail,
+  date, 
+  category, 
+  readTime,
+  featured = false, 
+  lang, 
+  city,
+  loading = 'lazy'
+} = Astro.props;
+
+const formattedDate = new Intl.DateTimeFormat(lang === 'ru' ? 'ru-RU' : 'en-US', {
+  day: 'numeric',
+  month: 'long',
+  year: 'numeric'
+}).format(new Date(date));
+
+const base = getBaseUrl(lang, city);
+const href = `${base}/news/${slug}`;
+const categoryLabel = newsCategories[category]?.[lang] || category;
+const displayImage = thumbnail || image;
+
+const readTimeText = readTime 
+  ? lang === 'ru' 
+    ? `${readTime} мин чтения` 
+    : `${readTime} min read`
+  : null;
+---
+
+<a 
+  href={href} 
+  class:list={['news-card', { featured }]}
+  data-category={category}
+  data-title={title.toLowerCase()}
+>
+  <div class="news-card-image">
+    <img src={displayImage} alt={title} loading={loading} />
+    <span class="news-card-category">{categoryLabel}</span>
+  </div>
+  <div class="news-card-content">
+    <p class="news-date">{formattedDate}</p>
+    <h2 class="news-title">{title}</h2>
+    <p class="news-excerpt">{excerpt}</p>
+    <div class="news-card-footer">
+      <span class="news-tag">{categoryLabel}</span>
+      {readTimeText && <span class="news-read-time">{readTimeText}</span>}
+    </div>
+  </div>
+</a>
+
+<style>
+  .news-card {
+    border: 1px solid var(--color-border, #e5e7eb);
+    border-radius: 14px;
+    overflow: hidden;
+    background: #fff;
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    transition: all 0.2s ease-out;
+  }
+
+  .news-card:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    transform: translateY(-2px);
+  }
+
+  .news-card-image {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .news-card-image img {
+    width: 100%;
+    aspect-ratio: 16/10;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+  }
+
+  .news-card:hover .news-card-image img {
+    transform: scale(1.03);
+  }
+
+  .news-card-category {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    padding: 4px 12px;
+    background: var(--color-accent, #A3DAF3);
+    border-radius: 999px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--color-primary, #2A2D2E);
+    font-family: var(--font-body, 'Manrope', sans-serif);
+  }
+
+  .news-card-content {
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+  }
+
+  .news-date {
+    font-size: 0.85rem;
+    color: var(--color-text-muted, #5C5A5A);
+    margin: 0 0 8px;
+    font-family: var(--font-body, 'Manrope', sans-serif);
+  }
+
+  .news-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--color-primary, #2A2D2E);
+    margin: 0 0 8px;
+    line-height: 1.4;
+    font-family: var(--font-heading, 'Onest', sans-serif);
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .news-excerpt {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: var(--color-text-muted, #5C5A5A);
+    flex-grow: 1;
+    margin: 0 0 12px;
+    font-family: var(--font-body, 'Manrope', sans-serif);
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .news-card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: auto;
+  }
+
+  .news-tag {
+    display: inline-block;
+    font-size: 0.75rem;
+    padding: 4px 10px;
+    border-radius: 999px;
+    background-color: var(--color-border, #E7E5E6);
+    color: var(--color-text-muted, #5C5A5A);
+    font-family: var(--font-body, 'Manrope', sans-serif);
+  }
+
+  .news-read-time {
+    font-size: 0.75rem;
+    color: var(--color-text-muted, #5C5A5A);
+    font-family: var(--font-body, 'Manrope', sans-serif);
+  }
+
+  /* Featured card styles */
+  .news-card.featured {
+    grid-column: span 2;
+  }
+
+  @media (min-width: 768px) {
+    .news-card.featured {
+      flex-direction: row;
+    }
+
+    .news-card.featured .news-card-image {
+      flex: 1 1 50%;
+    }
+
+    .news-card.featured .news-card-image img {
+      height: 100%;
+      aspect-ratio: auto;
+      min-height: 280px;
+    }
+
+    .news-card.featured .news-card-content {
+      flex: 1 1 50%;
+      padding: 24px;
+    }
+
+    .news-card.featured .news-title {
+      font-size: 1.4rem;
+      -webkit-line-clamp: 3;
+    }
+
+    .news-card.featured .news-excerpt {
+      -webkit-line-clamp: 4;
+    }
+  }
+
+  @media (max-width: 767px) {
+    .news-card.featured {
+      grid-column: span 1;
+    }
+  }
+
+  /* List view styles (applied via parent class) */
+  :global(.news-list) .news-card {
+    flex-direction: row;
+    align-items: stretch;
+  }
+
+  :global(.news-list) .news-card .news-card-image {
+    width: 250px;
+    flex-shrink: 0;
+  }
+
+  :global(.news-list) .news-card .news-card-image img {
+    height: 100%;
+    aspect-ratio: auto;
+  }
+
+  :global(.news-list) .news-card .news-card-content {
+    padding: 20px;
+  }
+
+  :global(.news-list) .news-card .news-card-category {
+    display: none;
+  }
+
+  :global(.news-list) .news-card .news-tag {
+    align-self: flex-end;
+  }
+
+  :global(.news-list) .news-card .news-excerpt {
+    -webkit-line-clamp: 3;
+  }
+
+  :global(.news-list) .news-card.featured {
+    grid-column: span 1;
+  }
+
+  @media (max-width: 767px) {
+    :global(.news-list) .news-card {
+      flex-direction: column;
+    }
+
+    :global(.news-list) .news-card .news-card-image {
+      width: 100%;
+    }
+
+    :global(.news-list) .news-card .news-card-image img {
+      aspect-ratio: 16/10;
+    }
+  }
+</style>

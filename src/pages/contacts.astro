@@ -1,0 +1,429 @@
+---
+import type { Lang } from '@/i18n';
+import { t, getBaseUrl } from '@/i18n';
+import { cities } from '@/data/cities';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Breadcrumbs from '@/components/Breadcrumbs.astro';
+import Faq from '@/components/Faq.astro';
+
+const lang: Lang = 'ru';
+const base = getBaseUrl(lang);
+
+const moscow = cities.find(c => c.id === 'moscow');
+const perm = cities.find(c => c.id === 'perm');
+
+const faqItems = [
+  {
+    question: "Какой график работы вашего офиса?",
+    answer: "Наши офисы работают с понедельника по пятницу с 9:00 до 18:00 (по местному времени). В остальное время вы можете оставить заявку через форму на сайте или написать нам на электронную почту."
+  },
+  {
+    question: "Где расположен ваш склад?",
+    answer: "Основные складские мощности расположены в Московской области и Перми. Это позволяет нам оптимизировать логистику и сократить сроки доставки оборудования в центральные и восточные регионы России."
+  },
+  {
+    question: "Как назначить встречу с техническим специалистом?",
+    answer: "Вы можете позвонить нам или оставить заявку на сайте с пометкой «Встреча с инженером». Наш менеджер свяжется с вами для согласования удобного времени и формата встречи (онлайн или в офисе)."
+  }
+];
+---
+
+<BaseLayout 
+  lang={lang} 
+  title={t('nav.contacts', lang)}
+  description="Контакты компании РУСТРЕЙД"
+  activeMenu={t('nav.contacts', lang)}
+>
+  <Breadcrumbs items={[{ label: 'Контакты' }]} />
+
+  <section class="page-hero">
+    <h1>{t('nav.contacts', lang)}</h1>
+  </section>
+
+  <section class="contacts-section">
+    <div class="section-header">
+      <h2>Свяжитесь с нами</h2>
+      <p>Мы всегда на связи, чтобы оперативно ответить на ваши вопросы и помочь с выбором лучшего решения.</p>
+    </div>
+
+    <div class="contacts-grid">
+      <!-- Phone -->
+      <a href={`tel:${moscow?.phone.replace(/[^+\d]/g, '')}`} class="contact-card">
+        <div class="contact-icon">
+          <img src="/img/phone.svg" alt="" width="24" height="24" />
+        </div>
+        <h3>Телефон</h3>
+        <span>{moscow?.phone}</span>
+      </a>
+
+      <!-- Email -->
+      <a href={`mailto:${moscow?.email}`} class="contact-card">
+        <div class="contact-icon">
+          <img src="/img/mail.svg" alt="" width="24" height="24" />
+        </div>
+        <h3>Email</h3>
+        <span>{moscow?.email}</span>
+      </a>
+
+      <!-- Moscow Office Trigger -->
+      <button class="contact-card tab-trigger active" data-tab="moscow">
+        <div class="contact-icon">
+          <img src="/img/location.svg" alt="" width="24" height="24" />
+        </div>
+        <h3>Локация</h3>
+        <span>Офис в Москве</span>
+      </button>
+
+      <!-- Perm Office Trigger -->
+      <button class="contact-card tab-trigger" data-tab="perm">
+        <div class="contact-icon">
+          <img src="/img/location.svg" alt="" width="24" height="24" />
+        </div>
+        <h3>Локация</h3>
+        <span>Офис в Перми</span>
+      </button>
+
+      <!-- Ask Question -->
+      <button class="contact-card accent" data-modal="contact">
+        <div class="contact-icon">
+          <img src="/img/message.svg" alt="" width="24" height="24" />
+        </div>
+        <h3>Задать вопрос</h3>
+        <span>Напишите нам</span>
+      </button>
+    </div>
+
+    <!-- Office Details -->
+    <div class="office-details">
+      <!-- Moscow Tab -->
+      <div class="office-tab active" id="tab-moscow">
+        <div class="office-content">
+          <div class="office-info">
+            <h2>Офис "РУСТРЕЙД" в Москве</h2>
+            <div class="info-row">
+              <img src="/img/location.svg" alt="" />
+              <p>{moscow?.address[lang]}</p>
+            </div>
+            <div class="info-row">
+              <img src="/img/clock.svg" alt="" />
+              <p>{moscow?.workingHours[lang]}</p>
+            </div>
+            <div class="info-row">
+              <img src="/img/phone.svg" alt="" />
+              <a href={`tel:${moscow?.phone.replace(/[^+\d]/g, '')}`}>{moscow?.phone}</a>
+            </div>
+            <div class="info-row">
+              <img src="/img/mail.svg" alt="" />
+              <a href={`mailto:${moscow?.email}`}>{moscow?.email}</a>
+            </div>
+          </div>
+          <div class="office-map">
+            <iframe 
+              src="https://yandex.ru/map-widget/v1/?lang=ru_RU&scroll=true&um=constructor%3Aafa27d9515b80670652cc904140fa7ccc208096725d0debac3b08b5df8a7e4b0" 
+              width="100%" 
+              height="400" 
+              frameborder="0" 
+              allowfullscreen="true">
+            </iframe>
+          </div>
+        </div>
+      </div>
+
+      <!-- Perm Tab -->
+      <div class="office-tab" id="tab-perm">
+        <div class="office-content">
+          <div class="office-info">
+            <h2>Офис "РУСТРЕЙД" в Перми</h2>
+            <div class="info-row">
+              <img src="/img/location.svg" alt="" />
+              <p>{perm?.address[lang]}</p>
+            </div>
+            <div class="info-row">
+              <img src="/img/clock.svg" alt="" />
+              <p>{perm?.workingHours[lang]}</p>
+            </div>
+            <div class="info-row">
+              <img src="/img/phone.svg" alt="" />
+              <a href={`tel:${perm?.phone.replace(/[^+\d]/g, '')}`}>{perm?.phone}</a>
+            </div>
+            <div class="info-row">
+              <img src="/img/mail.svg" alt="" />
+              <a href={`mailto:${perm?.email}`}>{perm?.email}</a>
+            </div>
+          </div>
+          <div class="office-map">
+            <iframe 
+              src="https://yandex.ru/map-widget/v1/?lang=ru_RU&scroll=true&um=constructor%3Ac0f58aa1a98855368382583994e050cdafe99bbd80213a49ecc2439204c8070f" 
+              width="100%" 
+              height="400" 
+              frameborder="0" 
+              allowfullscreen="true">
+            </iframe>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <Faq items={faqItems} />
+</BaseLayout>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const tabs = document.querySelectorAll('.tab-trigger');
+    const contents = document.querySelectorAll('.office-tab');
+
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        const targetId = tab.getAttribute('data-tab');
+        
+        // Remove active class from all
+        tabs.forEach(t => t.classList.remove('active'));
+        contents.forEach(c => c.classList.remove('active'));
+
+        // Add active class to current
+        tab.classList.add('active');
+        const targetContent = document.getElementById(`tab-${targetId}`);
+        if (targetContent) {
+          targetContent.classList.add('active');
+        }
+      });
+    });
+  });
+</script>
+
+<style>
+  .page-hero {
+    background: linear-gradient(59deg, rgba(42, 45, 46, 0.70) 0%, rgba(0, 0, 0, 0.40) 31.59%, rgba(42, 45, 46, 0.70) 100%), 
+                url('/img/kontakty.webp') center/cover no-repeat;
+    border-radius: var(--radius-xl);
+    padding: var(--space-12) var(--space-8);
+    margin-bottom: var(--space-12);
+    min-height: 300px;
+    display: flex;
+    align-items: center;
+  }
+
+  .page-hero h1 { 
+    color: var(--color-white); 
+    font-size: clamp(32px, 5vw, 48px); 
+    margin: 0; 
+  }
+
+  .contacts-section {
+    margin-bottom: var(--space-12);
+  }
+
+  .section-header {
+    margin-bottom: var(--space-8);
+    max-width: 800px;
+  }
+
+  .section-header h2 {
+    font-size: var(--text-3xl);
+    margin-bottom: var(--space-3);
+  }
+
+  .section-header p {
+    color: var(--color-text-muted);
+    font-size: var(--text-lg);
+    line-height: 1.6;
+  }
+
+  .contacts-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: var(--space-4);
+    margin-bottom: var(--space-12);
+  }
+
+  .contact-card {
+    background: var(--color-white);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: var(--space-5);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    transition: all var(--transition-base);
+    cursor: pointer;
+    text-align: left;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+    min-height: 180px;
+    justify-content: space-between;
+  }
+
+  .contact-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.08);
+    border-color: #A3DAF3;
+  }
+  
+  .contact-card.active {
+    border-color: #3B95C8;
+    background: #F8FDFF;
+    box-shadow: 0 4px 12px rgba(59, 149, 200, 0.15);
+  }
+
+  /* Styling for icons */
+  .contact-icon {
+    width: 56px;
+    height: 56px;
+    background: #ECF3FD; /* Light blue background for icons as in screenshot */
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: var(--space-4);
+    transition: all var(--transition-base);
+  }
+  
+  .contact-icon img {
+    opacity: 0.9;
+  }
+
+  /* Accent card (Задать вопрос) */
+  .contact-card.accent {
+    background: linear-gradient(135deg, #A3DAF3 0%, #3B95C8 100%);
+    border: none;
+    color: #1a1a1a;
+  }
+  
+  .contact-card.accent:hover {
+    box-shadow: 0 10px 25px rgba(59, 149, 200, 0.3);
+  }
+  
+  .contact-card.accent .contact-icon {
+    background: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+  }
+
+  .contact-card.accent h3, 
+  .contact-card.accent span {
+    color: #1a1a1a; /* Dark text as in screenshot */
+  }
+
+  .contact-card h3 {
+    font-size: 14px;
+    color: #5C5A5A; /* Gray text for labels */
+    margin: 0 0 4px 0;
+    font-weight: 500;
+  }
+
+  .contact-card span, .contact-card a {
+    font-size: 18px;
+    color: var(--color-primary);
+    font-weight: 600;
+    line-height: 1.3;
+    display: block;
+    text-decoration: none;
+  }
+
+  /* Office Tabs */
+  .office-tab {
+    display: none;
+    animation: fadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .office-tab.active {
+    display: block;
+  }
+
+  .office-content {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    gap: var(--space-8);
+    background: var(--color-white);
+    border-radius: var(--radius-xl);
+    overflow: hidden;
+    border: 1px solid var(--color-border);
+    box-shadow: var(--shadow-sm);
+  }
+
+  .office-info {
+    padding: var(--space-8);
+  }
+
+  .office-info h2 {
+    font-size: var(--text-2xl);
+    margin-bottom: var(--space-6);
+  }
+
+  .info-row {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+    margin-bottom: var(--space-4);
+    font-size: var(--text-lg);
+  }
+
+  .info-row img {
+    width: 24px;
+    height: 24px;
+    opacity: 0.6;
+  }
+
+  .info-row a {
+    color: var(--color-primary);
+    transition: color var(--transition-base);
+  }
+
+  .info-row a:hover {
+    color: var(--color-accent);
+  }
+
+  .office-map {
+    height: 100%;
+    min-height: 400px;
+    background: var(--color-bg-card);
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @media (max-width: 1200px) {
+    .contacts-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  @media (max-width: 900px) {
+    .office-content {
+      grid-template-columns: 1fr;
+    }
+    
+    .office-map {
+      height: 300px;
+      min-height: 300px;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .contacts-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .contact-card:last-child {
+      grid-column: span 2;
+    }
+
+    .hero {
+      padding: var(--space-8) var(--space-5);
+      min-height: 250px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .contacts-grid {
+      grid-template-columns: 1fr;
+    }
+    
+    .contact-card:last-child {
+      grid-column: auto;
+    }
+  }
+</style>

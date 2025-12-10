@@ -1,0 +1,195 @@
+---
+import type { Lang } from '@/i18n';
+import { t, getBaseUrl } from '@/i18n';
+import { cities } from '@/data/cities';
+
+interface Props {
+  lang: Lang;
+  type?: 'organization' | 'article' | 'product' | 'faq' | 'breadcrumb';
+  pageTitle?: string;
+  pageDescription?: string;
+  articleData?: {
+    headline: string;
+    description: string;
+    image: string;
+    datePublished: string;
+    dateModified?: string;
+    author?: string;
+  };
+  productData?: {
+    name: string;
+    description: string;
+    image: string;
+    brand?: string;
+  };
+  faqData?: Array<{ question: string; answer: string }>;
+  breadcrumbs?: Array<{ name: string; url: string }>;
+}
+
+const {
+  lang,
+  type = 'organization',
+  pageTitle,
+  pageDescription,
+  articleData,
+  productData,
+  faqData,
+  breadcrumbs
+} = Astro.props;
+
+const currentCity = cities[0]; // Default to Moscow for contact info
+const siteUrl = 'https://rustrade.pro';
+const base = getBaseUrl(lang);
+
+// Organization Schema (always included)
+const organizationSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  '@id': `${siteUrl}/#organization`,
+  name: t('meta.siteName', lang),
+  url: siteUrl,
+  logo: {
+    '@type': 'ImageObject',
+    url: `${siteUrl}/img/logo.svg`,
+    width: 200,
+    height: 60
+  },
+  description: t('meta.defaultDescription', lang),
+  foundingDate: '2020',
+  address: cities.map(c => ({
+    '@type': 'PostalAddress',
+    addressLocality: c.name[lang],
+    addressCountry: 'RU',
+    streetAddress: c.address[lang]
+  })),
+  contactPoint: cities.map(c => ({
+    '@type': 'ContactPoint',
+    telephone: c.phone,
+    email: c.email,
+    contactType: 'customer service',
+    availableLanguage: ['Russian', 'English'],
+    areaServed: 'RU'
+  })),
+  sameAs: [
+    'https://t.me/rustrade',
+    'https://vk.com/rustrade'
+  ]
+};
+
+// Website Schema with Sitelinks SearchBox
+const websiteSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  '@id': `${siteUrl}/#website`,
+  url: siteUrl,
+  name: t('meta.siteName', lang),
+  description: t('meta.defaultDescription', lang),
+  publisher: { '@id': `${siteUrl}/#organization` },
+  inLanguage: lang === 'ru' ? 'ru-RU' : 'en-US',
+  potentialAction: {
+    '@type': 'SearchAction',
+    target: {
+      '@type': 'EntryPoint',
+      urlTemplate: `${siteUrl}${base}/search?q={search_term_string}`
+    },
+    'query-input': 'required name=search_term_string'
+  }
+};
+
+// Article Schema
+const articleSchema = articleData ? {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: articleData.headline,
+  description: articleData.description,
+  image: articleData.image.startsWith('http') ? articleData.image : `${siteUrl}${articleData.image}`,
+  datePublished: articleData.datePublished,
+  dateModified: articleData.dateModified || articleData.datePublished,
+  author: {
+    '@type': 'Organization',
+    name: t('meta.siteName', lang),
+    url: siteUrl
+  },
+  publisher: {
+    '@type': 'Organization',
+    name: t('meta.siteName', lang),
+    logo: {
+      '@type': 'ImageObject',
+      url: `${siteUrl}/img/logo.svg`
+    }
+  },
+  mainEntityOfPage: {
+    '@type': 'WebPage',
+    '@id': Astro.url.href
+  }
+} : null;
+
+// Product Schema
+const productSchema = productData ? {
+  '@context': 'https://schema.org',
+  '@type': 'Product',
+  name: productData.name,
+  description: productData.description,
+  image: productData.image.startsWith('http') ? productData.image : `${siteUrl}${productData.image}`,
+  brand: {
+    '@type': 'Brand',
+    name: productData.brand || t('meta.siteName', lang)
+  },
+  manufacturer: {
+    '@type': 'Organization',
+    name: t('meta.siteName', lang)
+  }
+} : null;
+
+// FAQ Schema
+const faqSchema = faqData && faqData.length > 0 ? {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqData.map(item => ({
+    '@type': 'Question',
+    name: item.question,
+    acceptedAnswer: {
+      '@type': 'Answer',
+      text: item.answer
+    }
+  }))
+} : null;
+
+// Breadcrumb Schema
+const breadcrumbSchema = breadcrumbs && breadcrumbs.length > 0 ? {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: breadcrumbs.map((item, index) => ({
+    '@type': 'ListItem',
+    position: index + 1,
+    name: item.name,
+    item: item.url.startsWith('http') ? item.url : `${siteUrl}${item.url}`
+  }))
+} : null;
+---
+
+<!-- Organization Schema -->
+<script type="application/ld+json" set:html={JSON.stringify(organizationSchema)} />
+
+<!-- Website Schema -->
+<script type="application/ld+json" set:html={JSON.stringify(websiteSchema)} />
+
+<!-- Article Schema (if provided) -->
+{articleSchema && (
+  <script type="application/ld+json" set:html={JSON.stringify(articleSchema)} />
+)}
+
+<!-- Product Schema (if provided) -->
+{productSchema && (
+  <script type="application/ld+json" set:html={JSON.stringify(productSchema)} />
+)}
+
+<!-- FAQ Schema (if provided) -->
+{faqSchema && (
+  <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+)}
+
+<!-- Breadcrumb Schema (if provided) -->
+{breadcrumbSchema && (
+  <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+)}

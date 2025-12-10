@@ -1,0 +1,148 @@
+{
+  "meta": {
+    "siteName": "Rustrade",
+    "defaultTitle": "Rustrade - Steam Turbine Manufacturing and Supply",
+    "defaultDescription": "Rustrade LLC is a leading supplier of power equipment and services for power plants. Design and supply of steam turbines from 25 kW to 40 MW."
+  },
+  "nav": {
+    "home": "Home",
+    "design": "Engineering",
+    "turbines": "Turbines",
+    "turbogenerators": "Turbogenerators",
+    "components": "Components",
+    "about": "About",
+    "cases": "Cases",
+    "news": "News",
+    "contacts": "Contacts",
+    "cooperation": "Cooperation",
+    "privacy": "Privacy Policy"
+  },
+  "components": {
+    "blades": "Blades",
+    "oilCoolers": "Oil Coolers",
+    "condensers": "Condensers"
+  },
+  "turbines": {
+    "drive": "Drive Steam Turbines",
+    "driveDesc": "Equipment drive or alternative to electric motor",
+    "lowPower": "Low Power Steam Turbines",
+    "lowPowerDesc": "High-speed steam turbines of full factory readiness with capacity from 15 to 4000 kW",
+    "condensing": "Condensing Turbines",
+    "condensingDesc": "General steam turbines with capacity from 4 to 120 MW",
+    "backpressure": "Backpressure Turbines",
+    "optimal": "Standard Steam Turbines"
+  },
+  "hero": {
+    "title": "High-efficiency steam turbine solutions",
+    "description": "Our solutions significantly reduce the cost of energy projects and generate benefits even where it was previously impossible.",
+    "cta": "View cases",
+    "ctaSecondary": "Find solution"
+  },
+  "services": {
+    "title": "Turbines and Services",
+    "description": "We focus on customer needs and select the optimal solution. We bring the best world experience, clear design and 15 years of experience.",
+    "design": "Design and Construction",
+    "designDesc": "Turnkey design and construction of energy facilities",
+    "rkd": "Working Documentation",
+    "rkdDesc": "Adaptation and translation of working design documentation",
+    "cert": "TR CU Certification",
+    "certDesc": "Equipment certification",
+    "delivery": "Delivery",
+    "deliveryDesc": "DDP delivery to Customer's warehouse",
+    "chief": "Supervision Services",
+    "chiefDesc": "Installation supervision and commissioning"
+  },
+  "about": {
+    "title": "About Company",
+    "description": "Rustrade LLC was founded in 2020. The company's mission is to provide Customers with the opportunity to purchase quality and cost-effective solutions based on steam turbines.",
+    "readMore": "Read more",
+    "values": "Values",
+    "partners": "Partners",
+    "stats": {
+      "power": "MW",
+      "powerLabel": "Total installed capacity",
+      "projects": "pcs",
+      "projectsLabel": "Successfully completed projects",
+      "inProgress": "pcs",
+      "inProgressLabel": "Projects in progress"
+    }
+  },
+  "cases": {
+    "title": "Cases",
+    "viewCase": "View case",
+    "sugarFactory": "Sugar Factory",
+    "sugarFactoryDesc": "Replacement of outdated turbine with high-efficiency unit of full factory readiness",
+    "oilFactory": "Oil Extraction Plant",
+    "oilFactoryDesc": "Installation of 5 MW turbogenerator unit",
+    "tgk": "TGK",
+    "tgkDesc": "Installation of 2.5 MW turbogenerator unit",
+    "chemistFactory": "Chemical Plant",
+    "chemistFactoryDesc": "Installation of 3.8 MW turbogenerator unit"
+  },
+  "forms": {
+    "name": "Name",
+    "namePlaceholder": "Your name",
+    "phone": "Phone",
+    "phonePlaceholder": "+7 (___) ___-__-__",
+    "phoneError": "Please enter a valid phone number",
+    "email": "E-mail",
+    "emailPlaceholder": "example@mail.com",
+    "emailError": "Please enter a valid email",
+    "company": "Company name",
+    "companyPlaceholder": "Your company name",
+    "message": "Message",
+    "submit": "Submit",
+    "callback": "Request Callback",
+    "orderCallback": "Order Callback",
+    "startProject": "Discuss Project",
+    "findSolution": "Find Solution",
+    "consultation": "Get Consultation",
+    "steamTurbine": "Steam Turbine",
+    "turbineDrive": "Drive",
+    "turbineGeneration": "Generation",
+    "hasROU": "Is there a PRV (Pressure Reducing Valve)?",
+    "yes": "Yes",
+    "no": "No",
+    "privacyConsent": "I agree to the processing of my personal data in accordance with the",
+    "privacyPolicy": "Privacy Policy",
+    "privacyError": "You must accept the privacy policy",
+    "captchaError": "Please complete the reCAPTCHA verification",
+    "required": "Required field",
+    "thankYou": "Thank you!",
+    "willCallBack": "We will call you back within one business day.",
+    "confidenceNotice": "We undertake that the commercial information obtained during the preparation and implementation of the project is confidential and shall not be disclosed or transferred to third parties."
+  },
+  "footer": {
+    "contacts": "Contacts",
+    "subscribe": "Subscribe to receive useful articles on energy and the latest news from our company",
+    "downloadPresentation": "Download presentation",
+    "enterEmail": "Enter e-mail address"
+  },
+  "news": {
+    "title": "News & Articles",
+    "search": "Search news",
+    "searchPlaceholder": "Enter keyword...",
+    "categories": "Categories",
+    "all": "All",
+    "companyNews": "Company News",
+    "articles": "Articles",
+    "industry": "Industry News",
+    "found": "Found",
+    "readMore": "Read more",
+    "popularArticles": "Popular Articles",
+    "subscribeTitle": "Subscribe to news",
+    "subscribeButton": "Subscribe",
+    "backToNews": "Back to news"
+  },
+  "cities": {
+    "moscow": "Moscow",
+    "perm": "Perm"
+  },
+  "common": {
+    "menu": "Menu",
+    "close": "Close",
+    "loading": "Loading...",
+    "error": "Error"
+  }
+}
+

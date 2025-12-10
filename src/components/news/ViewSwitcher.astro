@@ -1,0 +1,95 @@
+---
+import type { Lang } from '@/i18n';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+
+const gridLabel = lang === 'ru' ? 'Сетка' : 'Grid';
+const listLabel = lang === 'ru' ? 'Список' : 'List';
+---
+
+<div class="view-switcher">
+  <button id="view-grid" class="active" aria-label={gridLabel} title={gridLabel}>
+    <svg viewBox="0 0 24 24">
+      <path d="M3,3V11H11V3M9,9H5V5H9M3,13V21H11V13M9,19H5V15H9M13,3V11H21V3M19,9H15V5H19M13,13V21H21V13M19,19H15V15H19Z"/>
+    </svg>
+  </button>
+  <button id="view-list" aria-label={listLabel} title={listLabel}>
+    <svg viewBox="0 0 24 24">
+      <path d="M3,4H21V6H3V4M3,11H21V13H3V11M3,18H21V20H3V18Z"/>
+    </svg>
+  </button>
+</div>
+
+<script>
+  // View switcher logic
+  const gridButton = document.getElementById('view-grid');
+  const listButton = document.getElementById('view-list');
+  const newsGrid = document.getElementById('news-grid');
+
+  function setGridView() {
+    newsGrid?.classList.remove('news-list');
+    newsGrid?.classList.add('news-grid');
+    gridButton?.classList.add('active');
+    listButton?.classList.remove('active');
+    localStorage.setItem('newsView', 'grid');
+  }
+
+  function setListView() {
+    newsGrid?.classList.remove('news-grid');
+    newsGrid?.classList.add('news-list');
+    listButton?.classList.add('active');
+    gridButton?.classList.remove('active');
+    localStorage.setItem('newsView', 'list');
+  }
+
+  gridButton?.addEventListener('click', setGridView);
+  listButton?.addEventListener('click', setListView);
+
+  // Restore saved view preference
+  const savedView = localStorage.getItem('newsView');
+  if (savedView === 'list') {
+    setListView();
+  }
+</script>
+
+<style>
+  .view-switcher {
+    display: flex;
+    gap: 8px;
+    flex-shrink: 0;
+  }
+
+  .view-switcher button {
+    background: #fff;
+    border: 1px solid var(--color-border, #e5e7eb);
+    border-radius: 8px;
+    padding: 8px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease-out;
+    color: var(--color-text-muted, #5C5A5A);
+  }
+
+  .view-switcher button:hover {
+    border-color: var(--color-accent, #A3DAF3);
+    color: var(--color-primary, #2A2D2E);
+  }
+
+  .view-switcher button.active {
+    background-color: var(--color-accent, #A3DAF3);
+    color: var(--color-primary, #2A2D2E);
+    border-color: var(--color-accent, #A3DAF3);
+  }
+
+  .view-switcher svg {
+    width: 20px;
+    height: 20px;
+    fill: currentColor;
+  }
+</style>

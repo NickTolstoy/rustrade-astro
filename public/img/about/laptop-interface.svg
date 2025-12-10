@@ -1,0 +1,95 @@
+<svg viewBox="0 0 400 320" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Stage 1: Проектирование и поставка -->
+  <g>
+    <!-- Circle background -->
+    <circle cx="70" cy="70" r="45" fill="#A3DAF3" opacity="0.15"/>
+    <circle cx="70" cy="70" r="35" fill="#FFFFFF" stroke="#A3DAF3" stroke-width="2"/>
+    
+    <!-- Blueprint/Document icon -->
+    <rect x="52" y="55" width="28" height="32" rx="2" fill="#FFFFFF" stroke="#5BC0EB" stroke-width="2"/>
+    <path d="M56 63 L72 63" stroke="#A3DAF3" stroke-width="2" stroke-linecap="round"/>
+    <path d="M56 69 L68 69" stroke="#A3DAF3" stroke-width="2" stroke-linecap="round"/>
+    <path d="M56 75 L70 75" stroke="#A3DAF3" stroke-width="2" stroke-linecap="round"/>
+    <path d="M56 81 L64 81" stroke="#A3DAF3" stroke-width="2" stroke-linecap="round"/>
+    
+    <!-- Pencil -->
+    <path d="M74 52 L82 60 L70 72 L66 76 L68 70 L74 52Z" fill="#5BC0EB"/>
+    <path d="M82 60 L86 56 L80 50 L74 52" fill="#A3DAF3"/>
+    
+    <!-- Number -->
+    <circle cx="100" cy="40" r="12" fill="#5BC0EB"/>
+    <text x="100" y="45" text-anchor="middle" fill="white" font-size="14" font-weight="600">1</text>
+  </g>
+  
+  <!-- Arrow 1 to 2 -->
+  <path d="M120 70 C150 70, 150 160, 180 160" stroke="#E5EEF5" stroke-width="3" stroke-dasharray="6 4" fill="none"/>
+  <polygon points="180,155 190,160 180,165" fill="#A3DAF3"/>
+  
+  <!-- Stage 2: Монтаж и пусконаладка -->
+  <g>
+    <!-- Circle background -->
+    <circle cx="230" cy="160" r="45" fill="#5BC0EB" opacity="0.15"/>
+    <circle cx="230" cy="160" r="35" fill="#FFFFFF" stroke="#5BC0EB" stroke-width="2"/>
+    
+    <!-- Wrench and gear icon -->
+    <circle cx="225" cy="155" r="12" fill="none" stroke="#5BC0EB" stroke-width="2"/>
+    <circle cx="225" cy="155" r="4" fill="#5BC0EB"/>
+    <!-- Gear teeth -->
+    <path d="M225 141 L225 145 M225 165 L225 169 M211 155 L215 155 M235 155 L239 155 M215 145 L218 148 M232 162 L235 165 M215 165 L218 162 M232 148 L235 145" stroke="#5BC0EB" stroke-width="2" stroke-linecap="round"/>
+    
+    <!-- Wrench -->
+    <path d="M238 168 L248 178 L252 174 L242 164" fill="#A3DAF3"/>
+    <circle cx="250" cy="176" r="6" fill="none" stroke="#A3DAF3" stroke-width="2"/>
+    
+    <!-- Spark/Power indicator -->
+    <path d="M215 140 L218 146 L214 146 L217 152" stroke="#5BC0EB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    
+    <!-- Number -->
+    <circle cx="260" cy="130" r="12" fill="#5BC0EB"/>
+    <text x="260" y="135" text-anchor="middle" fill="white" font-size="14" font-weight="600">2</text>
+  </g>
+  
+  <!-- Arrow 2 to 3 -->
+  <path d="M275 160 C305 160, 305 250, 335 250" stroke="#E5EEF5" stroke-width="3" stroke-dasharray="6 4" fill="none"/>
+  <polygon points="335,245 345,250 335,255" fill="#A3DAF3"/>
+  
+  <!-- Stage 3: Сервисное обслуживание -->
+  <g>
+    <!-- Circle background -->
+    <circle cx="70" cy="250" r="45" fill="#A3DAF3" opacity="0.15"/>
+    <circle cx="70" cy="250" r="35" fill="#FFFFFF" stroke="#A3DAF3" stroke-width="2"/>
+    
+    <!-- Support/Headset icon -->
+    <path d="M55 255 C55 240, 85 240, 85 255" stroke="#5BC0EB" stroke-width="3" fill="none" stroke-linecap="round"/>
+    <rect x="50" y="252" width="10" height="16" rx="3" fill="#5BC0EB"/>
+    <rect x="80" y="252" width="10" height="16" rx="3" fill="#5BC0EB"/>
+    <path d="M85 268 Q85 275, 75 275" stroke="#5BC0EB" stroke-width="2" fill="none" stroke-linecap="round"/>
+    
+    <!-- Checkmark badge -->
+    <circle cx="78" cy="235" r="8" fill="#A3DAF3"/>
+    <path d="M74 235 L77 238 L82 232" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    
+    <!-- Number -->
+    <circle cx="100" cy="220" r="12" fill="#5BC0EB"/>
+    <text x="100" y="225" text-anchor="middle" fill="white" font-size="14" font-weight="600">3</text>
+  </g>
+  
+  <!-- Arrow 3 back (cycle) -->
+  <path d="M115 250 C200 280, 280 280, 350 250 Q380 235, 380 200 Q380 120, 330 80 Q300 55, 250 50" stroke="#E5EEF5" stroke-width="2" stroke-dasharray="4 3" fill="none"/>
+  
+  <!-- Central turbine icon (representing the product) -->
+  <g transform="translate(200, 160)">
+    <circle cx="0" cy="0" r="25" fill="#F8FBFD" stroke="#E5EEF5" stroke-width="2"/>
+    <!-- Turbine blades -->
+    <ellipse cx="0" cy="-12" rx="4" ry="10" fill="#A3DAF3" transform="rotate(0)"/>
+    <ellipse cx="10" cy="6" rx="4" ry="10" fill="#A3DAF3" transform="rotate(120 0 0)"/>
+    <ellipse cx="-10" cy="6" rx="4" ry="10" fill="#A3DAF3" transform="rotate(240 0 0)"/>
+    <circle cx="0" cy="0" r="6" fill="#5BC0EB"/>
+  </g>
+  
+  <!-- Decorative dots -->
+  <circle cx="150" cy="50" r="3" fill="#A3DAF3" opacity="0.4"/>
+  <circle cx="320" cy="100" r="4" fill="#5BC0EB" opacity="0.3"/>
+  <circle cx="350" cy="180" r="3" fill="#A3DAF3" opacity="0.4"/>
+  <circle cx="140" cy="280" r="4" fill="#5BC0EB" opacity="0.3"/>
+</svg>

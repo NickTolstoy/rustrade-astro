@@ -1,0 +1,126 @@
+---
+interface Props {
+  title?: string;
+  description?: string;
+  keywords?: string;
+  image?: string;
+  type?: 'website' | 'article' | 'product';
+  canonical?: string;
+  noindex?: boolean;
+  publishedTime?: string;
+  modifiedTime?: string;
+  author?: string;
+  lang?: string;
+}
+
+const { 
+  title, 
+  description, 
+  image = '/img/og-default.jpg', 
+  type = 'website',
+  canonical,
+  noindex = false,
+  publishedTime,
+  modifiedTime,
+  lang = 'ru'
+} = Astro.props;
+
+const siteUrl = 'https://rustrade.pro';
+const currentUrl = canonical || Astro.url.href;
+const fullImageUrl = image.startsWith('http') ? image : `${siteUrl}${image}`;
+const siteName = lang === 'ru' ? 'РУСТРЕЙД' : 'RUSTRADE';
+const locale = lang === 'ru' ? 'ru_RU' : 'en_US';
+const altLocale = lang === 'ru' ? 'en_US' : 'ru_RU';
+
+// Generate alternate URLs
+// Russian: / (root)
+// English: /eng/
+const pathParts = Astro.url.pathname.split('/').filter(Boolean);
+let pagePath = '';
+
+if (lang === 'en') {
+  // English: /eng/...
+  pagePath = pathParts.slice(1).join('/'); // Remove 'eng'
+} else {
+  // Russian: /...
+  pagePath = pathParts.join('/');
+}
+
+const ruUrl = `${siteUrl}/${pagePath}`.replace(/\/$/, '') || siteUrl;
+const enUrl = `${siteUrl}/eng/${pagePath}`.replace(/\/$/, '').replace('/eng/', '/eng');
+
+const defaultTitle = lang === 'ru' 
+  ? 'Рустрейд - производство и поставка паровых турбин'
+  : 'Rustrade - steam turbine production and supply';
+
+const defaultDescription = lang === 'ru'
+  ? 'ООО «РУСТРЕЙД» - ведущий поставщик энергетического оборудования и услуг для электростанций. Проектирование и поставка паровых турбин от 25 кВт до 40 МВт.'
+  : 'RUSTRADE LLC - leading supplier of power equipment and services for power plants. Design and supply of steam turbines from 25 kW to 40 MW.';
+
+const finalTitle = title 
+  ? (title.includes(siteName) || title.includes('РУСТРЕЙД') || title.includes('RUSTRADE') ? title : `${title} | ${siteName}`)
+  : defaultTitle;
+const finalDescription = description || defaultDescription;
+---
+
+<!-- Primary Meta Tags -->
+<title>{finalTitle}</title>
+<meta name="title" content={finalTitle} />
+<meta name="description" content={finalDescription} />
+<meta name="keywords" content={lang === 'ru' 
+  ? 'паровые турбины, турбогенераторы, энергетическое оборудование, лопатки турбин, маслоохладители, конденсаторы, Рустрейд'
+  : 'steam turbines, turbogenerators, power equipment, turbine blades, oil coolers, condensers, Rustrade'} />
+<meta name="author" content={siteName} />
+<meta name="generator" content={Astro.generator} />
+<link rel="canonical" href={currentUrl} />
+
+<!-- Robots -->
+{noindex ? (
+  <meta name="robots" content="noindex, nofollow" />
+) : (
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+)}
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content={type} />
+<meta property="og:url" content={currentUrl} />
+<meta property="og:title" content={title || defaultTitle} />
+<meta property="og:description" content={finalDescription} />
+<meta property="og:image" content={fullImageUrl} />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content={title || defaultTitle} />
+<meta property="og:locale" content={locale} />
+<meta property="og:locale:alternate" content={altLocale} />
+<meta property="og:site_name" content={siteName} />
+
+{type === 'article' && publishedTime && (
+  <meta property="article:published_time" content={publishedTime} />
+)}
+{type === 'article' && modifiedTime && (
+  <meta property="article:modified_time" content={modifiedTime} />
+)}
+
+<!-- Twitter -->
+<meta property="twitter:card" content="summary_large_image" />
+<meta property="twitter:url" content={currentUrl} />
+<meta property="twitter:title" content={title || defaultTitle} />
+<meta property="twitter:description" content={finalDescription} />
+<meta property="twitter:image" content={fullImageUrl} />
+
+<!-- Alternate languages (hreflang) -->
+<link rel="alternate" hreflang="ru" href={ruUrl} />
+<link rel="alternate" hreflang="en" href={enUrl} />
+<link rel="alternate" hreflang="x-default" href={ruUrl} />
+
+<!-- Mobile -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="theme-color" content="#2A2D2E" />
+<meta name="mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="default" />
+<meta name="apple-mobile-web-app-title" content={siteName} />
+
+<!-- Geo -->
+<meta name="geo.region" content="RU" />
+<meta name="geo.placename" content={lang === 'ru' ? 'Россия' : 'Russia'} />

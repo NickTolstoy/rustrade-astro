@@ -1,0 +1,235 @@
+/* Info Menu / Sidebar */
+.info-menu {
+  position: fixed;
+  left: var(--space-2);
+  top: var(--space-2);
+  bottom: var(--space-2);
+  width: var(--sidebar-width);
+  background: linear-gradient(180deg, var(--color-bg-dark) 0%, var(--color-primary) 100%);
+  border-radius: var(--radius-xl);
+  padding: var(--space-4);
+  display: flex;
+  flex-direction: column;
+  z-index: var(--z-fixed);
+}
+
+.info-menu-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--space-6);
+}
+
+.info-menu .logo {
+  height: 32px;
+}
+
+.info-menu-cards {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  flex: 1;
+}
+
+.info-menu-card {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  padding: var(--space-4);
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius-lg);
+  color: var(--color-white);
+  transition: all var(--transition-base);
+}
+
+.info-menu-card:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
+}
+
+.info-menu-card-icon {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-accent);
+  border-radius: var(--radius-md);
+}
+
+.info-menu-card-icon img {
+  width: 24px;
+  height: 24px;
+}
+
+.info-menu-card-content h4 {
+  color: var(--color-white);
+  font-size: var(--text-md);
+  font-weight: 600;
+  margin-bottom: var(--space-1);
+}
+
+.info-menu-card-content p {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: var(--text-sm);
+  margin: 0;
+}
+
+/* Sidebar Contact Button */
+.sidebar-contact-btn {
+  margin-top: auto;
+  padding: var(--space-4);
+  background: var(--color-accent);
+  border-radius: var(--radius-lg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  color: var(--color-primary);
+  font-weight: 600;
+  font-size: var(--text-md);
+  transition: all var(--transition-base);
+}
+
+.sidebar-contact-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+  color: var(--color-primary);
+}
+
+/* Mobile Sidebar Cards */
+.info-menu.mobile {
+  position: static;
+  display: none;
+  width: 100%;
+  background: transparent;
+  padding: var(--space-3);
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.info-menu.mobile .info-menu-card {
+  flex: 1 1 calc(50% - var(--space-2));
+  background: linear-gradient(180deg, var(--color-bg-dark) 0%, var(--color-primary) 100%);
+}
+
+/* Tablet/Small Desktop - 1351px to 1445px */
+@media (max-width: 1445px) and (min-width: 1351px) {
+  .info-menu {
+    width: 280px;
+    padding: var(--space-3);
+  }
+
+  .info-menu-header {
+    margin-bottom: var(--space-4);
+  }
+
+  .info-menu .logo {
+    height: 28px;
+  }
+
+  .info-menu-cards {
+    gap: var(--space-2);
+  }
+
+  .info-menu-card {
+    padding: var(--space-3);
+    gap: var(--space-3);
+  }
+
+  .info-menu-card-icon {
+    width: 40px;
+    height: 40px;
+  }
+
+  .info-menu-card-icon img {
+    width: 20px;
+    height: 20px;
+  }
+
+  .info-menu-card-content h4 {
+    font-size: 13px;
+  }
+
+  .info-menu-card-content p {
+    font-size: 11px;
+    line-height: 1.3;
+  }
+
+  .sidebar-contact-btn {
+    padding: var(--space-3);
+    font-size: 13px;
+  }
+}
+
+/* Smaller - 1201px to 1350px */
+@media (max-width: 1350px) and (min-width: 1201px) {
+  .info-menu {
+    width: 240px;
+    padding: 10px;
+  }
+
+  .info-menu-header {
+    margin-bottom: var(--space-3);
+  }
+
+  .info-menu .logo {
+    height: 24px;
+  }
+
+  .info-menu-card {
+    padding: 10px;
+    gap: 10px;
+  }
+
+  .info-menu-card-icon {
+    width: 36px;
+    height: 36px;
+  }
+
+  .info-menu-card-icon img {
+    width: 18px;
+    height: 18px;
+  }
+
+  .info-menu-card-content h4 {
+    font-size: 12px;
+    margin-bottom: 2px;
+  }
+
+  .info-menu-card-content p {
+    font-size: 10px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .sidebar-contact-btn {
+    padding: 10px;
+    font-size: 12px;
+  }
+
+  .sidebar-contact-btn img {
+    width: 16px;
+    height: 16px;
+  }
+}
+
+/* Mobile - below 1200px */
+@media (max-width: 1200px) {
+  .info-menu:not(.mobile) {
+    display: none;
+  }
+
+  .info-menu.mobile {
+    display: flex;
+  }
+}
+
+@media (max-width: 768px) {
+  .info-menu.mobile .info-menu-card {
+    flex: 1 1 100%;
+  }
+}
+

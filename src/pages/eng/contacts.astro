@@ -1,0 +1,193 @@
+---
+import type { Lang } from '@/i18n';
+import { t, getBaseUrl } from '@/i18n';
+import { cities } from '@/data/cities';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+
+const lang: Lang = 'en';
+const base = getBaseUrl(lang);
+// Default to Moscow for contact info in English
+const currentCity = cities[0];
+---
+
+<BaseLayout 
+  lang={lang} 
+  title={t('nav.contacts', lang)}
+  description="Contact Rustrade - steam turbine supplier"
+  activeMenu={t('nav.contacts', lang)}
+>
+  <section class="page-hero">
+    <h1>{t('nav.contacts', lang)}</h1>
+  </section>
+
+  <section class="contacts-content">
+    <div class="contacts-grid">
+      <div class="contact-card">
+        <div class="contact-icon">
+          <img src="/img/phone.svg" alt="" width="24" height="24" />
+        </div>
+        <h3>{t('forms.phone', lang)}</h3>
+        <a href={`tel:${currentCity?.phone.replace(/[^+\d]/g, '')}`}>{currentCity?.phone}</a>
+      </div>
+
+      <div class="contact-card">
+        <div class="contact-icon">
+          <img src="/img/mail.svg" alt="" width="24" height="24" />
+        </div>
+        <h3>{t('forms.email', lang)}</h3>
+        <a href={`mailto:${currentCity?.email}`}>{currentCity?.email}</a>
+      </div>
+
+      <div class="contact-card">
+        <div class="contact-icon">
+          <img src="/img/location.svg" alt="" width="24" height="24" />
+        </div>
+        <h3>Address</h3>
+        <span>{currentCity?.address[lang]}</span>
+      </div>
+
+      <div class="contact-card">
+        <div class="contact-icon">
+          <img src="/img/clock.svg" alt="" width="24" height="24" />
+        </div>
+        <h3>Working Hours</h3>
+        <span>{currentCity?.workingHours[lang]}</span>
+      </div>
+    </div>
+
+    <div class="contact-form-section">
+      <h2>{t('forms.startProject', lang)}</h2>
+      <form class="contact-form" data-form="contact">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="name">{t('forms.name', lang)}</label>
+            <input type="text" id="name" name="name" required />
+          </div>
+          <div class="form-group">
+            <label for="phone">{t('forms.phone', lang)}</label>
+            <input type="tel" id="phone" name="phone" required />
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="email">{t('forms.email', lang)}</label>
+            <input type="email" id="email" name="email" />
+          </div>
+          <div class="form-group">
+            <label for="company">{t('forms.company', lang)}</label>
+            <input type="text" id="company" name="company" />
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="message">{t('forms.message', lang)}</label>
+          <textarea id="message" name="message" rows="4"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">{t('forms.submit', lang)}</button>
+      </form>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .page-hero {
+    background: linear-gradient(135deg, #2A2D2E 0%, #3d4142 100%);
+    border-radius: var(--radius-xl);
+    padding: var(--space-12) var(--space-8);
+    margin-bottom: var(--space-8);
+  }
+
+  .page-hero h1 {
+    color: var(--color-white);
+    font-size: clamp(28px, 5vw, 40px);
+    margin: 0;
+  }
+
+  .contacts-content {
+    padding: var(--space-8) 0;
+  }
+
+  .contacts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: var(--space-4);
+    margin-bottom: var(--space-12);
+  }
+
+  .contact-card {
+    background: var(--color-white);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: var(--space-6);
+  }
+
+  .contact-icon {
+    width: 48px;
+    height: 48px;
+    background: var(--color-accent);
+    border-radius: var(--radius-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: var(--space-4);
+  }
+
+  .contact-card h3 {
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+    margin: 0 0 var(--space-2);
+  }
+
+  .contact-card a,
+  .contact-card span {
+    font-size: var(--text-lg);
+    color: var(--color-primary);
+    font-weight: 500;
+  }
+
+  .contact-form-section {
+    max-width: 800px;
+  }
+
+  .contact-form-section h2 {
+    margin-bottom: var(--space-6);
+  }
+
+  .contact-form .form-row {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-4);
+  }
+
+  .contact-form .form-group {
+    margin-bottom: var(--space-4);
+  }
+
+  .contact-form label {
+    display: block;
+    font-size: var(--text-sm);
+    font-weight: 500;
+    margin-bottom: var(--space-2);
+  }
+
+  .contact-form input,
+  .contact-form textarea {
+    width: 100%;
+    padding: var(--space-3);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    font-size: var(--text-base);
+  }
+
+  .contact-form input:focus,
+  .contact-form textarea:focus {
+    outline: none;
+    border-color: var(--color-accent);
+  }
+
+  @media (max-width: 768px) {
+    .contact-form .form-row {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+

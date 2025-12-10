@@ -1,0 +1,131 @@
+/* Font Face Declarations */
+@font-face {
+  font-family: 'Onest';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: local('Onest Bold'),
+    url('/fonts/onest/WOFF/OnestBold1602-hint.woff') format('woff'),
+    url('/fonts/onest/TTF/OnestBold1602-hint.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Onest';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: local('Onest Medium'),
+    url('/fonts/onest/WOFF/OnestMedium1602-hint.woff') format('woff'),
+    url('/fonts/onest/TTF/OnestMedium1602-hint.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Manrope';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Manrope Regular'),
+    url('/fonts/Manrope/static/Manrope-Regular.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Manrope';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: local('Manrope Medium'),
+    url('/fonts/Manrope/static/Manrope-Medium.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Manrope';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: local('Manrope SemiBold'),
+    url('/fonts/Manrope/static/Manrope-SemiBold.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Manrope';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: local('Manrope Bold'),
+    url('/fonts/Manrope/static/Manrope-Bold.ttf') format('truetype');
+}
+
+/* Typography Base Styles */
+body {
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  color: var(--color-text);
+  line-height: var(--leading-normal);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  line-height: var(--leading-tight);
+  color: var(--color-primary);
+}
+
+h1 {
+  font-size: clamp(28px, 5vw, var(--text-4xl));
+  letter-spacing: -2px;
+}
+
+h2 {
+  font-size: clamp(24px, 4vw, var(--text-3xl));
+  letter-spacing: -0.96px;
+}
+
+h3 {
+  font-size: clamp(20px, 3vw, var(--text-2xl));
+  letter-spacing: -0.6px;
+}
+
+h4 {
+  font-size: var(--text-lg);
+  font-weight: 600;
+}
+
+h5, h6 {
+  font-size: var(--text-md);
+  font-weight: 600;
+}
+
+p {
+  margin-bottom: 1em;
+  line-height: var(--leading-relaxed);
+}
+
+a {
+  color: var(--color-primary);
+  transition: color var(--transition-fast);
+}
+
+a:hover {
+  color: var(--color-accent);
+}
+
+strong, b {
+  font-weight: 600;
+}
+
+small {
+  font-size: var(--text-sm);
+}
+
+.text-muted {
+  color: var(--color-text-muted);
+}
+
+.text-accent {
+  color: var(--color-accent);
+}
+
+.text-center {
+  text-align: center;
+}
+

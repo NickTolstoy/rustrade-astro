@@ -1,0 +1,641 @@
+---
+import type { Lang } from '@/i18n';
+import { t, getBaseUrl } from '@/i18n';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+
+import Faq from '@/components/Faq.astro';
+
+const lang: Lang = 'ru';
+const base = getBaseUrl(lang);
+
+const faqItems = [
+  {
+    question: "Как долго компания работает на рынке?",
+    answer: "ООО «Рустрейд» была основана в 2020 году, однако ключевые специалисты нашей команды имеют более 15 лет опыта работы в сфере энергетического машиностроения и реализации крупных проектов."
+  },
+  {
+    question: "Есть ли у вас необходимые лицензии и сертификаты?",
+    answer: "Да, наша деятельность полностью лицензирована. Мы являемся членом СРО, имеем допуски к работам по проектированию и строительству на особо опасных производственных объектах, а также сертификаты ISO 9001."
+  },
+  {
+    question: "С какими производителями вы сотрудничаете?",
+    answer: "Мы работаем с проверенным пулом заводов-изготовителей в России и дружественных странах. Каждый партнер проходит тщательный аудит системы контроля качества перед началом сотрудничества."
+  }
+];
+
+const stats = [
+  { value: 57, unit: 'МВт', label: 'Суммарная установочная мощность', icon: '/img/icons/effective.svg' },
+  { value: 8, unit: 'шт', label: 'Успешно реализованных проектов', icon: '/img/icons/checked_bookmark.svg' },
+  { value: 10, unit: 'шт', label: 'Проектов в стадии реализации', icon: '/img/settings.svg' },
+  { value: 15, unit: 'лет', label: 'Опыта работы на рынке', icon: '/img/icons/quality.svg' }
+];
+
+
+const partners = [
+  { name: "Газпром", logo: "/img/partners/gazprom.png" },
+  { name: "Татнефть", logo: "/img/partners/tatneft.png" },
+  { name: "Уральская Сталь", logo: "/img/partners/ural_steel.png" },
+  { name: "УРАЛХИМ", logo: "/img/partners/uralchem.png" },
+  { name: "Северсталь", logo: "/img/partners/severstal.png" },
+  { name: "СИБУР", logo: "/img/partners/sibur.png" },
+  { name: "Роснефть", logo: "/img/partners/rosneft.png" },
+  { name: "Segezha Group", logo: "/img/partners/segezha.png" },
+  { name: "ЕвроХим", logo: "/img/partners/Evrohim.svg" },
+  { name: "Лукойл", logo: "/img/partners/LUK_OIL.svg" },
+  { name: "НЛМК", logo: "/img/partners/NLMK.svg" },
+  { name: "Губахинский Кокс", logo: "/img/partners/Gubahinskiy Koks.svg" }
+];
+---
+
+<BaseLayout 
+  lang={lang} 
+  title="О компании | РУСТРЕЙД"
+  description="ООО «Рустрейд» — проектирование и поставка паровых турбин, турбогенераторов и комплектующих"
+>
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-content">
+      <h1>О компании</h1>
+      <p>Обеспечиваем заказчиков качественными и эффективными энергетическими решениями на базе паровых турбин</p>
+    </div>
+  </section>
+
+  <!-- About Info Section -->
+  <section class="section about-info">
+    <div class="about-grid">
+      <div class="about-text">
+        <h2>Миссия и подход</h2>
+        <div class="text-content">
+          <p>
+            ООО «Рустрейд» была создана в 2020 году. Наша миссия – обеспечить Заказчика возможностью приобрести качественные и эффективные по стоимости решения на базе паровых турбин.
+          </p>
+          <p>
+            Мы проектируем и поставляет противодавленческие и конденсационные паровые турбины, паровые турбины с отбором, которые работают в широком диапазоне давления и расхода, с возможностью поиска индивидуального решения под потребности каждого отдельного Заказчика.
+          </p>
+          <p>
+            Мы предоставляем нашим клиентам возможность получить надежное и качественное решение при существенном экономическом преимуществе по сравнению с доступными на рынке РФ вариантами.
+          </p>
+        </div>
+      </div>
+      <div class="about-image">
+        <img src="/img/about/chairs.jpg" alt="Офис Рустрейд" />
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats Section -->
+  <section class="section stats">
+    <div class="stats-grid">
+      {stats.map(stat => (
+        <div class="stat-card">
+          <div class="stat-icon">
+            <img src={stat.icon} alt={stat.label} />
+          </div>
+          <div class="stat-content-wrapper">
+            <div class="stat-value-wrapper">
+              <span class="stat-value" data-value={stat.value}>0</span>
+              <span class="stat-unit">{stat.unit}</span>
+            </div>
+            <p class="stat-label">{stat.label}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- Values Section -->
+  <section class="section values">
+    <div class="section-header">
+      <h2>Наши ценности</h2>
+      <p>Принципы, которыми мы руководствуемся в своей работе каждый день</p>
+    </div>
+    <div class="values-grid">
+      <div class="value-card value-card-1">
+        <h3>Обеспечить позитивные преобразования</h3>
+        <ul>
+          <li>Мы стимулируем системные позитивные преобразования для наших клиентов</li>
+        </ul>
+      </div>
+      <div class="value-card value-card-2">
+        <h3>Руководить с учетом контекста</h3>
+        <ul>
+          <li>Мы прозрачны и инклюзивны, когда принимаем и объясняем решения</li>
+          <li>Мы все - лидеры</li>
+        </ul>
+      </div>
+      <div class="value-card value-card-3">
+        <h3>Укреплять доверие</h3>
+        <ul>
+          <li>Мы слушаем, говорим и даем откровенную обратную связь</li>
+          <li>Мы относимся друг к другу с уважением</li>
+          <li>Мы сотрудничаем - с намерением и заботой</li>
+        </ul>
+        <div class="value-image">
+          <img src="/руки.webp" alt="Партнёрство" />
+        </div>
+      </div>
+      <div class="value-card value-card-4">
+        <h3>Ежегодный аудит</h3>
+        <ul>
+          <li>Мы гордимся своей работой и берем на себя ответственность за ее влияние</li>
+          <li>Мы уполномочены предпринимать действия, чтобы двигаться вперед</li>
+          <li>Действуем с ответственностью перед клиентами</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Partners Marquee Section -->
+  <section class="section partners">
+    <div class="section-header">
+      <h2>Нам доверяют</h2>
+    </div>
+    
+    <div class="marquee-container">
+      <div class="marquee-track">
+        {/* First set of partners */}
+        {partners.map(partner => (
+          <div class="partner-item">
+            <div class="partner-logo">
+              <img src={partner.logo} alt={partner.name} />
+            </div>
+          </div>
+        ))}
+        {/* Duplicate set for seamless loop */}
+        {partners.map(partner => (
+          <div class="partner-item">
+            <div class="partner-logo">
+              <img src={partner.logo} alt={partner.name} />
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="section cta">
+    <div class="cta-content">
+      <h2>Готовы начать проект?</h2>
+      <p>Свяжитесь с нами для консультации или обсуждения деталей вашего проекта</p>
+      <button class="btn btn-accent" data-modal="contact">
+        <span>Связаться с нами</span>
+        <img src="/img/arrow_right.svg" alt="" width="16" height="16" />
+      </button>
+    </div>
+  </section>
+
+  <Faq items={faqItems} />
+</BaseLayout>
+
+<script>
+  function animateStats() {
+    const stats = document.querySelectorAll('.stat-value');
+    
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const target = entry.target;
+          const endValue = parseInt(target.getAttribute('data-value') || '0');
+          const duration = 2000; // 2 seconds
+          const start = 0;
+          const startTime = performance.now();
+
+          function update(currentTime: number) {
+            const elapsed = currentTime - startTime;
+            const progress = Math.min(elapsed / duration, 1);
+            
+            // Ease out quart
+            const ease = 1 - Math.pow(1 - progress, 4);
+            
+            const current = Math.floor(start + (endValue - start) * ease);
+            target.textContent = current.toString();
+
+            if (progress < 1) {
+              requestAnimationFrame(update);
+            } else {
+              target.textContent = endValue.toString();
+            }
+          }
+
+          requestAnimationFrame(update);
+          observer.unobserve(target);
+        }
+      });
+    }, { threshold: 0.2 });
+
+    stats.forEach(stat => observer.observe(stat));
+  }
+
+  document.addEventListener('astro:page-load', animateStats);
+  document.addEventListener('DOMContentLoaded', animateStats);
+</script>
+
+<style>
+  /* Common Styles */
+  .section {
+    margin-bottom: var(--space-12);
+  }
+
+  .section-header {
+    margin-bottom: var(--space-8);
+  }
+
+  .section-header h2 {
+    font-size: var(--text-3xl);
+    margin-bottom: var(--space-3);
+  }
+
+  .section-header p {
+    color: var(--color-text-muted);
+    font-size: var(--text-lg);
+    max-width: 600px;
+  }
+
+  /* Hero Section */
+  .hero {
+    background: linear-gradient(59deg, rgba(42, 45, 46, 0.85) 0%, rgba(0, 0, 0, 0.60) 31.59%, rgba(42, 45, 46, 0.85) 100%), 
+                url('/img/about/team.png') center/cover no-repeat;
+    border-radius: var(--radius-xl);
+    padding: var(--space-12) var(--space-8);
+    margin-bottom: var(--space-12);
+    min-height: 400px;
+    display: flex;
+    align-items: center;
+  }
+
+  .hero-content { max-width: 700px; color: var(--color-white); }
+  .hero h1 { font-size: clamp(32px, 5vw, 48px); color: var(--color-white); margin-bottom: var(--space-4); letter-spacing: -1px; }
+  .hero p { font-size: var(--text-lg); opacity: 0.9; margin-bottom: var(--space-8); line-height: 1.6; max-width: 600px; }
+
+  /* About Info Grid */
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-8);
+    align-items: center;
+  }
+
+  .about-text h2 {
+    font-size: var(--text-3xl);
+    margin-bottom: var(--space-6);
+  }
+
+  .text-content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+  }
+
+  .text-content p {
+    font-size: var(--text-base);
+    line-height: 1.6;
+    color: var(--color-text-muted);
+  }
+
+  .about-image {
+    border-radius: var(--radius-xl);
+    overflow: hidden;
+    height: 100%;
+    min-height: 400px;
+  }
+
+  .about-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+  }
+
+  .about-image:hover img {
+    transform: scale(1.05);
+  }
+
+  /* Stats Section */
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: var(--space-4);
+  }
+
+  .stat-card {
+    background: var(--color-bg-card);
+    padding: var(--space-6);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--color-border);
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+  }
+
+  .stat-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-md);
+    background: var(--color-white);
+    border-color: var(--color-accent);
+  }
+
+  .stat-icon {
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--color-white);
+    border-radius: 12px;
+    padding: 8px;
+    margin-bottom: 8px;
+    box-shadow: var(--shadow-sm);
+  }
+
+  .stat-icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  .stat-value-wrapper {
+    display: flex;
+    align-items: baseline;
+    gap: var(--space-2);
+  }
+
+  .stat-value {
+    font-size: var(--text-4xl);
+    font-weight: 700;
+    color: var(--color-primary);
+    font-family: var(--font-heading);
+    line-height: 1;
+  }
+
+  .stat-unit {
+    font-size: var(--text-lg);
+    color: var(--color-text-muted);
+    font-weight: 500;
+  }
+
+  .stat-label {
+    font-size: var(--text-base);
+    color: var(--color-text-muted);
+    line-height: 1.4;
+  }
+
+  /* Values Section - Bento Grid (exact match to reference) */
+  .values-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1.2fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 16px;
+    min-height: 480px;
+  }
+
+  .value-card {
+    background: linear-gradient(145deg, 
+      rgba(255,255,255,0.9) 0%, 
+      rgba(250,250,250,0.85) 50%, 
+      rgba(245,245,245,0.8) 100%
+    );
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    padding: 32px;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    box-shadow: 
+      0 8px 32px rgba(0,0,0,0.08),
+      0 0 0 1px rgba(255,255,255,0.5),
+      inset 0 1px 0 rgba(255,255,255,0.6);
+    border: 1px solid rgba(255,255,255,0.3);
+  }
+
+  .value-card h3 {
+    font-size: var(--text-2xl);
+    font-weight: 600;
+    color: var(--color-primary);
+    margin-bottom: var(--space-5);
+    line-height: 1.3;
+  }
+
+  .value-card ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    margin-top: auto;
+  }
+
+  .value-card li {
+    position: relative;
+    padding-left: var(--space-4);
+    margin-bottom: var(--space-2);
+    font-size: var(--text-base);
+    color: var(--color-text-muted);
+    line-height: 1.6;
+  }
+
+  .value-card li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 8px;
+    width: 5px;
+    height: 5px;
+    background: var(--color-border);
+    border-radius: 50%;
+  }
+
+  /* Bento layout - exact positions */
+  .value-card-1 { 
+    grid-column: 1; 
+    grid-row: 1; 
+  }
+  
+  .value-card-2 { 
+    grid-column: 2; 
+    grid-row: 1; 
+  }
+  
+  .value-card-3 { 
+    grid-column: 3; 
+    grid-row: 1 / 3;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .value-card-4 { 
+    grid-column: 1 / 3; 
+    grid-row: 2; 
+  }
+
+  .value-image {
+    margin-top: auto;
+    padding-top: 24px;
+    flex-grow: 1;
+    display: flex;
+    align-items: flex-end;
+  }
+
+  .value-image img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    display: block;
+    object-fit: contain;
+  }
+
+  /* Partners Marquee */
+  .marquee-container {
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+    padding: var(--space-6) 0;
+    mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+    -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+  }
+
+  .marquee-track {
+    display: flex;
+    gap: var(--space-8);
+    width: max-content;
+    animation: scroll 40s linear infinite;
+  }
+
+  .marquee-track:hover {
+    animation-play-state: paused;
+  }
+
+  .partner-item {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .partner-logo {
+    padding: var(--space-4) var(--space-8);
+    background: var(--color-white);
+    border: 1px solid var(--color-border);
+    border-radius: 20px;
+    transition: all 0.3s ease;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 200px;
+  }
+
+  .partner-logo img {
+    max-height: 100%;
+    max-width: 100%;
+    object-fit: contain;
+    filter: grayscale(100%);
+    transition: all 0.3s ease;
+    opacity: 0.7;
+  }
+
+  .partner-item:hover .partner-logo {
+    border-color: var(--color-accent);
+    transform: scale(1.05);
+    box-shadow: var(--shadow-sm);
+  }
+  
+  .partner-item:hover .partner-logo img {
+    filter: grayscale(0%);
+    opacity: 1;
+  }
+
+  @keyframes scroll {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+
+  /* CTA Section */
+  .cta {
+    background: var(--color-bg-card);
+    border-radius: var(--radius-xl);
+    padding: var(--space-12) var(--space-8);
+    text-align: center;
+  }
+
+  .cta-content {
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .cta h2 {
+    font-size: var(--text-3xl);
+    margin-bottom: var(--space-4);
+  }
+
+  .cta p {
+    font-size: var(--text-lg);
+    color: var(--color-text-muted);
+    margin-bottom: var(--space-8);
+  }
+
+  /* Responsive Design */
+  @media (max-width: 1024px) {
+    .about-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .about-image {
+      min-height: 300px;
+      order: -1;
+    }
+
+    .values-grid {
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: auto auto auto;
+      min-height: auto;
+    }
+    
+    .value-card-1 { grid-column: 1; grid-row: 1; }
+    .value-card-2 { grid-column: 2; grid-row: 1; }
+    .value-card-3 { grid-column: 1 / 3; grid-row: 2; }
+    .value-card-4 { grid-column: 1 / 3; grid-row: 3; }
+  }
+
+  @media (max-width: 768px) {
+    .hero {
+      padding: var(--space-8) var(--space-5);
+      min-height: 300px;
+    }
+
+    .values-grid {
+      grid-template-columns: 1fr;
+      min-height: auto;
+    }
+    
+    .value-card-1,
+    .value-card-2,
+    .value-card-3,
+    .value-card-4 { 
+      grid-column: 1 !important; 
+      grid-row: auto !important; 
+    }
+
+    .value-card {
+      padding: 24px;
+    }
+
+    .value-card h3 {
+      font-size: 18px;
+    }
+
+    .stats-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .stats-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

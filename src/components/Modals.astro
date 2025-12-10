@@ -1,0 +1,2269 @@
+---
+import type { Lang } from '@/i18n';
+import { t, getBaseUrl } from '@/i18n';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const base = getBaseUrl(lang);
+
+// reCAPTCHA site key
+const recaptchaSiteKey = '6LfNRK8pAAAAAH_LHUf8KKIPEHunNcHtvejUlqu5';
+---
+
+<!-- Callback Modal -->
+<div class="modal-overlay" id="callback-modal">
+  <div class="modal">
+    <div class="modal-header">
+      <h3 class="modal-title">{t('forms.orderCallback', lang)}</h3>
+      <button class="modal-close" data-close-modal aria-label={t('common.close', lang)}>
+        <img src="/img/close.svg" alt="close" width="16" height="16" />
+      </button>
+    </div>
+    
+    <div class="modal-body">
+      <form class="modal-form" data-form="callback">
+        <div class="form-group">
+          <label for="callback-name">{t('forms.name', lang)}<span class="required">*</span></label>
+          <input 
+            type="text" 
+            id="callback-name" 
+            name="name" 
+            placeholder={t('forms.namePlaceholder', lang)}
+            required 
+          />
+        </div>
+        
+        <div class="form-group">
+          <label for="callback-phone">{t('forms.phone', lang)}<span class="required">*</span></label>
+          <input 
+            type="tel" 
+            id="callback-phone" 
+            name="phone" 
+            class="phone-mask"
+            placeholder={t('forms.phonePlaceholder', lang)}
+            required 
+          />
+          <span class="error-message hidden">{t('forms.phoneError', lang)}</span>
+        </div>
+        
+        <div class="checkbox-group privacy-checkbox-group">
+          <input type="checkbox" id="callback-privacy" name="privacy" class="privacy-checkbox" required />
+          <label for="callback-privacy">
+            {t('forms.privacyConsent', lang)}
+            <a href={`${base}/privacy-policy`} target="_blank">{t('forms.privacyPolicy', lang)}</a>
+          </label>
+        </div>
+        
+        <div class="recaptcha-container hidden" data-recaptcha-container>
+          <div class="recaptcha" id="recaptcha-callback"></div>
+        </div>
+        
+        <button type="submit" class="modal-submit" disabled>
+          {t('forms.submit', lang)}
+        </button>
+      </form>
+    </div>
+    
+    <div class="modal-body modal-success hidden">
+      <div class="modal-success-icon">
+        <img src="/img/check.svg" alt="success" width="32" height="32" />
+      </div>
+      <h3>{t('forms.thankYou', lang)}</h3>
+      <p>{t('forms.willCallBack', lang)}</p>
+    </div>
+  </div>
+</div>
+
+<!-- Contact Modal (Обсудить проект / Подобрать решение) -->
+<div class="modal-overlay" id="contact-modal">
+  <div class="modal modal-large">
+    <div class="modal-header">
+      <h3 class="modal-title">{t('forms.startProject', lang)}</h3>
+      <button class="modal-close" data-close-modal aria-label={t('common.close', lang)}>
+        <img src="/img/close.svg" alt="close" width="16" height="16" />
+      </button>
+    </div>
+    
+    <div class="modal-body">
+      <p class="modal-notice">{t('forms.confidenceNotice', lang)}</p>
+      
+      <form class="modal-form" data-form="contact">
+      <!-- Contact Fields -->
+      <div class="form-row">
+        <div class="form-group">
+          <label for="contact-name">{t('forms.name', lang)}<span class="required">*</span></label>
+          <input 
+            type="text" 
+            id="contact-name" 
+            name="name" 
+            placeholder={t('forms.namePlaceholder', lang)}
+            required 
+          />
+        </div>
+        
+        <div class="form-group">
+          <label for="contact-phone">{t('forms.phone', lang)}<span class="required">*</span></label>
+          <input 
+            type="tel" 
+            id="contact-phone" 
+            name="phone" 
+            class="phone-mask"
+            placeholder={t('forms.phonePlaceholder', lang)}
+            required 
+          />
+          <span class="error-message hidden">{t('forms.phoneError', lang)}</span>
+        </div>
+      </div>
+      
+      <div class="form-row">
+        <div class="form-group">
+          <label for="contact-email">{t('forms.email', lang)}</label>
+          <input 
+            type="email" 
+            id="contact-email" 
+            name="email" 
+            class="email-input"
+            placeholder={t('forms.emailPlaceholder', lang)}
+          />
+          <span class="error-message hidden">{t('forms.emailError', lang)}</span>
+        </div>
+        
+        <div class="form-group">
+          <label for="contact-company">{t('forms.company', lang)}</label>
+          <input 
+            type="text" 
+            id="contact-company" 
+            name="company" 
+            placeholder={t('forms.companyPlaceholder', lang)}
+          />
+        </div>
+      </div>
+      
+      <!-- Steam Turbine Question -->
+      <div class="form-section">
+        <h4 class="form-section-title">{t('forms.steamTurbine', lang)}</h4>
+        <div class="radio-buttons-row">
+          <label class="radio-btn">
+            <input type="radio" name="turbine_type" value="drive" />
+            <span class="radio-btn-label">{t('forms.turbineDrive', lang)}</span>
+          </label>
+          <label class="radio-btn">
+            <input type="radio" name="turbine_type" value="generation" />
+            <span class="radio-btn-label">{t('forms.turbineGeneration', lang)}</span>
+          </label>
+        </div>
+      </div>
+      
+      <!-- ROU Question -->
+      <div class="form-section">
+        <h4 class="form-section-title">{t('forms.hasROU', lang)}</h4>
+        <div class="radio-buttons-row">
+          <label class="radio-btn">
+            <input type="radio" name="has_rou" value="yes" />
+            <span class="radio-btn-label">{t('forms.yes', lang)}</span>
+          </label>
+          <label class="radio-btn">
+            <input type="radio" name="has_rou" value="no" />
+            <span class="radio-btn-label">{t('forms.no', lang)}</span>
+          </label>
+        </div>
+      </div>
+      
+      <!-- Privacy and reCAPTCHA -->
+      <div class="checkbox-group privacy-checkbox-group">
+        <input type="checkbox" id="contact-privacy" name="privacy" class="privacy-checkbox" required />
+        <label for="contact-privacy">
+          {t('forms.privacyConsent', lang)}
+          <a href={`${base}/privacy-policy`} target="_blank">{t('forms.privacyPolicy', lang)}</a>
+        </label>
+      </div>
+      <span class="error-message privacy-error hidden">{t('forms.privacyError', lang)}</span>
+      
+      <div class="recaptcha-container hidden" data-recaptcha-container>
+        <div class="recaptcha" id="recaptcha-contact"></div>
+      </div>
+      <span class="error-message captcha-error hidden">{t('forms.captchaError', lang)}</span>
+      
+      <button type="submit" class="modal-submit" disabled>
+        {t('forms.submit', lang)}
+      </button>
+      </form>
+    </div>
+    
+    <div class="modal-body modal-success hidden">
+      <div class="modal-success-icon">
+        <img src="/img/check.svg" alt="success" width="32" height="32" />
+      </div>
+      <h3>{t('forms.thankYou', lang)}</h3>
+      <p>{t('forms.willCallBack', lang)}</p>
+    </div>
+  </div>
+</div>
+
+<!-- Consultation Modal -->
+<div class="modal-overlay" id="consultation-modal">
+  <div class="modal modal-large">
+    <div class="modal-header">
+      <h3 class="modal-title">Получить консультацию</h3>
+      <button class="modal-close" data-close-modal aria-label={t('common.close', lang)}>
+        <img src="/img/close.svg" alt="close" width="16" height="16" />
+      </button>
+    </div>
+    
+    <div class="modal-body">
+      <p class="modal-notice">Мы принимаем на себя обязательство о том, что информация, полученная в рамках консультации, является конфиденциальной и не подлежит разглашению или передаче третьим лицам.</p>
+      
+      <form class="modal-form" data-form="consultation">
+      <!-- Ваши контакты -->
+      <div class="form-section">
+        <h4 class="form-section-title">Ваши контакты</h4>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="consult-name">{t('forms.name', lang)}<span class="required">*</span></label>
+          <input 
+            type="text" 
+            id="consult-name" 
+            name="name" 
+            placeholder="Введите ваше имя"
+            required 
+          />
+        </div>
+        
+        <div class="form-group">
+          <label for="consult-phone">{t('forms.phone', lang)}<span class="required">*</span></label>
+          <input 
+            type="tel" 
+            id="consult-phone" 
+            name="phone" 
+            class="phone-mask"
+            placeholder="+7 (___) ___-__-__"
+            required 
+          />
+          <span class="error-message hidden">{t('forms.phoneError', lang)}</span>
+        </div>
+      </div>
+      
+      <div class="form-row">
+        <div class="form-group">
+          <label for="consult-email">E-mail</label>
+          <input 
+            type="email" 
+            id="consult-email" 
+            name="email" 
+            class="email-input"
+            placeholder="example@mail.ru"
+          />
+          <span class="error-message hidden">{t('forms.emailError', lang)}</span>
+        </div>
+        
+        <div class="form-group">
+          <label for="consult-company">Компания</label>
+          <input 
+            type="text" 
+            id="consult-company" 
+            name="company" 
+            placeholder="Название компании"
+          />
+        </div>
+      </div>
+      
+      <!-- Тема консультации -->
+      <div class="form-section">
+        <h4 class="form-section-title">Тема консультации</h4>
+        <div class="checkbox-buttons-grid">
+          <label class="checkbox-btn">
+            <input type="checkbox" name="consultation_technical" />
+            <span class="checkbox-btn-label">Технический вопрос</span>
+          </label>
+          <label class="checkbox-btn">
+            <input type="checkbox" name="consultation_commercial" />
+            <span class="checkbox-btn-label">Коммерческое предложение</span>
+          </label>
+          <label class="checkbox-btn">
+            <input type="checkbox" name="consultation_service" />
+            <span class="checkbox-btn-label">Сервис и обслуживание</span>
+          </label>
+          <label class="checkbox-btn">
+            <input type="checkbox" name="consultation_documentation" />
+            <span class="checkbox-btn-label">Разработка документации</span>
+          </label>
+          <label class="checkbox-btn">
+            <input type="checkbox" name="consultation_other" />
+            <span class="checkbox-btn-label">Другое</span>
+          </label>
+        </div>
+      </div>
+      
+      <!-- Ваш вопрос -->
+      <div class="form-section">
+        <h4 class="form-section-title">Ваш вопрос</h4>
+        <div class="form-group">
+          <textarea 
+            id="consult-message" 
+            name="message" 
+            placeholder="Опишите ваш вопрос"
+            rows="4"
+          ></textarea>
+        </div>
+      </div>
+      
+      <!-- Как с вами связаться? -->
+      <div class="form-section">
+        <h4 class="form-section-title">Как с вами связаться?</h4>
+        <div class="radio-buttons-row">
+          <label class="radio-btn">
+            <input type="radio" name="contact_method" value="phone" />
+            <span class="radio-btn-label">По телефону</span>
+          </label>
+          <label class="radio-btn">
+            <input type="radio" name="contact_method" value="email" />
+            <span class="radio-btn-label">По email</span>
+          </label>
+        </div>
+      </div>
+      
+      <!-- Privacy and reCAPTCHA -->
+      <div class="checkbox-group privacy-checkbox-group">
+        <input type="checkbox" id="consult-privacy" name="privacy" class="privacy-checkbox" required />
+        <label for="consult-privacy">
+          {t('forms.privacyConsent', lang)}
+          <a href={`${base}/privacy-policy`} target="_blank">{t('forms.privacyPolicy', lang)}</a>
+        </label>
+      </div>
+      <span class="error-message privacy-error hidden">{t('forms.privacyError', lang)}</span>
+      
+      <div class="recaptcha-container hidden" data-recaptcha-container>
+        <div class="recaptcha" id="recaptcha-consultation"></div>
+      </div>
+      <span class="error-message captcha-error hidden">{t('forms.captchaError', lang)}</span>
+      
+      <button type="submit" class="modal-submit" disabled>
+        {t('forms.submit', lang)}
+      </button>
+      </form>
+    </div>
+    
+    <div class="modal-body modal-success hidden">
+      <div class="modal-success-icon">
+        <img src="/img/check.svg" alt="success" width="32" height="32" />
+      </div>
+      <h3>{t('forms.thankYou', lang)}</h3>
+      <p>{t('forms.willCallBack', lang)}</p>
+    </div>
+  </div>
+</div>
+
+<!-- Design Order Modal -->
+<div class="modal-overlay" id="design-modal">
+  <div class="modal modal-large">
+    <div class="modal-header">
+      <h3 class="modal-title">{t('forms.designOrder', lang)}</h3>
+      <button class="modal-close" data-close-modal aria-label={t('common.close', lang)}>
+        <img src="/img/close.svg" alt="close" width="16" height="16" />
+      </button>
+    </div>
+    
+    <div class="modal-body">
+      <p class="modal-notice">{t('forms.confidenceNotice', lang)}</p>
+      
+      <form class="modal-form" data-form="design">
+      <!-- Contact Fields -->
+      <div class="form-row">
+        <div class="form-group">
+          <label for="design-name">{t('forms.name', lang)}<span class="required">*</span></label>
+          <input 
+            type="text" 
+            id="design-name" 
+            name="name" 
+            placeholder={t('forms.namePlaceholder', lang)}
+            required 
+          />
+        </div>
+        
+        <div class="form-group">
+          <label for="design-phone">{t('forms.phone', lang)}<span class="required">*</span></label>
+          <input 
+            type="tel" 
+            id="design-phone" 
+            name="phone" 
+            class="phone-mask"
+            placeholder={t('forms.phonePlaceholder', lang)}
+            required 
+          />
+          <span class="error-message hidden">{t('forms.phoneError', lang)}</span>
+        </div>
+      </div>
+      
+      <div class="form-row">
+        <div class="form-group">
+          <label for="design-email">{t('forms.email', lang)}</label>
+          <input 
+            type="email" 
+            id="design-email" 
+            name="email" 
+            class="email-input"
+            placeholder={t('forms.emailPlaceholder', lang)}
+          />
+          <span class="error-message hidden">{t('forms.emailError', lang)}</span>
+        </div>
+        
+        <div class="form-group">
+          <label for="design-company">{t('forms.company', lang)}</label>
+          <input 
+            type="text" 
+            id="design-company" 
+            name="company" 
+            placeholder={t('forms.companyPlaceholder', lang)}
+          />
+        </div>
+      </div>
+      
+      <!-- Project Type -->
+      <div class="form-section">
+        <h4 class="form-section-title">{t('forms.projectType', lang)}</h4>
+        <div class="radio-buttons-row">
+          <label class="radio-btn">
+            <input type="radio" name="project_type" value="turbines" />
+            <span class="radio-btn-label">{t('forms.turbineUnits', lang)}</span>
+          </label>
+          <label class="radio-btn">
+            <input type="radio" name="project_type" value="boilers" />
+            <span class="radio-btn-label">{t('forms.boilerUnits', lang)}</span>
+          </label>
+          <label class="radio-btn">
+            <input type="radio" name="project_type" value="pipelines" />
+            <span class="radio-btn-label">{t('forms.pipelines', lang)}</span>
+          </label>
+          <label class="radio-btn">
+            <input type="radio" name="project_type" value="energy_systems" />
+            <span class="radio-btn-label">{t('forms.energySystems', lang)}</span>
+          </label>
+          <label class="radio-btn">
+            <input type="radio" name="project_type" value="other" />
+            <span class="radio-btn-label">{t('forms.other', lang)}</span>
+          </label>
+        </div>
+      </div>
+
+      <!-- Project Description -->
+      <div class="form-group" style="margin-top: var(--space-4);">
+        <label for="design-description">{t('forms.projectDescription', lang)}</label>
+        <textarea 
+          id="design-description" 
+          name="description" 
+          placeholder={t('forms.projectDescriptionPlaceholder', lang)}
+          rows="3"
+          style="width: 100%; padding: 12px; border: 1px solid var(--color-border); border-radius: var(--radius-md); font-family: inherit; resize: vertical;"
+        ></textarea>
+      </div>
+
+      <!-- Required Deadlines -->
+      <div class="form-group" style="margin-top: var(--space-4);">
+        <label for="design-deadlines">{t('forms.requiredDeadlines', lang)}</label>
+        <input 
+          type="text" 
+          id="design-deadlines" 
+          name="deadlines" 
+          placeholder={t('forms.requiredDeadlinesPlaceholder', lang)}
+        />
+      </div>
+      
+      <!-- Contact Preference -->
+      <div class="form-section">
+        <h4 class="form-section-title">{t('forms.howToContact', lang)}</h4>
+        <div class="radio-buttons-row">
+          <label class="radio-btn">
+            <input type="radio" name="contact_method" value="phone" />
+            <span class="radio-btn-label">{t('forms.byPhone', lang)}</span>
+          </label>
+          <label class="radio-btn">
+            <input type="radio" name="contact_method" value="email" />
+            <span class="radio-btn-label">{t('forms.byEmail', lang)}</span>
+          </label>
+        </div>
+      </div>
+      
+      <!-- Privacy and reCAPTCHA -->
+      <div class="checkbox-group privacy-checkbox-group">
+        <input type="checkbox" id="design-privacy" name="privacy" class="privacy-checkbox" required />
+        <label for="design-privacy">
+          {t('forms.privacyConsent', lang)}
+          <a href={`${base}/privacy-policy`} target="_blank">{t('forms.privacyPolicy', lang)}</a>
+        </label>
+      </div>
+      <span class="error-message privacy-error hidden">{t('forms.privacyError', lang)}</span>
+      
+      <div class="recaptcha-container hidden" data-recaptcha-container>
+        <div class="recaptcha" id="recaptcha-design"></div>
+      </div>
+      <span class="error-message captcha-error hidden">{t('forms.captchaError', lang)}</span>
+      
+      <button type="submit" class="modal-submit" disabled>
+        {t('forms.submit', lang)}
+      </button>
+      </form>
+    </div>
+    
+    <div class="modal-body modal-success hidden">
+      <div class="modal-success-icon">
+        <img src="/img/check.svg" alt="success" width="32" height="32" />
+      </div>
+      <h3>{t('forms.thankYou', lang)}</h3>
+      <p>{t('forms.willCallBack', lang)}</p>
+    </div>
+  </div>
+</div>
+
+<!-- Blades Order Modal -->
+<div class="modal-overlay" id="blades-modal">
+  <div class="modal modal-large">
+    <div class="modal-header">
+      <h3 class="modal-title">Заказать изготовление лопаток</h3>
+      <button class="modal-close" data-close-modal aria-label={t('common.close', lang)}>
+        <img src="/img/close.svg" alt="close" width="16" height="16" />
+      </button>
+    </div>
+    
+    <div class="modal-body">
+      <p class="modal-notice">Мы гарантируем конфиденциальность ваших данных и предложим оптимальное решение для вашего проекта в кратчайшие сроки.</p>
+      
+      <form class="modal-form" data-form="blades">
+      <!-- Ваши контакты -->
+      <div class="form-section">
+        <h4 class="form-section-title">Ваши контакты</h4>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="blades-name">Имя<span class="required">*</span></label>
+          <input 
+            type="text" 
+            id="blades-name" 
+            name="name" 
+            placeholder="Введите ваше имя"
+            required 
+          />
+        </div>
+        
+        <div class="form-group">
+          <label for="blades-phone">Телефон<span class="required">*</span></label>
+          <input 
+            type="tel" 
+            id="blades-phone" 
+            name="phone" 
+            class="phone-mask"
+            placeholder="+7 (___) ___-__-__"
+            required 
+          />
+          <span class="error-message hidden">{t('forms.phoneError', lang)}</span>
+        </div>
+      </div>
+      
+      <div class="form-row">
+        <div class="form-group">
+          <label for="blades-email">E-mail</label>
+          <input 
+            type="email" 
+            id="blades-email" 
+            name="email" 
+            class="email-input"
+            placeholder="example@mail.ru"
+          />
+          <span class="error-message hidden">{t('forms.emailError', lang)}</span>
+        </div>
+        
+        <div class="form-group">
+          <label for="blades-company">Компания</label>
+          <input 
+            type="text" 
+            id="blades-company" 
+            name="company" 
+            placeholder="Название компании"
+          />
+        </div>
+      </div>
+      
+      <!-- Оригинальный бренд лопаток -->
+      <div class="form-section">
+        <h4 class="form-section-title">Укажите оригинальный бренд лопаток</h4>
+      </div>
+      <div class="form-group">
+        <input 
+          type="text" 
+          id="blades-brand" 
+          name="brand" 
+          placeholder="Введите оригинальный бренд лопаток"
+        />
+      </div>
+      
+      <!-- Необходимое количество -->
+      <div class="form-section">
+        <h4 class="form-section-title">Необходимое количество</h4>
+      </div>
+      <div class="form-group">
+        <input 
+          type="text" 
+          id="blades-quantity" 
+          name="quantity" 
+          placeholder="Укажите количество"
+        />
+      </div>
+      
+      <!-- Нанесение защитных покрытий -->
+      <div class="form-section">
+        <h4 class="form-section-title">Нанесение защитных покрытий</h4>
+        <div class="radio-buttons-row">
+          <label class="radio-btn">
+            <input type="radio" name="coating" value="yes" />
+            <span class="radio-btn-label">Да</span>
+          </label>
+          <label class="radio-btn">
+            <input type="radio" name="coating" value="no" />
+            <span class="radio-btn-label">Нет</span>
+          </label>
+        </div>
+      </div>
+      
+      <!-- Сроки изготовления -->
+      <div class="form-section">
+        <h4 class="form-section-title">Сроки изготовления</h4>
+      </div>
+      <div class="form-group">
+        <input 
+          type="text" 
+          id="blades-deadline" 
+          name="deadline" 
+          placeholder="Укажите срок в месяцах (при необходимости)"
+        />
+      </div>
+      
+      <!-- Как с вами связаться? -->
+      <div class="form-section">
+        <h4 class="form-section-title">Как с вами связаться?</h4>
+        <div class="radio-buttons-row">
+          <label class="radio-btn">
+            <input type="radio" name="contact_method" value="phone" />
+            <span class="radio-btn-label">По телефону</span>
+          </label>
+          <label class="radio-btn">
+            <input type="radio" name="contact_method" value="email" />
+            <span class="radio-btn-label">По email</span>
+          </label>
+          <label class="radio-btn">
+            <input type="radio" name="contact_method" value="any" />
+            <span class="radio-btn-label">Любым способом</span>
+          </label>
+        </div>
+      </div>
+      
+      <!-- Privacy and reCAPTCHA -->
+      <div class="checkbox-group privacy-checkbox-group">
+        <input type="checkbox" id="blades-privacy" name="privacy" class="privacy-checkbox" required />
+        <label for="blades-privacy">
+          {t('forms.privacyConsent', lang)}
+          <a href={`${base}/privacy-policy`} target="_blank">{t('forms.privacyPolicy', lang)}</a>
+        </label>
+      </div>
+      <span class="error-message privacy-error hidden">{t('forms.privacyError', lang)}</span>
+      
+      <div class="recaptcha-container hidden" data-recaptcha-container>
+        <div class="recaptcha" id="recaptcha-blades"></div>
+      </div>
+      <span class="error-message captcha-error hidden">{t('forms.captchaError', lang)}</span>
+      
+      <button type="submit" class="modal-submit" disabled>
+        {t('forms.submit', lang)}
+      </button>
+      </form>
+    </div>
+    
+    <div class="modal-body modal-success hidden">
+      <div class="modal-success-icon">
+        <img src="/img/check.svg" alt="success" width="32" height="32" />
+      </div>
+      <h3>{t('forms.thankYou', lang)}</h3>
+      <p>{t('forms.willCallBack', lang)}</p>
+    </div>
+  </div>
+</div>
+
+<!-- Oil Cooler Order Modal -->
+<div class="modal-overlay" id="oil-cooler-modal">
+  <div class="modal modal-large">
+    <div class="modal-header">
+      <h3 class="modal-title">Заказать маслоохладитель</h3>
+      <button class="modal-close" data-close-modal aria-label={t('common.close', lang)}>
+        <img src="/img/close.svg" alt="close" width="16" height="16" />
+      </button>
+    </div>
+    
+    <div class="modal-body">
+      <p class="modal-notice">Мы гарантируем конфиденциальность ваших данных и предложим оптимальное решение для вашего проекта в кратчайшие сроки.</p>
+      
+      <form class="modal-form" data-form="oil-cooler">
+      <!-- Ваши контакты -->
+      <div class="form-section">
+        <h4 class="form-section-title">Ваши контакты</h4>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="oilcooler-name">Имя<span class="required">*</span></label>
+          <input 
+            type="text" 
+            id="oilcooler-name" 
+            name="name" 
+            placeholder="Введите ваше имя"
+            required 
+          />
+        </div>
+        
+        <div class="form-group">
+          <label for="oilcooler-phone">Телефон<span class="required">*</span></label>
+          <input 
+            type="tel" 
+            id="oilcooler-phone" 
+            name="phone" 
+            class="phone-mask"
+            placeholder="+7 (___) ___-__-__"
+            required 
+          />
+          <span class="error-message hidden">{t('forms.phoneError', lang)}</span>
+        </div>
+      </div>
+      
+      <div class="form-row">
+        <div class="form-group">
+          <label for="oilcooler-email">E-mail</label>
+          <input 
+            type="email" 
+            id="oilcooler-email" 
+            name="email" 
+            class="email-input"
+            placeholder="example@mail.ru"
+          />
+          <span class="error-message hidden">{t('forms.emailError', lang)}</span>
+        </div>
+        
+        <div class="form-group">
+          <label for="oilcooler-company">Компания</label>
+          <input 
+            type="text" 
+            id="oilcooler-company" 
+            name="company" 
+            placeholder="Название компании"
+          />
+        </div>
+      </div>
+      
+      <!-- Тип маслоохладителя -->
+      <div class="form-section">
+        <h4 class="form-section-title">Тип маслоохладителя</h4>
+        <div class="radio-buttons-wrap">
+          <label class="radio-btn">
+            <input type="radio" name="cooler_type" value="single_pass" />
+            <span class="radio-btn-label">Одноходовой</span>
+          </label>
+          <label class="radio-btn">
+            <input type="radio" name="cooler_type" value="double_pass" />
+            <span class="radio-btn-label">Двухходовой</span>
+          </label>
+          <label class="radio-btn">
+            <input type="radio" name="cooler_type" value="block" />
+            <span class="radio-btn-label">Блочное исполнение</span>
+          </label>
+          <label class="radio-btn">
+            <input type="radio" name="cooler_type" value="other" />
+            <span class="radio-btn-label">Другой</span>
+          </label>
+        </div>
+      </div>
+      
+      <!-- Параметры турбины -->
+      <div class="form-section">
+        <h4 class="form-section-title">Параметры турбины</h4>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="oilcooler-power">Мощность турбины (МВт)</label>
+          <input 
+            type="text" 
+            id="oilcooler-power" 
+            name="turbine_power" 
+            placeholder="Укажите мощность"
+          />
+        </div>
+        
+        <div class="form-group">
+          <label for="oilcooler-oil-flow">Расход масла (м³/ч)</label>
+          <input 
+            type="text" 
+            id="oilcooler-oil-flow" 
+            name="oil_flow" 
+            placeholder="Укажите расход"
+          />
+        </div>
+      </div>
+      
+      <!-- Дополнительная информация -->
+      <div class="form-section">
+        <h4 class="form-section-title">Дополнительная информация</h4>
+      </div>
+      <div class="form-group">
+        <textarea 
+          id="oilcooler-message" 
+          name="message" 
+          placeholder="Сообщение или дополнительные требования"
+          rows="3"
+        ></textarea>
+      </div>
+      
+      <!-- Сроки поставки -->
+      <div class="form-section">
+        <h4 class="form-section-title">Сроки поставки</h4>
+      </div>
+      <div class="form-group">
+        <input 
+          type="text" 
+          id="oilcooler-deadline" 
+          name="deadline" 
+          placeholder="Укажите срок в месяцах (при необходимости)"
+        />
+      </div>
+      
+      <!-- Как с вами связаться? -->
+      <div class="form-section">
+        <h4 class="form-section-title">Как с вами связаться?</h4>
+        <div class="radio-buttons-row">
+          <label class="radio-btn">
+            <input type="radio" name="contact_method" value="phone" />
+            <span class="radio-btn-label">По телефону</span>
+          </label>
+          <label class="radio-btn">
+            <input type="radio" name="contact_method" value="email" />
+            <span class="radio-btn-label">По email</span>
+          </label>
+          <label class="radio-btn">
+            <input type="radio" name="contact_method" value="any" />
+            <span class="radio-btn-label">Любым способом</span>
+          </label>
+        </div>
+      </div>
+      
+      <!-- Privacy and reCAPTCHA -->
+      <div class="checkbox-group privacy-checkbox-group">
+        <input type="checkbox" id="oilcooler-privacy" name="privacy" class="privacy-checkbox" required />
+        <label for="oilcooler-privacy">
+          {t('forms.privacyConsent', lang)}
+          <a href={`${base}/privacy-policy`} target="_blank">{t('forms.privacyPolicy', lang)}</a>
+        </label>
+      </div>
+      <span class="error-message privacy-error hidden">{t('forms.privacyError', lang)}</span>
+      
+      <div class="recaptcha-container hidden" data-recaptcha-container>
+        <div class="recaptcha" id="recaptcha-oil-cooler"></div>
+      </div>
+      <span class="error-message captcha-error hidden">{t('forms.captchaError', lang)}</span>
+      
+      <button type="submit" class="modal-submit" disabled>
+        {t('forms.submit', lang)}
+      </button>
+      </form>
+    </div>
+    
+    <div class="modal-body modal-success hidden">
+      <div class="modal-success-icon">
+        <img src="/img/check.svg" alt="success" width="32" height="32" />
+      </div>
+      <h3>{t('forms.thankYou', lang)}</h3>
+      <p>{t('forms.willCallBack', lang)}</p>
+    </div>
+  </div>
+</div>
+
+<!-- Case Consultation Modal -->
+<div class="modal-overlay" id="case-consultation-modal">
+  <div class="modal modal-large">
+    <div class="modal-header">
+      <h3 class="modal-title">Получить консультацию</h3>
+      <button class="modal-close" data-close-modal aria-label={t('common.close', lang)}>
+        <img src="/img/close.svg" alt="close" width="16" height="16" />
+      </button>
+    </div>
+    
+    <div class="modal-body">
+      <p class="modal-notice">Мы принимаем на себя обязательство о том, что информация, полученная в рамках консультации, является конфиденциальной и не подлежит разглашению или передаче третьим лицам.</p>
+      
+      <form class="modal-form" data-form="case-consultation">
+      <!-- Contact Fields -->
+      <h4 class="form-section-title">Ваши контакты</h4>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="case-consult-name">{t('forms.name', lang)}<span class="required">*</span></label>
+          <input 
+            type="text" 
+            id="case-consult-name" 
+            name="name" 
+            placeholder={t('forms.namePlaceholder', lang)}
+            required 
+          />
+        </div>
+        
+        <div class="form-group">
+          <label for="case-consult-phone">{t('forms.phone', lang)}<span class="required">*</span></label>
+          <input 
+            type="tel" 
+            id="case-consult-phone" 
+            name="phone" 
+            class="phone-mask"
+            placeholder={t('forms.phonePlaceholder', lang)}
+            required 
+          />
+          <span class="error-message hidden">{t('forms.phoneError', lang)}</span>
+        </div>
+      </div>
+      
+      <div class="form-row">
+        <div class="form-group">
+          <label for="case-consult-email">{t('forms.email', lang)}</label>
+          <input 
+            type="email" 
+            id="case-consult-email" 
+            name="email" 
+            class="email-input"
+            placeholder={t('forms.emailPlaceholder', lang)}
+          />
+          <span class="error-message hidden">{t('forms.emailError', lang)}</span>
+        </div>
+        
+        <div class="form-group">
+          <label for="case-consult-company">{t('forms.company', lang)}</label>
+          <input 
+            type="text" 
+            id="case-consult-company" 
+            name="company" 
+            placeholder={t('forms.companyPlaceholder', lang)}
+          />
+        </div>
+      </div>
+      
+      <!-- Consultation Topic -->
+      <div class="form-section">
+        <h4 class="form-section-title">Тема консультации</h4>
+        <div class="radio-buttons-wrap">
+          <label class="radio-btn">
+            <input type="radio" name="consultation_topic" value="technical" />
+            <span class="radio-btn-label">Технический вопрос</span>
+          </label>
+          <label class="radio-btn">
+            <input type="radio" name="consultation_topic" value="commercial" />
+            <span class="radio-btn-label">Коммерческое предложение</span>
+          </label>
+          <label class="radio-btn">
+            <input type="radio" name="consultation_topic" value="service" />
+            <span class="radio-btn-label">Сервис и обслуживание</span>
+          </label>
+          <label class="radio-btn">
+            <input type="radio" name="consultation_topic" value="documentation" />
+            <span class="radio-btn-label">Разработка документации</span>
+          </label>
+          <label class="radio-btn">
+            <input type="radio" name="consultation_topic" value="other" />
+            <span class="radio-btn-label">Другое</span>
+          </label>
+        </div>
+      </div>
+
+      <!-- Question -->
+      <div class="form-group" style="margin-top: var(--space-4);">
+        <label for="case-consult-question">Ваш вопрос</label>
+        <textarea 
+          id="case-consult-question" 
+          name="question" 
+          placeholder="Опишите ваш вопрос"
+          rows="4"
+          style="width: 100%; padding: 12px; border: 1px solid var(--color-border); border-radius: 30px; font-family: inherit; resize: vertical;"
+        ></textarea>
+      </div>
+      
+      <!-- Contact Preference -->
+      <div class="form-section">
+        <h4 class="form-section-title">Как с вами связаться?</h4>
+        <div class="radio-buttons-row">
+          <label class="radio-btn">
+            <input type="radio" name="contact_method" value="phone" />
+            <span class="radio-btn-label">По телефону</span>
+          </label>
+          <label class="radio-btn">
+            <input type="radio" name="contact_method" value="email" />
+            <span class="radio-btn-label">По email</span>
+          </label>
+        </div>
+      </div>
+      
+      <!-- Privacy and reCAPTCHA -->
+      <div class="checkbox-group privacy-checkbox-group">
+        <input type="checkbox" id="case-consult-privacy" name="privacy" class="privacy-checkbox" required />
+        <label for="case-consult-privacy">
+          {t('forms.privacyConsent', lang)}
+          <a href={`${base}/privacy-policy`} target="_blank">{t('forms.privacyPolicy', lang)}</a>
+        </label>
+      </div>
+      <span class="error-message privacy-error hidden">{t('forms.privacyError', lang)}</span>
+      
+      <div class="recaptcha-container hidden" data-recaptcha-container>
+        <div class="recaptcha" id="recaptcha-case-consultation"></div>
+      </div>
+      <span class="error-message captcha-error hidden">{t('forms.captchaError', lang)}</span>
+      
+      <button type="submit" class="modal-submit" disabled>
+        {t('forms.submit', lang)}
+      </button>
+      </form>
+    </div>
+    
+    <div class="modal-body modal-success hidden">
+      <div class="modal-success-icon">
+        <img src="/img/check.svg" alt="success" width="32" height="32" />
+      </div>
+      <h3>{t('forms.thankYou', lang)}</h3>
+      <p>{t('forms.willCallBack', lang)}</p>
+    </div>
+  </div>
+</div>
+
+<!-- Turbogenerator Modal -->
+<div class="modal-overlay" id="turbogenerator-modal">
+  <div class="modal modal-large">
+    <div class="modal-header">
+      <h3 class="modal-title">Заказать турбогенератор</h3>
+      <button class="modal-close" data-close-modal aria-label={t('common.close', lang)}>
+        <img src="/img/close.svg" alt="close" width="16" height="16" />
+      </button>
+    </div>
+    
+    <div class="modal-body">
+      <p class="modal-notice">Мы гарантируем конфиденциальность ваших данных. Наши специалисты помогут подобрать оптимальное решение для вашего проекта.</p>
+      
+      <form class="modal-form" data-form="turbogenerator">
+      <!-- Contact Fields -->
+      <h4 class="form-section-title">Ваши контакты</h4>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="turbogen-name">{t('forms.name', lang)}<span class="required">*</span></label>
+          <input 
+            type="text" 
+            id="turbogen-name" 
+            name="name" 
+            placeholder={t('forms.namePlaceholder', lang)}
+            required 
+          />
+        </div>
+        
+        <div class="form-group">
+          <label for="turbogen-phone">{t('forms.phone', lang)}<span class="required">*</span></label>
+          <input 
+            type="tel" 
+            id="turbogen-phone" 
+            name="phone" 
+            class="phone-mask"
+            placeholder={t('forms.phonePlaceholder', lang)}
+            required 
+          />
+          <span class="error-message hidden">{t('forms.phoneError', lang)}</span>
+        </div>
+      </div>
+      
+      <div class="form-row">
+        <div class="form-group">
+          <label for="turbogen-email">{t('forms.email', lang)}</label>
+          <input 
+            type="email" 
+            id="turbogen-email" 
+            name="email" 
+            class="email-input"
+            placeholder={t('forms.emailPlaceholder', lang)}
+          />
+          <span class="error-message hidden">{t('forms.emailError', lang)}</span>
+        </div>
+        
+        <div class="form-group">
+          <label for="turbogen-company">{t('forms.company', lang)}</label>
+          <input 
+            type="text" 
+            id="turbogen-company" 
+            name="company" 
+            placeholder={t('forms.companyPlaceholder', lang)}
+          />
+        </div>
+      </div>
+      
+      <!-- Generator Type -->
+      <div class="form-section">
+        <h4 class="form-section-title">Тип турбогенератора</h4>
+        <div class="radio-buttons-wrap">
+          <label class="radio-btn">
+            <input type="radio" name="generator_type" value="synchronous" />
+            <span class="radio-btn-label">Синхронный</span>
+          </label>
+          <label class="radio-btn">
+            <input type="radio" name="generator_type" value="asynchronous" />
+            <span class="radio-btn-label">Асинхронный</span>
+          </label>
+        </div>
+      </div>
+      
+      <!-- Voltage -->
+      <div class="form-section">
+        <h4 class="form-section-title">Напряжение</h4>
+        <div class="radio-buttons-wrap">
+          <label class="radio-btn">
+            <input type="radio" name="voltage" value="0.4" />
+            <span class="radio-btn-label">0,4 кВ</span>
+          </label>
+          <label class="radio-btn">
+            <input type="radio" name="voltage" value="6.3" />
+            <span class="radio-btn-label">6,3 кВ</span>
+          </label>
+          <label class="radio-btn">
+            <input type="radio" name="voltage" value="10.5" />
+            <span class="radio-btn-label">10,5 кВ</span>
+          </label>
+        </div>
+      </div>
+      
+      <!-- Excitation System -->
+      <div class="form-section">
+        <h4 class="form-section-title">Система возбуждения</h4>
+        <div class="radio-buttons-wrap">
+          <label class="radio-btn">
+            <input type="radio" name="excitation" value="static" />
+            <span class="radio-btn-label">Статическая</span>
+          </label>
+          <label class="radio-btn">
+            <input type="radio" name="excitation" value="brushless" />
+            <span class="radio-btn-label">Бесщеточная</span>
+          </label>
+        </div>
+      </div>
+
+      <!-- Additional Info -->
+      <div class="form-group" style="margin-top: var(--space-4);">
+        <label for="turbogen-message">Дополнительная информация</label>
+        <textarea 
+          id="turbogen-message" 
+          name="message" 
+          placeholder="Сообщение или дополнительные требования"
+          rows="3"
+          style="width: 100%; padding: 12px; border: 1px solid var(--color-border); border-radius: 30px; font-family: inherit; resize: vertical;"
+        ></textarea>
+      </div>
+      
+      <!-- Delivery Time -->
+      <div class="form-group">
+        <label for="turbogen-deadline">Сроки поставки</label>
+        <input 
+          type="text" 
+          id="turbogen-deadline" 
+          name="deadline" 
+          placeholder="Укажите срок в месяцах (при необходимости)"
+        />
+      </div>
+      
+      <!-- Contact Preference -->
+      <div class="form-section">
+        <h4 class="form-section-title">Как с вами связаться?</h4>
+        <div class="radio-buttons-row">
+          <label class="radio-btn">
+            <input type="radio" name="contact_method" value="phone" />
+            <span class="radio-btn-label">По телефону</span>
+          </label>
+          <label class="radio-btn">
+            <input type="radio" name="contact_method" value="email" />
+            <span class="radio-btn-label">По email</span>
+          </label>
+          <label class="radio-btn">
+            <input type="radio" name="contact_method" value="any" />
+            <span class="radio-btn-label">Любым способом</span>
+          </label>
+        </div>
+      </div>
+      
+      <!-- Privacy and reCAPTCHA -->
+      <div class="checkbox-group privacy-checkbox-group">
+        <input type="checkbox" id="turbogen-privacy" name="privacy" class="privacy-checkbox" required />
+        <label for="turbogen-privacy">
+          {t('forms.privacyConsent', lang)}
+          <a href={`${base}/privacy-policy`} target="_blank">{t('forms.privacyPolicy', lang)}</a>
+        </label>
+      </div>
+      <span class="error-message privacy-error hidden">{t('forms.privacyError', lang)}</span>
+      
+      <div class="recaptcha-container hidden" data-recaptcha-container>
+        <div class="recaptcha" id="recaptcha-turbogenerator"></div>
+      </div>
+      <span class="error-message captcha-error hidden">{t('forms.captchaError', lang)}</span>
+      
+      <button type="submit" class="modal-submit" disabled>
+        {t('forms.submit', lang)}
+      </button>
+      </form>
+    </div>
+    
+    <div class="modal-body modal-success hidden">
+      <div class="modal-success-icon">
+        <img src="/img/check.svg" alt="success" width="32" height="32" />
+      </div>
+      <h3>{t('forms.thankYou', lang)}</h3>
+      <p>{t('forms.willCallBack', lang)}</p>
+    </div>
+  </div>
+</div>
+
+<!-- Condenser Order Modal -->
+<div class="modal-overlay" id="condenser-modal">
+  <div class="modal modal-large">
+    <div class="modal-header">
+      <h3 class="modal-title">Заказать конденсатор</h3>
+      <button class="modal-close" data-close-modal aria-label={t('common.close', lang)}>
+        <img src="/img/close.svg" alt="close" width="16" height="16" />
+      </button>
+    </div>
+    
+    <div class="modal-body">
+      <p class="modal-notice">Мы гарантируем конфиденциальность ваших данных и предложим оптимальное решение для вашего проекта в кратчайшие сроки.</p>
+      
+      <form class="modal-form" data-form="condenser">
+      <!-- Ваши контакты -->
+      <div class="form-section">
+        <h4 class="form-section-title">Ваши контакты</h4>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="condenser-name">Имя<span class="required">*</span></label>
+          <input 
+            type="text" 
+            id="condenser-name" 
+            name="name" 
+            placeholder="Введите ваше имя"
+            required 
+          />
+        </div>
+        
+        <div class="form-group">
+          <label for="condenser-phone">Телефон<span class="required">*</span></label>
+          <input 
+            type="tel" 
+            id="condenser-phone" 
+            name="phone" 
+            class="phone-mask"
+            placeholder="+7 (___) ___-__-__"
+            required 
+          />
+          <span class="error-message hidden">{t('forms.phoneError', lang)}</span>
+        </div>
+      </div>
+      
+      <div class="form-row">
+        <div class="form-group">
+          <label for="condenser-email">E-mail</label>
+          <input 
+            type="email" 
+            id="condenser-email" 
+            name="email" 
+            class="email-input"
+            placeholder="example@mail.ru"
+          />
+          <span class="error-message hidden">{t('forms.emailError', lang)}</span>
+        </div>
+        
+        <div class="form-group">
+          <label for="condenser-company">Компания</label>
+          <input 
+            type="text" 
+            id="condenser-company" 
+            name="company" 
+            placeholder="Название компании"
+          />
+        </div>
+      </div>
+      
+      <!-- Тип конденсатора -->
+      <div class="form-section">
+        <h4 class="form-section-title">Тип конденсатора</h4>
+        <div class="radio-buttons-wrap">
+          <label class="radio-btn">
+            <input type="radio" name="condenser_type" value="single_pass" />
+            <span class="radio-btn-label">Одноходовой</span>
+          </label>
+          <label class="radio-btn">
+            <input type="radio" name="condenser_type" value="double_pass" />
+            <span class="radio-btn-label">Двухходовой</span>
+          </label>
+          <label class="radio-btn">
+            <input type="radio" name="condenser_type" value="combined" />
+            <span class="radio-btn-label">Комбинированный</span>
+          </label>
+          <label class="radio-btn">
+            <input type="radio" name="condenser_type" value="other" />
+            <span class="radio-btn-label">Другой</span>
+          </label>
+        </div>
+      </div>
+      
+      <!-- Параметры турбины -->
+      <div class="form-section">
+        <h4 class="form-section-title">Параметры турбины</h4>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="condenser-power">Мощность турбины (МВт)</label>
+          <input 
+            type="text" 
+            id="condenser-power" 
+            name="turbine_power" 
+            placeholder="Укажите мощность"
+          />
+        </div>
+        
+        <div class="form-group">
+          <label for="condenser-steam-flow">Расход пара (т/ч)</label>
+          <input 
+            type="text" 
+            id="condenser-steam-flow" 
+            name="steam_flow" 
+            placeholder="Укажите расход пара"
+          />
+        </div>
+      </div>
+      
+      <!-- Дополнительная информация -->
+      <div class="form-section">
+        <h4 class="form-section-title">Дополнительная информация</h4>
+      </div>
+      <div class="form-group">
+        <textarea 
+          id="condenser-message" 
+          name="message" 
+          placeholder="Сообщение или дополнительные требования"
+          rows="3"
+        ></textarea>
+      </div>
+      
+      <!-- Сроки поставки -->
+      <div class="form-section">
+        <h4 class="form-section-title">Сроки поставки</h4>
+      </div>
+      <div class="form-group">
+        <input 
+          type="text" 
+          id="condenser-deadline" 
+          name="deadline" 
+          placeholder="Укажите срок в месяцах (при необходимости)"
+        />
+      </div>
+      
+      <!-- Как с вами связаться? -->
+      <div class="form-section">
+        <h4 class="form-section-title">Как с вами связаться?</h4>
+        <div class="radio-buttons-row">
+          <label class="radio-btn">
+            <input type="radio" name="contact_method" value="phone" />
+            <span class="radio-btn-label">По телефону</span>
+          </label>
+          <label class="radio-btn">
+            <input type="radio" name="contact_method" value="email" />
+            <span class="radio-btn-label">По email</span>
+          </label>
+          <label class="radio-btn">
+            <input type="radio" name="contact_method" value="any" />
+            <span class="radio-btn-label">Любым способом</span>
+          </label>
+        </div>
+      </div>
+      
+      <!-- Privacy and reCAPTCHA -->
+      <div class="checkbox-group privacy-checkbox-group">
+        <input type="checkbox" id="condenser-privacy" name="privacy" class="privacy-checkbox" required />
+        <label for="condenser-privacy">
+          {t('forms.privacyConsent', lang)}
+          <a href={`${base}/privacy-policy`} target="_blank">{t('forms.privacyPolicy', lang)}</a>
+        </label>
+      </div>
+      <span class="error-message privacy-error hidden">{t('forms.privacyError', lang)}</span>
+      
+      <div class="recaptcha-container hidden" data-recaptcha-container>
+        <div class="recaptcha" id="recaptcha-condenser"></div>
+      </div>
+      <span class="error-message captcha-error hidden">{t('forms.captchaError', lang)}</span>
+      
+      <button type="submit" class="modal-submit" disabled>
+        {t('forms.submit', lang)}
+      </button>
+      </form>
+    </div>
+    
+    <div class="modal-body modal-success hidden">
+      <div class="modal-success-icon">
+        <img src="/img/check.svg" alt="success" width="32" height="32" />
+      </div>
+      <h3>{t('forms.thankYou', lang)}</h3>
+      <p>{t('forms.willCallBack', lang)}</p>
+    </div>
+  </div>
+</div>
+
+<!-- Turbine Order Modal -->
+<div class="modal-overlay" id="turbine-modal">
+  <div class="modal modal-large">
+    <div class="modal-header">
+      <h3 class="modal-title">Заказать турбину</h3>
+      <button class="modal-close" data-close-modal aria-label={t('common.close', lang)}>
+        <img src="/img/close.svg" alt="close" width="16" height="16" />
+      </button>
+    </div>
+    
+    <div class="modal-body">
+      <p class="modal-notice">Мы гарантируем конфиденциальность ваших данных и предложим оптимальное решение для вашего проекта в кратчайшие сроки.</p>
+      
+      <form class="modal-form" data-form="turbine">
+      <!-- Ваши контакты -->
+      <div class="form-section">
+        <h4 class="form-section-title">Ваши контакты</h4>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="turbine-name">Имя<span class="required">*</span></label>
+          <input 
+            type="text" 
+            id="turbine-name" 
+            name="name" 
+            placeholder="Введите ваше имя"
+            required 
+          />
+        </div>
+        
+        <div class="form-group">
+          <label for="turbine-phone">Телефон<span class="required">*</span></label>
+          <input 
+            type="tel" 
+            id="turbine-phone" 
+            name="phone" 
+            class="phone-mask"
+            placeholder="+7 (___) ___-__-__"
+            required 
+          />
+          <span class="error-message hidden">{t('forms.phoneError', lang)}</span>
+        </div>
+      </div>
+      
+      <div class="form-row">
+        <div class="form-group">
+          <label for="turbine-email">E-mail</label>
+          <input 
+            type="email" 
+            id="turbine-email" 
+            name="email" 
+            class="email-input"
+            placeholder="example@mail.ru"
+          />
+          <span class="error-message hidden">{t('forms.emailError', lang)}</span>
+        </div>
+        
+        <div class="form-group">
+          <label for="turbine-company">Компания</label>
+          <input 
+            type="text" 
+            id="turbine-company" 
+            name="company" 
+            placeholder="Название компании"
+          />
+        </div>
+      </div>
+      
+      <!-- Тип турбины -->
+      <div class="form-section">
+        <h4 class="form-section-title">Тип турбины</h4>
+        <div class="radio-buttons-wrap">
+          <label class="radio-btn">
+            <input type="radio" name="turbine_type" value="drive" />
+            <span class="radio-btn-label">Приводная</span>
+          </label>
+          <label class="radio-btn">
+            <input type="radio" name="turbine_type" value="generation" />
+            <span class="radio-btn-label">Генерационная</span>
+          </label>
+          <label class="radio-btn">
+            <input type="radio" name="turbine_type" value="condensing" />
+            <span class="radio-btn-label">Конденсационная</span>
+          </label>
+          <label class="radio-btn">
+            <input type="radio" name="turbine_type" value="backpressure" />
+            <span class="radio-btn-label">Противодавленческая</span>
+          </label>
+        </div>
+      </div>
+      
+      <!-- Параметры турбины -->
+      <div class="form-section">
+        <h4 class="form-section-title">Параметры турбины</h4>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="turbine-power">Мощность турбины (МВт)</label>
+          <input 
+            type="text" 
+            id="turbine-power" 
+            name="turbine_power" 
+            placeholder="Укажите мощность"
+          />
+        </div>
+        
+        <div class="form-group">
+          <label for="turbine-steam-flow">Расход пара (т/ч)</label>
+          <input 
+            type="text" 
+            id="turbine-steam-flow" 
+            name="steam_flow" 
+            placeholder="Укажите расход пара"
+          />
+        </div>
+      </div>
+      
+      <!-- Дополнительная информация -->
+      <div class="form-section">
+        <h4 class="form-section-title">Дополнительная информация</h4>
+      </div>
+      <div class="form-group">
+        <textarea 
+          id="turbine-message" 
+          name="message" 
+          placeholder="Сообщение или дополнительные требования"
+          rows="3"
+        ></textarea>
+      </div>
+      
+      <!-- Сроки поставки -->
+      <div class="form-section">
+        <h4 class="form-section-title">Сроки поставки</h4>
+      </div>
+      <div class="form-group">
+        <input 
+          type="text" 
+          id="turbine-deadline" 
+          name="deadline" 
+          placeholder="Укажите срок в месяцах (при необходимости)"
+        />
+      </div>
+      
+      <!-- Как с вами связаться? -->
+      <div class="form-section">
+        <h4 class="form-section-title">Как с вами связаться?</h4>
+        <div class="radio-buttons-row">
+          <label class="radio-btn">
+            <input type="radio" name="contact_method" value="phone" />
+            <span class="radio-btn-label">По телефону</span>
+          </label>
+          <label class="radio-btn">
+            <input type="radio" name="contact_method" value="email" />
+            <span class="radio-btn-label">По email</span>
+          </label>
+          <label class="radio-btn">
+            <input type="radio" name="contact_method" value="any" />
+            <span class="radio-btn-label">Любым способом</span>
+          </label>
+        </div>
+      </div>
+      
+      <!-- Privacy and reCAPTCHA -->
+      <div class="checkbox-group privacy-checkbox-group">
+        <input type="checkbox" id="turbine-privacy" name="privacy" class="privacy-checkbox" required />
+        <label for="turbine-privacy">
+          {t('forms.privacyConsent', lang)}
+          <a href={`${base}/privacy-policy`} target="_blank">{t('forms.privacyPolicy', lang)}</a>
+        </label>
+      </div>
+      <span class="error-message privacy-error hidden">{t('forms.privacyError', lang)}</span>
+      
+      <div class="recaptcha-container hidden" data-recaptcha-container>
+        <div class="recaptcha" id="recaptcha-turbine"></div>
+      </div>
+      <span class="error-message captcha-error hidden">{t('forms.captchaError', lang)}</span>
+      
+      <button type="submit" class="modal-submit" disabled>
+        {t('forms.submit', lang)}
+      </button>
+      </form>
+    </div>
+    
+    <div class="modal-body modal-success hidden">
+      <div class="modal-success-icon">
+        <img src="/img/check.svg" alt="success" width="32" height="32" />
+      </div>
+      <h3>{t('forms.thankYou', lang)}</h3>
+      <p>{t('forms.willCallBack', lang)}</p>
+    </div>
+  </div>
+</div>
+
+<style>
+  @import '../styles/components/modals.css';
+  
+  /* Required field marker */
+  .required {
+    color: #e74c3c;
+    margin-left: 2px;
+  }
+  
+  /* Modal notice text */
+  .modal-notice {
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+    margin-bottom: var(--space-6);
+    line-height: 1.5;
+  }
+  
+  /* Form row for two columns */
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-4);
+  }
+  
+  @media (max-width: 600px) {
+    .form-row {
+      grid-template-columns: 1fr;
+    }
+  }
+  
+  /* Form section */
+  .form-section {
+    margin-top: var(--space-4);
+    padding-top: var(--space-4);
+    border-top: 1px solid var(--color-border);
+  }
+  
+  .form-section-title {
+    font-size: var(--text-md);
+    font-weight: 600;
+    color: var(--color-primary);
+    margin-bottom: var(--space-3);
+  }
+  
+  /* Radio buttons row */
+  .radio-buttons-row {
+    display: flex;
+    gap: var(--space-3);
+    flex-wrap: wrap;
+  }
+
+  /* Radio buttons wrap (for multiple options) */
+  .radio-buttons-wrap {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+  }
+
+  .radio-buttons-wrap .radio-btn-label {
+    min-width: auto;
+    padding: var(--space-2) var(--space-4);
+    font-size: var(--text-sm);
+  }
+  
+  .radio-btn {
+    display: flex;
+    cursor: pointer;
+  }
+  
+  .radio-btn input[type="radio"] {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+  
+  .radio-btn-label {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-3) var(--space-5);
+    border: 2px solid var(--color-border);
+    border-radius: 50px;
+    font-size: var(--text-md);
+    font-weight: 500;
+    color: var(--color-text-muted);
+    background: var(--color-white);
+    transition: all var(--transition-fast);
+    min-width: 120px;
+  }
+  
+  .radio-btn input[type="radio"]:checked + .radio-btn-label {
+    border-color: var(--color-accent);
+    background: var(--color-accent);
+    color: var(--color-primary);
+  }
+  
+  .radio-btn:hover .radio-btn-label {
+    border-color: var(--color-accent);
+  }
+  
+  .radio-btn input[type="radio"]:focus + .radio-btn-label {
+    box-shadow: 0 0 0 3px rgba(163, 218, 243, 0.4);
+  }
+
+  /* Checkbox buttons grid (for consultation topics) */
+  .checkbox-buttons-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+  }
+  
+  .checkbox-btn {
+    display: flex;
+    cursor: pointer;
+  }
+  
+  .checkbox-btn input[type="checkbox"] {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+  
+  .checkbox-btn-label {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-2) var(--space-4);
+    border: 2px solid var(--color-border);
+    border-radius: 50px;
+    font-size: var(--text-sm);
+    font-weight: 500;
+    color: var(--color-text-muted);
+    background: var(--color-white);
+    transition: all var(--transition-fast);
+  }
+  
+  .checkbox-btn input[type="checkbox"]:checked + .checkbox-btn-label {
+    border-color: var(--color-accent);
+    background: var(--color-accent);
+    color: var(--color-primary);
+  }
+  
+  .checkbox-btn:hover .checkbox-btn-label {
+    border-color: var(--color-accent);
+  }
+  
+  .checkbox-btn input[type="checkbox"]:focus + .checkbox-btn-label {
+    box-shadow: 0 0 0 3px rgba(163, 218, 243, 0.4);
+  }
+  
+  /* reCAPTCHA container */
+  .recaptcha-container {
+    margin-top: var(--space-4);
+    display: flex;
+    justify-content: center;
+    transition: all var(--transition-base);
+  }
+  
+  .recaptcha-container.visible {
+    display: flex;
+  }
+  
+  .recaptcha {
+    min-height: 78px;
+  }
+  
+  /* Error messages */
+  .error-message {
+    color: var(--color-error, #e74c3c);
+    font-size: var(--text-sm);
+    margin-top: var(--space-1);
+  }
+  
+  .privacy-error,
+  .captcha-error {
+    display: block;
+    text-align: center;
+  }
+  
+  /* Privacy checkbox group styling */
+  .privacy-checkbox-group {
+    margin-top: var(--space-4);
+  }
+  
+  .privacy-checkbox-group input[type="checkbox"] {
+    flex-shrink: 0;
+  }
+  
+  .privacy-checkbox-group label {
+    line-height: 1.4;
+  }
+  
+  /* Submit button states */
+  .modal-submit {
+    margin-top: var(--space-4);
+    transition: all var(--transition-base);
+    border-radius: 30px;
+  }
+  
+  .modal-submit:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+    background: var(--color-border);
+  }
+  
+  .modal-submit:not(:disabled):hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+  }
+  
+  /* Input validation states */
+  .form-group input.valid {
+    border-color: var(--color-success, #27ae60);
+  }
+  
+  .form-group input.invalid {
+    border-color: var(--color-error, #e74c3c);
+  }
+</style>
+
+<script define:vars={{ recaptchaSiteKey }}>
+  // Store reCAPTCHA widget IDs
+  const recaptchaWidgets = {};
+  let recaptchaLoaded = false;
+  
+  // Load reCAPTCHA script
+  function loadRecaptcha() {
+    if (recaptchaLoaded || document.querySelector('script[src*="recaptcha"]')) return;
+    
+    const script = document.createElement('script');
+    script.src = `https://www.google.com/recaptcha/api.js?onload=onRecaptchaLoad&render=explicit`;
+    script.async = true;
+    script.defer = true;
+    document.head.appendChild(script);
+    recaptchaLoaded = true;
+  }
+  
+  // Initialize reCAPTCHA when loaded
+  window.onRecaptchaLoad = function() {
+    document.querySelectorAll('.recaptcha').forEach(element => {
+      if (!element.dataset.widgetId && element.closest('.recaptcha-container.visible')) {
+        try {
+          const widgetId = grecaptcha.render(element.id, {
+            sitekey: recaptchaSiteKey,
+            callback: (token) => {
+              updateSubmitButton(element.closest('form'));
+            },
+            'expired-callback': () => {
+              updateSubmitButton(element.closest('form'));
+            }
+          });
+          element.dataset.widgetId = widgetId;
+          recaptchaWidgets[element.id] = widgetId;
+        } catch (e) {
+          console.error('reCAPTCHA render error:', e);
+        }
+      }
+    });
+  };
+  
+  // Phone mask function
+  // Format: +7 (XXX) XXX-XX-XX
+  // Auto-fill +7 ( on focus
+  // If user types 7 or 8 as first digit, ignore it (common Russian mistake)
+  function applyPhoneMask(input) {
+    // Set placeholder to show mask format
+    input.setAttribute('placeholder', '+7 (___) ___-__-__');
+    
+    input.addEventListener('focus', function() {
+      if (!this.value || this.value.length < 4) {
+        this.value = '+7 (';
+        // Position cursor after the opening parenthesis
+        setTimeout(() => {
+          this.setSelectionRange(4, 4);
+        }, 0);
+      }
+    });
+    
+    input.addEventListener('input', function(e) {
+      // Get the input value
+      let rawInput = this.value;
+      
+      // Remove the +7 prefix and all non-digits to get only the phone number digits
+      let cleanInput = rawInput.replace(/^\+7\s*\(?/, '').replace(/\D/g, '');
+      
+      // If user types 7 or 8 as first digit after +7 (common Russian format mistake),
+      // remove it because +7 is already there
+      if (cleanInput.length > 0 && (cleanInput.charAt(0) === '7' || cleanInput.charAt(0) === '8')) {
+        cleanInput = cleanInput.substring(1);
+      }
+      
+      // Limit to 10 digits (standard Russian phone number without country code)
+      cleanInput = cleanInput.substring(0, 10);
+      
+      // Format the phone number: +7 (XXX) XXX-XX-XX
+      let formatted = '+7 (';
+      
+      if (cleanInput.length > 0) {
+        // First 3 digits (area code / operator code)
+        formatted += cleanInput.substring(0, 3);
+      }
+      if (cleanInput.length >= 3) {
+        // Closing parenthesis and next 3 digits
+        formatted += ') ' + cleanInput.substring(3, 6);
+      }
+      if (cleanInput.length >= 6) {
+        // First pair of last digits
+        formatted += '-' + cleanInput.substring(6, 8);
+      }
+      if (cleanInput.length >= 8) {
+        // Second pair of last digits
+        formatted += '-' + cleanInput.substring(8, 10);
+      }
+      
+      this.value = formatted;
+      
+      // Validate: phone is valid when we have all 10 digits
+      const isValid = cleanInput.length === 10;
+      this.classList.toggle('valid', isValid);
+      this.classList.toggle('invalid', cleanInput.length > 0 && !isValid);
+      
+      // Show/hide error message
+      const errorMsg = this.parentElement.querySelector('.error-message');
+      if (errorMsg) {
+        errorMsg.classList.toggle('hidden', isValid || cleanInput.length === 0);
+      }
+      
+      updateSubmitButton(this.closest('form'));
+    });
+    
+    input.addEventListener('keydown', function(e) {
+      const key = e.key;
+      const cursorPos = this.selectionStart;
+      
+      // Allow: backspace, delete, tab, escape, enter, arrow keys
+      if (['Backspace', 'Delete', 'Tab', 'Escape', 'Enter', 'ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown'].includes(key)) {
+        // Prevent deleting the +7 ( prefix
+        if (key === 'Backspace' && cursorPos <= 4) {
+          e.preventDefault();
+          return;
+        }
+        return;
+      }
+      
+      // Allow Ctrl/Cmd + A, C, V, X
+      if ((e.ctrlKey || e.metaKey) && ['a', 'c', 'v', 'x'].includes(key.toLowerCase())) {
+        return;
+      }
+      
+      // Only allow digits
+      if (!/^\d$/.test(key)) {
+        e.preventDefault();
+        return;
+      }
+      
+      // Check if we're at the first digit position and user types 7 or 8
+      // The current value is "+7 (" so position 4 is where the first digit goes
+      const currentDigits = this.value.replace(/^\+7\s*\(?/, '').replace(/\D/g, '');
+      if (currentDigits.length === 0 && (key === '7' || key === '8')) {
+        // Block 7 or 8 as the first digit after +7
+        e.preventDefault();
+        return;
+      }
+    });
+    
+    input.addEventListener('blur', function() {
+      // Clear if only prefix is entered
+      if (this.value === '+7 (' || this.value === '+7 ' || this.value === '+7') {
+        this.value = '';
+        this.classList.remove('valid', 'invalid');
+        updateSubmitButton(this.closest('form'));
+      }
+    });
+    
+    // Handle paste events
+    input.addEventListener('paste', function(e) {
+      e.preventDefault();
+      const pastedText = (e.clipboardData || window.clipboardData).getData('text');
+      
+      // Extract only digits from pasted text
+      let digits = pastedText.replace(/\D/g, '');
+      
+      // Remove leading country code if present (7 or 8)
+      if (digits.startsWith('7') || digits.startsWith('8')) {
+        digits = digits.substring(1);
+      }
+      
+      // Limit to 10 digits
+      digits = digits.substring(0, 10);
+      
+      // Trigger input event to format
+      this.value = '+7 (' + digits;
+      this.dispatchEvent(new Event('input', { bubbles: true }));
+    });
+  }
+  
+  // Email validation with visual feedback
+  function applyEmailValidation(input) {
+    // Set placeholder to show expected format
+    input.setAttribute('placeholder', 'example@mail.com');
+    
+    input.addEventListener('input', function() {
+      const value = this.value.trim();
+      
+      // Email regex pattern: basic but effective validation
+      // Matches: name@domain.tld
+      const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+      
+      // Check if empty (optional field), valid email, or in-progress typing
+      const isEmpty = value === '';
+      const isValidEmail = emailRegex.test(value);
+      const hasAtSign = value.includes('@');
+      const hasDot = value.includes('.');
+      
+      // Only show as invalid if user has typed something substantial
+      // (has @ and something after it, or just appears complete but wrong)
+      const looksComplete = hasAtSign && value.split('@')[1]?.includes('.');
+      
+      this.classList.remove('valid', 'invalid');
+      
+      if (!isEmpty) {
+        if (isValidEmail) {
+          this.classList.add('valid');
+        } else if (looksComplete) {
+          // Only mark invalid if email looks complete but is wrong
+          this.classList.add('invalid');
+        }
+      }
+      
+      // Show/hide error message
+      const errorMsg = this.parentElement.querySelector('.error-message');
+      if (errorMsg) {
+        // Show error only when email looks complete but is invalid
+        errorMsg.classList.toggle('hidden', isEmpty || isValidEmail || !looksComplete);
+      }
+    });
+    
+    input.addEventListener('blur', function() {
+      const value = this.value.trim();
+      const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+      const isEmpty = value === '';
+      const isValid = isEmpty || emailRegex.test(value);
+      
+      this.classList.remove('valid', 'invalid');
+      
+      if (!isEmpty) {
+        this.classList.add(isValid ? 'valid' : 'invalid');
+      }
+      
+      const errorMsg = this.parentElement.querySelector('.error-message');
+      if (errorMsg) {
+        errorMsg.classList.toggle('hidden', isEmpty || isValid);
+      }
+    });
+  }
+  
+  // Update submit button state
+  function updateSubmitButton(form) {
+    if (!form) return;
+    
+    const submitBtn = form.querySelector('.modal-submit');
+    const privacyCheckbox = form.querySelector('.privacy-checkbox');
+    const phoneInput = form.querySelector('.phone-mask');
+    const nameInput = form.querySelector('input[name="name"]');
+    const recaptchaContainer = form.querySelector('.recaptcha-container');
+    const recaptchaElement = form.querySelector('.recaptcha');
+    
+    // Check required fields
+    const nameValid = nameInput && nameInput.value.trim().length > 0;
+    const phoneValid = phoneInput && phoneInput.classList.contains('valid');
+    const privacyChecked = privacyCheckbox && privacyCheckbox.checked;
+    
+    // Check reCAPTCHA if visible
+    let recaptchaValid = true;
+    if (recaptchaContainer && recaptchaContainer.classList.contains('visible') && recaptchaElement) {
+      const widgetId = recaptchaElement.dataset.widgetId;
+      if (widgetId !== undefined && typeof grecaptcha !== 'undefined') {
+        const response = grecaptcha.getResponse(parseInt(widgetId));
+        recaptchaValid = response && response.length > 0;
+      } else {
+        recaptchaValid = false;
+      }
+    }
+    
+    const canSubmit = nameValid && phoneValid && privacyChecked && recaptchaValid;
+    submitBtn.disabled = !canSubmit;
+  }
+  
+  // Initialize forms
+  document.addEventListener('DOMContentLoaded', function() {
+    // Apply phone mask
+    document.querySelectorAll('.phone-mask').forEach(applyPhoneMask);
+    
+    // Apply email validation
+    document.querySelectorAll('.email-input').forEach(applyEmailValidation);
+    
+    // Handle privacy checkbox - show reCAPTCHA when checked
+    document.querySelectorAll('.privacy-checkbox').forEach(checkbox => {
+      checkbox.addEventListener('change', function() {
+        const form = this.closest('form');
+        const recaptchaContainer = form.querySelector('.recaptcha-container');
+        const privacyError = form.querySelector('.privacy-error');
+        
+        if (this.checked) {
+          recaptchaContainer.classList.remove('hidden');
+          recaptchaContainer.classList.add('visible');
+          if (privacyError) privacyError.classList.add('hidden');
+          
+          // Load and render reCAPTCHA if not already done
+          loadRecaptcha();
+          
+          // Wait for reCAPTCHA to load then render
+          setTimeout(() => {
+            if (typeof grecaptcha !== 'undefined') {
+              const recaptchaElement = recaptchaContainer.querySelector('.recaptcha');
+              if (recaptchaElement && !recaptchaElement.dataset.widgetId) {
+                try {
+                  const widgetId = grecaptcha.render(recaptchaElement.id, {
+                    sitekey: recaptchaSiteKey,
+                    callback: () => updateSubmitButton(form),
+                    'expired-callback': () => updateSubmitButton(form)
+                  });
+                  recaptchaElement.dataset.widgetId = widgetId;
+                  recaptchaWidgets[recaptchaElement.id] = widgetId;
+                } catch (e) {
+                  // Already rendered
+                }
+              }
+            }
+          }, 500);
+        } else {
+          recaptchaContainer.classList.add('hidden');
+          recaptchaContainer.classList.remove('visible');
+        }
+        
+        updateSubmitButton(form);
+      });
+    });
+    
+    // Handle name input changes
+    document.querySelectorAll('input[name="name"]').forEach(input => {
+      input.addEventListener('input', function() {
+        updateSubmitButton(this.closest('form'));
+      });
+    });
+    
+    // Open modals
+    document.querySelectorAll('[data-modal]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const modalId = btn.getAttribute('data-modal');
+        const modal = document.getElementById(`${modalId}-modal`);
+        modal?.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      });
+    });
+    
+    // Close modals
+    document.querySelectorAll('[data-close-modal]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const modal = btn.closest('.modal-overlay');
+        modal?.classList.remove('active');
+        document.body.style.overflow = '';
+      });
+    });
+    
+    // Close on overlay click
+    document.querySelectorAll('.modal-overlay').forEach(overlay => {
+      overlay.addEventListener('click', (e) => {
+        if (e.target === overlay) {
+          overlay.classList.remove('active');
+          document.body.style.overflow = '';
+        }
+      });
+    });
+    
+    // Close on Escape
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        document.querySelectorAll('.modal-overlay.active').forEach(modal => {
+          modal.classList.remove('active');
+        });
+        document.body.style.overflow = '';
+      }
+    });
+    
+    // Form submission
+    document.querySelectorAll('[data-form]').forEach(form => {
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        
+        const formElement = form;
+        const formType = formElement.getAttribute('data-form');
+        const submitBtn = formElement.querySelector('.modal-submit');
+        
+        // Validate privacy checkbox
+        const privacyCheckbox = formElement.querySelector('.privacy-checkbox');
+        if (!privacyCheckbox?.checked) {
+          const privacyError = formElement.querySelector('.privacy-error');
+          if (privacyError) privacyError.classList.remove('hidden');
+          return;
+        }
+        
+        // Validate reCAPTCHA
+        const recaptchaContainer = formElement.querySelector('.recaptcha-container');
+        const recaptchaElement = formElement.querySelector('.recaptcha');
+        if (recaptchaContainer?.classList.contains('visible') && recaptchaElement) {
+          const widgetId = recaptchaElement.dataset.widgetId;
+          if (widgetId !== undefined && typeof grecaptcha !== 'undefined') {
+            const response = grecaptcha.getResponse(parseInt(widgetId));
+            if (!response) {
+              const captchaError = formElement.querySelector('.captcha-error');
+              if (captchaError) captchaError.classList.remove('hidden');
+              return;
+            }
+          }
+        }
+        
+        // Disable submit button during submission
+        submitBtn.disabled = true;
+        submitBtn.textContent = '...';
+        
+        const formData = new FormData(formElement);
+        
+        // Add reCAPTCHA response
+        if (recaptchaElement?.dataset.widgetId && typeof grecaptcha !== 'undefined') {
+          const recaptchaResponse = grecaptcha.getResponse(parseInt(recaptchaElement.dataset.widgetId));
+          formData.append('g-recaptcha-response', recaptchaResponse);
+        }
+        
+        try {
+          const response = await fetch('/api/form', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              type: formType,
+              data: Object.fromEntries(formData)
+            })
+          });
+          
+          if (response.ok) {
+            const modal = formElement.closest('.modal');
+            const successEl = modal?.querySelector('.modal-success');
+            formElement.classList.add('hidden');
+            successEl?.classList.remove('hidden');
+          } else {
+            throw new Error('Form submission failed');
+          }
+        } catch (error) {
+          console.error('Form submission error:', error);
+          submitBtn.disabled = false;
+          submitBtn.textContent = 'Отправить';
+        }
+      });
+    });
+  });
+</script>

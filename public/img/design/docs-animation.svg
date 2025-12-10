@@ -1,0 +1,175 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 280" id="pieChartTop">
+  <defs>
+    <!-- Верхние грани секторов -->
+    <linearGradient id="gray1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#B0B0B0"/>
+      <stop offset="100%" stop-color="#989898"/>
+    </linearGradient>
+    <linearGradient id="gray2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#D0D0D0"/>
+      <stop offset="100%" stop-color="#B8B8B8"/>
+    </linearGradient>
+    <linearGradient id="gray3" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#909090"/>
+      <stop offset="100%" stop-color="#787878"/>
+    </linearGradient>
+    <linearGradient id="gray4" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#E8E8E8"/>
+      <stop offset="100%" stop-color="#D0D0D0"/>
+    </linearGradient>
+    
+    <!-- Боковые грани (темнее) -->
+    <linearGradient id="side1" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#888888"/>
+      <stop offset="100%" stop-color="#606060"/>
+    </linearGradient>
+    <linearGradient id="side2" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#A8A8A8"/>
+      <stop offset="100%" stop-color="#808080"/>
+    </linearGradient>
+    <linearGradient id="side3" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#707070"/>
+      <stop offset="100%" stop-color="#505050"/>
+    </linearGradient>
+    <linearGradient id="side4" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#C8C8C8"/>
+      <stop offset="100%" stop-color="#A0A0A0"/>
+    </linearGradient>
+    
+    <!-- Тень под диаграммой -->
+    <filter id="mainShadow" x="-50%" y="-50%" width="200%" height="200%">
+      <feDropShadow dx="4" dy="8" stdDeviation="8" flood-color="#000" flood-opacity="0.25"/>
+    </filter>
+    
+    <filter id="sectorShadow" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="2" dy="3" stdDeviation="4" flood-color="#000" flood-opacity="0.2"/>
+    </filter>
+    
+    <!-- Стиль для символов валют -->
+    <style>
+      .currency { 
+        font-family: Arial, sans-serif; 
+        font-weight: bold; 
+        font-size: 24px; 
+        fill: rgba(255,255,255,0.5);
+        text-anchor: middle;
+        dominant-baseline: middle;
+        text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+      }
+    </style>
+  </defs>
+  
+  <!-- Диаграмма -->
+  <g transform="translate(270, 170)" filter="url(#mainShadow)">
+    
+    <!-- Сектор 1 (35%) - тёмно-серый - $ -->
+    <g id="sector1" filter="url(#sectorShadow)">
+      <!-- Боковая стенка справа -->
+      <path d="M0,-90 L0,-90 L0,-75 L0,0 L0,15 L77,61 L77,46 Z" fill="url(#side3)" opacity="0.9"/>
+      <!-- Боковая дуга -->
+      <path d="M0,-90 A90,90 0 0,1 77,46 L77,61 A90,90 0 0,0 0,-75 Z" fill="url(#side3)" opacity="0.7"/>
+      <!-- Верхняя грань -->
+      <path d="M0,0 L0,-90 A90,90 0 0,1 77,46 Z" fill="url(#gray3)" stroke="#505050" stroke-width="1"/>
+      <!-- Блик -->
+      <path d="M5,-85 A85,85 0 0,1 70,42 L40,20 A50,50 0 0,0 5,-50 Z" fill="rgba(255,255,255,0.15)"/>
+      <text x="30" y="-25" class="currency">$</text>
+      <animateTransform attributeName="transform" type="translate"
+        values="0,0; 12,-18; 12,-18; 0,0"
+        keyTimes="0; 0.3; 0.7; 1"
+        dur="4s" repeatCount="indefinite" calcMode="spline"
+        keySplines="0.4 0 0.2 1; 0.4 0 0.2 1; 0.4 0 0.2 1"/>
+    </g>
+    
+    <!-- Сектор 2 (25%) - средне-серый - ₽ -->
+    <g id="sector2" filter="url(#sectorShadow)">
+      <!-- Боковые стенки -->
+      <path d="M77,46 L77,61 L-46,92 L-46,77 Z" fill="url(#side1)" opacity="0.9"/>
+      <path d="M77,46 A90,90 0 0,1 -46,77 L-46,92 A90,90 0 0,0 77,61 Z" fill="url(#side1)" opacity="0.7"/>
+      <!-- Верхняя грань -->
+      <path d="M0,0 L77,46 A90,90 0 0,1 -46,77 Z" fill="url(#gray1)" stroke="#707070" stroke-width="1"/>
+      <!-- Блик -->
+      <path d="M70,42 A85,85 0 0,1 -42,70 L-25,45 A50,50 0 0,0 45,25 Z" fill="rgba(255,255,255,0.12)"/>
+      <text x="15" y="55" class="currency">₽</text>
+      <animateTransform attributeName="transform" type="translate"
+        values="0,0; 15,12; 15,12; 0,0"
+        keyTimes="0; 0.3; 0.7; 1"
+        dur="4s" repeatCount="indefinite" calcMode="spline"
+        keySplines="0.4 0 0.2 1; 0.4 0 0.2 1; 0.4 0 0.2 1"
+        begin="0.5s"/>
+    </g>
+    
+    <!-- Сектор 3 (22%) - светло-серый - € -->
+    <g id="sector3" filter="url(#sectorShadow)">
+      <!-- Левая боковая стенка -->
+      <path d="M-46,77 L-46,92 L-85,-13 L-85,-28 Z" fill="url(#side2)" opacity="0.9"/>
+      <!-- Дуговая стенка -->
+      <path d="M-46,77 A90,90 0 0,1 -85,-28 L-85,-13 A90,90 0 0,0 -46,92 Z" fill="url(#side2)" opacity="0.7"/>
+      <!-- Правая стенка (прилегает к ₽) -->
+      <path d="M0,0 L0,15 L-46,92 L-46,77 Z" fill="url(#side2)" opacity="0.85"/>
+      <!-- Верхняя грань -->
+      <path d="M0,0 L-46,77 A90,90 0 0,1 -85,-28 Z" fill="url(#gray2)" stroke="#909090" stroke-width="1"/>
+      <!-- Блик -->
+      <path d="M-42,70 A85,85 0 0,1 -78,-25 L-50,-15 A50,50 0 0,0 -28,45 Z" fill="rgba(255,255,255,0.1)"/>
+      <text x="-50" y="25" class="currency">€</text>
+      <animateTransform attributeName="transform" type="translate"
+        values="0,0; -18,8; -18,8; 0,0"
+        keyTimes="0; 0.3; 0.7; 1"
+        dur="4s" repeatCount="indefinite" calcMode="spline"
+        keySplines="0.4 0 0.2 1; 0.4 0 0.2 1; 0.4 0 0.2 1"
+        begin="1s"/>
+    </g>
+    
+    <!-- Сектор 4 (18%) - очень светло-серый - ¥ -->
+    <g id="sector4" filter="url(#sectorShadow)">
+      <!-- Левая боковая стенка -->
+      <path d="M-85,-28 L-85,-13 L0,-75 L0,-90 Z" fill="url(#side4)" opacity="0.9"/>
+      <!-- Дуговая стенка -->
+      <path d="M-85,-28 A90,90 0 0,1 0,-90 L0,-75 A90,90 0 0,0 -85,-13 Z" fill="url(#side4)" opacity="0.7"/>
+      <!-- Правая стенка (прилегает к €) -->
+      <path d="M0,0 L0,15 L-85,-13 L-85,-28 Z" fill="url(#side4)" opacity="0.85"/>
+      <!-- Верхняя грань -->
+      <path d="M0,0 L-85,-28 A90,90 0 0,1 0,-90 Z" fill="url(#gray4)" stroke="#A8A8A8" stroke-width="1"/>
+      <!-- Блик -->
+      <path d="M-78,-25 A85,85 0 0,1 0,-85 L0,-50 A50,50 0 0,0 -48,-15 Z" fill="rgba(255,255,255,0.15)"/>
+      <text x="-35" y="-45" class="currency">¥</text>
+      <animateTransform attributeName="transform" type="translate"
+        values="0,0; -10,-15; -10,-15; 0,0"
+        keyTimes="0; 0.3; 0.7; 1"
+        dur="4s" repeatCount="indefinite" calcMode="spline"
+        keySplines="0.4 0 0.2 1; 0.4 0 0.2 1; 0.4 0 0.2 1"
+        begin="1.5s"/>
+    </g>
+    
+  </g>
+  
+  <!-- ЛИНЕЙНЫЕ ГРАФИКИ -->
+  <g id="lineCharts">
+    <!-- График 1 -->
+    <path id="line1" d="M120 70 L135 45 L150 60 L165 10 L180 35 L195 -5 L215 20 L230 -15 L250 30 L265 5 L285 40 L300 15 L320 60 L335 25 L355 80 L370 45 L390 70 L400 50" 
+          fill="none" stroke="#A0A0A0" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
+          stroke-dasharray="500">
+      <animate attributeName="stroke-dashoffset" 
+        values="500;0;0;0" 
+        keyTimes="0;0.36;0.91;1"
+        dur="5.5s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" 
+        values="1;1;1;0;0" 
+        keyTimes="0;0.36;0.91;0.92;1"
+        dur="5.5s" repeatCount="indefinite"/>
+    </path>
+    
+    <!-- График 2 -->
+    <path id="line2" d="M120 130 L140 145 L155 120 L170 150 L188 115 L205 140 L220 95 L240 125 L258 80 L275 110 L295 70 L310 100 L330 55 L348 90 L370 45 L390 75 L400 50" 
+          fill="none" stroke="#808080" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
+          stroke-dasharray="500">
+      <animate attributeName="stroke-dashoffset" 
+        values="500;0;0;0" 
+        keyTimes="0;0.36;0.91;1"
+        dur="5.5s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" 
+        values="1;1;1;0;0" 
+        keyTimes="0;0.36;0.91;0.92;1"
+        dur="5.5s" repeatCount="indefinite"/>
+    </path>
+  </g>
+</svg>

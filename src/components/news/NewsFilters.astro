@@ -1,0 +1,280 @@
+---
+import type { Lang } from '@/i18n';
+import { getBaseUrl } from '@/i18n';
+import { newsCategories, getPopularArticles } from '@/data/news';
+
+interface Props {
+  lang: Lang;
+  totalCount: number;
+}
+
+const { lang, totalCount } = Astro.props;
+
+const categories = [
+  { id: 'all', label: { ru: 'Все', en: 'All' } },
+  ...Object.entries(newsCategories).map(([id, labels]) => ({ id, label: labels }))
+];
+
+const popularArticles = getPopularArticles(3);
+const base = getBaseUrl(lang);
+
+// Localized text
+const searchPlaceholder = lang === 'ru' ? 'Введите ключевое слово...' : 'Enter keyword...';
+const categoriesTitle = lang === 'ru' ? 'Категории' : 'Categories';
+const searchTitle = lang === 'ru' ? 'Поиск по новостям' : 'Search News';
+const popularTitle = lang === 'ru' ? 'Популярные статьи' : 'Popular Articles';
+const subscribeTitle = lang === 'ru' ? 'Подписка на новости' : 'Subscribe to News';
+const subscribeButton = lang === 'ru' ? 'Подписаться' : 'Subscribe';
+const foundText = lang === 'ru' ? 'Найдено' : 'Found';
+---
+
+<aside class="filters-sidebar">
+  <div class="filter-group">
+    <h3>{searchTitle}</h3>
+    <div class="search-wrapper">
+      <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <circle cx="11" cy="11" r="8"/>
+        <path d="m21 21-4.35-4.35"/>
+      </svg>
+      <input 
+        type="text" 
+        id="news-search-input" 
+        placeholder={searchPlaceholder}
+        autocomplete="off"
+      />
+    </div>
+  </div>
+
+  <div class="filter-group" style="margin-top: 20px;">
+    <h3>{categoriesTitle}</h3>
+    <div class="filter-tags">
+      {categories.map((cat, index) => (
+        <button 
+          class:list={['filter-tag', { active: index === 0 }]}
+          data-category={cat.id}
+          type="button"
+        >
+          {cat.label[lang]}
+        </button>
+      ))}
+    </div>
+  </div>
+
+  <div class="results-info">
+    <span class="muted">{foundText}: <span id="results-count">{totalCount}</span></span>
+  </div>
+
+  <div class="sidebar-block popular-posts">
+    <h3>{popularTitle}</h3>
+    {popularArticles.map(article => (
+      <a href={`${base}/news/${article.slug}`}>
+        {article.title[lang]}
+      </a>
+    ))}
+  </div>
+
+  <div class="sidebar-block subscribe-box">
+    <h3>{subscribeTitle}</h3>
+    <p>
+      {lang === 'ru' 
+        ? 'Получайте последние новости и обновления на вашу почту'
+        : 'Get the latest news and updates to your email'}
+    </p>
+    <form class="subscribe-form" data-form="subscribe">
+      <input 
+        type="email" 
+        name="email"
+        placeholder={lang === 'ru' ? 'Ваш email' : 'Your email'}
+        required
+      />
+      <button type="submit" class="subscribe-btn">{subscribeButton}</button>
+    </form>
+  </div>
+</aside>
+
+<style>
+  .filters-sidebar {
+    background: var(--color-bg-secondary, #f8fafc);
+    border: 1px solid var(--color-border, #e5e7eb);
+    border-radius: 14px;
+    padding: 20px;
+    align-self: start;
+  }
+
+  @media (min-width: 992px) {
+    .filters-sidebar {
+      position: sticky;
+      top: 100px;
+    }
+  }
+
+  .filter-group h3,
+  .sidebar-block h3 {
+    font-size: 1.1rem;
+    margin: 0 0 16px;
+    color: var(--color-primary, #2A2D2E);
+    font-family: var(--font-heading, 'Onest', sans-serif);
+    font-weight: 600;
+  }
+
+  .search-wrapper {
+    position: relative;
+  }
+
+  .search-icon {
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 18px;
+    height: 18px;
+    color: var(--color-text-muted, #5C5A5A);
+    opacity: 0.6;
+  }
+
+  .filter-group input[type="text"] {
+    width: 100%;
+    padding: 12px 12px 12px 40px;
+    border: 1px solid var(--color-border, #e5e7eb);
+    border-radius: 10px;
+    box-sizing: border-box;
+    font-family: var(--font-body, 'Manrope', sans-serif);
+    font-size: 0.95rem;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    background: #fff;
+  }
+
+  .filter-group input[type="text"]:focus {
+    border-color: var(--color-accent, #A3DAF3);
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(163, 218, 243, 0.2);
+  }
+
+  .filter-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .filter-tag {
+    background-color: var(--color-border, #E7E5E6);
+    color: var(--color-text-muted, #5C5A5A);
+    border: 1px solid transparent;
+    border-radius: 999px;
+    padding: 8px 14px;
+    font-size: 0.85rem;
+    cursor: pointer;
+    font-family: var(--font-body, 'Manrope', sans-serif);
+    transition: all 0.2s ease-out;
+  }
+
+  .filter-tag:hover {
+    background-color: #d8d6d7;
+  }
+
+  .filter-tag.active {
+    background-color: var(--color-accent, #A3DAF3);
+    color: var(--color-primary, #2A2D2E);
+  }
+
+  .results-info {
+    margin-top: 16px;
+    font-family: var(--font-body, 'Manrope', sans-serif);
+    font-size: 0.9rem;
+  }
+
+  .muted {
+    color: var(--color-text-muted, #5C5A5A);
+  }
+
+  .sidebar-block {
+    margin-top: 24px;
+    padding-top: 20px;
+    border-top: 1px solid var(--color-border, #e5e7eb);
+  }
+
+  .popular-posts a {
+    display: block;
+    margin-bottom: 12px;
+    font-weight: 400;
+    color: var(--color-primary, #2A2D2E);
+    font-family: var(--font-body, 'Manrope', sans-serif);
+    font-size: 0.95rem;
+    line-height: 1.5;
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .popular-posts a:hover {
+    color: var(--color-text-muted, #5C5A5A);
+    text-decoration: underline;
+  }
+
+  .subscribe-box {
+    background: linear-gradient(135deg, var(--color-primary, #2A2D2E) 0%, #484848 100%);
+    color: #fff;
+    padding: 20px;
+    border-radius: 14px;
+    margin-top: 24px;
+    border: none;
+  }
+
+  .subscribe-box h3 {
+    color: #fff;
+    margin-bottom: 8px;
+  }
+
+  .subscribe-box p {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 0.9rem;
+    margin: 0 0 16px;
+    font-family: var(--font-body, 'Manrope', sans-serif);
+    line-height: 1.5;
+  }
+
+  .subscribe-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .subscribe-form input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+    box-sizing: border-box;
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+    font-family: var(--font-body, 'Manrope', sans-serif);
+    font-size: 0.95rem;
+  }
+
+  .subscribe-form input::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+  }
+
+  .subscribe-form input:focus {
+    outline: none;
+    border-color: var(--color-accent, #A3DAF3);
+    background: rgba(255, 255, 255, 0.15);
+  }
+
+  .subscribe-btn {
+    width: 100%;
+    padding: 12px;
+    background: var(--color-accent, #A3DAF3);
+    color: var(--color-primary, #2A2D2E);
+    border: none;
+    border-radius: 10px;
+    font-family: var(--font-body, 'Manrope', sans-serif);
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+
+  .subscribe-btn:hover {
+    background: #8dcce8;
+  }
+</style>

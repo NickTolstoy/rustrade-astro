@@ -1,0 +1,72 @@
+---
+export interface BreadcrumbItem {
+  label: string;
+  href?: string;
+}
+
+interface Props {
+  items: BreadcrumbItem[];
+}
+
+const { items } = Astro.props;
+---
+
+<nav class="breadcrumbs" aria-label="Навигация по сайту">
+  <a href="/">Главная</a>
+  {items.map((item, index) => (
+    <>
+      <span class="separator">/</span>
+      {item.href ? (
+        <a href={item.href}>{item.label}</a>
+      ) : (
+        <span class="current">{item.label}</span>
+      )}
+    </>
+  ))}
+</nav>
+
+<style>
+.breadcrumbs {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  margin-bottom: 32px;
+  flex-wrap: wrap;
+}
+
+.breadcrumbs a {
+  color: var(--color-text-muted, #5C5A5A);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.breadcrumbs a:hover {
+  color: var(--color-accent, #A3DAF3);
+}
+
+.breadcrumbs .separator {
+  color: var(--color-border, #E7E5E6);
+}
+
+.breadcrumbs .current {
+  color: var(--color-primary, #2A2D2E);
+  font-weight: 500;
+  max-width: 400px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@media (max-width: 768px) {
+  .breadcrumbs {
+    font-size: 12px;
+    margin-bottom: 24px;
+  }
+  
+  .breadcrumbs .current {
+    max-width: 200px;
+  }
+}
+</style>
+

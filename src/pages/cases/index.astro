@@ -1,0 +1,356 @@
+---
+import type { Lang } from '@/i18n';
+import { getBaseUrl } from '@/i18n';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Breadcrumbs from '@/components/Breadcrumbs.astro';
+import Faq from '@/components/Faq.astro';
+
+const lang: Lang = 'ru';
+const base = getBaseUrl(lang);
+
+const faqItems = [
+  {
+    question: "В каких отраслях вы реализуете проекты?",
+    answer: "Мы имеем успешный опыт реализации проектов в различных отраслях: энергетика, химическая промышленность, пищевая промышленность (сахарные и маслоэкстракционные заводы), металлургия и другие."
+  },
+  {
+    question: "Какова средняя продолжительность реализации проекта?",
+    answer: "Сроки зависят от масштаба и сложности задачи. В среднем, поставка оборудования занимает от 6 до 12 месяцев, а полный цикл проекта «под ключ» — от 12 до 18 месяцев."
+  },
+  {
+    question: "Предоставляете ли вы гарантию на выполненные работы?",
+    answer: "Да, мы предоставляем гарантию на поставляемое оборудование и выполненные работы. Стандартный гарантийный срок составляет 12-24 месяца с момента ввода в эксплуатацию."
+  }
+];
+
+const cases = [
+  {
+    id: 'sugar-factory',
+    title: 'Сахарный завод',
+    description: 'Замена устаревшей турбогенераторной установки (ТГУ) с противодавлением на высокоэффективную ТГУ полной заводской готовности',
+    category: 'Сахар',
+    image: '/img/cases/sugar_main.webp',
+    href: `${base}/cases/sugar-factory`
+  },
+  {
+    id: 'oil-factory',
+    title: 'Маслоэкстракционный завод',
+    description: 'Установка турбогенераторной установки мощностью 5 МВт на Маслоэкстракционный завод',
+    category: 'Пищевая промышленность',
+    image: '/img/cases/oil.webp',
+    href: `${base}/cases/oil-factory`
+  },
+  {
+    id: 'tgk',
+    title: 'Территориально-генерирующая компания',
+    description: 'Установка турбогенераторной установки мощностью 2,5 МВт',
+    category: 'Энергетика',
+    image: '/img/cases/tgk_main.webp',
+    href: `${base}/cases/tgk`
+  },
+  {
+    id: 'chemist-factory',
+    title: 'Химический завод',
+    description: 'Установка турбогенераторной установки мощностью 3,8 МВт',
+    category: 'Химия',
+    image: '/img/cases/chemist_main.webp',
+    href: `${base}/cases/chemist-factory`
+  }
+];
+
+const categories = ['Все', 'Химия', 'Сахар', 'Маслоэкстракция', 'Энергетика'];
+---
+
+<BaseLayout 
+  lang={lang} 
+  title="Кейсы | РУСТРЕЙД" 
+  description="Реализованные проекты компании РУСТРЕЙД в области энергетики и паровых турбин"
+>
+  <Breadcrumbs items={[{ label: 'Кейсы' }]} />
+
+  <main class="fade-in">
+    <div class="cases-panel">
+      <h1 class="cases-header">Кейсы</h1>
+      <div class="cases-switcher">
+        <ul>
+          <li class="active">Все <img src="/img/circle.svg" alt="" /> {cases.length}</li>
+          {categories.slice(1).map(cat => (
+            <li>{cat}</li>
+          ))}
+        </ul>
+      </div>
+    </div>
+
+    <div class="cases-list">
+      {cases.map((item) => (
+        <a class="case-item" href={item.href} style={`background-image: linear-gradient(50deg, rgba(0, 0, 0, 0.75) 0%, rgba(0, 0, 0, 0.00) 100%), url(${item.image});`}>
+          <div class="category-row">
+            <p>
+              <img src="/img/circle.svg" alt="circle" /> Кейс
+            </p>
+            <p>{item.category}</p>
+          </div>
+
+          <div class="short-desc">
+            <h2>{item.title}</h2>
+            <p>{item.description}</p>
+            <div class="nav-arrow">
+              <img src="/img/main/black_arrow_diagonal.svg" alt="arrow" />
+            </div>
+          </div>
+        </a>
+      ))}
+    </div>
+
+    <Faq items={faqItems} />
+  </main>
+</BaseLayout>
+
+<style>
+  main {
+    padding-bottom: var(--space-12);
+  }
+
+  .cases-panel {
+    display: flex;
+    padding: 32px 0px;
+    align-items: flex-start;
+    gap: 8px;
+    border-radius: 10px;
+    border: 1px solid #5C5A5A;
+    margin-bottom: 8px;
+  }
+
+  .cases-header {
+    color: #000;
+    font-family: var(--font-heading);
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    letter-spacing: -0.96px;
+    padding: 0 64px;
+    flex: 1 0 0;
+    margin: 0;
+  }
+
+  .cases-switcher {
+    flex: 1 0 0;
+    display: flex;
+    align-items: center;
+  }
+
+  .cases-switcher ul {
+    display: flex;
+    list-style-type: none;
+    padding-right: 24px;
+    gap: 10px;
+    margin: 0;
+    padding: 0 24px 0 0;
+  }
+
+  .cases-switcher li {
+    display: flex;
+    padding: 12px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    border-radius: 10px;
+    background: #FFF;
+    font-family: var(--font-body);
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .cases-switcher li.active {
+    background: #2A2D2E;
+    color: white;
+  }
+  
+  .cases-switcher li img {
+    filter: brightness(0) invert(1);
+  }
+
+  .cases-list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+  }
+
+  .case-item {
+    display: flex;
+    box-sizing: border-box;
+    width: 100%;
+    height: 400px;
+    padding: 32px;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    border-radius: 10px;
+    position: relative;
+    cursor: pointer;
+    background-size: cover !important;
+    background-position: center center !important;
+    text-decoration: none;
+    transition: all 0.5s ease;
+    filter: grayscale(100%);
+  }
+
+  .case-item:hover {
+    filter: grayscale(0%);
+  }
+
+  @media (max-width: 1024px) {
+    .cases-list {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .nav-arrow {
+    display: flex;
+    box-sizing: border-box;
+    width: 36px;
+    height: 36px;
+    padding: 8px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    border-radius: 50%;
+    background: #FFF;
+    margin-top: 12px;
+  }
+
+  .nav-arrow img {
+    transition: transform 0.5s;
+    width: 100%;
+    height: 100%;
+  }
+
+  .case-item:hover .nav-arrow img {
+    transform: rotate(45deg);
+  }
+
+  .case-item:hover::after {
+    content: '';
+    position: absolute;
+    left: 0; 
+    top: 0;
+    width: 100%; 
+    height: 100%;
+    border-radius: 10px;
+    background: linear-gradient(45deg, rgba(0, 0, 0, 0.80) 0%, rgba(41, 41, 41, 0.67) 15.93%, rgba(255, 255, 255, 0.00) 100%);
+    pointer-events: none;
+  }
+
+  .category-row, .short-desc {
+    z-index: 10;
+    position: relative;
+  }
+
+  .category-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+  }
+
+  .category-row img {
+    margin-right: 8px;
+  }
+
+  .category-row p {
+    color: #FFF;
+    font-family: var(--font-body);
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 20px;
+    letter-spacing: -0.42px;
+    display: flex;
+    align-items: center;
+  }
+  
+  .category-row p:last-child {
+    flex: 1 0 0;
+  }
+
+  .short-desc h2 {
+    color: white;
+    font-family: var(--font-heading);
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    letter-spacing: -0.96px;
+    margin-bottom: 12px;
+    margin-top: 0;
+  }
+
+  .short-desc p {
+    max-width: 530px;
+    color: white;
+    font-family: var(--font-body);
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 20px;
+    letter-spacing: -0.42px;
+    margin: 0;
+  }
+
+  /* Responsive */
+  @media (max-width: 810px) {
+    .cases-header {
+      padding: 0 24px;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .cases-panel {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 16px;
+      padding: 24px;
+    }
+    
+    .cases-header {
+      padding: 0;
+      font-size: 24px;
+    }
+    
+    .cases-switcher {
+      width: 100%;
+      overflow-x: auto;
+    }
+    
+    .cases-switcher ul {
+      padding-right: 0;
+    }
+    
+    .cases-switcher li {
+      font-size: 14px;
+      padding: 8px 12px;
+      white-space: nowrap;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .case-item {
+      height: 350px;
+      padding: 24px;
+    }
+    
+    .short-desc h2 {
+      font-size: 24px;
+    }
+    
+    .cases-panel {
+      padding: 16px;
+    }
+    
+    .cases-switcher li {
+      padding: 6px 10px;
+      font-size: 12px;
+    }
+  }
+</style>

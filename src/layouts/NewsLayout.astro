@@ -1,0 +1,50 @@
+---
+import type { Lang } from '@/i18n';
+import BaseLayout from './BaseLayout.astro';
+import '@/styles/components/news.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+  keywords?: string;
+  image?: string;
+  lang: Lang;
+  articleData?: {
+    headline: string;
+    description: string;
+    image: string;
+    datePublished: string;
+    dateModified?: string;
+    author?: string;
+  };
+  breadcrumbs?: Array<{ name: string; url: string }>;
+}
+
+const {
+  title,
+  description,
+  keywords,
+  image,
+  lang,
+  articleData,
+  breadcrumbs
+} = Astro.props;
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  keywords={keywords}
+  image={image}
+  type={articleData ? 'article' : 'website'}
+  publishedTime={articleData?.datePublished}
+  modifiedTime={articleData?.dateModified}
+  author={articleData?.author}
+  lang={lang}
+  activeMenu="Новости"
+  articleData={articleData}
+  breadcrumbs={breadcrumbs}
+>
+  <slot />
+</BaseLayout>
+

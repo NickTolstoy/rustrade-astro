@@ -1,0 +1,266 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 280" id="blueprintDrawing">
+  <defs>
+    <!-- Фильтры для объёмности -->
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="3" dy="4" stdDeviation="3" flood-color="#000" flood-opacity="0.2"/>
+    </filter>
+    <filter id="shadowSmall" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="2" dy="3" stdDeviation="2" flood-color="#000" flood-opacity="0.18"/>
+    </filter>
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="1.5" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    
+    <!-- Градиенты для линий -->
+    <linearGradient id="lineGrad1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#252535"/>
+      <stop offset="50%" stop-color="#454565"/>
+      <stop offset="100%" stop-color="#353545"/>
+    </linearGradient>
+    <linearGradient id="lineGrad2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#354555"/>
+      <stop offset="100%" stop-color="#556575"/>
+    </linearGradient>
+    
+    <style>
+      .line-main { fill: none; stroke: url(#lineGrad1); stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
+      .line-med { fill: none; stroke: #404560; stroke-width: 1.8; stroke-linecap: round; }
+      .line-thin { fill: none; stroke: #505575; stroke-width: 1.2; }
+      .line-detail { fill: none; stroke: #606580; stroke-width: 0.9; }
+      .line-shadow { fill: none; stroke: rgba(0,0,0,0.15); stroke-width: 3; stroke-linecap: round; }
+      .line-main-sm { fill: none; stroke: url(#lineGrad1); stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+      .line-med-sm { fill: none; stroke: #404560; stroke-width: 1.2; stroke-linecap: round; }
+      .line-thin-sm { fill: none; stroke: #505575; stroke-width: 0.9; }
+    </style>
+  </defs>
+  
+  <!-- ========== КЛЕТЧАТАЯ РАЗМЕТКА ========== -->
+  <defs>
+    <pattern id="grid" width="20" height="20" patternUnits="userSpaceOnUse">
+      <path d="M 20 0 L 0 0 0 20" fill="none" stroke="#8090A0" stroke-width="0.4"/>
+    </pattern>
+  </defs>
+  <rect width="400" height="280" fill="url(#grid)" opacity="0.3"/>
+  
+  <!-- ========== БОЛЬШАЯ КРУГЛАЯ ДИАФРАГМА ========== -->
+  <g id="frontView" transform="translate(200, 125)">
+    
+    <!-- Теневой слой (смещён) -->
+    <g transform="translate(3, 4)" opacity="0.2">
+      <circle r="100" class="line-shadow" stroke-dasharray="628">
+        <animate attributeName="stroke-dashoffset" values="628;0;0;628;628" keyTimes="0;0.2;0.45;0.65;1" dur="6s" repeatCount="indefinite"/>
+      </circle>
+      <circle r="71" class="line-shadow" stroke-dasharray="446">
+        <animate attributeName="stroke-dashoffset" values="446;0;0;446;446" keyTimes="0;0.2;0.45;0.65;1" dur="6s" repeatCount="indefinite" begin="0.15s"/>
+      </circle>
+      <circle r="53" class="line-shadow" stroke-dasharray="333">
+        <animate attributeName="stroke-dashoffset" values="333;0;0;333;333" keyTimes="0;0.2;0.45;0.65;1" dur="6s" repeatCount="indefinite" begin="0.2s"/>
+      </circle>
+      <circle r="36" class="line-shadow" stroke-dasharray="226">
+        <animate attributeName="stroke-dashoffset" values="226;0;0;226;226" keyTimes="0;0.2;0.45;0.65;1" dur="6s" repeatCount="indefinite" begin="0.25s"/>
+      </circle>
+    </g>
+    
+    <!-- Основной слой с фильтром -->
+    <g filter="url(#glow)">
+      <!-- Внешний обод -->
+      <circle r="100" class="line-main" stroke-dasharray="628">
+        <animate attributeName="stroke-dashoffset" values="628;0;0;628;628" keyTimes="0;0.2;0.45;0.65;1" dur="6s" repeatCount="indefinite"/>
+      </circle>
+      <circle r="93" class="line-med" stroke-dasharray="584">
+        <animate attributeName="stroke-dashoffset" values="584;0;0;584;584" keyTimes="0;0.2;0.45;0.65;1" dur="6s" repeatCount="indefinite" begin="0.05s"/>
+      </circle>
+      <circle r="86" class="line-thin" stroke-dasharray="540">
+        <animate attributeName="stroke-dashoffset" values="540;0;0;540;540" keyTimes="0;0.2;0.45;0.65;1" dur="6s" repeatCount="indefinite" begin="0.1s"/>
+      </circle>
+      
+      <!-- Кольцо с лопатками -->
+      <circle r="71" class="line-main" stroke-dasharray="446">
+        <animate attributeName="stroke-dashoffset" values="446;0;0;446;446" keyTimes="0;0.2;0.45;0.65;1" dur="6s" repeatCount="indefinite" begin="0.15s"/>
+      </circle>
+      <circle r="53" class="line-main" stroke-dasharray="333">
+        <animate attributeName="stroke-dashoffset" values="333;0;0;333;333" keyTimes="0;0.2;0.45;0.65;1" dur="6s" repeatCount="indefinite" begin="0.2s"/>
+      </circle>
+      
+      <!-- Внутренняя втулка -->
+      <circle r="36" class="line-main" stroke-dasharray="226">
+        <animate attributeName="stroke-dashoffset" values="226;0;0;226;226" keyTimes="0;0.2;0.45;0.65;1" dur="6s" repeatCount="indefinite" begin="0.25s"/>
+      </circle>
+      <circle r="29" class="line-med" stroke-dasharray="182">
+        <animate attributeName="stroke-dashoffset" values="182;0;0;182;182" keyTimes="0;0.2;0.45;0.65;1" dur="6s" repeatCount="indefinite" begin="0.3s"/>
+      </circle>
+      <circle r="20" class="line-thin" stroke-dasharray="126">
+        <animate attributeName="stroke-dashoffset" values="126;0;0;126;126" keyTimes="0;0.2;0.45;0.65;1" dur="6s" repeatCount="indefinite" begin="0.35s"/>
+      </circle>
+      
+      <!-- Центральная точка -->
+      <circle r="5" fill="#354565" opacity="0">
+        <animate attributeName="opacity" values="0;0.8;0.8;0;0" keyTimes="0;0.2;0.45;0.65;1" dur="6s" repeatCount="indefinite" begin="0.4s"/>
+      </circle>
+    </g>
+    
+    <!-- Шпоночный паз -->
+    <path d="M-4 -20 L-4 -36 L4 -36 L4 -20" class="line-med" stroke-dasharray="45">
+      <animate attributeName="stroke-dashoffset" values="45;0;0;45;45" keyTimes="0;0.2;0.45;0.65;1" dur="6s" repeatCount="indefinite" begin="0.4s"/>
+    </path>
+    
+    <!-- Лопатки -->
+    <g id="blades">
+      <animate attributeName="opacity" values="0;1;1;0;0" keyTimes="0;0.15;0.45;0.6;1" dur="6s" repeatCount="indefinite" begin="0.45s"/>
+      <g class="line-thin">
+        <line x1="53" y1="0" x2="71" y2="0" transform="rotate(0)"/>
+        <line x1="53" y1="0" x2="71" y2="0" transform="rotate(10)"/>
+        <line x1="53" y1="0" x2="71" y2="0" transform="rotate(20)"/>
+        <line x1="53" y1="0" x2="71" y2="0" transform="rotate(30)"/>
+        <line x1="53" y1="0" x2="71" y2="0" transform="rotate(40)"/>
+        <line x1="53" y1="0" x2="71" y2="0" transform="rotate(50)"/>
+        <line x1="53" y1="0" x2="71" y2="0" transform="rotate(60)"/>
+        <line x1="53" y1="0" x2="71" y2="0" transform="rotate(70)"/>
+        <line x1="53" y1="0" x2="71" y2="0" transform="rotate(80)"/>
+        <line x1="53" y1="0" x2="71" y2="0" transform="rotate(90)"/>
+        <line x1="53" y1="0" x2="71" y2="0" transform="rotate(100)"/>
+        <line x1="53" y1="0" x2="71" y2="0" transform="rotate(110)"/>
+        <line x1="53" y1="0" x2="71" y2="0" transform="rotate(120)"/>
+        <line x1="53" y1="0" x2="71" y2="0" transform="rotate(130)"/>
+        <line x1="53" y1="0" x2="71" y2="0" transform="rotate(140)"/>
+        <line x1="53" y1="0" x2="71" y2="0" transform="rotate(150)"/>
+        <line x1="53" y1="0" x2="71" y2="0" transform="rotate(160)"/>
+        <line x1="53" y1="0" x2="71" y2="0" transform="rotate(170)"/>
+        <line x1="53" y1="0" x2="71" y2="0" transform="rotate(180)"/>
+        <line x1="53" y1="0" x2="71" y2="0" transform="rotate(190)"/>
+        <line x1="53" y1="0" x2="71" y2="0" transform="rotate(200)"/>
+        <line x1="53" y1="0" x2="71" y2="0" transform="rotate(210)"/>
+        <line x1="53" y1="0" x2="71" y2="0" transform="rotate(220)"/>
+        <line x1="53" y1="0" x2="71" y2="0" transform="rotate(230)"/>
+        <line x1="53" y1="0" x2="71" y2="0" transform="rotate(240)"/>
+        <line x1="53" y1="0" x2="71" y2="0" transform="rotate(250)"/>
+        <line x1="53" y1="0" x2="71" y2="0" transform="rotate(260)"/>
+        <line x1="53" y1="0" x2="71" y2="0" transform="rotate(270)"/>
+        <line x1="53" y1="0" x2="71" y2="0" transform="rotate(280)"/>
+        <line x1="53" y1="0" x2="71" y2="0" transform="rotate(290)"/>
+        <line x1="53" y1="0" x2="71" y2="0" transform="rotate(300)"/>
+        <line x1="53" y1="0" x2="71" y2="0" transform="rotate(310)"/>
+        <line x1="53" y1="0" x2="71" y2="0" transform="rotate(320)"/>
+        <line x1="53" y1="0" x2="71" y2="0" transform="rotate(330)"/>
+        <line x1="53" y1="0" x2="71" y2="0" transform="rotate(340)"/>
+        <line x1="53" y1="0" x2="71" y2="0" transform="rotate(350)"/>
+      </g>
+    </g>
+    
+    <!-- Крепёжные отверстия с заливкой -->
+    <g id="bolts">
+      <animate attributeName="opacity" values="0;1;1;0;0" keyTimes="0;0.15;0.45;0.6;1" dur="6s" repeatCount="indefinite" begin="0.5s"/>
+      <circle cx="89" cy="0" r="4" fill="rgba(64,69,96,0.3)" class="line-detail"/>
+      <circle cx="77" cy="45" r="4" fill="rgba(64,69,96,0.3)" class="line-detail"/>
+      <circle cx="45" cy="77" r="4" fill="rgba(64,69,96,0.3)" class="line-detail"/>
+      <circle cx="0" cy="89" r="4" fill="rgba(64,69,96,0.3)" class="line-detail"/>
+      <circle cx="-45" cy="77" r="4" fill="rgba(64,69,96,0.3)" class="line-detail"/>
+      <circle cx="-77" cy="45" r="4" fill="rgba(64,69,96,0.3)" class="line-detail"/>
+      <circle cx="-89" cy="0" r="4" fill="rgba(64,69,96,0.3)" class="line-detail"/>
+      <circle cx="-77" cy="-45" r="4" fill="rgba(64,69,96,0.3)" class="line-detail"/>
+      <circle cx="-45" cy="-77" r="4" fill="rgba(64,69,96,0.3)" class="line-detail"/>
+      <circle cx="0" cy="-89" r="4" fill="rgba(64,69,96,0.3)" class="line-detail"/>
+      <circle cx="45" cy="-77" r="4" fill="rgba(64,69,96,0.3)" class="line-detail"/>
+      <circle cx="77" cy="-45" r="4" fill="rgba(64,69,96,0.3)" class="line-detail"/>
+    </g>
+    
+    <!-- Осевые линии -->
+    <g id="axes">
+      <animate attributeName="opacity" values="0;1;1;0;0" keyTimes="0;0.15;0.45;0.6;1" dur="6s" repeatCount="indefinite" begin="0.55s"/>
+      <line x1="-105" y1="0" x2="105" y2="0" stroke="#607080" stroke-width="0.6" stroke-dasharray="8,4"/>
+      <line x1="0" y1="-105" x2="0" y2="105" stroke="#607080" stroke-width="0.6" stroke-dasharray="8,4"/>
+    </g>
+  </g>
+  
+  <!-- ========== МАЛЕНЬКАЯ ДИАФРАГМА ========== -->
+  <g id="smallView" transform="translate(290, 195)">
+    
+    <!-- Теневой слой -->
+    <g transform="translate(2, 3)" opacity="0.18">
+      <circle r="70" class="line-shadow" stroke-dasharray="440">
+        <animate attributeName="stroke-dashoffset" values="440;0;0;440;440" keyTimes="0;0.2;0.45;0.65;1" dur="6s" repeatCount="indefinite" begin="2s"/>
+      </circle>
+      <circle r="48" class="line-shadow" stroke-dasharray="302">
+        <animate attributeName="stroke-dashoffset" values="302;0;0;302;302" keyTimes="0;0.2;0.45;0.65;1" dur="6s" repeatCount="indefinite" begin="2.15s"/>
+      </circle>
+      <circle r="24" class="line-shadow" stroke-dasharray="151">
+        <animate attributeName="stroke-dashoffset" values="151;0;0;151;151" keyTimes="0;0.2;0.45;0.65;1" dur="6s" repeatCount="indefinite" begin="2.25s"/>
+      </circle>
+    </g>
+    
+    <!-- Основной слой -->
+    <g filter="url(#glow)">
+      <!-- Внешний обод -->
+      <circle r="70" class="line-main-sm" stroke-dasharray="440">
+        <animate attributeName="stroke-dashoffset" values="440;0;0;440;440" keyTimes="0;0.2;0.45;0.65;1" dur="6s" repeatCount="indefinite" begin="2s"/>
+      </circle>
+      <circle r="64" class="line-med-sm" stroke-dasharray="402">
+        <animate attributeName="stroke-dashoffset" values="402;0;0;402;402" keyTimes="0;0.2;0.45;0.65;1" dur="6s" repeatCount="indefinite" begin="2.05s"/>
+      </circle>
+      <circle r="58" class="line-thin-sm" stroke-dasharray="364">
+        <animate attributeName="stroke-dashoffset" values="364;0;0;364;364" keyTimes="0;0.2;0.45;0.65;1" dur="6s" repeatCount="indefinite" begin="2.1s"/>
+      </circle>
+      
+      <!-- Кольцо с лопатками -->
+      <circle r="48" class="line-main-sm" stroke-dasharray="302">
+        <animate attributeName="stroke-dashoffset" values="302;0;0;302;302" keyTimes="0;0.2;0.45;0.65;1" dur="6s" repeatCount="indefinite" begin="2.15s"/>
+      </circle>
+      <circle r="36" class="line-main-sm" stroke-dasharray="226">
+        <animate attributeName="stroke-dashoffset" values="226;0;0;226;226" keyTimes="0;0.2;0.45;0.65;1" dur="6s" repeatCount="indefinite" begin="2.2s"/>
+      </circle>
+      
+      <!-- Внутренняя втулка -->
+      <circle r="24" class="line-main-sm" stroke-dasharray="151">
+        <animate attributeName="stroke-dashoffset" values="151;0;0;151;151" keyTimes="0;0.2;0.45;0.65;1" dur="6s" repeatCount="indefinite" begin="2.25s"/>
+      </circle>
+      <circle r="18" class="line-med-sm" stroke-dasharray="113">
+        <animate attributeName="stroke-dashoffset" values="113;0;0;113;113" keyTimes="0;0.2;0.45;0.65;1" dur="6s" repeatCount="indefinite" begin="2.3s"/>
+      </circle>
+      <circle r="12" class="line-thin-sm" stroke-dasharray="75">
+        <animate attributeName="stroke-dashoffset" values="75;0;0;75;75" keyTimes="0;0.2;0.45;0.65;1" dur="6s" repeatCount="indefinite" begin="2.35s"/>
+      </circle>
+      
+      <!-- Центральная точка -->
+      <circle r="3" fill="#354565" opacity="0">
+        <animate attributeName="opacity" values="0;0.8;0.8;0;0" keyTimes="0;0.2;0.45;0.65;1" dur="6s" repeatCount="indefinite" begin="2.4s"/>
+      </circle>
+    </g>
+    
+    <!-- Лопатки маленькие -->
+    <g id="bladesSmall">
+      <animate attributeName="opacity" values="0;1;1;0;0" keyTimes="0;0.15;0.45;0.6;1" dur="6s" repeatCount="indefinite" begin="2.4s"/>
+      <g class="line-thin-sm">
+        <line x1="36" y1="0" x2="48" y2="0" transform="rotate(0)"/>
+        <line x1="36" y1="0" x2="48" y2="0" transform="rotate(20)"/>
+        <line x1="36" y1="0" x2="48" y2="0" transform="rotate(40)"/>
+        <line x1="36" y1="0" x2="48" y2="0" transform="rotate(60)"/>
+        <line x1="36" y1="0" x2="48" y2="0" transform="rotate(80)"/>
+        <line x1="36" y1="0" x2="48" y2="0" transform="rotate(100)"/>
+        <line x1="36" y1="0" x2="48" y2="0" transform="rotate(120)"/>
+        <line x1="36" y1="0" x2="48" y2="0" transform="rotate(140)"/>
+        <line x1="36" y1="0" x2="48" y2="0" transform="rotate(160)"/>
+        <line x1="36" y1="0" x2="48" y2="0" transform="rotate(180)"/>
+        <line x1="36" y1="0" x2="48" y2="0" transform="rotate(200)"/>
+        <line x1="36" y1="0" x2="48" y2="0" transform="rotate(220)"/>
+        <line x1="36" y1="0" x2="48" y2="0" transform="rotate(240)"/>
+        <line x1="36" y1="0" x2="48" y2="0" transform="rotate(260)"/>
+        <line x1="36" y1="0" x2="48" y2="0" transform="rotate(280)"/>
+        <line x1="36" y1="0" x2="48" y2="0" transform="rotate(300)"/>
+        <line x1="36" y1="0" x2="48" y2="0" transform="rotate(320)"/>
+        <line x1="36" y1="0" x2="48" y2="0" transform="rotate(340)"/>
+      </g>
+    </g>
+    
+    <!-- Осевые линии маленькие -->
+    <g id="axesSmall">
+      <animate attributeName="opacity" values="0;1;1;0;0" keyTimes="0;0.15;0.45;0.6;1" dur="6s" repeatCount="indefinite" begin="2.45s"/>
+      <line x1="-75" y1="0" x2="75" y2="0" stroke="#708090" stroke-width="0.5" stroke-dasharray="5,3"/>
+      <line x1="0" y1="-75" x2="0" y2="75" stroke="#708090" stroke-width="0.5" stroke-dasharray="5,3"/>
+    </g>
+  </g>
+  
+</svg>

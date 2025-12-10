@@ -1,0 +1,135 @@
+<svg viewBox="0 0 200 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    .unit-left { animation: unit-sync-left 3s ease-in-out infinite; }
+    .unit-right { animation: unit-sync-right 3s ease-in-out infinite; }
+    @keyframes unit-sync-left {
+      0%, 100% { transform: translateX(0); }
+      30% { transform: translateX(-4px); }
+      70% { transform: translateX(2px); }
+    }
+    @keyframes unit-sync-right {
+      0%, 100% { transform: translateX(0); }
+      30% { transform: translateX(4px); }
+      70% { transform: translateX(-2px); }
+    }
+    .pipe-flow { stroke-dasharray: 12; animation: pipe-animate 1.5s linear infinite; }
+    @keyframes pipe-animate {
+      0% { stroke-dashoffset: 24; }
+      100% { stroke-dashoffset: 0; }
+    }
+    .tube-glow { animation: tube-pulse 2.5s ease-in-out infinite; }
+    .tube-glow:nth-child(even) { animation-delay: 0.3s; }
+    @keyframes tube-pulse {
+      0%, 100% { opacity: 0.5; }
+      50% { opacity: 1; }
+    }
+    .frame-base { animation: frame-stable 4s ease-in-out infinite; }
+    @keyframes frame-stable {
+      0%, 100% { opacity: 0.8; }
+      50% { opacity: 1; }
+    }
+    .indicator-main { animation: indicator-blink 2s ease-in-out infinite; }
+    .indicator-reserve { animation: indicator-blink 2s ease-in-out 1s infinite; }
+    @keyframes indicator-blink {
+      0%, 100% { opacity: 0.6; transform: scale(1); }
+      50% { opacity: 1; transform: scale(1.1); }
+    }
+    .valve-handle { animation: valve-turn 4s ease-in-out infinite; }
+    @keyframes valve-turn {
+      0%, 100% { transform: rotate(0deg); }
+      25% { transform: rotate(15deg); }
+      75% { transform: rotate(-15deg); }
+    }
+    .label-text { animation: label-fade 3s ease-in-out infinite; }
+    @keyframes label-fade {
+      0%, 100% { opacity: 0.7; }
+      50% { opacity: 1; }
+    }
+  </style>
+  
+  <!-- Рамное основание блока -->
+  <g class="frame-base">
+    <rect x="15" y="145" width="170" height="20" rx="4" stroke="#2A2D2E" stroke-width="3" fill="none"/>
+    <!-- Опорные ножки -->
+    <rect x="25" y="160" width="12" height="8" rx="2" fill="#2A2D2E"/>
+    <rect x="85" y="160" width="12" height="8" rx="2" fill="#2A2D2E"/>
+    <rect x="163" y="160" width="12" height="8" rx="2" fill="#2A2D2E"/>
+  </g>
+  
+  <!-- Левый блок маслоохладителя (ОСНОВНОЙ) -->
+  <g class="unit-left" style="transform-origin: 55px 90px;">
+    <!-- Корпус -->
+    <rect x="20" y="35" width="70" height="105" rx="6" stroke="#2A2D2E" stroke-width="2.5" fill="none"/>
+    
+    <!-- Внутренняя теплообменная часть -->
+    <rect x="28" y="50" width="54" height="75" rx="4" fill="#5BC0EB" fill-opacity="0.15" stroke="#5BC0EB" stroke-width="1.5"/>
+    
+    <!-- Теплообменные трубки -->
+    <line class="tube-glow" x1="33" y1="60" x2="77" y2="60" stroke="#5BC0EB" stroke-width="2"/>
+    <line class="tube-glow" x1="33" y1="75" x2="77" y2="75" stroke="#5BC0EB" stroke-width="2"/>
+    <line class="tube-glow" x1="33" y1="90" x2="77" y2="90" stroke="#5BC0EB" stroke-width="2"/>
+    <line class="tube-glow" x1="33" y1="105" x2="77" y2="105" stroke="#5BC0EB" stroke-width="2"/>
+    <line class="tube-glow" x1="33" y1="120" x2="77" y2="120" stroke="#5BC0EB" stroke-width="2"/>
+    
+    <!-- Входные/выходные патрубки -->
+    <rect x="35" y="22" width="14" height="15" rx="3" fill="#2A2D2E"/>
+    <rect x="61" y="22" width="14" height="15" rx="3" fill="#2A2D2E"/>
+    
+    <!-- Индикатор "ОСНОВНОЙ" -->
+    <g class="indicator-main" style="transform-origin: 55px 138px;">
+      <circle cx="55" cy="138" r="8" fill="#28A745"/>
+      <text x="55" y="142" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" font-weight="700" fill="white">1</text>
+    </g>
+  </g>
+  
+  <!-- Правый блок маслоохладителя (РЕЗЕРВНЫЙ) -->
+  <g class="unit-right" style="transform-origin: 145px 90px;">
+    <!-- Корпус -->
+    <rect x="110" y="35" width="70" height="105" rx="6" stroke="#2A2D2E" stroke-width="2.5" fill="none"/>
+    
+    <!-- Внутренняя теплообменная часть -->
+    <rect x="118" y="50" width="54" height="75" rx="4" fill="#5BC0EB" fill-opacity="0.1" stroke="#5BC0EB" stroke-width="1.5" opacity="0.7"/>
+    
+    <!-- Теплообменные трубки (более тусклые - резерв) -->
+    <line class="tube-glow" x1="123" y1="60" x2="167" y2="60" stroke="#5BC0EB" stroke-width="2" opacity="0.5"/>
+    <line class="tube-glow" x1="123" y1="75" x2="167" y2="75" stroke="#5BC0EB" stroke-width="2" opacity="0.5"/>
+    <line class="tube-glow" x1="123" y1="90" x2="167" y2="90" stroke="#5BC0EB" stroke-width="2" opacity="0.5"/>
+    <line class="tube-glow" x1="123" y1="105" x2="167" y2="105" stroke="#5BC0EB" stroke-width="2" opacity="0.5"/>
+    <line class="tube-glow" x1="123" y1="120" x2="167" y2="120" stroke="#5BC0EB" stroke-width="2" opacity="0.5"/>
+    
+    <!-- Входные/выходные патрубки -->
+    <rect x="125" y="22" width="14" height="15" rx="3" fill="#2A2D2E"/>
+    <rect x="151" y="22" width="14" height="15" rx="3" fill="#2A2D2E"/>
+    
+    <!-- Индикатор "РЕЗЕРВНЫЙ" -->
+    <g class="indicator-reserve" style="transform-origin: 145px 138px;">
+      <circle cx="145" cy="138" r="8" fill="#5BC0EB"/>
+      <text x="145" y="142" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" font-weight="700" fill="white">2</text>
+    </g>
+  </g>
+  
+  <!-- Соединительные трубопроводы с анимацией потока -->
+  <g>
+    <!-- Верхний коллектор -->
+    <path d="M49 22H75 Q82 22 82 29 V35 H118 V29 Q118 22 125 22 H151" stroke="#2A2D2E" stroke-width="3" fill="none"/>
+    <path class="pipe-flow" d="M49 22H75 Q82 22 82 29 V35 H118 V29 Q118 22 125 22 H151" stroke="#5BC0EB" stroke-width="2" fill="none"/>
+    
+    <!-- Нижний коллектор -->
+    <path d="M55 140H55 Q60 145 100 145 Q140 145 145 140 H145" stroke="#2A2D2E" stroke-width="3" fill="none"/>
+    <path class="pipe-flow" d="M55 140H55 Q60 145 100 145 Q140 145 145 140 H145" stroke="#5BC0EB" stroke-width="2" fill="none"/>
+  </g>
+  
+  <!-- Переключающий кран -->
+  <g transform="translate(92, 85)">
+    <circle cx="8" cy="8" r="10" stroke="#2A2D2E" stroke-width="2" fill="white"/>
+    <g class="valve-handle" style="transform-origin: 8px 8px;">
+      <rect x="5" y="-5" width="6" height="26" rx="2" fill="#2A2D2E"/>
+    </g>
+  </g>
+  
+  <!-- Метки -->
+  <g class="label-text">
+    <text x="55" y="15" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#28A745" font-weight="600">ОСНОВНОЙ</text>
+    <text x="145" y="15" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#5BC0EB" font-weight="600">РЕЗЕРВНЫЙ</text>
+  </g>
+</svg>

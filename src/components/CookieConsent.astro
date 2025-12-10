@@ -1,0 +1,158 @@
+---
+import type { Lang } from '@/i18n';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+
+const text = {
+  ru: {
+    message: 'Мы используем cookies для улучшения работы сайта и анализа трафика.',
+    accept: 'Принять',
+    learnMore: 'Подробнее'
+  },
+  en: {
+    message: 'We use cookies to improve your experience and analyze traffic.',
+    accept: 'Accept',
+    learnMore: 'Learn more'
+  }
+};
+
+const t = text[lang];
+---
+
+<div id="cookie-consent" class="cookie-consent" style="display: none;">
+  <div class="cookie-content">
+    <p>{t.message}</p>
+    <div class="cookie-actions">
+      <button id="cookie-accept" class="btn btn-primary">{t.accept}</button>
+      <a href={lang === 'ru' ? '/privacy-policy' : '/eng/privacy-policy'} class="cookie-link">{t.learnMore}</a>
+    </div>
+  </div>
+</div>
+
+<style>
+  .cookie-consent {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: #fff;
+    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.1);
+    z-index: 10000;
+    padding: 16px 24px;
+    animation: slideUp 0.3s ease-out;
+  }
+
+  @keyframes slideUp {
+    from {
+      transform: translateY(100%);
+    }
+    to {
+      transform: translateY(0);
+    }
+  }
+
+  .cookie-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  .cookie-content p {
+    margin: 0;
+    color: #2A2D2E;
+    font-size: 14px;
+    flex: 1;
+    min-width: 200px;
+  }
+
+  .cookie-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .cookie-consent .btn {
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    border: none;
+    transition: all 0.2s ease;
+  }
+
+  .cookie-consent .btn-primary {
+    background: #A3DAF3;
+    color: #2A2D2E;
+  }
+
+  .cookie-consent .btn-primary:hover {
+    background: #8BC5E8;
+  }
+
+  .cookie-consent .btn-secondary {
+    background: #f5f5f5;
+    color: #5C5A5A;
+  }
+
+  .cookie-consent .btn-secondary:hover {
+    background: #e8e8e8;
+  }
+
+  .cookie-link {
+    color: #5C5A5A;
+    font-size: 13px;
+    text-decoration: underline;
+  }
+
+  .cookie-link:hover {
+    color: #2A2D2E;
+  }
+
+  @media (max-width: 768px) {
+    .cookie-content {
+      flex-direction: column;
+      text-align: center;
+    }
+
+    .cookie-actions {
+      width: 100%;
+      justify-content: center;
+    }
+  }
+</style>
+
+<script>
+  const COOKIE_CONSENT_KEY = 'rustrade_cookie_consent';
+
+  function initCookieConsent() {
+    const consent = localStorage.getItem(COOKIE_CONSENT_KEY);
+    const banner = document.getElementById('cookie-consent');
+    
+    if (!consent && banner) {
+      banner.style.display = 'block';
+    }
+
+    document.getElementById('cookie-accept')?.addEventListener('click', () => {
+      localStorage.setItem(COOKIE_CONSENT_KEY, 'accepted');
+      if (banner) banner.style.display = 'none';
+    });
+  }
+
+  // Initialize on DOM ready
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initCookieConsent);
+  } else {
+    initCookieConsent();
+  }
+</script>
+

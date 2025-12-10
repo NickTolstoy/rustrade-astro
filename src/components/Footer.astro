@@ -1,0 +1,78 @@
+---
+import type { Lang } from '@/i18n';
+import { t, getBaseUrl } from '@/i18n';
+import { getFooterNavigation, dropdownIcons } from '@/data/navigation';
+import { cities } from '@/data/cities';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const navigation = getFooterNavigation(lang);
+const currentCity = cities[0]; // Default to Moscow for contact info
+const base = getBaseUrl(lang);
+---
+
+<footer>
+  <div class="footer-contacts">
+    <a href={base || '/'}>
+      <img src="/img/logo.svg" alt="Rustrade" class="footer-logo" width="120" height="32" />
+    </a>
+    
+    <div class="contact-item">
+      <img src="/img/mail.svg" alt="email" width="20" height="20" />
+      <a href={`mailto:${currentCity?.email}`}>{currentCity?.email}</a>
+    </div>
+    
+    <div class="contact-item">
+      <img src="/img/phone.svg" alt="phone" width="20" height="20" />
+      <a href={`tel:${currentCity?.phone.replace(/[^+\d]/g, '')}`}>{currentCity?.phone}</a>
+    </div>
+    
+    <div class="contact-item">
+      <img src="/img/location.svg" alt="address" width="20" height="20" />
+      <span>{currentCity?.address[lang]}</span>
+    </div>
+    
+    <p>{currentCity?.workingHours[lang]}</p>
+  </div>
+
+  <nav class="footer-nav">
+    <div class="footer-nav-links">
+      {navigation.map((item) => (
+        <a href={item.href}>{item.name}</a>
+      ))}
+      <a href="/Презентация_РУСТРЕЙД.pdf" download style="display: flex; align-items: center; gap: 8px; color: var(--color-error);">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" set:html={dropdownIcons.presentation} />
+        {t('footer.downloadPresentation', lang)}
+      </a>
+    </div>
+  </nav>
+  
+  <div class="footer-subscription">
+    <h4>{t('footer.subscribe', lang).split('.')[0]}</h4>
+    <p>{t('footer.subscribe', lang)}</p>
+    
+    <form class="footer-subscription-form" data-form="subscribe">
+      <input 
+        type="email" 
+        name="email" 
+        placeholder={t('footer.enterEmail', lang)}
+        required
+      />
+      <button type="submit">
+        {t('forms.submit', lang)}
+      </button>
+    </form>
+  </div>
+  
+  <div class="footer-bottom">
+    <span>© {new Date().getFullYear()} Rustrade. {lang === 'ru' ? 'Все права защищены.' : 'All rights reserved.'}</span>
+    <a href={`${base}/privacy-policy`}>{t('nav.privacy', lang)}</a>
+  </div>
+</footer>
+
+<style>
+  @import '../styles/components/footer.css';
+</style>

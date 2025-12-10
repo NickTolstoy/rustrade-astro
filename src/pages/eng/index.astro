@@ -1,0 +1,184 @@
+---
+import type { Lang } from '@/i18n';
+import { t, getBaseUrl } from '@/i18n';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+
+const lang: Lang = 'en';
+const base = getBaseUrl(lang);
+---
+
+<BaseLayout 
+  lang={lang} 
+  keywords="steam turbines, power equipment, turbogenerators, Rustrade"
+>
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-content">
+      <h1>{t('hero.title', lang)}</h1>
+      <p>{t('hero.description', lang)}</p>
+      <div class="hero-buttons">
+        <a href={`${base}/cases`} class="btn btn-primary">
+          <span>{t('hero.cta', lang)}</span>
+          <img src="/img/arrow_right.svg" alt="" width="16" height="16" />
+        </a>
+        <button class="btn btn-accent" data-modal="contact">
+          <span>{t('hero.ctaSecondary', lang)}</span>
+          <img src="/img/settings.svg" alt="" width="16" height="16" />
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services Section -->
+  <section class="services-section">
+    <div class="block-header">
+      <a href={`${base}/turbines`}>
+        <h2>
+          {t('services.title', lang)}
+          <img src="/img/main/arrow_circle_diagonal.svg" alt="" width="24" height="24" />
+        </h2>
+      </a>
+      <p>{t('services.description', lang)}</p>
+    </div>
+
+    <div class="services-cards">
+      <a class="service-card" href={`${base}/turbines/drive`}>
+        <div class="service-card-icon">
+          <img src="/img/main/service_circles.svg" alt="" width="32" height="32" />
+        </div>
+        <div class="service-card-content">
+          <h4>{t('turbines.drive', lang)}</h4>
+          <p>{t('turbines.driveDesc', lang)}</p>
+        </div>
+        <div class="service-card-arrow">
+          <img src="/img/main/black_arrow_diagonal.svg" alt="" width="24" height="24" />
+        </div>
+        <img class="service-card-bg" src="/img/main/priv_turbine.webp" alt="" />
+      </a>
+
+      <a class="service-card" href={`${base}/turbines/low-power`}>
+        <div class="service-card-icon">
+          <img src="/img/main/service_atom.svg" alt="" width="32" height="32" />
+        </div>
+        <div class="service-card-content">
+          <h4>{t('turbines.lowPower', lang)}</h4>
+          <p>{t('turbines.lowPowerDesc', lang)}</p>
+        </div>
+        <div class="service-card-arrow">
+          <img src="/img/main/black_arrow_diagonal.svg" alt="" width="24" height="24" />
+        </div>
+        <img class="service-card-bg" src="/img/main/low_turbine.webp" alt="" />
+      </a>
+
+      <a class="service-card" href={`${base}/turbines/condensing`}>
+        <div class="service-card-icon">
+          <img src="/img/main/service_regular.svg" alt="" width="32" height="32" />
+        </div>
+        <div class="service-card-content">
+          <h4>{t('turbines.optimal', lang)}</h4>
+          <p>{t('turbines.condensingDesc', lang)}</p>
+        </div>
+        <div class="service-card-arrow">
+          <img src="/img/main/black_arrow_diagonal.svg" alt="" width="24" height="24" />
+        </div>
+        <img class="service-card-bg" src="/img/main/usual_turbine.webp" alt="" />
+      </a>
+    </div>
+  </section>
+
+  <!-- Service Kinds Section -->
+  <section class="service-kinds">
+    <div class="service-kind-card">
+      <div class="service-kind-header">
+        <img src="/img/main/kinds/build.svg" alt="" width="32" height="32" />
+        <h3>{t('services.design', lang)}</h3>
+      </div>
+      <p>{t('services.designDesc', lang)}</p>
+    </div>
+
+    <div class="service-kind-card">
+      <div class="service-kind-header">
+        <img src="/img/main/kinds/rkd.svg" alt="" width="32" height="32" />
+        <h3>{t('services.rkd', lang)}</h3>
+      </div>
+      <p>{t('services.rkdDesc', lang)}</p>
+    </div>
+
+    <div class="service-kind-card">
+      <div class="service-kind-header">
+        <img src="/img/main/kinds/cert.svg" alt="" width="32" height="32" />
+        <h3>{t('services.cert', lang)}</h3>
+      </div>
+      <p>{t('services.certDesc', lang)}</p>
+    </div>
+
+    <div class="service-kind-card">
+      <div class="service-kind-header">
+        <img src="/img/main/kinds/delivery.svg" alt="" width="32" height="32" />
+        <h3>{t('services.delivery', lang)}</h3>
+      </div>
+      <p>{t('services.deliveryDesc', lang)}</p>
+    </div>
+
+    <div class="service-kind-card">
+      <div class="service-kind-header">
+        <img src="/img/main/kinds/chief.svg" alt="" width="32" height="32" />
+        <h3>{t('services.chief', lang)}</h3>
+      </div>
+      <p>{t('services.chiefDesc', lang)}</p>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .hero {
+    background: linear-gradient(59deg, rgba(42, 45, 46, 0.70) 0%, rgba(0, 0, 0, 0.40) 31.59%, rgba(42, 45, 46, 0.70) 100%), 
+                url('/img/main/main_image.webp') center/cover no-repeat;
+    border-radius: var(--radius-xl);
+    padding: var(--space-12) var(--space-8);
+    margin-bottom: var(--space-8);
+    min-height: 400px;
+    display: flex;
+    align-items: center;
+  }
+
+  .hero-content { max-width: 600px; color: var(--color-white); }
+  .hero h1 { font-size: clamp(28px, 5vw, 40px); color: var(--color-white); margin-bottom: var(--space-4); letter-spacing: -2px; }
+  .hero p { font-size: var(--text-lg); opacity: 0.9; margin-bottom: var(--space-6); line-height: 1.6; }
+  .hero-buttons { display: flex; flex-wrap: wrap; gap: var(--space-3); }
+  .hero-buttons .btn { display: inline-flex; align-items: center; gap: var(--space-2); }
+
+  .block-header { margin-bottom: var(--space-6); }
+  .block-header a { display: inline-block; }
+  .block-header h2 { display: inline-flex; align-items: center; gap: var(--space-2); font-size: var(--text-3xl); margin-bottom: var(--space-3); }
+  .block-header h2 img { transition: transform var(--transition-base); }
+  .block-header a:hover h2 img { transform: translate(4px, -4px); }
+  .block-header p { color: var(--color-text-muted); max-width: 600px; }
+
+  .services-section { margin-bottom: var(--space-8); }
+  .services-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--space-4); }
+  .service-card { position: relative; display: flex; flex-direction: column; padding: var(--space-5); background: var(--color-white); border: 1px solid var(--color-border); border-radius: var(--radius-lg); overflow: hidden; transition: all var(--transition-base); min-height: 280px; }
+  .service-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
+  .service-card-icon { margin-bottom: var(--space-4); }
+  .service-card-content { flex: 1; }
+  .service-card-content h4 { font-size: var(--text-lg); margin-bottom: var(--space-2); }
+  .service-card-content p { color: var(--color-text-muted); font-size: var(--text-base); }
+  .service-card-arrow { position: absolute; top: var(--space-5); right: var(--space-5); opacity: 0; transform: translate(-10px, 10px); transition: all var(--transition-base); }
+  .service-card:hover .service-card-arrow { opacity: 1; transform: translate(0, 0); }
+  .service-card-bg { position: absolute; bottom: 0; right: 0; width: 150px; height: auto; opacity: 0.8; transition: opacity var(--transition-base); }
+  .service-card:hover .service-card-bg { opacity: 1; }
+
+  .service-kinds { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: var(--space-4); margin-bottom: var(--space-8); }
+  .service-kind-card { padding: var(--space-5); background: var(--color-bg-card); border-radius: var(--radius-lg); transition: all var(--transition-base); }
+  .service-kind-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
+  .service-kind-header { display: flex; align-items: center; gap: var(--space-3); margin-bottom: var(--space-3); }
+  .service-kind-header h3 { font-size: var(--text-md); font-weight: 600; }
+  .service-kind-card p { color: var(--color-text-muted); font-size: var(--text-sm); }
+
+  @media (max-width: 768px) {
+    .hero { padding: var(--space-8) var(--space-5); min-height: 350px; }
+    .services-cards { grid-template-columns: 1fr; }
+    .service-kinds { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 480px) { .service-kinds { grid-template-columns: 1fr; } }
+</style>

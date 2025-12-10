@@ -1,0 +1,668 @@
+/* Header Styles */
+header.main-header {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-6);
+  padding-top: var(--space-3);
+  padding-bottom: var(--space-4);
+}
+
+/* Main Menu */
+.main-menu ul {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: var(--space-5);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.menu-item {
+  position: relative;
+}
+
+/* Regular nav links */
+.nav-link {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--color-primary);
+  font-size: var(--text-base);
+  font-weight: 500;
+  transition: color var(--transition-fast);
+  text-decoration: none;
+}
+
+.nav-link:hover,
+.nav-link.active {
+  color: #7f8386;
+}
+
+/* Dropdown trigger - now a span for hover behavior */
+.nav-dropdown-trigger {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 0;
+  color: var(--color-primary);
+  font-size: var(--text-base);
+  font-weight: 500;
+  cursor: pointer;
+  transition: color var(--transition-fast);
+  font-family: inherit;
+}
+
+.menu-item.has-dropdown:hover .nav-dropdown-trigger {
+  color: #7f8386;
+}
+
+.menu-icon {
+  flex-shrink: 0;
+  opacity: 0.7;
+  overflow: visible;
+}
+
+.menu-item.has-dropdown:hover .menu-icon,
+.nav-link:hover .menu-icon {
+  opacity: 1;
+  color: var(--color-primary); /* Force original color on hover */
+}
+
+/* Icon Animations */
+/* Writing animation for Design icon */
+@keyframes writing {
+  0%, 100% { transform: translate(0, 0) rotate(0deg); }
+  25% { transform: translate(1px, -1px) rotate(5deg); }
+  50% { transform: translate(-1px, 1px) rotate(-5deg); }
+  75% { transform: translate(1px, 1px) rotate(5deg); }
+}
+
+.nav-link:hover .menu-icon :global(.icon-pen) {
+  animation: writing 0.5s ease-in-out infinite;
+  transform-origin: center center;
+}
+
+/* Spin animation for Turbines icon */
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.nav-link:hover .menu-icon :global(.icon-fan) {
+  animation: spin 1.5s linear infinite;
+  transform-origin: 12px 12px;
+}
+
+/* Pulse animation for Turbogenerators icon */
+@keyframes pulse-bolt {
+  0% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.1); opacity: 0.8; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.nav-link:hover .menu-icon :global(.icon-bolt) {
+  animation: pulse-bolt 0.8s ease-in-out infinite;
+  transform-origin: center;
+}
+
+/* Dropdown Icon Animations */
+
+/* Blades - Spin */
+.dropdown-menu li a:hover .dropdown-item-icon :global(.icon-blades) {
+  animation: spin 2s linear infinite;
+  transform-origin: 12px 12px;
+}
+
+/* Cooler - Pulse/Shiver */
+@keyframes shiver {
+  0% { transform: translate(0, 0); }
+  25% { transform: translate(-1px, 0); }
+  75% { transform: translate(1px, 0); }
+  100% { transform: translate(0, 0); }
+}
+.dropdown-menu li a:hover .dropdown-item-icon :global(.icon-cooler) {
+  animation: shiver 0.5s ease-in-out infinite;
+}
+
+/* Condenser - Bubble/Scale */
+@keyframes breathe {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+.dropdown-menu li a:hover .dropdown-item-icon :global(.icon-condenser) {
+  animation: breathe 1s ease-in-out infinite;
+  transform-origin: center;
+}
+
+/* About Sub - Bounce */
+@keyframes bounce-small {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-2px); }
+}
+.dropdown-menu li a:hover .dropdown-item-icon :global(.icon-about-sub) {
+  animation: bounce-small 0.6s ease-in-out infinite;
+}
+
+/* Case - Tilt */
+@keyframes tilt {
+  0%, 100% { transform: rotate(0deg); }
+  25% { transform: rotate(-5deg); }
+  75% { transform: rotate(5deg); }
+}
+.dropdown-menu li a:hover .dropdown-item-icon :global(.icon-case) {
+  animation: tilt 0.8s ease-in-out infinite;
+  transform-origin: center;
+}
+
+/* Cooperation - Pulse */
+.dropdown-menu li a:hover .dropdown-item-icon :global(.icon-cooperation) {
+  animation: pulse-bolt 1s ease-in-out infinite;
+  transform-origin: center;
+}
+
+/* Contact - Ring */
+@keyframes ring {
+  0% { transform: rotate(0); }
+  10% { transform: rotate(15deg); }
+  20% { transform: rotate(-15deg); }
+  30% { transform: rotate(10deg); }
+  40% { transform: rotate(-10deg); }
+  50% { transform: rotate(0); }
+  100% { transform: rotate(0); }
+}
+.dropdown-menu li a:hover .dropdown-item-icon :global(.icon-contact) {
+  animation: ring 1.5s ease-in-out infinite;
+  transform-origin: center;
+}
+
+/* FAQ - Wiggle */
+@keyframes wiggle {
+  0%, 100% { transform: rotate(0deg); }
+  25% { transform: rotate(-10deg); }
+  75% { transform: rotate(10deg); }
+}
+.dropdown-menu li a:hover .dropdown-item-icon :global(.icon-faq) {
+  animation: wiggle 0.6s ease-in-out infinite;
+  transform-origin: center;
+}
+
+/* Presentation - Download Arrow */
+@keyframes download-arrow {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(3px); }
+  100% { transform: translateY(0); }
+}
+.dropdown-menu li a:hover .dropdown-item-icon :global(.icon-presentation-arrow) {
+  animation: download-arrow 1s ease-in-out infinite;
+}
+
+.dropdown-arrow {
+  flex-shrink: 0;
+  transition: transform var(--transition-fast);
+}
+
+.menu-item.has-dropdown:hover .dropdown-arrow {
+  transform: rotate(180deg);
+}
+
+/* Dropdown Menu - Vertical with Icons */
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: -12px;
+  background: var(--color-white);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: 4px 0 !important; /* Уменьшаем паддинг контейнера */
+  min-width: 220px;
+  box-shadow: var(--shadow-lg);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px);
+  transition: all 0.2s ease;
+  z-index: var(--z-dropdown);
+  list-style: none;
+  margin: 0;
+  /* Vertical layout - КРИТИЧНО */
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: stretch !important;
+  justify-content: flex-start !important;
+  gap: 0 !important;
+}
+
+/* Show dropdown on hover */
+.menu-item.has-dropdown:hover .dropdown-menu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.dropdown-menu li {
+  display: block !important;
+  width: 100%;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.dropdown-menu li a {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center;
+  gap: var(--space-3);
+  padding: 10px 16px !important; /* Увеличил внутренние отступы */
+  white-space: nowrap;
+  color: var(--color-text);
+  text-decoration: none;
+  transition: all var(--transition-fast);
+  border-radius: var(--radius-md);
+  width: 100%;
+  box-sizing: border-box;
+  margin: 0 !important;
+  line-height: 1.4 !important;
+  min-height: 0 !important;
+  height: auto !important;
+}
+
+.dropdown-menu li a:hover {
+  background: transparent;
+  color: #7f8386;
+  transform: translateX(5px) scale(1.02);
+}
+
+/* Dropdown item icons */
+.dropdown-item-icon {
+  flex-shrink: 0;
+  width: 16px;
+  height: 16px;
+  color: #323232;
+  opacity: 1;
+  overflow: visible; /* Added to allow animations to exceed bounds */
+}
+
+.dropdown-menu li a:hover .dropdown-item-icon {
+  opacity: 1;
+  color: #323232; /* Keep original color on hover */
+}
+
+/* Header Right Section */
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  margin-left: auto;
+}
+
+/* Language Selector */
+.lang-selector {
+  position: relative;
+}
+
+.lang-trigger {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: var(--space-2) var(--space-3);
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  color: var(--color-primary);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  font-family: inherit;
+}
+
+.lang-trigger:hover {
+  background: var(--color-border);
+}
+
+.lang-icon {
+  flex-shrink: 0;
+  opacity: 0.7;
+}
+
+.lang-selector.open .lang-trigger {
+  background: var(--color-border);
+}
+
+.lang-selector .dropdown-arrow {
+  transition: transform var(--transition-fast);
+}
+
+.lang-selector.open .dropdown-arrow {
+  transform: rotate(180deg);
+}
+
+.selector-dropdown {
+  position: absolute;
+  top: calc(100% + 4px);
+  right: 0;
+  background: var(--color-white);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-md);
+  min-width: 120px;
+  padding: var(--space-2);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(5px);
+  transition: all 0.2s ease;
+  z-index: var(--z-dropdown);
+}
+
+.lang-selector.open .selector-dropdown {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.lang-option {
+  display: block;
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-sm);
+  color: var(--color-text);
+  text-decoration: none;
+  font-size: var(--text-sm);
+  transition: all var(--transition-fast);
+}
+
+.lang-option:hover {
+  background: var(--color-bg);
+}
+
+.lang-option.active {
+  font-weight: 600;
+  color: var(--color-accent);
+  background: var(--color-bg);
+}
+
+/* Header Phone */
+.header-phone {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--color-primary);
+  font-size: var(--text-base);
+  font-weight: 600;
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+.header-phone:hover {
+  color: var(--color-accent);
+}
+
+.phone-icon {
+  flex-shrink: 0;
+  color: var(--color-accent);
+}
+
+/* Header Email */
+.header-email {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--color-primary);
+  font-size: var(--text-base);
+  font-weight: 600;
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+.header-email:hover {
+  color: var(--color-accent);
+}
+
+.email-icon {
+  flex-shrink: 0;
+  color: var(--color-accent);
+}
+
+/* Callback Button */
+.callback-btn {
+  padding: var(--space-3) var(--space-5);
+  border-radius: var(--radius-full);
+  background: var(--color-accent);
+  color: var(--color-primary);
+  font-weight: 600;
+  font-size: var(--text-sm);
+  border: none;
+  cursor: pointer;
+  transition: all var(--transition-base);
+  font-family: inherit;
+}
+
+.callback-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+/* Mobile Header */
+.mobile-header {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  padding: var(--space-3);
+  background: var(--color-white);
+  z-index: var(--z-sticky);
+  box-shadow: var(--shadow-sm);
+}
+
+.mobile-header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.mobile-header .logo {
+  height: 32px;
+}
+
+.mobile-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.lang-selector.mobile .lang-trigger {
+  padding: var(--space-1) var(--space-2);
+}
+
+.burger-btn {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.burger-btn img {
+  width: 24px;
+  height: 24px;
+}
+
+/* Hide email text but keep icon for 1351px - 1700px */
+@media (max-width: 1700px) and (min-width: 1351px) {
+  .header-email span {
+    display: none;
+  }
+  
+  .header-email .email-icon {
+    width: 22px;
+    height: 22px;
+  }
+}
+
+/* Hide phone text below 1581px */
+@media (max-width: 1581px) {
+  .header-phone span {
+    display: none;
+  }
+  
+  .header-phone .phone-icon {
+    width: 22px;
+    height: 22px;
+  }
+}
+
+/* Reduce lang button size below 1585px */
+@media (max-width: 1585px) {
+  .lang-trigger {
+    padding: var(--space-1) var(--space-2);
+    font-size: 13px;
+  }
+}
+
+/* Reduce menu gap slightly between 1446px and 1460px */
+@media (max-width: 1460px) and (min-width: 1446px) {
+  .main-menu ul {
+    gap: 16px;
+  }
+}
+
+/* Extra tight fit before mobile breakpoint (1201px - 1211px) */
+@media (max-width: 1211px) and (min-width: 1201px) {
+  .callback-btn {
+    padding: 5px 8px;
+    font-size: 10px;
+  }
+  
+    .lang-trigger {
+      padding: 5px 8px;
+      font-size: 11px;
+    }
+
+    .lang-trigger .lang-icon {
+      display: none;
+    }
+  }
+
+/* Tablet/Small Desktop - 1351px to 1445px */
+@media (max-width: 1445px) and (min-width: 1351px) {
+  header.main-header {
+    gap: var(--space-4);
+  }
+
+  .main-menu ul {
+    gap: var(--space-3);
+  }
+
+  .nav-link,
+  .nav-dropdown-trigger {
+    font-size: 14px;
+  }
+
+  .header-right {
+    gap: var(--space-3);
+  }
+
+  .header-phone,
+  .header-email {
+    font-size: 14px;
+  }
+
+  .callback-btn {
+    padding: var(--space-2) var(--space-4);
+    font-size: 13px;
+  }
+
+  .lang-trigger {
+    padding: var(--space-1) var(--space-2);
+    font-size: 13px;
+  }
+}
+
+/* Smaller - 1201px to 1350px */
+@media (max-width: 1350px) and (min-width: 1201px) {
+  header.main-header {
+    gap: var(--space-3);
+  }
+
+  .main-menu ul {
+    gap: var(--space-2);
+  }
+
+  .nav-link,
+  .nav-dropdown-trigger {
+    font-size: 13px;
+  }
+
+  .nav-dropdown-trigger .menu-icon {
+    display: none;
+  }
+
+  .header-right {
+    gap: var(--space-2);
+  }
+
+  .header-phone span,
+  .header-email span {
+    display: none;
+  }
+
+  .header-phone .phone-icon,
+  .header-email .email-icon {
+    width: 22px;
+    height: 22px;
+  }
+
+  .callback-btn {
+    padding: 8px 14px;
+    font-size: 12px;
+    white-space: nowrap;
+  }
+}
+
+/* Mobile - below 1200px */
+@media (max-width: 1200px) {
+  header.main-header {
+    display: none;
+  }
+
+  .mobile-header {
+    display: block;
+  }
+}
+
+/* КРИТИЧНО: Принудительное вертикальное расположение dropdown меню */
+/* Эти правила в конце файла для максимального приоритета */
+.main-header .dropdown-menu,
+.main-menu .dropdown-menu,
+.menu-item.has-dropdown .dropdown-menu,
+header .main-header .dropdown-menu,
+header .main-menu .dropdown-menu {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: stretch !important;
+}
+
+.dropdown-menu > li,
+.main-header .dropdown-menu > li,
+.menu-item.has-dropdown .dropdown-menu > li {
+  display: block !important;
+  width: 100% !important;
+  flex: none !important;
+}
+
+.dropdown-menu li a,
+.main-header .dropdown-menu li a,
+.menu-item.has-dropdown .dropdown-menu li a {
+  display: flex !important;
+  flex-direction: row !important;
+  width: 100% !important;
+  padding: 10px 16px !important; /* Увеличил здесь тоже */
+  margin: 0 !important;
+  line-height: 1.4 !important;
+  min-height: 0 !important;
+}

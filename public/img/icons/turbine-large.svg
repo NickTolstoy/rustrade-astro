@@ -1,0 +1,26 @@
+<svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Large turbine body -->
+  <rect x="8" y="16" width="48" height="28" rx="4" fill="#F0F7FC" stroke="#5BC0EB" stroke-width="2"/>
+  
+  <!-- Turbine core -->
+  <circle cx="32" cy="30" r="10" fill="#5BC0EB"/>
+  <circle cx="32" cy="30" r="4" fill="#F0F7FC"/>
+  
+  <!-- Turbine blades -->
+  <ellipse cx="32" cy="17" rx="4" ry="8" fill="#A3DAF3"/>
+  <ellipse cx="43" cy="26" rx="8" ry="4" fill="#A3DAF3"/>
+  <ellipse cx="32" cy="43" rx="4" ry="8" fill="#A3DAF3"/>
+  <ellipse cx="21" cy="26" rx="8" ry="4" fill="#A3DAF3"/>
+  
+  <!-- Steam pipes -->
+  <rect x="2" y="26" width="8" height="8" rx="2" fill="#C5E8F7" stroke="#5BC0EB" stroke-width="1"/>
+  <rect x="54" y="26" width="8" height="8" rx="2" fill="#C5E8F7" stroke="#5BC0EB" stroke-width="1"/>
+  
+  <!-- Base -->
+  <rect x="12" y="44" width="40" height="8" rx="3" fill="#5BC0EB"/>
+  <rect x="18" y="52" width="10" height="4" fill="#A3DAF3"/>
+  <rect x="36" y="52" width="10" height="4" fill="#A3DAF3"/>
+  
+  <!-- Power indicator -->
+  <path d="M52 8 L56 14 L53 14 L55 20 L50 13 L53 13 L52 8Z" fill="#A3DAF3"/>
+</svg>

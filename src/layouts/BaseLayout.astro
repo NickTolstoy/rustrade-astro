@@ -1,0 +1,189 @@
+---
+import type { Lang } from '@/i18n';
+import { getBaseUrl } from '@/i18n';
+import MetaTags from '@/components/seo/MetaTags.astro';
+import SchemaOrg from '@/components/seo/SchemaOrg.astro';
+import Header from '@/components/Header.astro';
+import Sidebar from '@/components/Sidebar.astro';
+import Footer from '@/components/Footer.astro';
+import MobileMenu from '@/components/MobileMenu.astro';
+import Modals from '@/components/Modals.astro';
+import CookieConsent from '@/components/CookieConsent.astro';
+import '@/styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+  keywords?: string;
+  image?: string;
+  type?: 'website' | 'article';
+  publishedTime?: string;
+  modifiedTime?: string;
+  author?: string;
+  lang: Lang;
+  activeMenu?: string;
+  noSidebar?: boolean;
+  noindex?: boolean;
+  articleData?: any;
+  productData?: any;
+  faqData?: any;
+  breadcrumbs?: any;
+}
+
+const {
+  title,
+  description,
+  keywords,
+  image,
+  type = 'website',
+  publishedTime,
+  modifiedTime,
+  author,
+  lang,
+  activeMenu,
+  noSidebar = false,
+  noindex = false,
+  articleData,
+  productData,
+  faqData,
+  breadcrumbs
+} = Astro.props;
+
+const base = getBaseUrl(lang);
+---
+
+<!DOCTYPE html>
+<html lang={lang}>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  
+  <MetaTags
+    title={title}
+    description={description}
+    keywords={keywords}
+    image={image}
+    type={type}
+    publishedTime={publishedTime}
+    modifiedTime={modifiedTime}
+    author={author}
+    lang={lang}
+    noindex={noindex}
+  />
+  
+  <SchemaOrg
+    lang={lang}
+    articleData={articleData}
+    productData={productData}
+    faqData={faqData}
+    breadcrumbs={breadcrumbs}
+  />
+  
+  <!-- Preconnect to external resources -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://mc.yandex.ru" />
+  
+  <!-- Preload critical assets -->
+  <link rel="preload" href="/fonts/Manrope/static/Manrope-Regular.ttf" as="font" type="font/ttf" crossorigin />
+  <link rel="preload" href="/fonts/Manrope/static/Manrope-Medium.ttf" as="font" type="font/ttf" crossorigin />
+  <link rel="preload" href="/img/logo.svg" as="image" />
+  
+  <!-- Import map for Three.js -->
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "https://unpkg.com/three@0.153.0/build/three.module.js",
+        "three/": "https://unpkg.com/three@0.153.0/"
+      }
+    }
+  </script>
+  
+  <!-- Favicons -->
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <link rel="manifest" href="/site.webmanifest" />
+  
+  <!-- Yandex.Metrika (deferred) -->
+  <script is:inline>
+    window.addEventListener('load', function() {
+      setTimeout(function() {
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();
+        for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+        k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+        ym(98009395, "init", {
+          clickmap:true,
+          trackLinks:true,
+          accurateTrackBounce:true,
+          webvisor:true
+        });
+      }, 2000);
+    });
+  </script>
+  <noscript>
+    <div><img src="https://mc.yandex.ru/watch/98009395" style="position:absolute; left:-9999px;" alt="" /></div>
+  </noscript>
+</head>
+<body>
+  <div class="wrapper">
+    {!noSidebar && <Sidebar lang={lang} />}
+    
+    <div class={noSidebar ? 'content no-sidebar' : 'content with-sidebar'}>
+      <Header lang={lang} activeMenu={activeMenu} />
+      
+      <main class="fade-in-slow">
+        <slot />
+      </main>
+      
+      <Footer lang={lang} />
+    </div>
+  </div>
+  
+  <MobileMenu lang={lang} />
+  <Modals lang={lang} />
+  <CookieConsent lang={lang} />
+</body>
+</html>
+
+<style is:global>
+  /* 
+   * Wrapper has padding: 8px on all sides
+   * Sidebar is position:fixed at left:8px, so it starts at viewport 8px
+   * Content is inside wrapper, so its 0 position = 8px from viewport
+   * 
+   * To position content after sidebar:
+   * margin-left = sidebar_width + gap = 342px + 10px = 352px (from wrapper content edge)
+   */
+  
+  /* Default (> 1445px): sidebar width=370px */
+  .content.with-sidebar {
+    margin-left: 385px !important; /* 370 + 15 */
+    padding-right: 7px !important; /* Дополнительный отступ справа */
+    box-sizing: border-box !important;
+  }
+
+  /* 1351px - 1445px: sidebar width=300px */
+  @media screen and (max-width: 1445px) and (min-width: 1351px) {
+    .content.with-sidebar {
+      margin-left: 315px !important; /* 310 + 5 */
+    }
+  }
+
+  /* 1201px - 1350px: sidebar width=300px */
+  @media screen and (max-width: 1350px) and (min-width: 1201px) {
+    .content.with-sidebar {
+      margin-left: 315px !important; /* 310 + 5 */
+    }
+  }
+
+  /* Mobile < 1200px: sidebar hidden */
+  @media screen and (max-width: 1200px) {
+    .content.with-sidebar,
+    .content.no-sidebar {
+      margin-left: 0 !important;
+    }
+  }
+</style>

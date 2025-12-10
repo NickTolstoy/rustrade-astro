@@ -1,0 +1,415 @@
+---
+import type { Lang } from '@/i18n';
+import { getBaseUrl } from '@/i18n';
+import '@/styles/global.css';
+
+const lang: Lang = 'ru';
+const base = getBaseUrl(lang) || '/';
+---
+
+<!DOCTYPE html>
+<html lang={lang}>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>404 — Страница не найдена | Rustrade</title>
+  <meta name="robots" content="noindex, nofollow" />
+  
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+</head>
+<body>
+  <div class="error-page">
+    <a href="/" class="logo-link">
+      <img src="/img/logo.svg" alt="Rustrade" class="logo" />
+    </a>
+
+    <!-- Wind particles -->
+    <div class="wind-container">
+      <div class="wind-particle p1"></div>
+      <div class="wind-particle p2"></div>
+      <div class="wind-particle p3"></div>
+      <div class="wind-particle p4"></div>
+      <div class="wind-particle p5"></div>
+      <div class="wind-particle p6"></div>
+      <div class="wind-particle p7"></div>
+      <div class="wind-particle p8"></div>
+    </div>
+
+    <div class="error-content">
+
+      <div class="error-code">
+        <span class="digit digit-left">4</span>
+        <div class="turbine">
+          <svg viewBox="0 0 42 42" class="turbine-svg">
+            <defs>
+              <linearGradient id="blade-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#005d9b"/>
+                <stop offset="50%" stop-color="#003e68"/>
+                <stop offset="100%" stop-color="#003152"/>
+              </linearGradient>
+            </defs>
+            <!-- 8 blades like in logo -->
+            <path fill="url(#blade-gradient)" d="m38.39,12.44c-1.2,1.41-2.44,2.78-3.73,4.11-.39.41-.76.84-1.12,1.27-.44.53-.89,1.05-1.39,1.52-.74.71-1.71.95-2.57.59-.98-.41-1.54-1.24-1.54-2.55h0c.06-.59.43-1.37.67-2.19.37-1.21.75-2.43,1.14-3.64.3-.94.61-1.87.92-2.81.58-1.75.98-3.56,1.69-5.27.11-.26.19-.36.52-.17,1.63.94,2.93,2.26,4.18,3.62.75.82,1.56,1.68,1.85,2.86.26,1.01.02,1.91-.62,2.66Z"/>
+            <path fill="url(#blade-gradient)" d="m27.77,12.37c-.03,1.02-.54,1.88-1.41,2.24-.99.4-1.96.22-2.88-.71-.37-.45-.68-1.27-1.08-2.03-.73-1.36-1.44-2.74-2.14-4.12-.32-.63-.63-1.26-.95-1.88-.83-1.65-1.82-3.21-2.53-4.93-.11-.26-.12-.39.25-.49,1.82-.49,3.68-.49,5.51-.4,1.11.05,2.29.09,3.33.71.9.53,1.36,1.34,1.43,2.32.14,1.85.23,3.7.27,5.55,0,.4.03.8.06,1.2.06.85.15,1.7.13,2.55Z"/>
+            <path fill="url(#blade-gradient)" d="m19.88,12.64c-.41.99-1.23,1.54-2.54,1.54h0c-.59-.05-1.38-.42-2.19-.67-1.54-.47-3.08-.96-4.62-1.46-.6-.2-1.21-.4-1.81-.6-1.75-.58-3.55-.98-5.26-1.7-.26-.11-.36-.19-.17-.52.93-1.64,2.26-2.95,3.61-4.2.82-.76,1.68-1.56,2.85-1.86,1.01-.26,1.9-.01,2.65.62,1.41,1.21,2.78,2.45,4.11,3.74.22.21.43.4.66.6.72.63,1.47,1.22,2.12,1.92.71.74.95,1.71.59,2.58Z"/>
+            <path fill="url(#blade-gradient)" d="m13.86,18.77c-.46.38-1.27.68-2.02,1.08-1.62.87-3.26,1.71-4.91,2.55-.36.18-.72.37-1.08.55-1.64.83-3.21,1.83-4.91,2.53-.26.11-.38.12-.49-.25-.49-1.82-.48-3.68-.4-5.53.05-1.11.09-2.29.7-3.34.53-.9,1.34-1.36,2.31-1.44,1.85-.14,3.69-.23,5.54-.27h.03c1.24-.03,2.47-.22,3.71-.19,1.02.03,1.88.54,2.23,1.41.4.99.22,1.96-.71,2.89Z"/>
+            <path fill="url(#blade-gradient)" d="m14.15,24.92c-.06.59-.43,1.38-.67,2.19-.48,1.6-.99,3.18-1.51,4.77-.18.56-.36,1.11-.55,1.67-.58,1.76-.98,3.57-1.69,5.28-.11.26-.19.36-.52.17-1.63-.93-2.94-2.26-4.19-3.62-.75-.83-1.56-1.68-1.85-2.86-.26-1.01-.01-1.91.62-2.66,1.2-1.41,2.44-2.78,3.73-4.11.03-.03.06-.06.08-.09.83-.89,1.55-1.86,2.44-2.7.74-.71,1.7-.95,2.57-.59.98.41,1.54,1.24,1.54,2.55h0Z"/>
+            <path fill="url(#blade-gradient)" d="m25.45,42.16c-1.81.49-3.68.48-5.51.4-1.11-.05-2.29-.09-3.33-.71-.9-.53-1.35-1.34-1.43-2.32-.14-1.85-.23-3.7-.27-5.56,0-.1,0-.21-.01-.31-.04-1.15-.21-2.29-.18-3.44.03-1.03.53-1.88,1.41-2.24.98-.4,1.96-.22,2.88.71.38.46.68,1.27,1.08,2.03.71,1.33,1.4,2.67,2.08,4.02.34.67.68,1.33,1.01,2,.83,1.65,1.82,3.21,2.53,4.93.11.26.12.39-.25.49Z"/>
+            <path fill="url(#blade-gradient)" d="m39.06,32.81c-.94,1.64-2.26,2.95-3.61,4.2-.82.76-1.68,1.56-2.85,1.86-1.01.26-1.9.01-2.65-.62-1.4-1.21-2.77-2.45-4.11-3.74-.19-.18-.38-.36-.58-.53-.74-.65-1.51-1.26-2.2-1.98-.71-.74-.95-1.71-.58-2.58.41-.99,1.23-1.54,2.54-1.54h0c.59.05,1.37.42,2.19.67,1.28.39,2.56.8,3.83,1.21.87.28,1.73.56,2.59.85,1.75.58,3.55.98,5.26,1.7.26.11.35.19.17.52Z"/>
+            <path fill="url(#blade-gradient)" d="m28.04,17.38c.06-.59.43-1.37.67-2.19.37-1.21.75-2.43,1.14-3.64,1.75,1.69,3.05,3.85,3.69,6.27-.44.53-.89,1.05-1.39,1.52-.74.71-1.71.95-2.57.59-.98-.41-1.54-1.24-1.54-2.55h0Z"/>
+          </svg>
+        </div>
+        <span class="digit digit-right">4</span>
+      </div>
+
+      <h1>Страница не найдена</h1>
+      <p class="error-message">
+        Похоже, эта страница потерялась где-то между турбинами. 
+        Но не волнуйтесь — мы поможем вам найти путь!
+      </p>
+
+      <div class="error-actions">
+        <a href="/" class="btn btn-primary">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+            <polyline points="9 22 9 12 15 12 15 22"/>
+          </svg>
+          На главную
+        </a>
+        <a href="/contacts" class="btn btn-secondary">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+          </svg>
+          Связаться с нами
+        </a>
+      </div>
+
+      <div class="quick-links">
+        <p>Популярные разделы:</p>
+        <div class="links">
+          <a href="/turbines">Турбины</a>
+          <a href="/about">О компании</a>
+          <a href="/news">Новости</a>
+          <a href="/cases">Кейсы</a>
+        </div>
+      </div>
+    </div>
+
+    <footer class="error-footer">
+      <p>© 2025 Rustrade. Все права защищены.</p>
+    </footer>
+  </div>
+</body>
+</html>
+
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    font-family: 'Manrope', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: #F8F8F8;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  .error-page {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+    position: relative;
+  }
+
+  .error-content {
+    text-align: center;
+    max-width: 600px;
+  }
+
+  .logo-link {
+    position: absolute;
+    top: 30px;
+    left: 30px;
+    transition: transform 0.3s ease;
+    z-index: 10;
+  }
+
+  .logo-link:hover {
+    transform: scale(1.05);
+  }
+
+  .logo {
+    height: 40px;
+  }
+
+  /* Wind Particles */
+  .wind-container {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    overflow: hidden;
+  }
+
+  .wind-particle {
+    position: absolute;
+    width: 80px;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, rgba(163, 218, 243, 0.6), transparent);
+    border-radius: 2px;
+    animation: windBlow 6s ease-in-out infinite;
+    opacity: 0;
+  }
+
+  .p1 { top: 20%; left: -100px; animation-delay: 0s; }
+  .p2 { top: 35%; left: -100px; animation-delay: 0.8s; width: 120px; }
+  .p3 { top: 45%; left: -100px; animation-delay: 1.5s; width: 60px; }
+  .p4 { top: 55%; left: -100px; animation-delay: 2.2s; width: 100px; }
+  .p5 { top: 65%; left: -100px; animation-delay: 3s; width: 70px; }
+  .p6 { top: 30%; left: -100px; animation-delay: 3.5s; width: 90px; }
+  .p7 { top: 50%; left: -100px; animation-delay: 4s; width: 110px; }
+  .p8 { top: 75%; left: -100px; animation-delay: 4.5s; width: 50px; }
+
+  @keyframes windBlow {
+    0% {
+      left: -150px;
+      opacity: 0;
+    }
+    10% {
+      opacity: 1;
+    }
+    90% {
+      opacity: 1;
+    }
+    100% {
+      left: 110%;
+      opacity: 0;
+    }
+  }
+
+  /* Error Code with Turbine */
+  .error-code {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 30px;
+  }
+
+  .digit {
+    font-size: clamp(80px, 20vw, 150px);
+    font-weight: 800;
+    color: #2A2D2E;
+    line-height: 1;
+    transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  .digit-left {
+    animation: digitLeft 6s ease-in-out infinite;
+  }
+
+  .digit-right {
+    animation: digitRight 6s ease-in-out infinite;
+  }
+
+  @keyframes digitLeft {
+    0%, 100% {
+      transform: translateX(0);
+    }
+    30%, 50% {
+      transform: translateX(-30px);
+    }
+  }
+
+  @keyframes digitRight {
+    0%, 100% {
+      transform: translateX(0);
+    }
+    30%, 50% {
+      transform: translateX(30px);
+    }
+  }
+
+  .turbine {
+    width: clamp(80px, 18vw, 140px);
+    height: clamp(80px, 18vw, 140px);
+  }
+
+  .turbine-svg {
+    width: 100%;
+    height: 100%;
+    animation: windSpin 6s ease-in-out infinite;
+  }
+
+  @keyframes windSpin {
+    0% {
+      transform: rotate(0deg);
+    }
+    30% {
+      transform: rotate(720deg); /* Fast spin during wind */
+    }
+    50% {
+      transform: rotate(1080deg);
+    }
+    100% {
+      transform: rotate(1440deg); /* Slow down */
+    }
+  }
+
+  h1 {
+    font-size: clamp(24px, 5vw, 36px);
+    color: #2A2D2E;
+    margin-bottom: 16px;
+    font-weight: 700;
+  }
+
+  .error-message {
+    font-size: clamp(14px, 3vw, 18px);
+    color: #5C5A5A;
+    line-height: 1.6;
+    margin-bottom: 40px;
+    max-width: 450px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* Buttons */
+  .error-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    justify-content: center;
+    margin-bottom: 50px;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 28px;
+    border-radius: 50px;
+    font-size: 16px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    border: none;
+  }
+
+  .btn-primary {
+    background: #A3DAF3;
+    color: #1a1a1a;
+    box-shadow: 0 4px 20px rgba(163, 218, 243, 0.3);
+  }
+
+  .btn-primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 30px rgba(163, 218, 243, 0.4);
+    background: #8ECFE8;
+  }
+
+  .btn-secondary {
+    background: #fff;
+    color: #2A2D2E;
+    border: 2px solid #E7E5E6;
+  }
+
+  .btn-secondary:hover {
+    background: #ECF3FD;
+    border-color: #A3DAF3;
+    transform: translateY(-3px);
+  }
+
+  /* Quick Links */
+  .quick-links {
+    padding-top: 30px;
+    border-top: 1px solid #E7E5E6;
+  }
+
+  .quick-links p {
+    font-size: 14px;
+    color: #5C5A5A;
+    margin-bottom: 16px;
+  }
+
+  .links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    justify-content: center;
+  }
+
+  .links a {
+    padding: 8px 20px;
+    background: #fff;
+    border: 1px solid #E7E5E6;
+    border-radius: 20px;
+    color: #2A2D2E;
+    text-decoration: none;
+    font-size: 14px;
+    transition: all 0.3s ease;
+  }
+
+  .links a:hover {
+    background: #ECF3FD;
+    border-color: #A3DAF3;
+    color: #2A2D2E;
+    transform: translateY(-2px);
+  }
+
+  /* Footer */
+  .error-footer {
+    position: absolute;
+    bottom: 20px;
+    text-align: center;
+  }
+
+  .error-footer p {
+    font-size: 13px;
+    color: #5C5A5A;
+  }
+
+  /* Mobile */
+  @media (max-width: 480px) {
+    .error-actions {
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    .btn {
+      justify-content: center;
+    }
+
+    .links {
+      gap: 8px;
+    }
+
+    .links a {
+      padding: 6px 14px;
+      font-size: 13px;
+    }
+
+    @keyframes digitLeft {
+      0%, 100% {
+        transform: translateX(0);
+      }
+      30%, 50% {
+        transform: translateX(-15px);
+      }
+    }
+
+    @keyframes digitRight {
+      0%, 100% {
+        transform: translateX(0);
+      }
+      30%, 50% {
+        transform: translateX(15px);
+      }
+    }
+  }
+</style>

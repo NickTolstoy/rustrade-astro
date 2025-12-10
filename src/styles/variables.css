@@ -1,0 +1,90 @@
+:root {
+  /* Colors */
+  --color-primary: #2A2D2E;
+  --color-primary-light: #606060;
+  --color-secondary: #5C5A5A;
+  --color-accent: #A3DAF3;
+  --color-accent-green: #90EE90;
+  --color-success: #00964E;
+  --color-bg: #F8F8F8;
+  --color-bg-card: #ECF3FD;
+  --color-bg-dark: #2A2D2E;
+  --color-border: #E7E5E6;
+  --color-border-dark: #D9D9D9;
+  --color-text: #2A2D2E;
+  --color-text-muted: #5C5A5A;
+  --color-text-light: #E7E5E6;
+  --color-white: #FFF;
+  --color-error: #ff0000;
+
+  /* Typography */
+  --font-heading: 'Onest', sans-serif;
+  --font-body: 'Manrope', sans-serif;
+
+  /* Font Sizes */
+  --text-xs: 11px;
+  --text-sm: 12px;
+  --text-base: 14px;
+  --text-md: 16px;
+  --text-lg: 18px;
+  --text-xl: 20px;
+  --text-2xl: 24px;
+  --text-3xl: 32px;
+  --text-4xl: 40px;
+
+  /* Line Heights */
+  --leading-tight: 1.2;
+  --leading-normal: 1.5;
+  --leading-relaxed: 1.75;
+
+  /* Spacing */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --space-16: 64px;
+
+  /* Border Radius */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 10px;
+  --radius-xl: 14px;
+  --radius-full: 50px;
+  --radius-circle: 50%;
+
+  /* Shadows */
+  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.1);
+  --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.15);
+  --shadow-lg: 0 6px 12px rgba(0, 0, 0, 0.2);
+
+  /* Transitions */
+  --transition-fast: 0.2s ease;
+  --transition-base: 0.3s ease;
+  --transition-slow: 0.5s ease;
+
+  /* Z-index */
+  --z-dropdown: 10;
+  --z-sticky: 20;
+  --z-fixed: 30;
+  --z-modal-backdrop: 40;
+  --z-modal: 50;
+  --z-tooltip: 60;
+
+  /* Layout */
+  --header-height: 64px;
+  --sidebar-width: 370px;
+  --container-max: 1200px;
+}
+
+/* Dark theme support (future) */
+@media (prefers-color-scheme: dark) {
+  :root {
+    /* Can override variables here for dark mode */
+  }
+}
+

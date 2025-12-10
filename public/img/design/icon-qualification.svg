@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="#2A2D2E">
+  <!-- Высокая квалификация - диплом со значком -->
+  <!-- Свиток диплома -->
+  <path d="M18 4C14 4 14 8 14 8L14 56C14 56 14 60 18 60L56 60C56 60 58 60 58 58L58 10C58 10 58 4 54 4L18 4Z"/>
+  <!-- Загнутый угол сверху -->
+  <path d="M14 8C14 8 14 4 18 4L18 12C14 12 14 8 14 8Z" fill="#2A2D2E"/>
+  <ellipse cx="16" cy="8" rx="2" ry="4" fill="#2A2D2E"/>
+  <!-- Загнутый угол снизу -->
+  <ellipse cx="16" cy="56" rx="2" ry="4" fill="#2A2D2E"/>
+  <!-- Точка справа внизу -->
+  <circle cx="56" cy="56" r="2"/>
+  <!-- Линии текста -->
+  <rect x="24" y="14" width="26" height="3" rx="1" fill="white"/>
+  <rect x="24" y="22" width="20" height="2" rx="1" fill="white" opacity="0.6"/>
+  <rect x="24" y="28" width="24" height="2" rx="1" fill="white" opacity="0.6"/>
+  <!-- Значок с шапкой выпускника -->
+  <circle cx="22" cy="46" r="14" fill="#2A2D2E" stroke="white" stroke-width="2"/>
+  <!-- Шапка выпускника -->
+  <path d="M22 38L10 44L22 50L34 44Z" fill="none" stroke="white" stroke-width="2"/>
+  <rect x="20" y="44" width="4" height="6" fill="none" stroke="white" stroke-width="1.5"/>
+  <!-- Ленточки -->
+  <path d="M16 60L19 54L22 60" fill="none" stroke="white" stroke-width="2"/>
+  <path d="M28 60L25 54L22 60" fill="none" stroke="white" stroke-width="2"/>
+</svg>

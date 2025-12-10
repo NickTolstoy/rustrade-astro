@@ -1,0 +1,92 @@
+<svg viewBox="0 0 200 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    .wave-line { animation: wave-flow 2.5s ease-in-out infinite; transform-origin: center; }
+    .wave-line:nth-child(2) { animation-delay: 0.2s; }
+    .wave-line:nth-child(3) { animation-delay: 0.4s; }
+    .wave-line:nth-child(4) { animation-delay: 0.6s; }
+    .wave-line:nth-child(5) { animation-delay: 0.8s; }
+    @keyframes wave-flow {
+      0%, 100% { transform: translateY(0) scaleY(1); opacity: 0.6; }
+      50% { transform: translateY(-4px) scaleY(1.05); opacity: 1; }
+    }
+    .surface-fill { animation: surface-pulse 3.5s ease-in-out infinite; }
+    @keyframes surface-pulse {
+      0%, 100% { fill-opacity: 0.08; }
+      50% { fill-opacity: 0.18; }
+    }
+    .heat-arrow { animation: heat-transfer 2s ease-in-out infinite; }
+    .heat-arrow-down { animation: heat-transfer-down 2s ease-in-out infinite; }
+    @keyframes heat-transfer {
+      0%, 100% { transform: translateY(0); opacity: 0.5; }
+      50% { transform: translateY(-6px); opacity: 1; }
+    }
+    @keyframes heat-transfer-down {
+      0%, 100% { transform: translateY(0); opacity: 0.5; }
+      50% { transform: translateY(6px); opacity: 1; }
+    }
+    .grid-cell { animation: cell-glow 3s ease-in-out infinite; }
+    .grid-cell:nth-child(even) { animation-delay: 0.5s; }
+    @keyframes cell-glow {
+      0%, 100% { opacity: 0.3; }
+      50% { opacity: 0.7; }
+    }
+    .meter-text { animation: meter-pulse 2s ease-in-out infinite; }
+    @keyframes meter-pulse {
+      0%, 100% { opacity: 0.8; transform: scale(1); }
+      50% { opacity: 1; transform: scale(1.05); }
+    }
+  </style>
+  
+  <!-- Основная площадь теплообмена -->
+  <rect class="surface-fill" x="30" y="40" width="140" height="100" rx="8" fill="#5BC0EB"/>
+  <rect x="30" y="40" width="140" height="100" rx="8" stroke="#2A2D2E" stroke-width="2.5" fill="none"/>
+  
+  <!-- Сетка теплообменной поверхности -->
+  <g class="grid-cell">
+    <line x1="65" y1="45" x2="65" y2="135" stroke="#5BC0EB" stroke-width="1" opacity="0.4"/>
+    <line x1="100" y1="45" x2="100" y2="135" stroke="#5BC0EB" stroke-width="1" opacity="0.4"/>
+    <line x1="135" y1="45" x2="135" y2="135" stroke="#5BC0EB" stroke-width="1" opacity="0.4"/>
+    <line x1="35" y1="70" x2="165" y2="70" stroke="#5BC0EB" stroke-width="1" opacity="0.4"/>
+    <line x1="35" y1="100" x2="165" y2="100" stroke="#5BC0EB" stroke-width="1" opacity="0.4"/>
+  </g>
+  
+  <!-- Волнистые линии теплопередачи -->
+  <path class="wave-line" d="M40 55C50 50 58 60 68 55C78 50 86 60 96 55C106 50 114 60 124 55C134 50 142 60 152 55C162 50 165 55 165 55" stroke="#5BC0EB" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+  <path class="wave-line" d="M40 75C50 70 58 80 68 75C78 70 86 80 96 75C106 70 114 80 124 75C134 70 142 80 152 75C162 70 165 75 165 75" stroke="#2A2D2E" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+  <path class="wave-line" d="M40 95C50 90 58 100 68 95C78 90 86 100 96 95C106 90 114 100 124 95C134 90 142 100 152 95C162 90 165 95 165 95" stroke="#5BC0EB" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+  <path class="wave-line" d="M40 115C50 110 58 120 68 115C78 110 86 120 96 115C106 110 114 120 124 115C134 110 142 120 152 115C162 110 165 115 165 115" stroke="#2A2D2E" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+  <path class="wave-line" d="M40 135C50 130 58 140 68 135C78 130 86 140 96 135C106 130 114 140 124 135C134 130 142 140 152 135C162 130 165 135 165 135" stroke="#5BC0EB" stroke-width="2.5" stroke-linecap="round" fill="none" opacity="0.5"/>
+  
+  <!-- Стрелки направления теплопередачи (вверх) -->
+  <g class="heat-arrow" style="transform-origin: 70px 25px;">
+    <path d="M70 35V18" stroke="#5BC0EB" stroke-width="2.5" stroke-linecap="round"/>
+    <path d="M64 24L70 18L76 24" stroke="#5BC0EB" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+  <g class="heat-arrow" style="transform-origin: 130px 25px;">
+    <path d="M130 35V18" stroke="#5BC0EB" stroke-width="2.5" stroke-linecap="round"/>
+    <path d="M124 24L130 18L136 24" stroke="#5BC0EB" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+  
+  <!-- Стрелки направления теплопередачи (вниз) -->
+  <g class="heat-arrow-down" style="transform-origin: 70px 155px;">
+    <path d="M70 145V162" stroke="#5BC0EB" stroke-width="2.5" stroke-linecap="round"/>
+    <path d="M64 156L70 162L76 156" stroke="#5BC0EB" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+  <g class="heat-arrow-down" style="transform-origin: 130px 155px;">
+    <path d="M130 145V162" stroke="#5BC0EB" stroke-width="2.5" stroke-linecap="round"/>
+    <path d="M124 156L130 162L136 156" stroke="#5BC0EB" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+  
+  <!-- Маркер площади м² -->
+  <g class="meter-text" style="transform-origin: 185px 160px;">
+    <rect x="155" y="145" width="40" height="28" rx="6" fill="#5BC0EB" fill-opacity="0.15" stroke="#5BC0EB" stroke-width="1.5"/>
+    <text x="175" y="164" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="700" fill="#2A2D2E">м²</text>
+  </g>
+  
+  <!-- Размерные линии -->
+  <g opacity="0.5">
+    <line x1="30" y1="165" x2="170" y2="165" stroke="#2A2D2E" stroke-width="1.5" stroke-dasharray="4,3"/>
+    <line x1="30" y1="162" x2="30" y2="168" stroke="#2A2D2E" stroke-width="1.5"/>
+    <line x1="170" y1="162" x2="170" y2="168" stroke="#2A2D2E" stroke-width="1.5"/>
+  </g>
+</svg>

@@ -1,0 +1,177 @@
+---
+import type { Lang } from '@/i18n';
+import { t, getBaseUrl } from '@/i18n';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+
+const lang: Lang = 'en';
+const base = getBaseUrl(lang);
+---
+
+<BaseLayout 
+  lang={lang} 
+  title="Privacy Policy"
+  description="Privacy Policy of Rustrade LLC regarding the processing of personal data"
+>
+  <section class="page-hero">
+    <h1>Privacy Policy</h1>
+  </section>
+
+  <article class="privacy-content">
+    <section class="privacy-section">
+      <h2>1. General Provisions</h2>
+      <p>
+        This Privacy Policy applies to all information that the Rustrade website, located at the domain 
+        rustrade.pro, may receive about the User while using the site.
+      </p>
+    </section>
+
+    <section class="privacy-section">
+      <h2>2. Definitions</h2>
+      <p><strong>"Personal Data"</strong> — any information relating directly or indirectly to an identified 
+      or identifiable natural person (data subject).</p>
+      <p><strong>"Processing of Personal Data"</strong> — any action (operation) or set of actions (operations) 
+      performed with or without the use of automated means with personal data.</p>
+      <p><strong>"Confidentiality of Personal Data"</strong> — a mandatory requirement for the Operator or 
+      another person who has gained access to personal data to prevent their distribution without the consent 
+      of the data subject.</p>
+    </section>
+
+    <section class="privacy-section">
+      <h2>3. Subject of the Privacy Policy</h2>
+      <p>This Privacy Policy establishes the obligations of the Site Administration regarding non-disclosure 
+      and ensuring the protection of the confidentiality of personal data that the User provides at the 
+      request of the Site Administration when registering on the site or when filling out feedback forms.</p>
+      <p>Personal data authorized for processing under this Privacy Policy is provided by the User by filling 
+      out forms on the Site and includes the following information:</p>
+      <ul>
+        <li>User's first and last name</li>
+        <li>User's contact phone number</li>
+        <li>Email address</li>
+        <li>Organization name</li>
+      </ul>
+    </section>
+
+    <section class="privacy-section">
+      <h2>4. Purposes of Collecting Personal Information</h2>
+      <p>The Site Administration may use the User's personal data for the following purposes:</p>
+      <ul>
+        <li>Establishing feedback with the User, including sending notifications, requests regarding the use 
+        of the Site, provision of services, processing requests and applications from the User</li>
+        <li>Confirming the accuracy and completeness of personal data provided by the User</li>
+        <li>Providing the User with effective customer and technical support</li>
+        <li>Providing the User with their consent to product updates, special offers, pricing information, 
+        newsletters and other information on behalf of the Site</li>
+      </ul>
+    </section>
+
+    <section class="privacy-section">
+      <h2>5. Methods and Terms of Personal Information Processing</h2>
+      <p>The processing of the User's personal data is carried out without time limit, by any legal means, 
+      including in personal data information systems using automation tools or without using such tools.</p>
+      <p>The User's personal data may be transferred to authorized state authorities of the Russian Federation 
+      only on the grounds and in the manner established by the legislation of the Russian Federation.</p>
+    </section>
+
+    <section class="privacy-section">
+      <h2>6. Obligations of the Parties</h2>
+      <p><strong>The User is obliged to:</strong></p>
+      <ul>
+        <li>Provide information about personal data necessary for using the Site</li>
+        <li>Update, supplement the provided information about personal data in case of changes to this 
+        information</li>
+      </ul>
+      <p><strong>The Site Administration is obliged to:</strong></p>
+      <ul>
+        <li>Use the information received exclusively for the purposes specified in this Privacy Policy</li>
+        <li>Ensure that confidential information is kept secret, not disclosed without the prior written 
+        permission of the User</li>
+        <li>Take precautions to protect the confidentiality of the User's personal data</li>
+      </ul>
+    </section>
+
+    <section class="privacy-section">
+      <h2>7. Use of Cookies</h2>
+      <p>The Site uses cookies to personalize content, provide social networking features and analyze our 
+      traffic. We also share information about your use of our site with our social media, advertising and 
+      analytics partners.</p>
+      <p>You can manage cookie settings in your browser. Disabling cookies may affect the functionality of 
+      the site.</p>
+    </section>
+
+    <section class="privacy-section">
+      <h2>8. Contact Information</h2>
+      <p>For all questions related to this Privacy Policy, you can contact us:</p>
+      <ul>
+        <li>Email: <a href="mailto:office@rustrade.pro">office@rustrade.pro</a></li>
+        <li>Phone: <a href="tel:+79161114555">8(916) 111-4-555</a></li>
+      </ul>
+    </section>
+
+    <section class="privacy-section">
+      <p class="last-updated"><em>Last updated: November 2025</em></p>
+    </section>
+  </article>
+</BaseLayout>
+
+<style>
+  .page-hero {
+    background: linear-gradient(135deg, #2A2D2E 0%, #3d4142 100%);
+    border-radius: var(--radius-xl);
+    padding: var(--space-12) var(--space-8);
+    margin-bottom: var(--space-8);
+  }
+
+  .page-hero h1 {
+    color: var(--color-white);
+    font-size: clamp(28px, 5vw, 40px);
+    margin: 0;
+  }
+
+  .privacy-content {
+    max-width: 900px;
+    padding: var(--space-8) 0;
+  }
+
+  .privacy-section {
+    margin-bottom: var(--space-8);
+  }
+
+  .privacy-section h2 {
+    font-size: var(--text-xl);
+    color: var(--color-primary);
+    margin-bottom: var(--space-4);
+    font-weight: 600;
+  }
+
+  .privacy-section p {
+    color: var(--color-text-muted);
+    line-height: 1.75;
+    margin-bottom: var(--space-3);
+  }
+
+  .privacy-section ul {
+    color: var(--color-text-muted);
+    line-height: 1.75;
+    margin-bottom: var(--space-3);
+    padding-left: var(--space-6);
+  }
+
+  .privacy-section li {
+    margin-bottom: var(--space-2);
+  }
+
+  .privacy-section a {
+    color: var(--color-accent);
+    text-decoration: underline;
+  }
+
+  .privacy-section a:hover {
+    color: var(--color-primary);
+  }
+
+  .last-updated {
+    color: var(--color-text-muted);
+    font-size: var(--text-sm);
+  }
+</style>
+

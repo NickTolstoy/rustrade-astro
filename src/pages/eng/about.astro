@@ -1,0 +1,411 @@
+---
+import type { Lang } from '@/i18n';
+import { t, getBaseUrl } from '@/i18n';
+import { getCityById } from '@/data/cities';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+
+const lang: Lang = 'en';
+const base = getBaseUrl(lang);
+const currentCity = getCityById('moscow');
+---
+
+<BaseLayout 
+  lang={lang} 
+  title="About Us"
+  description="Rustrade LLC — design and supply of steam turbines, turbogenerators and components"
+  activeMenu={t('nav.about', lang)}
+>
+  <main class="about-main fade_in_slow">
+    <div class="main_col">
+      <div class="team_img">
+        <img src="/img/cases/oil_1.webp" alt="Rustrade Team" />
+      </div>
+      
+      <div class="main_info">
+        <div class="description info_card">
+          <h4>About Us</h4>
+          <p>
+            Rustrade LLC was founded in 2020. The company's mission is to provide customers with the opportunity to acquire high-quality and cost-effective solutions based on steam turbines.
+          </p>
+          <p>
+            Rustrade designs and supplies backpressure and condensing steam turbines, extraction steam turbines that operate in a wide range of pressure and flow, with the ability to find individual solutions for each customer's needs.
+          </p>
+          <p>
+            We provide our clients with the opportunity to obtain a reliable and high-quality solution based on steam turbines with a significant economic advantage compared to the options available on the Russian market.
+          </p>
+        </div>
+
+        <div class="company_contacts info_card">
+          <h4>Contacts</h4>
+          <div class="contacts_cols">
+            <div class="contacts_col">
+              <div>
+                <h6>e-mail</h6>
+                <p>{currentCity?.email || 'office@rustrade.pro'}</p>
+              </div>
+
+              <div>
+                <h6>Social Networks</h6>
+                <p>Telegram / VKontakte</p>
+              </div>
+
+              <div>
+                <h6>Phone</h6>
+                <p>{currentCity?.phone || '8(916) 111-4-555'}</p>
+              </div>
+            </div>
+
+            <div class="contacts_col">
+              <div>
+                <h6>Address</h6>
+                <p>{currentCity?.address[lang] || 'Russia, Perm, Oleg Koshevoy st., 31, room 20'}</p>
+              </div>
+
+              <div>
+                <h6><a href="#">Yandex Maps</a></h6>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="stats">
+        <div class="stats_item">
+          <div class="stats_count">
+            <div class="stats_count_n">57</div>
+            <div class="stats_count_item">MW</div>
+          </div>
+          <h3>Total installed capacity</h3>
+        </div>
+
+        <div class="stats_item">
+          <div class="stats_count">
+            <div class="stats_count_n">8</div>
+            <div class="stats_count_item">pcs</div>
+          </div>
+          <h3>Successfully completed projects</h3>
+        </div>
+
+        <div class="stats_item">
+          <div class="stats_count">
+            <div class="stats_count_n">10</div>
+            <div class="stats_count_item">pcs</div>
+          </div>
+          <h3>Projects in progress</h3>
+        </div>
+      </div>
+    </div>
+
+    <div class="col">
+      <div class="values info_card">
+        <h4>Values</h4>
+        <div>
+          <div class="value_block">
+            <h6>Drive positive change.</h6>
+            <p>We stimulate systemic positive transformations for our clients.</p>
+          </div>
+          
+          <div class="value_block">
+            <h6>Lead with context.</h6>
+            <p>We are transparent and inclusive when making and explaining decisions.</p>
+            <p>We are all leaders.</p>
+          </div>
+
+          <div class="value_block">
+            <h6>Act with responsibility.</h6>
+            <p>We take pride in our work and take responsibility for its impact. We are empowered to take action to move forward.</p>
+          </div>
+
+          <div class="value_block">
+            <h6>Foster connections.</h6>
+            <p>We learn from each other and teach each other to build connections and amplify the results of our collective efforts. We create partnerships inside and outside the organization</p>
+          </div>
+
+          <div class="value_block">
+            <h6>Build trust.</h6>
+            <p>We listen, speak, and give candid feedback. We treat each other with respect. We collaborate - with intention and care.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="clients info_card">
+        <h4>Partners</h4>
+        <div class="clients_cols">
+          <div class="clients_col">
+            <p>URALCHEM</p>
+            <p>Sokolsky Pulp Mill</p>
+            <p>Ural Steel</p>
+            <p>Lukoil</p>
+          </div>
+          <div class="clients_col">
+            <p>Gubakha Coke</p>
+            <p>Sibur</p>
+            <p>Rosneft</p>
+            <p>Tatneft</p>
+          </div>
+        </div>
+      </div>
+
+      <img src="/img/about/chairs.jpg" class="chairs_img" alt="About Rustrade" />
+    </div>
+  </main>
+</BaseLayout>
+
+<style>
+  .about-main {
+    display: flex;
+  }
+
+  .main_col {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .team_img {
+    border-radius: 10px;
+    height: 513px;
+    margin-bottom: 8px;
+    overflow: hidden;
+  }
+
+  .team_img img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    border-radius: 10px;
+  }
+
+  .main_info {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 8px;
+  }
+
+  .info_card {
+    padding: 16px;
+    border-radius: 10px;
+    background: #E9E9E9;
+  }
+
+  .info_card h4, .info_card h6 {
+    color: #000;
+    font-family: Manrope, sans-serif;
+    font-style: normal;
+    font-weight: 500;
+  }
+
+  .info_card h4 {
+    font-size: 14px;
+    line-height: 20px;
+    letter-spacing: -0.42px;
+  }
+
+  .info_card h6 {
+    font-size: 12px;
+    line-height: 18px;
+    margin-top: 8px;
+  }
+
+  .info_card p {
+    color: #5C5A5A;
+    font-family: Manrope, sans-serif;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 18px;
+  }
+
+  .info_card > p {
+    margin-top: 10px;
+  }
+
+  .description, .company_contacts {
+    width: 50%;
+  }
+
+  .contacts_cols {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .contacts_col > div {
+    margin-top: 8px;
+  }
+
+  .contacts_col > div:first-child {
+    margin-top: 10px;
+  }
+
+  .stats {
+    display: flex;
+    flex: 1;
+    gap: 8px;
+  }
+
+  .stats_item {
+    display: flex;
+    padding: 16px;
+    flex-direction: column;
+    flex: 1 0 0;
+    border-radius: 10px;
+    background: #ECF3FD;
+    gap: 64px;
+  }
+
+  .stats_item h3 {
+    color: #2A2D2E;
+    font-family: Manrope, sans-serif;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 20px;
+    letter-spacing: -0.42px;
+  }
+
+  .stats_count {
+    display: flex;
+    align-items: flex-start;
+  }
+
+  .stats_count_n {
+    color: #2A2D2E;
+    font-family: Onest, sans-serif;
+    font-size: 40px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 48px;
+    letter-spacing: -2px;
+  }
+
+  .stats_count_item {
+    color: #2A2D2E;
+    font-family: Manrope, sans-serif;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 20px;
+    letter-spacing: -0.42px;
+    position: relative;
+    top: 3px;
+    left: 8px;
+  }
+
+  .col {
+    padding-left: 8px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .values, .clients {
+    margin-bottom: 8px;
+  }
+
+  .values h4, .values .value_block {
+    margin-bottom: 10px;
+  }
+
+  .value_block h6 {
+    margin-bottom: 4px;
+  }
+
+  .clients_cols {
+    display: flex;
+    margin-top: 10px;
+  }
+
+  .clients_col {
+    width: 50%;
+  }
+
+  .clients_col p {
+    margin-top: 2px;
+  }
+
+  .clients_col p:first-child {
+    margin-top: 0px;
+  }
+
+  .clients h4 {
+    margin-bottom: 10px;
+  }
+
+  .chairs_img {
+    width: 100%;
+    flex: 1;
+    border-radius: 10px;
+    object-fit: cover;
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .team_img {
+      width: 100%;
+      height: 200px;
+    }
+
+    .main_info {
+      flex-direction: column;
+    }
+
+    .description, .company_contacts {
+      width: unset;
+    }
+  }
+
+  @media (min-width: 420px) and (max-width: 768px) {
+    .team_img {
+      height: 350px;
+    }
+  }
+
+  @media (min-width: 768px) and (max-width: 992px) {
+    .team_img {
+      height: 450px;
+    }
+  }
+
+  @media (max-width: 1200px) {
+    .description, .company_contacts {
+      width: unset;
+    }
+
+    .stats {
+      flex-direction: column;
+      margin-bottom: 8px;
+    }
+
+    .about-main {
+      flex-direction: column;
+    }
+
+    .col {
+      padding-left: 0;
+    }
+  }
+
+  @media (min-width: 1200px) and (max-width: 1500px) {
+    .about-main {
+      flex-direction: column;
+    }
+
+    .contacts_cols {
+      flex-direction: column;
+    }
+
+    .stats {
+      margin-bottom: 8px;
+    }
+  }
+
+  @media (max-width: 1500px) {
+    .stats {
+      margin-bottom: 8px;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .col {
+      padding-left: 0;
+    }
+  }
+</style>

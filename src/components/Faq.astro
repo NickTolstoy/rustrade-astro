@@ -1,0 +1,340 @@
+---
+interface Props {
+  items: {
+    question: string;
+    answer: string;
+  }[];
+  title?: string;
+  subtitle?: string;
+  showMoreLink?: boolean;
+}
+
+const { 
+  items, 
+  title = "Ответы на вопросы",
+  subtitle = "Мы собрали ответы на самые популярные вопросы наших клиентов. Если вы не нашли ответ на свой вопрос — свяжитесь с нами.",
+  showMoreLink = true
+} = Astro.props;
+---
+
+<section class="section faq-section">
+  <!-- Header: Full Width -->
+  <div class="faq-header">
+    <div class="faq-header-content">
+      <h2>{title}</h2>
+      <p>{subtitle}</p>
+      <div class="faq-decoration">
+        <img src="/img/faq-decoration.svg" alt="" />
+      </div>
+    </div>
+  </div>
+
+  <!-- Questions: Below Header -->
+  <div class="faq-accordion">
+    <div class="faq-container">
+      {items.map((item) => (
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false">
+            <span class="faq-question-text">{item.question}</span>
+            <div class="faq-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 5V19M5 12H19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-content">
+              <p>{item.answer}</p>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+
+  <!-- Footer with link to full FAQ page -->
+  {showMoreLink && (
+    <div class="faq-footer">
+      <p class="faq-footer-text">Не смогли найти ответ на интересующий вас вопрос? Возможно ответ есть тут:</p>
+      <a href="/faq" class="faq-footer-btn">
+        <span>Все вопросы и ответы</span>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
+    </div>
+  )}
+</section>
+
+<script>
+  function initAccordion() {
+    const questions = document.querySelectorAll('.faq-question');
+    
+    const newQuestions = Array.from(questions).filter(q => !q.hasAttribute('data-initialized'));
+
+    newQuestions.forEach(question => {
+      question.setAttribute('data-initialized', 'true');
+      question.addEventListener('click', (e) => {
+        const container = question.closest('.faq-container');
+        if (!container) return;
+
+        const expanded = question.getAttribute('aria-expanded') === 'true';
+        
+        container.querySelectorAll('.faq-question').forEach(q => {
+          if (q !== question) {
+            q.setAttribute('aria-expanded', 'false');
+            q.nextElementSibling?.classList.remove('open');
+          }
+        });
+
+        question.setAttribute('aria-expanded', (!expanded).toString());
+        question.nextElementSibling?.classList.toggle('open');
+      });
+    });
+  }
+
+  document.addEventListener('astro:page-load', initAccordion);
+  document.addEventListener('DOMContentLoaded', initAccordion);
+</script>
+
+<style>
+  .faq-section {
+    margin-bottom: var(--space-12);
+  }
+
+  /* Header: Full Width */
+  .faq-header {
+    margin-bottom: var(--space-8);
+  }
+
+  .faq-header-content {
+    position: relative;
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    border-radius: var(--radius-xl);
+    padding: var(--space-10);
+    overflow: hidden;
+    min-height: 280px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .faq-header-content > *:not(.faq-decoration) {
+    position: relative;
+    z-index: 1;
+  }
+
+  .faq-header h2 {
+    font-size: var(--text-4xl);
+    color: var(--color-primary);
+    margin-bottom: var(--space-4);
+    line-height: 1.2;
+    max-width: 500px;
+  }
+
+  .faq-header p {
+    font-size: var(--text-lg);
+    color: var(--color-text-muted);
+    line-height: 1.7;
+    max-width: 600px;
+  }
+
+  .faq-decoration {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    pointer-events: none;
+    overflow: hidden;
+    border-radius: var(--radius-xl);
+  }
+
+  .faq-decoration img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.2;
+  }
+
+  /* Questions */
+  .faq-accordion {
+    padding: 0;
+  }
+
+  .faq-container {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .faq-item {
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .faq-item:last-child {
+    border-bottom: none;
+  }
+
+  .faq-question {
+    width: 100%;
+    padding: var(--space-5) 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: none;
+    border: none;
+    cursor: pointer;
+    text-align: left;
+    transition: all 0.3s ease;
+  }
+
+  .faq-question-text {
+    font-size: var(--text-lg);
+    font-weight: 600;
+    color: var(--color-primary);
+    line-height: 1.4;
+    flex: 1;
+    padding-right: var(--space-4);
+  }
+
+  .faq-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: var(--color-bg-card);
+    border: 1px solid var(--color-border);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    flex-shrink: 0;
+    color: var(--color-text-muted);
+  }
+
+  .faq-question:hover .faq-icon {
+    border-color: var(--color-accent);
+    color: var(--color-accent);
+  }
+
+  .faq-question[aria-expanded="true"] .faq-icon {
+    background: var(--color-accent);
+    border-color: var(--color-accent);
+    color: var(--color-white);
+    transform: rotate(45deg);
+  }
+
+  .faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .faq-answer.open {
+    max-height: 500px;
+  }
+
+  .faq-answer-content {
+    padding: 0 0 var(--space-6) 0;
+  }
+
+  .faq-answer-content p {
+    color: var(--color-text-muted);
+    line-height: 1.7;
+    font-size: var(--text-base);
+    padding-left: var(--space-4);
+    border-left: 2px solid var(--color-accent);
+  }
+
+  /* Footer */
+  .faq-footer {
+    margin-top: var(--space-8);
+    padding: var(--space-6);
+    background: var(--color-bg-card);
+    border-radius: var(--radius-lg);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: var(--space-4);
+  }
+
+  .faq-footer-text {
+    color: var(--color-text-muted);
+    font-size: var(--text-base);
+    line-height: 1.6;
+  }
+
+  .faq-footer-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding: var(--space-3) var(--space-6);
+    background: var(--color-accent);
+    color: var(--color-primary);
+    border-radius: var(--radius-full);
+    font-weight: 600;
+    font-size: var(--text-base);
+    transition: all 0.3s ease;
+  }
+
+  .faq-footer-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(255, 204, 0, 0.3);
+  }
+
+  .faq-footer-btn svg {
+    transition: transform 0.3s ease;
+  }
+
+  .faq-footer-btn:hover svg {
+    transform: translateX(4px);
+  }
+
+  /* Responsive */
+  @media (max-width: 1024px) {
+    .faq-header-content {
+      padding: var(--space-8);
+      min-height: 240px;
+    }
+
+    .faq-header h2 {
+      font-size: var(--text-3xl);
+    }
+
+    .faq-decoration img {
+      opacity: 0.15;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .faq-header-content {
+      padding: var(--space-6);
+      min-height: 200px;
+    }
+
+    .faq-header h2 {
+      font-size: var(--text-2xl);
+    }
+
+    .faq-header p {
+      font-size: var(--text-base);
+    }
+
+    .faq-question {
+      padding: var(--space-4) 0;
+    }
+
+    .faq-question-text {
+      font-size: var(--text-base);
+    }
+
+    .faq-icon {
+      width: 32px;
+      height: 32px;
+    }
+
+    .faq-answer-content {
+      padding: 0 0 var(--space-4) 0;
+    }
+  }
+</style>

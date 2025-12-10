@@ -1,0 +1,227 @@
+---
+import type { Lang } from '@/i18n';
+import { t, languages, langLabels, getBaseUrl, getAlternateUrl } from '@/i18n';
+import { getMobileNavigation } from '@/data/navigation';
+import { cities } from '@/data/cities';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const navigation = getMobileNavigation(lang);
+const currentCity = cities[0]; // Default to Moscow
+const currentUrl = Astro.url.pathname;
+const base = getBaseUrl(lang);
+---
+
+<div class="mobile-menu-overlay" id="mobile-menu">
+  <div class="mobile-menu-header">
+    <a href={base || '/'}>
+      <img src="/img/logo.svg" alt="Rustrade" width="120" height="32" />
+    </a>
+    <button class="modal-close" data-close-menu aria-label={t('common.close', lang)}>
+      <img src="/img/close.svg" alt="close" width="16" height="16" />
+    </button>
+  </div>
+  
+  <div class="mobile-menu-content">
+    <!-- Language Selection -->
+    <div class="mobile-menu-section">
+      <div class="mobile-lang-buttons">
+        {languages.map((l) => (
+          <a 
+            href={getAlternateUrl(currentUrl, l)}
+            class:list={['mobile-lang-btn', { active: l === lang }]}
+          >
+            {langLabels[l]}
+          </a>
+        ))}
+      </div>
+    </div>
+    
+    <!-- Navigation -->
+    {navigation.map((item) => (
+      <a href={item.href} class="mobile-menu-item">
+        {item.name}
+      </a>
+    ))}
+  </div>
+  
+  <div class="mobile-menu-footer">
+    <div class="mobile-menu-contacts">
+      <a href={`tel:${currentCity?.phone.replace(/[^+\d]/g, '')}`} class="mobile-phone">
+        <img src="/img/phone.svg" alt="phone" width="20" height="20" />
+        {currentCity?.phone}
+      </a>
+      <a href={`mailto:${currentCity?.email}`} class="mobile-email">
+        {currentCity?.email}
+      </a>
+    </div>
+    <button class="btn btn-accent" data-modal="callback">
+      {t('forms.orderCallback', lang)}
+    </button>
+  </div>
+</div>
+
+<style>
+  /* Mobile Menu Overlay */
+  .mobile-menu-overlay {
+    position: fixed;
+    inset: 0;
+    background: var(--color-white, #fff);
+    z-index: 9999;
+    transform: translateX(100%);
+    transition: transform 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+  }
+
+  .mobile-menu-overlay.active {
+    transform: translateX(0);
+  }
+
+  .mobile-menu-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--color-border, #E7E5E6);
+    flex-shrink: 0;
+  }
+
+  .mobile-menu-header .modal-close {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--color-border, #E7E5E6);
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+
+  .mobile-menu-content {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    flex: 1;
+    overflow-y: auto;
+  }
+
+  .mobile-menu-section {
+    padding: 16px 0;
+    border-bottom: 1px solid var(--color-border, #E7E5E6);
+  }
+  
+  .mobile-lang-buttons {
+    display: flex;
+    gap: 8px;
+  }
+  
+  .mobile-lang-btn {
+    padding: 10px 20px;
+    background: var(--color-border, #E7E5E6);
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--color-text, #2A2D2E);
+    text-decoration: none;
+    transition: all 0.2s ease;
+  }
+  
+  .mobile-lang-btn.active {
+    background: var(--color-accent, #A3DAF3);
+    color: var(--color-primary, #2A2D2E);
+  }
+
+  .mobile-menu-item {
+    display: block;
+    padding: 14px 16px;
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--color-primary, #2A2D2E);
+    text-decoration: none;
+    border-radius: 8px;
+    transition: background 0.2s ease;
+  }
+
+  .mobile-menu-item:hover,
+  .mobile-menu-item:active {
+    background: var(--color-border, #E7E5E6);
+  }
+
+  .mobile-menu-footer {
+    padding: 20px;
+    border-top: 1px solid var(--color-border, #E7E5E6);
+    flex-shrink: 0;
+    background: var(--color-white, #fff);
+  }
+  
+  .mobile-menu-contacts {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 16px;
+  }
+  
+  .mobile-phone {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--color-primary, #2A2D2E);
+    text-decoration: none;
+  }
+  
+  .mobile-email {
+    font-size: 14px;
+    color: var(--color-text-muted, #5C5A5A);
+    text-decoration: none;
+  }
+
+  .mobile-menu-footer .btn {
+    width: 100%;
+    padding: 14px 20px;
+    background: var(--color-accent, #A3DAF3);
+    color: var(--color-primary, #2A2D2E);
+    border: none;
+    border-radius: 10px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s ease;
+  }
+
+  .mobile-menu-footer .btn:hover {
+    background: #8BC5E8;
+  }
+</style>
+
+<script>
+  const burgerBtn = document.querySelector('[data-burger]');
+  const closeBtn = document.querySelector('[data-close-menu]');
+  const mobileMenu = document.getElementById('mobile-menu');
+  
+  burgerBtn?.addEventListener('click', () => {
+    mobileMenu?.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  });
+  
+  closeBtn?.addEventListener('click', () => {
+    mobileMenu?.classList.remove('active');
+    document.body.style.overflow = '';
+  });
+  
+  // Close on link click
+  document.querySelectorAll('.mobile-menu-item').forEach(item => {
+    item.addEventListener('click', () => {
+      mobileMenu?.classList.remove('active');
+      document.body.style.overflow = '';
+    });
+  });
+</script>

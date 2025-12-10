@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="#2A2D2E">
+  <!-- Современные технологии - шестерня с глобусом и цифровыми линиями -->
+  <!-- Половина шестерни слева -->
+  <path d="M8 24V20H12C12.5 18 13.5 16 14.5 14.5L12 11L15 8L18.5 10.5C20 9.5 22 8.5 24 8V4H28V8C28 8 29 8 30 8.5L30 8.5C26 10 22 14 20 20C18 26 18 32 20 38C22 44 26 50 32 54L32 56H28V60H24V56C22 55.5 20 54.5 18.5 53.5L15 56L12 53L14.5 49.5C13.5 48 12.5 46 12 44H8V40H12C12 38 12.5 36 13 34L8 34V30L14 30C14.5 28 15.5 26 16.5 24.5L12 21L15 18L19 21.5C20 20.5 21.5 19.5 23 19"/>
+  <!-- Глобус в центре -->
+  <circle cx="38" cy="32" r="16" fill="white" stroke="#2A2D2E" stroke-width="3"/>
+  <ellipse cx="38" cy="32" rx="6" ry="16" fill="none" stroke="#2A2D2E" stroke-width="2"/>
+  <line x1="22" y1="32" x2="54" y2="32" stroke="#2A2D2E" stroke-width="2"/>
+  <ellipse cx="38" cy="32" rx="16" ry="6" fill="none" stroke="#2A2D2E" stroke-width="2"/>
+  <ellipse cx="38" cy="24" rx="13" ry="4" fill="none" stroke="#2A2D2E" stroke-width="1.5"/>
+  <ellipse cx="38" cy="40" rx="13" ry="4" fill="none" stroke="#2A2D2E" stroke-width="1.5"/>
+  <!-- Цифровые линии справа -->
+  <line x1="54" y1="18" x2="58" y2="14" stroke="#2A2D2E" stroke-width="2"/>
+  <circle cx="60" cy="12" r="2"/>
+  <line x1="54" y1="26" x2="60" y2="22" stroke="#2A2D2E" stroke-width="2"/>
+  <circle cx="62" cy="20" r="2"/>
+  <line x1="54" y1="38" x2="60" y2="42" stroke="#2A2D2E" stroke-width="2"/>
+  <circle cx="62" cy="44" r="2"/>
+  <line x1="54" y1="46" x2="58" y2="50" stroke="#2A2D2E" stroke-width="2"/>
+  <circle cx="60" cy="52" r="2"/>
+</svg>

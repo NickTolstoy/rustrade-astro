@@ -1,0 +1,89 @@
+<svg viewBox="0 0 200 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    .tube { stroke-dasharray: 200; stroke-dashoffset: 200; animation: flow 2.5s ease-in-out infinite; }
+    .tube:nth-child(2) { animation-delay: 0.15s; }
+    .tube:nth-child(3) { animation-delay: 0.3s; }
+    .tube:nth-child(4) { animation-delay: 0.45s; }
+    .tube:nth-child(5) { animation-delay: 0.6s; }
+    .tube:nth-child(6) { animation-delay: 0.75s; }
+    @keyframes flow {
+      0%, 100% { stroke-dashoffset: 200; opacity: 0.5; }
+      50% { stroke-dashoffset: 0; opacity: 1; }
+    }
+    .shell { animation: shell-breathe 4s ease-in-out infinite; }
+    @keyframes shell-breathe {
+      0%, 100% { opacity: 0.7; transform: scale(1); }
+      50% { opacity: 1; transform: scale(1.01); }
+    }
+    .inlet-flow { animation: inlet-pulse 2s ease-in-out infinite; }
+    .outlet-flow { animation: outlet-pulse 2s ease-in-out 0.5s infinite; }
+    @keyframes inlet-pulse {
+      0%, 100% { opacity: 0.4; transform: translateX(0); }
+      50% { opacity: 1; transform: translateX(3px); }
+    }
+    @keyframes outlet-pulse {
+      0%, 100% { opacity: 0.4; transform: translateX(0); }
+      50% { opacity: 1; transform: translateX(-3px); }
+    }
+    .baffle { animation: baffle-glow 3s ease-in-out infinite; }
+    @keyframes baffle-glow {
+      0%, 100% { opacity: 0.6; }
+      50% { opacity: 1; }
+    }
+    .direction-arrow { animation: arrow-flow 1.5s ease-in-out infinite; }
+    @keyframes arrow-flow {
+      0%, 100% { transform: translateX(0); opacity: 0.6; }
+      50% { transform: translateX(5px); opacity: 1; }
+    }
+  </style>
+  
+  <!-- Корпус теплообменника (кожухотрубный) -->
+  <g class="shell" style="transform-origin: center;">
+    <rect x="25" y="35" width="150" height="100" rx="12" stroke="#2A2D2E" stroke-width="3" fill="none"/>
+    <!-- Крышки теплообменника -->
+    <path d="M25 55C15 55 10 70 10 85C10 100 15 115 25 115" stroke="#2A2D2E" stroke-width="3" fill="none"/>
+    <path d="M175 55C185 55 190 70 190 85C190 100 185 115 175 115" stroke="#2A2D2E" stroke-width="3" fill="none"/>
+  </g>
+  
+  <!-- Входной патрубок (вверху слева) -->
+  <g class="inlet-flow" style="transform-origin: 40px 25px;">
+    <rect x="35" y="15" width="18" height="22" rx="3" stroke="#2A2D2E" stroke-width="2.5" fill="#4A9ECC" fill-opacity="0.15"/>
+    <path d="M44 5V15" stroke="#4A9ECC" stroke-width="3" stroke-linecap="round"/>
+    <path d="M38 10L44 5L50 10" stroke="#4A9ECC" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+  
+  <!-- Выходной патрубок (внизу справа) -->
+  <g class="outlet-flow" style="transform-origin: 160px 155px;">
+    <rect x="147" y="133" width="18" height="22" rx="3" stroke="#2A2D2E" stroke-width="2.5" fill="#4A9ECC" fill-opacity="0.15"/>
+    <path d="M156 155V165" stroke="#4A9ECC" stroke-width="3" stroke-linecap="round"/>
+    <path d="M150 160L156 165L162 160" stroke="#4A9ECC" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+  
+  <!-- Трубные решётки -->
+  <line class="baffle" x1="50" y1="40" x2="50" y2="130" stroke="#2A2D2E" stroke-width="3"/>
+  <line class="baffle" x1="150" y1="40" x2="150" y2="130" stroke="#2A2D2E" stroke-width="3"/>
+  
+  <!-- Перегородки внутри корпуса -->
+  <line class="baffle" x1="85" y1="38" x2="85" y2="100" stroke="#2A2D2E" stroke-width="2" opacity="0.5"/>
+  <line class="baffle" x1="115" y1="70" x2="115" y2="132" stroke="#2A2D2E" stroke-width="2" opacity="0.5"/>
+  
+  <!-- Трубки внутри (теплообменные трубы) -->
+  <path class="tube" d="M55 50H145" stroke="#5BC0EB" stroke-width="2.5" stroke-linecap="round"/>
+  <path class="tube" d="M55 65H145" stroke="#5BC0EB" stroke-width="2.5" stroke-linecap="round"/>
+  <path class="tube" d="M55 80H145" stroke="#5BC0EB" stroke-width="2.5" stroke-linecap="round"/>
+  <path class="tube" d="M55 95H145" stroke="#5BC0EB" stroke-width="2.5" stroke-linecap="round"/>
+  <path class="tube" d="M55 110H145" stroke="#5BC0EB" stroke-width="2.5" stroke-linecap="round"/>
+  <path class="tube" d="M55 125H145" stroke="#5BC0EB" stroke-width="2.5" stroke-linecap="round"/>
+  
+  <!-- Стрелки направления потока масла -->
+  <g class="direction-arrow" style="transform-origin: 100px 160px;">
+    <path d="M65 160H125" stroke="#5BC0EB" stroke-width="2" stroke-linecap="round" stroke-dasharray="6,4"/>
+    <path d="M118 155L125 160L118 165" stroke="#5BC0EB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+  
+  <!-- Индикатор "1-ход" или "2-хода" -->
+  <g transform="translate(160, 20)">
+    <rect x="0" y="0" width="30" height="22" rx="4" fill="#5BC0EB" fill-opacity="0.2" stroke="#5BC0EB" stroke-width="1.5"/>
+    <text x="15" y="16" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" font-weight="600" fill="#2A2D2E">1x</text>
+  </g>
+</svg>

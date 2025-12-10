@@ -1,0 +1,82 @@
+<svg viewBox="0 0 200 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    .gear-main { animation: rotateGear 6s linear infinite; transform-origin: 75px 100px; }
+    .gear-medium { animation: rotateGearReverse 5s linear infinite; transform-origin: 140px 75px; }
+    .gear-small { animation: rotateGear 4s linear infinite; transform-origin: 155px 140px; }
+    .connection { animation: pulse 2s ease-in-out infinite; }
+    .dot1 { animation: dotMove 2s ease-in-out infinite; }
+    .dot2 { animation: dotMove 2s ease-in-out 0.5s infinite; }
+    .dot3 { animation: dotMove 2s ease-in-out 1s infinite; }
+    
+    @keyframes rotateGear {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+    @keyframes rotateGearReverse {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(-360deg); }
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 0.4; }
+      50% { opacity: 0.8; }
+    }
+    @keyframes dotMove {
+      0%, 100% { opacity: 0.3; transform: scale(0.8); }
+      50% { opacity: 1; transform: scale(1.2); }
+    }
+  </style>
+  
+  <!-- Connection lines -->
+  <g class="connection">
+    <path d="M75 100 L140 75" stroke="#A3DAF3" stroke-width="3" stroke-dasharray="6,4"/>
+    <path d="M140 75 L155 140" stroke="#A3DAF3" stroke-width="3" stroke-dasharray="6,4"/>
+    <path d="M75 100 L155 140" stroke="#C5E8F7" stroke-width="2" stroke-dasharray="4,4"/>
+  </g>
+  
+  <!-- Main Gear -->
+  <g class="gear-main">
+    <circle cx="75" cy="100" r="38" fill="none" stroke="#5BC0EB" stroke-width="6"/>
+    <circle cx="75" cy="100" r="14" fill="#5BC0EB"/>
+    <circle cx="75" cy="100" r="8" fill="#FFFFFF"/>
+    
+    <!-- Gear teeth -->
+    <rect x="68" y="52" width="14" height="16" rx="3" fill="#5BC0EB"/>
+    <rect x="68" y="132" width="14" height="16" rx="3" fill="#5BC0EB"/>
+    <rect x="27" y="93" width="16" height="14" rx="3" fill="#5BC0EB"/>
+    <rect x="107" y="93" width="16" height="14" rx="3" fill="#5BC0EB"/>
+    
+    <rect x="40" y="60" width="12" height="12" rx="3" fill="#5BC0EB" transform="rotate(45 46 66)"/>
+    <rect x="98" y="60" width="12" height="12" rx="3" fill="#5BC0EB" transform="rotate(45 104 66)"/>
+    <rect x="40" y="128" width="12" height="12" rx="3" fill="#5BC0EB" transform="rotate(45 46 134)"/>
+    <rect x="98" y="128" width="12" height="12" rx="3" fill="#5BC0EB" transform="rotate(45 104 134)"/>
+  </g>
+  
+  <!-- Medium Gear -->
+  <g class="gear-medium">
+    <circle cx="140" cy="75" r="28" fill="none" stroke="#7FCBEC" stroke-width="5"/>
+    <circle cx="140" cy="75" r="10" fill="#7FCBEC"/>
+    <circle cx="140" cy="75" r="5" fill="#FFFFFF"/>
+    
+    <rect x="134" y="40" width="12" height="12" rx="2" fill="#7FCBEC"/>
+    <rect x="134" y="98" width="12" height="12" rx="2" fill="#7FCBEC"/>
+    <rect x="105" y="69" width="12" height="12" rx="2" fill="#7FCBEC"/>
+    <rect x="163" y="69" width="12" height="12" rx="2" fill="#7FCBEC"/>
+  </g>
+  
+  <!-- Small Gear -->
+  <g class="gear-small">
+    <circle cx="155" cy="140" r="20" fill="none" stroke="#A3DAF3" stroke-width="4"/>
+    <circle cx="155" cy="140" r="7" fill="#A3DAF3"/>
+    <circle cx="155" cy="140" r="3" fill="#FFFFFF"/>
+    
+    <rect x="150" y="115" width="10" height="9" rx="2" fill="#A3DAF3"/>
+    <rect x="150" y="156" width="10" height="9" rx="2" fill="#A3DAF3"/>
+    <rect x="130" y="135" width="9" height="10" rx="2" fill="#A3DAF3"/>
+    <rect x="171" y="135" width="9" height="10" rx="2" fill="#A3DAF3"/>
+  </g>
+  
+  <!-- Animated dots -->
+  <circle class="dot1" cx="30" cy="50" r="5" fill="#5BC0EB" style="transform-origin: 30px 50px;"/>
+  <circle class="dot2" cx="185" cy="35" r="4" fill="#A3DAF3" style="transform-origin: 185px 35px;"/>
+  <circle class="dot3" cx="25" cy="150" r="4" fill="#7FCBEC" style="transform-origin: 25px 150px;"/>
+</svg>
