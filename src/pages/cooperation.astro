@@ -3,6 +3,7 @@ import type { Lang } from '@/i18n';
 import { getBaseUrl } from '@/i18n';
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import Breadcrumbs from '@/components/Breadcrumbs.astro';
+import CtaFaq from '@/components/CtaFaq.astro';
 import Faq from '@/components/Faq.astro';
 import Partners from '@/components/Partners.astro';
 
@@ -157,19 +158,9 @@ const conditions = [
   <!-- Partners Section -->
   <Partners />
 
-  <!-- CTA Section -->
-  <section class="section cta">
-    <div class="cta-content">
-      <h2>Готовы начать проект?</h2>
-      <p>Мы готовы ответить на ваши вопросы по проектированию энергетических объектов и предложить оптимальные решения для вашего проекта</p>
-      <button class="btn btn-accent" data-modal="consultation">
-        <span>Получить консультацию</span>
-        <img src="/img/arrow_right.svg" alt="" width="16" height="16" />
-      </button>
-    </div>
-  </section>
-
   <Faq items={faqItems} />
+
+  <CtaFaq />
 </BaseLayout>
 
 <style>
@@ -288,7 +279,7 @@ const conditions = [
 
   .info-title {
     font-size: var(--text-lg);
-    font-weight: 600;
+    font-weight: 700;
     color: var(--color-primary);
   }
 
@@ -358,7 +349,7 @@ const conditions = [
 
   .condition-title {
     font-size: var(--text-base);
-    font-weight: 600;
+    font-weight: 700;
     color: var(--color-primary);
   }
 

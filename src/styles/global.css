@@ -124,7 +124,7 @@ body {
   border-radius: var(--radius-full);
   font-family: var(--font-body);
   font-size: var(--text-base);
-  font-weight: 500;
+  font-weight: 700;
   text-decoration: none;
   transition: all var(--transition-base);
   cursor: pointer;
@@ -155,29 +155,65 @@ body {
 }
 
 .btn-accent {
-  background: var(--color-accent);
-  color: var(--color-primary);
+  background: linear-gradient(135deg, 
+    rgba(2, 132, 199, 0.95) 0%, 
+    rgba(14, 165, 233, 0.9) 50%,
+    rgba(56, 189, 248, 0.9) 100%);
+  color: white;
   position: relative;
   z-index: 1;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 
+    0 4px 20px rgba(14, 165, 233, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.4);
+  overflow: hidden;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
 }
 
 .btn-accent::before {
   position: absolute;
   content: '';
-  inset: 0;
-  background: linear-gradient(134deg, var(--color-accent) 0%, var(--color-white) 100%);
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, 
+    transparent 0%,
+    rgba(255, 255, 255, 0.3) 50%,
+    transparent 100%);
   z-index: -1;
-  transition: opacity var(--transition-base);
-  opacity: 0;
+  transition: left 0.5s ease;
   border-radius: inherit;
 }
 
 .btn-accent:hover::before {
-  opacity: 1;
+  left: 100%;
 }
 
 .btn-accent:hover {
-  color: var(--color-primary);
+  background: linear-gradient(135deg, 
+    rgba(3, 105, 161, 0.95) 0%, 
+    rgba(2, 132, 199, 0.95) 50%,
+    rgba(14, 165, 233, 0.95) 100%);
+  color: white;
+  box-shadow: 
+    0 8px 32px rgba(14, 165, 233, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.5);
+  transform: translateY(-2px);
+}
+
+.btn-accent img,
+.btn-accent svg {
+  filter: brightness(0) invert(1) drop-shadow(0 0 0.5px white);
+  width: 18px;
+  height: 18px;
+  transition: transform 0.3s ease;
+}
+
+.btn-accent:hover img,
+.btn-accent:hover svg {
+  transform: translateX(4px);
 }
 
 /* Cards */

@@ -6,14 +6,12 @@ interface Props {
   }[];
   title?: string;
   subtitle?: string;
-  showMoreLink?: boolean;
 }
 
 const { 
   items, 
   title = "Ответы на вопросы",
-  subtitle = "Мы собрали ответы на самые популярные вопросы наших клиентов. Если вы не нашли ответ на свой вопрос — свяжитесь с нами.",
-  showMoreLink = true
+  subtitle = "Мы собрали ответы на самые популярные вопросы наших клиентов. Если вы не нашли ответ на свой вопрос — свяжитесь с нами."
 } = Astro.props;
 ---
 
@@ -52,18 +50,6 @@ const {
     </div>
   </div>
 
-  <!-- Footer with link to full FAQ page -->
-  {showMoreLink && (
-    <div class="faq-footer">
-      <p class="faq-footer-text">Не смогли найти ответ на интересующий вас вопрос? Возможно ответ есть тут:</p>
-      <a href="/faq" class="faq-footer-btn">
-        <span>Все вопросы и ответы</span>
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-      </a>
-    </div>
-  )}
 </section>
 
 <script>
@@ -190,7 +176,7 @@ const {
 
   .faq-question-text {
     font-size: var(--text-lg);
-    font-weight: 600;
+    font-weight: 700;
     color: var(--color-primary);
     line-height: 1.4;
     flex: 1;
@@ -243,51 +229,6 @@ const {
     font-size: var(--text-base);
     padding-left: var(--space-4);
     border-left: 2px solid var(--color-accent);
-  }
-
-  /* Footer */
-  .faq-footer {
-    margin-top: var(--space-8);
-    padding: var(--space-6);
-    background: var(--color-bg-card);
-    border-radius: var(--radius-lg);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    gap: var(--space-4);
-  }
-
-  .faq-footer-text {
-    color: var(--color-text-muted);
-    font-size: var(--text-base);
-    line-height: 1.6;
-  }
-
-  .faq-footer-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: var(--space-2);
-    padding: var(--space-3) var(--space-6);
-    background: var(--color-accent);
-    color: var(--color-primary);
-    border-radius: var(--radius-full);
-    font-weight: 600;
-    font-size: var(--text-base);
-    transition: all 0.3s ease;
-  }
-
-  .faq-footer-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(255, 204, 0, 0.3);
-  }
-
-  .faq-footer-btn svg {
-    transition: transform 0.3s ease;
-  }
-
-  .faq-footer-btn:hover svg {
-    transform: translateX(4px);
   }
 
   /* Responsive */

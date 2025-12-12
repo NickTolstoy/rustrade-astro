@@ -50,7 +50,7 @@ const ruUrl = `${siteUrl}/${pagePath}`.replace(/\/$/, '') || siteUrl;
 const enUrl = `${siteUrl}/eng/${pagePath}`.replace(/\/$/, '').replace('/eng/', '/eng');
 
 const defaultTitle = lang === 'ru' 
-  ? 'Рустрейд - производство и поставка паровых турбин'
+  ? 'РУСТРЕЙД - производство и поставка паровых турбин'
   : 'Rustrade - steam turbine production and supply';
 
 const defaultDescription = lang === 'ru'
@@ -68,7 +68,7 @@ const finalDescription = description || defaultDescription;
 <meta name="title" content={finalTitle} />
 <meta name="description" content={finalDescription} />
 <meta name="keywords" content={lang === 'ru' 
-  ? 'паровые турбины, турбогенераторы, энергетическое оборудование, лопатки турбин, маслоохладители, конденсаторы, Рустрейд'
+  ? 'паровые турбины, турбогенераторы, энергетическое оборудование, лопатки турбин, маслоохладители, конденсаторы, РУСТРЕЙД'
   : 'steam turbines, turbogenerators, power equipment, turbine blades, oil coolers, condensers, Rustrade'} />
 <meta name="author" content={siteName} />
 <meta name="generator" content={Astro.generator} />

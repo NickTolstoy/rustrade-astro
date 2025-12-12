@@ -141,11 +141,11 @@ export const newsArticles: NewsArticle[] = [
       en: 'Signed contract for design and supply of STU for pulp and paper mill'
     },
     excerpt: {
-      ru: 'Компания Рустрейд заключила контракт на проектирование и поставку паротурбинной установки для крупного целлюлозно-бумажного комбината.',
+      ru: 'Компания РУСТРЕЙД заключила контракт на проектирование и поставку паротурбинной установки для крупного целлюлозно-бумажного комбината.',
       en: 'Rustrade has signed a contract for the design and supply of a steam turbine unit for a large pulp and paper mill.'
     },
     content: {
-      ru: `<p>Компания Рустрейд заключила контракт на проектирование и поставку паротурбинной установки для крупного целлюлозно-бумажного комбината.</p>
+      ru: `<p>Компания РУСТРЕЙД заключила контракт на проектирование и поставку паротурбинной установки для крупного целлюлозно-бумажного комбината.</p>
 
 <p>В рамках контракта будет выполнено:</p>
 <ul>
@@ -207,7 +207,7 @@ export const newsArticles: NewsArticle[] = [
   <li>Необходимость повышения надежности энергоснабжения</li>
 </ol>
 
-<p>Специалисты компании Рустрейд помогут оценить потенциал вашего предприятия и подобрать оптимальное решение.</p>`,
+<p>Специалисты компании РУСТРЕЙД помогут оценить потенциал вашего предприятия и подобрать оптимальное решение.</p>`,
       en: `<p>Improving energy efficiency is one of the key tasks of modern industrial enterprises. The use of steam turbines can significantly reduce electricity costs and increase overall production efficiency.</p>
 
 <h2>Advantages of using steam turbines</h2>

@@ -3,6 +3,7 @@ import type { Lang } from '@/i18n';
 import { getBaseUrl } from '@/i18n';
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import Breadcrumbs from '@/components/Breadcrumbs.astro';
+import CtaFaq from '@/components/CtaFaq.astro';
 import Faq from '@/components/Faq.astro';
 
 const lang: Lang = 'ru';
@@ -329,19 +330,9 @@ const stats = [
     </div>
   </section>
 
-  <!-- CTA Section -->
-  <section class="section cta">
-    <div class="cta-content">
-      <h2>Готовы начать проект?</h2>
-      <p>Мы готовы ответить на ваши вопросы по проектированию энергетических объектов и предложить оптимальные решения для вашего проекта</p>
-      <button class="btn btn-accent" data-modal="consultation">
-        <span>Получить консультацию</span>
-        <img src="/img/arrow_right.svg" alt="" width="16" height="16" />
-      </button>
-    </div>
-  </section>
-
   <Faq items={faqItems} />
+
+  <CtaFaq />
 </BaseLayout>
 
 <style>
@@ -431,7 +422,7 @@ const stats = [
   .main-service-card h3 {
     font-size: var(--text-xl);
     margin-bottom: var(--space-3);
-    font-weight: 600;
+    font-weight: 700;
     color: var(--color-text);
   }
 
@@ -520,7 +511,7 @@ const stats = [
 
   .additional-service-card h3 {
     font-size: var(--text-lg);
-    font-weight: 600;
+    font-weight: 700;
     line-height: 1.3;
   }
 
@@ -955,7 +946,7 @@ const stats = [
   .benefit-card h3 {
     font-size: var(--text-lg);
     margin-bottom: var(--space-2);
-    font-weight: 600;
+    font-weight: 700;
   }
 
   .benefit-card p {

@@ -169,7 +169,7 @@
 
 .form-section-title {
   font-size: var(--text-md);
-  font-weight: 600;
+  font-weight: 700;
   color: var(--color-primary);
   margin-bottom: var(--space-3);
 }
@@ -293,29 +293,68 @@
   text-decoration: underline;
 }
 
-/* Submit Button */
+/* Submit Button - Glassmorphism */
 .modal-submit {
   width: 100%;
   padding: var(--space-4);
-  background: var(--color-accent);
-  color: var(--color-primary);
-  border: none;
+  background: linear-gradient(135deg, 
+    rgba(2, 132, 199, 0.95) 0%, 
+    rgba(14, 165, 233, 0.9) 50%,
+    rgba(56, 189, 248, 0.9) 100%);
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.3);
   border-radius: 30px;
   font-size: var(--text-lg);
-  font-weight: 600;
+  font-weight: 700;
   cursor: pointer;
-  transition: all var(--transition-base);
+  transition: all 0.4s ease;
+  box-shadow: 
+    0 4px 20px rgba(14, 165, 233, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.4);
+  position: relative;
+  overflow: hidden;
+}
+
+.modal-submit::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, 
+    transparent 0%,
+    rgba(255, 255, 255, 0.3) 50%,
+    transparent 100%);
+  transition: left 0.5s ease;
+}
+
+.modal-submit:hover::before {
+  left: 100%;
 }
 
 .modal-submit:hover {
   transform: translateY(-2px);
-  box-shadow: var(--shadow-md);
+  background: linear-gradient(135deg, 
+    rgba(3, 105, 161, 0.95) 0%, 
+    rgba(2, 132, 199, 0.95) 50%,
+    rgba(14, 165, 233, 0.95) 100%);
+  box-shadow: 
+    0 8px 32px rgba(14, 165, 233, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.5);
 }
 
 .modal-submit:disabled {
   opacity: 0.6;
   cursor: not-allowed;
   transform: none;
+}
+
+.modal-submit img,
+.modal-submit svg {
+  filter: brightness(0) invert(1) drop-shadow(0 0 0.5px white);
+  width: 18px;
+  height: 18px;
 }
 
 /* Success State */

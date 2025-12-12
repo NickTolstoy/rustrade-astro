@@ -3,6 +3,7 @@ import type { Lang } from '@/i18n';
 import { getBaseUrl } from '@/i18n';
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import Breadcrumbs from '@/components/Breadcrumbs.astro';
+import CtaFaq from '@/components/CtaFaq.astro';
 import Faq from '@/components/Faq.astro';
 import Partners from '@/components/Partners.astro';
 
@@ -112,8 +113,8 @@ const advantages = [
       <p>Миссия компании – обеспечить Заказчика возможностью приобрести качественные и эффективные по стоимости решения на базе паровых турбин</p>
       <div class="hero-buttons">
         <button class="btn btn-accent" data-modal="turbine">
-          <span>Заказать турбину</span>
           <img src="/img/arrow_right.svg" alt="" width="16" height="16" />
+          <span>Заказать турбину</span>
         </button>
       </div>
     </div>
@@ -274,19 +275,9 @@ const advantages = [
   <!-- Partners Section -->
   <Partners />
 
-  <!-- CTA Section -->
-  <section class="section cta">
-    <div class="cta-content">
-      <h2>Получить консультацию по турбинам</h2>
-      <p>Наши специалисты помогут подобрать оптимальную паровую турбину для вашего проекта и ответят на все технические вопросы</p>
-      <button class="btn btn-accent" data-modal="consultation">
-        <span>Получить консультацию</span>
-        <img src="/img/arrow_right.svg" alt="" width="16" height="16" />
-      </button>
-    </div>
-  </section>
-
   <Faq items={faqItems} />
+
+  <CtaFaq />
 </BaseLayout>
 
 <style>
@@ -436,7 +427,7 @@ const advantages = [
     font-size: var(--text-xl);
     margin-bottom: var(--space-3);
     color: var(--color-primary);
-    font-weight: 600;
+    font-weight: 700;
   }
 
   .turbine-card-content p {
@@ -757,7 +748,7 @@ const advantages = [
   
   .infographic-card h3 {
     font-size: var(--text-md);
-    font-weight: 600;
+    font-weight: 700;
     color: var(--color-primary);
     margin-bottom: var(--space-2);
     line-height: 1.3;

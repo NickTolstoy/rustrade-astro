@@ -3,6 +3,7 @@ import type { Lang } from '@/i18n';
 import { t, getBaseUrl } from '@/i18n';
 import BaseLayout from '@/layouts/BaseLayout.astro';
 
+import CtaFaq from '@/components/CtaFaq.astro';
 import Faq from '@/components/Faq.astro';
 
 const lang: Lang = 'ru';
@@ -54,8 +55,8 @@ const faqItems = [
       <p>{t('hero.description', lang)}</p>
       <div class="hero-buttons">
         <a href={`${base}/cases`} class="btn btn-cases">
-          <span>{t('hero.cta', lang)}</span>
           <img src="/img/arrow_right.svg" alt="" width="16" height="16" class="icon-dark" />
+          <span>{t('hero.cta', lang)}</span>
         </a>
         <button class="btn btn-accent" data-modal="contact">
           <span>{t('hero.ctaSecondary', lang)}</span>
@@ -193,19 +194,9 @@ const faqItems = [
     </div>
   </section>
 
-  <!-- CTA Section -->
-  <section class="section cta">
-    <div class="cta-content">
-      <h2>Получить консультацию</h2>
-      <p>Наши специалисты помогут подобрать оптимальное решение для вашего энергетического проекта</p>
-      <button class="btn btn-accent" data-modal="consultation">
-        <span>Связаться с нами</span>
-        <img src="/img/arrow_right.svg" alt="" width="16" height="16" />
-      </button>
-    </div>
-  </section>
-
   <Faq items={faqItems} />
+
+  <CtaFaq />
 </BaseLayout>
 
 <style>
@@ -316,7 +307,7 @@ const faqItems = [
   .service-kind-card { padding: var(--space-5); background: var(--color-bg-card); border-radius: var(--radius-lg); transition: all var(--transition-base); }
   .service-kind-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
   .service-kind-header { display: flex; align-items: center; gap: var(--space-3); margin-bottom: var(--space-3); }
-  .service-kind-header h3 { font-size: var(--text-md); font-weight: 600; }
+  .service-kind-header h3 { font-size: var(--text-md); font-weight: 700; }
   .service-kind-card p { color: var(--color-text-muted); font-size: var(--text-sm); }
 
   @media (max-width: 768px) {
