@@ -2,8 +2,9 @@
 import type { Lang } from '@/i18n';
 import { t, getBaseUrl } from '@/i18n';
 import BaseLayout from '@/layouts/BaseLayout.astro';
-
+import Breadcrumbs from '@/components/Breadcrumbs.astro';
 import Faq from '@/components/Faq.astro';
+import CtaFaq from '@/components/CtaFaq.astro';
 
 const lang: Lang = 'ru';
 const base = getBaseUrl(lang);
@@ -52,6 +53,8 @@ const partners = [
   title="О компании | РУСТРЕЙД"
   description="ООО «РУСТРЕЙД» — проектирование и поставка паровых турбин, турбогенераторов и комплектующих"
 >
+  <Breadcrumbs items={[{ label: 'О компании' }]} />
+
   <!-- Hero Section -->
   <section class="hero">
     <div class="hero-content">
@@ -173,19 +176,9 @@ const partners = [
     </div>
   </section>
 
-  <!-- CTA Section -->
-  <section class="section cta">
-    <div class="cta-content">
-      <h2>Готовы начать проект?</h2>
-      <p>Свяжитесь с нами для консультации или обсуждения деталей вашего проекта</p>
-      <button class="btn btn-accent" data-modal="contact">
-        <img src="/img/arrow_right.svg" alt="" width="16" height="16" />
-        <span>Связаться с нами</span>
-      </button>
-    </div>
-  </section>
-
   <Faq items={faqItems} />
+
+  <CtaFaq />
 </BaseLayout>
 
 <script>

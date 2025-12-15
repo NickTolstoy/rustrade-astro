@@ -4,6 +4,7 @@ import { t, getBaseUrl } from '@/i18n';
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import Breadcrumbs from '@/components/Breadcrumbs.astro';
 import Faq from '@/components/Faq.astro';
+import CtaFaq from '@/components/CtaFaq.astro';
 import { getNewsArticles, newsCategories, formatDate, getPopularArticles } from '@/data/news';
 import '@/styles/components/news.css';
 
@@ -158,19 +159,9 @@ const faqItems = [
       </p>
     </section>
 
-    <!-- CTA Section -->
-    <section class="section cta-consultation">
-      <div class="cta-content">
-        <h2>Получить консультацию</h2>
-        <p>Свяжитесь с нами для консультации по вопросам энергетического оборудования или получения коммерческого предложения</p>
-        <button class="btn btn-accent" data-modal="consultation">
-          <img src="/img/arrow_right.svg" alt="" width="16" height="16" />
-          <span>Получить консультацию</span>
-        </button>
-      </div>
-    </section>
-
     <Faq items={faqItems} />
+
+    <CtaFaq />
   </div>
 </BaseLayout>
 

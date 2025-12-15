@@ -3,6 +3,7 @@ import type { Lang } from '@/i18n';
 import { t, getBaseUrl } from '@/i18n';
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import Faq from '@/components/Faq.astro';
+import CtaFaq from '@/components/CtaFaq.astro';
 import { newsArticles, newsCategories, formatDate, getPopularArticles, getNewsArticleBySlug } from '@/data/news';
 
 export function getStaticPaths() {
@@ -87,9 +88,10 @@ const faqItems = [
     </nav>
 
     <div class="article-layout">
-      <!-- Main Content -->
-      <main class="article-main">
-        <article class="article-content">
+      <div class="article-grid">
+        <!-- Main Content -->
+        <main class="article-main">
+          <article class="article-content">
           <!-- Article Header -->
           <header class="article-header">
             <div class="article-meta">
@@ -171,37 +173,10 @@ const faqItems = [
             </a>
           </div>
         </article>
+        </main>
 
-        <!-- Related Articles -->
-        {relatedArticles.length > 0 && (
-          <section class="related-section">
-            <h2>
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
-              </svg>
-              Похожие материалы
-            </h2>
-            <div class="related-grid">
-              {relatedArticles.map((relArticle) => (
-                <a href={`${base}/news/${relArticle.slug}`} class="related-card">
-                  <div class="related-card-image">
-                    <img src={relArticle.image} alt={relArticle.title[lang]} loading="lazy" />
-                    <span class="related-card-category">{newsCategories[relArticle.category]?.[lang]}</span>
-                  </div>
-                  <div class="related-card-content">
-                    <h3>{relArticle.title[lang]}</h3>
-                    <p>{relArticle.excerpt[lang]}</p>
-                    <span class="related-card-date">{formatDate(relArticle.date, lang)}</span>
-                  </div>
-                </a>
-              ))}
-            </div>
-          </section>
-        )}
-      </main>
-
-      <!-- Right Sidebar -->
-      <aside class="article-sidebar article-sidebar-right">
+        <!-- Right Sidebar -->
+        <aside class="article-sidebar article-sidebar-right">
         <div class="sidebar-sticky">
           <!-- Table of Contents (Wiki-style) - Only for articles -->
           {article.category === 'articles' && tableOfContents.length > 0 && (
@@ -293,19 +268,37 @@ const faqItems = [
       </aside>
     </div>
 
-    <!-- CTA Section -->
-    <section class="section cta-consultation">
-      <div class="cta-content">
-        <h2>Получить консультацию</h2>
-        <p>Свяжитесь с нами для консультации по вопросам энергетического оборудования или получения коммерческого предложения</p>
-        <button class="btn btn-accent" data-modal="consultation">
-          <img src="/img/arrow_right.svg" alt="" width="16" height="16" />
-          <span>Получить консультацию</span>
-        </button>
-      </div>
-    </section>
+    <!-- Related Articles -->
+    {relatedArticles.length > 0 && (
+      <section class="related-section">
+        <h2>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
+          </svg>
+          Похожие материалы
+        </h2>
+        <div class="related-grid">
+          {relatedArticles.map((relArticle) => (
+            <a href={`${base}/news/${relArticle.slug}`} class="related-card">
+              <div class="related-card-image">
+                <img src={relArticle.image} alt={relArticle.title[lang]} loading="lazy" />
+                <span class="related-card-category">{newsCategories[relArticle.category]?.[lang]}</span>
+              </div>
+              <div class="related-card-content">
+                <h3>{relArticle.title[lang]}</h3>
+                <p>{relArticle.excerpt[lang]}</p>
+                <span class="related-card-date">{formatDate(relArticle.date, lang)}</span>
+              </div>
+            </a>
+          ))}
+        </div>
+      </section>
+    )}
+  </div>
 
     <Faq items={faqItems} />
+
+    <CtaFaq />
   </div>
 </BaseLayout>
 
@@ -350,15 +343,26 @@ const faqItems = [
 
 /* Two-column Layout */
 .article-layout {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.article-grid {
   display: grid;
   grid-template-columns: 1fr;
   gap: 10px;
 }
 
 @media (min-width: 1024px) {
-  .article-layout {
+  .article-grid {
     grid-template-columns: 1fr 320px;
     gap: 10px;
+    align-items: start;
+  }
+  
+  .article-main {
+    min-height: 0;
   }
 }
 
@@ -369,16 +373,17 @@ const faqItems = [
 
 @media (min-width: 1024px) {
   .article-sidebar {
-    display: block;
+    display: flex;
+    flex-direction: column;
+    align-self: stretch;
+    max-height: 100%;
   }
   .article-sidebar-right {
-    display: block;
+    display: flex;
   }
 }
 
 .sidebar-sticky {
-  position: sticky;
-  top: 24px;
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -403,7 +408,8 @@ const faqItems = [
 }
 
 .sidebar-section h3 svg {
-  opacity: 0.6;
+  color: rgb(14, 165, 233);
+  opacity: 1;
 }
 
 /* Table of Contents */
@@ -425,12 +431,18 @@ const faqItems = [
 }
 
 .toc-link:hover {
-  background: var(--color-accent, #A3DAF3);
+  background: linear-gradient(135deg, 
+    rgba(2, 132, 199, 0.15) 0%, 
+    rgba(14, 165, 233, 0.1) 50%,
+    rgba(56, 189, 248, 0.1) 100%);
 }
 
 .toc-link:hover .toc-number {
-  background: var(--color-white, #fff);
-  color: var(--color-primary, #2A2D2E);
+  background: linear-gradient(135deg, 
+    rgba(2, 132, 199, 0.95) 0%, 
+    rgba(14, 165, 233, 0.9) 50%,
+    rgba(56, 189, 248, 0.9) 100%);
+  color: white;
 }
 
 .toc-number {
@@ -502,7 +514,7 @@ const faqItems = [
 .popular-card-category {
   font-size: 10px;
   font-weight: 700;
-  color: var(--color-accent, #A3DAF3);
+  color: rgb(2, 132, 199);
   text-transform: uppercase;
   letter-spacing: 0.5px;
 }
@@ -543,7 +555,14 @@ const faqItems = [
 }
 
 .service-link:hover {
-  background: var(--color-accent, #A3DAF3);
+  background: linear-gradient(135deg, 
+    rgba(2, 132, 199, 0.15) 0%, 
+    rgba(14, 165, 233, 0.1) 50%,
+    rgba(56, 189, 248, 0.1) 100%);
+}
+
+.service-link:hover .service-name {
+  color: rgb(2, 132, 199);
 }
 
 .service-name {
@@ -583,7 +602,11 @@ const faqItems = [
 }
 
 .contact-item:hover {
-  background: var(--color-accent, #A3DAF3);
+  background: linear-gradient(135deg, 
+    rgba(2, 132, 199, 0.15) 0%, 
+    rgba(14, 165, 233, 0.1) 50%,
+    rgba(56, 189, 248, 0.1) 100%);
+  color: rgb(2, 132, 199);
 }
 
 /* Main Content */
@@ -613,11 +636,15 @@ const faqItems = [
 
 .article-category {
   padding: 6px 14px;
-  background: var(--color-accent, #A3DAF3);
+  background: linear-gradient(135deg, 
+    rgba(2, 132, 199, 0.95) 0%, 
+    rgba(14, 165, 233, 0.9) 50%,
+    rgba(56, 189, 248, 0.9) 100%);
   border-radius: 50px;
   font-size: 12px;
   font-weight: 700;
-  color: var(--color-primary, #2A2D2E);
+  color: white;
+  box-shadow: 0 2px 8px rgba(14, 165, 233, 0.3);
 }
 
 .article-date,
@@ -751,13 +778,20 @@ const faqItems = [
   border-radius: 10px;
   color: var(--color-text-muted, #5C5A5A);
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
 }
 
 .share-btn:hover {
-  background: var(--color-accent, #A3DAF3);
-  border-color: var(--color-accent, #A3DAF3);
-  color: var(--color-primary, #2A2D2E);
+  background: linear-gradient(135deg, 
+    rgba(2, 132, 199, 0.95) 0%, 
+    rgba(14, 165, 233, 0.9) 50%,
+    rgba(56, 189, 248, 0.9) 100%);
+  border-color: transparent;
+  color: white;
+  box-shadow: 0 4px 12px rgba(14, 165, 233, 0.3);
+  transform: translateY(-2px);
 }
 
 .back-link {
@@ -786,6 +820,7 @@ const faqItems = [
 /* Related Section */
 .related-section {
   margin-top: 32px;
+  margin-bottom: var(--space-12);
 }
 
 .related-section h2 {
@@ -845,11 +880,15 @@ const faqItems = [
   top: 12px;
   left: 12px;
   padding: 4px 12px;
-  background: var(--color-accent, #A3DAF3);
+  background: linear-gradient(135deg, 
+    rgba(2, 132, 199, 0.95) 0%, 
+    rgba(14, 165, 233, 0.9) 50%,
+    rgba(56, 189, 248, 0.9) 100%);
   border-radius: 50px;
   font-size: 11px;
   font-weight: 700;
-  color: var(--color-primary, #2A2D2E);
+  color: white;
+  box-shadow: 0 2px 6px rgba(14, 165, 233, 0.3);
 }
 
 .related-card-content {
@@ -882,57 +921,6 @@ const faqItems = [
 .related-card-date {
   font-size: 12px;
   color: var(--color-text-muted, #5C5A5A);
-}
-
-/* CTA Consultation (main page) */
-.cta-consultation {
-  background: var(--color-bg-card, #fff);
-  border: 1px solid var(--color-border, #E7E5E6);
-  border-radius: 16px;
-  padding: 48px 32px;
-  text-align: center;
-  margin: 48px 0;
-}
-
-.cta-consultation .cta-content {
-  max-width: 600px;
-  margin: 0 auto;
-}
-
-.cta-consultation h2 {
-  font-size: clamp(24px, 4vw, 32px);
-  font-weight: 700;
-  margin-bottom: 16px;
-  color: var(--color-primary, #2A2D2E);
-  font-family: var(--font-heading, 'Onest', sans-serif);
-}
-
-.cta-consultation p {
-  font-size: 16px;
-  color: var(--color-text-muted, #5C5A5A);
-  margin-bottom: 24px;
-  line-height: 1.6;
-}
-
-.cta-consultation .btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 14px 28px;
-  background: var(--color-accent, #A3DAF3);
-  border: none;
-  border-radius: 50px;
-  font-size: 15px;
-  font-weight: 700;
-  color: var(--color-primary, #2A2D2E);
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.cta-consultation .btn:hover {
-  background: var(--color-accent-hover, #8fcfed);
-  transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(163, 218, 243, 0.4);
 }
 
 /* Mobile Responsive */
@@ -1019,6 +1007,7 @@ const faqItems = [
     }, { rootMargin: '-20% 0px -80% 0px' });
 
     headings.forEach(heading => observer.observe(heading));
-  });
+
+    });
 </script>
 

@@ -72,27 +72,31 @@ const excitationSystems = [
 const advantages = [
   {
     title: 'Экономическое преимущество',
-    description: 'Существенная экономия по сравнению с российскими или европейскими аналогами при сохранении высокого качества'
+    description: 'Существенная экономия по сравнению с российскими или европейскими аналогами при сохранении высокого качества',
+    icon: '/img/turbogenerators/icons/economic-advantage.png'
   },
   {
     title: 'Надежные решения',
-    description: 'Проверенные технологии и комплектующие от ведущих мировых производителей'
+    description: 'Проверенные технологии и комплектующие от ведущих мировых производителей',
+    icon: '/img/turbogenerators/icons/reliable-solutions.png'
   },
   {
     title: 'Полная комплектация',
-    description: 'Турбогенераторные установки полной заводской готовности с системами управления и защиты'
+    description: 'Турбогенераторные установки полной заводской готовности с системами управления и защиты',
+    icon: '/img/turbogenerators/icons/full-package.png'
   },
   {
     title: 'Техническая поддержка',
-    description: 'Квалифицированная команда инженеров обеспечивает поддержку на всех этапах проекта'
+    description: 'Квалифицированная команда инженеров обеспечивает поддержку на всех этапах проекта',
+    icon: '/img/turbogenerators/icons/tech-support.png'
   }
 ];
 
 const stats = [
-  { value: 50, label: 'Выполненных проектов' },
-  { value: 30, label: 'Постоянных клиентов' },
+  { value: 8, label: 'Выполненных проектов' },
+  { value: 10, label: 'Постоянных клиентов' },
   { value: 5, label: 'Лет опыта' },
-  { value: 20, label: 'Ведущих специалистов' }
+  { value: 25, label: 'Ведущих специалистов' }
 ];
 ---
 
@@ -110,9 +114,13 @@ const stats = [
       <h1>Турбогенераторы</h1>
       <p>Турбогенераторные установки малой и средней мощности от 15 кВт до 40 МВт, преобразующие механическую энергию вращения ротора в электрическую энергию переменного тока</p>
       <div class="hero-buttons">
-        <button class="btn btn-accent" data-modal="turbogenerator">
-          <img src="/img/arrow_right.svg" alt="" width="16" height="16" />
-          <span>Заказать турбогенератор</span>
+        <button class="button-47" data-modal="turbogenerator">
+          <span class="button-47__circle">
+            <svg class="button-47__icon-svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polygon class="icon-bolt" points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+            </svg>
+          </span>
+          <span class="button-47__text">Заказать турбогенератор</span>
         </button>
       </div>
     </div>
@@ -273,11 +281,14 @@ const stats = [
   <section class="section advantages">
     <div class="section-header">
       <h2>Преимущества работы с нами</h2>
+      <p>Надёжные турбогенераторные установки полной заводской готовности с технической поддержкой на всех этапах</p>
     </div>
     <div class="advantages-grid">
       {advantages.map((adv, index) => (
         <div class="advantage-card">
-          <div class="advantage-number">{String(index + 1).padStart(2, '0')}</div>
+          <div class="advantage-icon">
+            <img src={adv.icon} alt={adv.title} />
+          </div>
           <h3>{adv.title}</h3>
           <p>{adv.description}</p>
         </div>
@@ -750,35 +761,42 @@ const stats = [
   .advantage-card {
     background: var(--color-white);
     border: 1px solid var(--color-border);
-    border-radius: var(--radius-lg);
+    border-radius: var(--radius-xl);
     padding: var(--space-6);
     transition: all 0.3s ease;
   }
 
   .advantage-card:hover {
     border-color: var(--color-accent);
-    transform: translateY(-4px);
     box-shadow: var(--shadow-md);
+    transform: translateY(-4px);
   }
 
-  .advantage-number {
-    font-size: var(--text-3xl);
-    font-weight: 700;
-    color: var(--color-accent);
-    opacity: 0.3;
-    margin-bottom: var(--space-3);
+  .advantage-icon {
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: var(--space-4);
+  }
+
+  .advantage-icon img {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
   }
 
   .advantage-card h3 {
     font-size: var(--text-lg);
-    margin-bottom: var(--space-2);
+    margin-bottom: var(--space-3);
     color: var(--color-primary);
   }
 
   .advantage-card p {
-    font-size: var(--text-sm);
+    font-size: var(--text-base);
     color: var(--color-text-muted);
-    line-height: 1.5;
+    line-height: 1.6;
   }
 
   /* CTA Section */

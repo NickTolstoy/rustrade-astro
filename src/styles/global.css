@@ -216,6 +216,212 @@ body {
   transform: translateX(4px);
 }
 
+/* Button 47 - Animated Hero Button */
+.button-47 {
+  display: inline-block;
+  position: relative;
+  padding: 1.1em 2.2em 1.1em calc(4.2em - 3px);
+  --button-47-transition: 0.45s cubic-bezier(0.65, 0, 0.076, 1);
+  border-radius: 3em;
+  text-decoration: none !important;
+  font-size: 1.1em;
+  line-height: 100%;
+  white-space: nowrap;
+  border: none;
+  outline: none;
+  background: transparent;
+  cursor: pointer;
+  font-family: var(--font-body);
+}
+
+.button-47:active {
+  transform: scale(0.9);
+}
+
+.button-47__circle {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 3.2em;
+  height: 3.2em;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding-left: 1em;
+  background: linear-gradient(135deg, 
+    rgba(2, 132, 199, 0.95) 0%, 
+    rgba(14, 165, 233, 0.9) 50%,
+    rgba(56, 189, 248, 0.9) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 4px 20px rgba(14, 165, 233, 0.3);
+  border-radius: 3em;
+  transition: width var(--button-47-transition), background var(--button-47-transition), box-shadow var(--button-47-transition);
+  overflow: hidden;
+}
+
+.button-47__circle::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, 
+    transparent 0%,
+    rgba(255, 255, 255, 0.3) 50%,
+    transparent 100%);
+  transition: 0.6s ease;
+}
+
+.button-47:hover .button-47__circle::before {
+  left: 100%;
+}
+
+.button-47__text {
+  position: relative;
+  line-height: 100%;
+  margin: 0;
+  color: #ffffff;
+  text-transform: uppercase;
+  font-weight: 700;
+  transition: var(--button-47-transition);
+  letter-spacing: 0.03em;
+  text-shadow: 0 2px 10px rgba(14, 165, 233, 0.7);
+}
+
+.button-47__text::before {
+  content: '';
+  position: absolute;
+  left: -3em;
+  right: -3em;
+  top: -1em;
+  bottom: -1em;
+  background: linear-gradient(135deg, 
+    rgba(2, 132, 199, 0.5) 0%, 
+    rgba(14, 165, 233, 0.4) 50%,
+    rgba(56, 189, 248, 0.5) 100%);
+  filter: blur(24px);
+  border-radius: 2em;
+  z-index: -1;
+  opacity: 1;
+  transition: var(--button-47-transition);
+}
+
+.button-47:hover .button-47__text::before {
+  opacity: 0;
+}
+
+.button-47:hover .button-47__circle {
+  width: 100%;
+  background: linear-gradient(135deg, 
+    rgba(3, 105, 161, 0.95) 0%, 
+    rgba(2, 132, 199, 0.95) 50%,
+    rgba(14, 165, 233, 0.95) 100%);
+  box-shadow: 0 8px 32px rgba(14, 165, 233, 0.4);
+}
+
+.button-47:hover .button-47__text {
+  color: #ffffff;
+}
+
+.button-47__icon-svg {
+  width: 20px;
+  height: 20px;
+  stroke: #ffffff;
+  stroke-width: 2.2;
+  fill: none;
+  transition: var(--button-47-transition);
+  transform-origin: center;
+}
+
+/* Design icon - pen writing animation */
+.button-47__icon-svg .icon-pen {
+  transform-origin: 17px 5px;
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.button-47:hover .button-47__icon-svg .icon-pen {
+  animation: pen-write 0.5s ease-in-out infinite;
+}
+
+@keyframes pen-write {
+  0%, 100% { transform: translate(0, 0) rotate(0deg); }
+  25% { transform: translate(1px, -1px) rotate(5deg); }
+  50% { transform: translate(-1px, 1px) rotate(-5deg); }
+  75% { transform: translate(1px, 1px) rotate(5deg); }
+}
+
+/* Turbines icon - spin animation */
+.button-47__icon-svg .icon-fan {
+  transform-origin: 12px 12px;
+  transition: transform 0.3s ease;
+}
+
+.button-47:hover .button-47__icon-svg .icon-fan {
+  animation: btn-spin 1.5s linear infinite;
+}
+
+@keyframes btn-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Turbogenerators icon - pulse animation */
+.button-47__icon-svg .icon-bolt {
+  transform-origin: center;
+  transition: transform 0.3s ease;
+}
+
+.button-47:hover .button-47__icon-svg .icon-bolt {
+  animation: btn-pulse-bolt 0.8s ease-in-out infinite;
+}
+
+@keyframes btn-pulse-bolt {
+  0% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.15); opacity: 0.85; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+/* Blades icon - spin animation */
+.button-47__icon-svg .icon-blades {
+  transform-origin: 12px 12px;
+  transition: transform 0.3s ease;
+}
+
+.button-47:hover .button-47__icon-svg .icon-blades {
+  animation: btn-spin 2s linear infinite;
+}
+
+/* Oil Coolers icon - shiver animation */
+.button-47__icon-svg .icon-cooler {
+  transition: transform 0.3s ease;
+}
+
+.button-47:hover .button-47__icon-svg .icon-cooler {
+  animation: btn-shiver 0.5s ease-in-out infinite;
+}
+
+@keyframes btn-shiver {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-2px); }
+  75% { transform: translateX(2px); }
+}
+
+/* Condensers icon - breathe animation */
+.button-47__icon-svg .icon-condenser {
+  transform-origin: center;
+  transition: transform 0.3s ease;
+}
+
+.button-47:hover .button-47__icon-svg .icon-condenser {
+  animation: btn-breathe 1s ease-in-out infinite;
+}
+
+@keyframes btn-breathe {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.08); }
+}
+
 /* Cards */
 .card {
   background: var(--color-white);

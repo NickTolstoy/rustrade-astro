@@ -148,9 +148,22 @@ const workAdvantages = [
       <h1>Конденсаторы паровых турбин</h1>
       <p>Высокоэффективные поверхностные конденсаторы различного исполнения для паровых турбин с оптимальными техническими характеристиками</p>
       <div class="hero-buttons">
-        <button class="btn btn-accent" data-modal="condenser">
-          <img src="/img/arrow_right.svg" alt="" width="16" height="16" />
-          <span>Заказать конденсатор</span>
+        <button class="button-47" data-modal="condenser">
+          <span class="button-47__circle">
+            <svg class="button-47__icon-svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <g class="icon-condenser">
+                <path d="M5 6v12a7 3 0 0 0 14 0V6"/>
+                <ellipse cx="12" cy="6" rx="7" ry="3"/>
+                <circle cx="9" cy="10" r="1"/>
+                <circle cx="12" cy="10" r="1"/>
+                <circle cx="15" cy="10" r="1"/>
+                <circle cx="9" cy="14" r="1"/>
+                <circle cx="12" cy="14" r="1"/>
+                <circle cx="15" cy="14" r="1"/>
+              </g>
+            </svg>
+          </span>
+          <span class="button-47__text">Заказать конденсатор</span>
         </button>
       </div>
     </div>
@@ -595,12 +608,15 @@ const workAdvantages = [
       chromeSteel: new THREE.MeshStandardMaterial({ color: 0xC8C8C8, metalness: 0.7, roughness: 0.15 })
     };
     
+    // Enhanced Lighting Setup for steel look
     const ambient = new THREE.AmbientLight(0xffffff, 0.8);
     scene.add(ambient);
     
     const keyLight = new THREE.DirectionalLight(0xffffff, 2.0);
     keyLight.position.set(8, 12, 10);
     keyLight.castShadow = true;
+    keyLight.shadow.mapSize.width = 2048;
+    keyLight.shadow.mapSize.height = 2048;
     scene.add(keyLight);
     
     const fillLight = new THREE.DirectionalLight(0xaabbcc, 1.0);
@@ -611,33 +627,87 @@ const workAdvantages = [
     rimLight.position.set(-3, -3, 8);
     scene.add(rimLight);
     
+    const topLight = new THREE.DirectionalLight(0xffffff, 0.8);
+    topLight.position.set(0, 15, 0);
+    scene.add(topLight);
+    
+    const backLight = new THREE.DirectionalLight(0xffffff, 0.6);
+    backLight.position.set(0, 5, -10);
+    scene.add(backLight);
+    
     function createTurbineStage(params) {
       const group = new THREE.Group();
       group.position.x = params.xOffset;
       
+      // Main disc with hub details
       const discGeometry = new THREE.CylinderGeometry(params.radius, params.radius * 0.95, params.thickness, 128);
       discGeometry.rotateZ(Math.PI / 2);
       const discMesh = new THREE.Mesh(discGeometry, steelMaterials.brushedSteel.clone());
       discMesh.castShadow = true;
+      discMesh.receiveShadow = true;
       group.add(discMesh);
       
+      // Inner hub ring
       const hubRingGeo = new THREE.TorusGeometry(params.radius * 0.4, 0.05, 16, 64);
       hubRingGeo.rotateY(Math.PI / 2);
       const hubRingMesh = new THREE.Mesh(hubRingGeo, steelMaterials.chromeSteel);
       hubRingMesh.position.x = params.thickness / 2 + 0.02;
       group.add(hubRingMesh);
       
+      const hubRingMesh2 = hubRingMesh.clone();
+      hubRingMesh2.position.x = -params.thickness / 2 - 0.02;
+      group.add(hubRingMesh2);
+      
+      // Add bolts/rivets on disc face
+      const boltCount = 12;
+      for (let i = 0; i < boltCount; i++) {
+        const angle = (2 * Math.PI * i) / boltCount;
+        const boltRadius = params.radius * 0.7;
+        
+        const boltGeo = new THREE.CylinderGeometry(0.03, 0.03, 0.08, 8);
+        boltGeo.rotateZ(Math.PI / 2);
+        const boltMesh = new THREE.Mesh(boltGeo, steelMaterials.chromeSteel);
+        boltMesh.position.set(
+          params.thickness / 2 + 0.04,
+          Math.cos(angle) * boltRadius,
+          Math.sin(angle) * boltRadius
+        );
+        group.add(boltMesh);
+        
+        // Bolt head
+        const boltHeadGeo = new THREE.CylinderGeometry(0.045, 0.045, 0.02, 6);
+        boltHeadGeo.rotateZ(Math.PI / 2);
+        const boltHeadMesh = new THREE.Mesh(boltHeadGeo, steelMaterials.darkSteel);
+        boltHeadMesh.position.set(
+          params.thickness / 2 + 0.09,
+          Math.cos(angle) * boltRadius,
+          Math.sin(angle) * boltRadius
+        );
+        group.add(boltHeadMesh);
+      }
+      
+      // Create rectangular blades
       for (let i = 0; i < params.bladeCount; i++) {
         const angle = (2 * Math.PI * i) / params.bladeCount;
+        
+        // Simple rectangular blade using BoxGeometry
         const bladeGeo = new THREE.BoxGeometry(params.bladeThickness, params.bladeLength, params.bladeWidth);
-        const bladeMat = (i % 3 === 0) ? steelMaterials.bladeSteel.clone() : steelMaterials.polishedSteel.clone();
+        
+        // Alternate blade coloring for visual depth
+        const bladeMat = (i % 3 === 0) ? steelMaterials.bladeSteel.clone() : 
+                         (i % 3 === 1) ? steelMaterials.polishedSteel.clone() : 
+                         steelMaterials.brushedSteel.clone();
+        
         const bladeMesh = new THREE.Mesh(bladeGeo, bladeMat);
         bladeMesh.castShadow = true;
+        bladeMesh.receiveShadow = true;
         
+        // Position blade radially outward from disc
         const radial = new THREE.Vector3(0, Math.cos(angle), Math.sin(angle));
         const offset = params.radius + params.bladeLength / 2;
         bladeMesh.position.copy(radial.clone().multiplyScalar(offset));
         
+        // Rotate blade to face outward
         const quaternion = new THREE.Quaternion();
         quaternion.setFromUnitVectors(new THREE.Vector3(0, 1, 0), radial);
         bladeMesh.quaternion.copy(quaternion);
@@ -648,21 +718,58 @@ const workAdvantages = [
       return group;
     }
     
+    // Stage configurations
     const stages = [
       { radius: 2.2, thickness: 0.4, bladeCount: 52, bladeLength: 0.85, bladeWidth: 0.12, bladeThickness: 0.08, xOffset: -1.4 },
       { radius: 2.0, thickness: 0.38, bladeCount: 48, bladeLength: 0.75, bladeWidth: 0.11, bladeThickness: 0.07, xOffset: 0.0 },
       { radius: 1.8, thickness: 0.35, bladeCount: 44, bladeLength: 0.65, bladeWidth: 0.10, bladeThickness: 0.065, xOffset: 1.2 },
     ];
     
+    // Create main shaft with details
     const totalLength = stages[stages.length - 1].xOffset - stages[0].xOffset + 2.5;
     const shaftGroup = new THREE.Group();
     
+    // Main shaft body
     const shaftGeo = new THREE.CylinderGeometry(0.45, 0.45, totalLength, 64);
     shaftGeo.rotateZ(Math.PI / 2);
     const shaftMesh = new THREE.Mesh(shaftGeo, steelMaterials.polishedSteel);
     shaftMesh.castShadow = true;
+    shaftMesh.receiveShadow = true;
     shaftMesh.position.x = (stages[0].xOffset + stages[stages.length - 1].xOffset) / 2;
     shaftGroup.add(shaftMesh);
+    
+    // Shaft journals (bearing surfaces)
+    const journalPositions = [-2.0, 2.0];
+    journalPositions.forEach(pos => {
+      const journalGeo = new THREE.CylinderGeometry(0.52, 0.52, 0.3, 32);
+      journalGeo.rotateZ(Math.PI / 2);
+      const journalMesh = new THREE.Mesh(journalGeo, steelMaterials.chromeSteel);
+      journalMesh.position.x = pos;
+      journalMesh.castShadow = true;
+      shaftGroup.add(journalMesh);
+      
+      // Journal rings
+      const ringGeo = new THREE.TorusGeometry(0.53, 0.03, 12, 32);
+      ringGeo.rotateY(Math.PI / 2);
+      const ringMesh1 = new THREE.Mesh(ringGeo, steelMaterials.darkSteel);
+      ringMesh1.position.x = pos + 0.15;
+      shaftGroup.add(ringMesh1);
+      const ringMesh2 = ringMesh1.clone();
+      ringMesh2.position.x = pos - 0.15;
+      shaftGroup.add(ringMesh2);
+    });
+    
+    // Shaft grooves between stages
+    stages.forEach((stage, idx) => {
+      if (idx < stages.length - 1) {
+        const midX = (stage.xOffset + stages[idx + 1].xOffset) / 2;
+        const grooveGeo = new THREE.TorusGeometry(0.46, 0.02, 8, 32);
+        grooveGeo.rotateY(Math.PI / 2);
+        const grooveMesh = new THREE.Mesh(grooveGeo, steelMaterials.darkSteel);
+        grooveMesh.position.x = midX;
+        shaftGroup.add(grooveMesh);
+      }
+    });
     
     scene.add(shaftGroup);
     
@@ -1562,23 +1669,55 @@ void main() {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    background: var(--color-accent);
-    color: var(--color-primary);
-    border: none;
-    border-radius: 50px;
-    padding: var(--space-3) var(--space-8);
-    font-size: var(--text-base);
+    gap: var(--space-2);
+    padding: var(--space-3) var(--space-6);
+    border-radius: var(--radius-full);
+    background: linear-gradient(135deg, 
+      rgba(2, 132, 199, 0.95) 0%, 
+      rgba(14, 165, 233, 0.9) 50%,
+      rgba(56, 189, 248, 0.9) 100%);
+    color: white;
     font-weight: 700;
+    font-size: var(--text-base);
+    border: 1px solid rgba(255, 255, 255, 0.3);
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: all 0.4s ease;
+    font-family: inherit;
+    box-shadow: 
+      0 4px 20px rgba(14, 165, 233, 0.3),
+      inset 0 1px 0 rgba(255, 255, 255, 0.4);
+    position: relative;
+    overflow: hidden;
     margin-top: var(--space-2);
-    width: auto;
+  }
+
+  .calculate-btn-modern::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, 
+      transparent 0%,
+      rgba(255, 255, 255, 0.3) 50%,
+      transparent 100%);
+    transition: left 0.5s ease;
+  }
+
+  .calculate-btn-modern:hover::before {
+    left: 100%;
   }
 
   .calculate-btn-modern:hover {
     transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
-    background: linear-gradient(134deg, var(--color-accent) 0%, var(--color-white) 100%);
+    background: linear-gradient(135deg, 
+      rgba(3, 105, 161, 0.95) 0%, 
+      rgba(2, 132, 199, 0.95) 50%,
+      rgba(14, 165, 233, 0.95) 100%);
+    box-shadow: 
+      0 8px 32px rgba(14, 165, 233, 0.4),
+      inset 0 1px 0 rgba(255, 255, 255, 0.5);
   }
 
   .calculator-results-card {
@@ -1813,43 +1952,44 @@ void main() {
   }
 
   .work-advantage-card {
-    background: var(--color-bg-card);
+    background: var(--color-white);
+    border: 1px solid var(--color-border);
     border-radius: var(--radius-xl);
     padding: var(--space-6);
-    text-align: center;
     transition: all 0.3s ease;
   }
 
   .work-advantage-card:hover {
+    border-color: var(--color-accent);
+    box-shadow: var(--shadow-md);
     transform: translateY(-4px);
-    box-shadow: var(--shadow-lg);
   }
 
   .work-advantage-icon {
-    width: 56px;
-    height: 56px;
+    width: 48px;
+    height: 48px;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 0 auto var(--space-4);
+    margin-bottom: var(--space-4);
   }
 
   .work-advantage-icon img {
-    width: 100%;
-    height: 100%;
+    width: 40px;
+    height: 40px;
     object-fit: contain;
   }
 
   .work-advantage-card h3 {
     font-size: var(--text-lg);
     color: var(--color-primary);
-    margin-bottom: var(--space-2);
+    margin-bottom: var(--space-3);
   }
 
   .work-advantage-card p {
     color: var(--color-text-muted);
-    line-height: 1.5;
-    font-size: var(--text-sm);
+    line-height: 1.6;
+    font-size: var(--text-base);
   }
 
   /* CTA Section */

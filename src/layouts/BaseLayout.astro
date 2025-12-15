@@ -129,7 +129,7 @@ const base = getBaseUrl(lang);
 </head>
 <body>
   <div class="wrapper">
-    {!noSidebar && <Sidebar lang={lang} />}
+    {!noSidebar && <Sidebar lang={lang} currentPath={Astro.url.pathname} />}
     
     <div class={noSidebar ? 'content no-sidebar' : 'content with-sidebar'}>
       <Header lang={lang} activeMenu={activeMenu} />

@@ -138,9 +138,16 @@ const advantages = [
       <h1>Маслоохладители для систем маслоснабжения паровых турбин</h1>
       <p>Высокоэффективные кожухотрубные маслоохладители для обеспечения надежной работы систем смазки и регулирования турбин</p>
       <div class="hero-buttons">
-        <button class="btn btn-accent" data-modal="oil-cooler">
-          <img src="/img/arrow_right.svg" alt="" width="16" height="16" />
-          <span>Заказать маслоохладитель</span>
+        <button class="button-47" data-modal="oil-cooler">
+          <span class="button-47__circle">
+            <svg class="button-47__icon-svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <g class="icon-cooler">
+                <rect x="2" y="3" width="20" height="18" rx="2"/>
+                <path d="M6 3v18M10 3v18M14 3v18M18 3v18"/>
+              </g>
+            </svg>
+          </span>
+          <span class="button-47__text">Заказать маслоохладитель</span>
         </button>
       </div>
     </div>
@@ -988,7 +995,6 @@ const advantages = [
     border: 1px solid var(--color-border);
     border-radius: var(--radius-xl);
     padding: var(--space-6);
-    text-align: center;
     transition: all 0.3s ease;
   }
 
@@ -999,17 +1005,17 @@ const advantages = [
   }
 
   .advantage-icon {
-    width: 64px;
-    height: 64px;
-    margin: 0 auto var(--space-4);
+    width: 48px;
+    height: 48px;
     display: flex;
     align-items: center;
     justify-content: center;
+    margin-bottom: var(--space-4);
   }
 
   .advantage-icon img {
-    width: 48px;
-    height: 48px;
+    width: 40px;
+    height: 40px;
     object-fit: contain;
   }
 

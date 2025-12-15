@@ -5,6 +5,7 @@ import { cities } from '@/data/cities';
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import Breadcrumbs from '@/components/Breadcrumbs.astro';
 import Faq from '@/components/Faq.astro';
+import CtaFaq from '@/components/CtaFaq.astro';
 
 const lang: Lang = 'ru';
 const base = getBaseUrl(lang);
@@ -166,6 +167,8 @@ const faqItems = [
   </section>
 
   <Faq items={faqItems} />
+
+  <CtaFaq />
 </BaseLayout>
 
 <script>

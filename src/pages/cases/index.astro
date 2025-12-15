@@ -4,6 +4,7 @@ import { getBaseUrl } from '@/i18n';
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import Breadcrumbs from '@/components/Breadcrumbs.astro';
 import Faq from '@/components/Faq.astro';
+import CtaFaq from '@/components/CtaFaq.astro';
 
 const lang: Lang = 'ru';
 const base = getBaseUrl(lang);
@@ -58,7 +59,6 @@ const cases = [
   }
 ];
 
-const categories = ['Все', 'Химия', 'Сахар', 'Маслоэкстракция', 'Энергетика'];
 ---
 
 <BaseLayout 
@@ -71,23 +71,12 @@ const categories = ['Все', 'Химия', 'Сахар', 'Маслоэкстр�
   <main class="fade-in">
     <div class="cases-panel">
       <h1 class="cases-header">Кейсы</h1>
-      <div class="cases-switcher">
-        <ul>
-          <li class="active">Все <img src="/img/circle.svg" alt="" /> {cases.length}</li>
-          {categories.slice(1).map(cat => (
-            <li>{cat}</li>
-          ))}
-        </ul>
-      </div>
     </div>
 
     <div class="cases-list">
       {cases.map((item) => (
         <a class="case-item" href={item.href} style={`background-image: linear-gradient(50deg, rgba(0, 0, 0, 0.75) 0%, rgba(0, 0, 0, 0.00) 100%), url(${item.image});`}>
           <div class="category-row">
-            <p>
-              <img src="/img/circle.svg" alt="circle" /> Кейс
-            </p>
             <p>{item.category}</p>
           </div>
 
@@ -103,6 +92,8 @@ const categories = ['Все', 'Химия', 'Сахар', 'Маслоэкстр�
     </div>
 
     <Faq items={faqItems} />
+
+    <CtaFaq />
   </main>
 </BaseLayout>
 
@@ -134,47 +125,11 @@ const categories = ['Все', 'Химия', 'Сахар', 'Маслоэкстр�
     margin: 0;
   }
 
-  .cases-switcher {
-    flex: 1 0 0;
-    display: flex;
-    align-items: center;
-  }
-
-  .cases-switcher ul {
-    display: flex;
-    list-style-type: none;
-    padding-right: 24px;
-    gap: 10px;
-    margin: 0;
-    padding: 0 24px 0 0;
-  }
-
-  .cases-switcher li {
-    display: flex;
-    padding: 12px;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-    border-radius: 10px;
-    background: #FFF;
-    font-family: var(--font-body);
-    cursor: pointer;
-    transition: all 0.3s ease;
-  }
-
-  .cases-switcher li.active {
-    background: #2A2D2E;
-    color: white;
-  }
-  
-  .cases-switcher li img {
-    filter: brightness(0) invert(1);
-  }
-
   .cases-list {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 8px;
+    margin-bottom: var(--space-12);
   }
 
   .case-item {
@@ -307,30 +262,12 @@ const categories = ['Все', 'Химия', 'Сахар', 'Маслоэкстр�
 
   @media (max-width: 768px) {
     .cases-panel {
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 16px;
       padding: 24px;
     }
     
     .cases-header {
       padding: 0;
       font-size: 24px;
-    }
-    
-    .cases-switcher {
-      width: 100%;
-      overflow-x: auto;
-    }
-    
-    .cases-switcher ul {
-      padding-right: 0;
-    }
-    
-    .cases-switcher li {
-      font-size: 14px;
-      padding: 8px 12px;
-      white-space: nowrap;
     }
   }
 
@@ -346,11 +283,6 @@ const categories = ['Все', 'Химия', 'Сахар', 'Маслоэкстр�
     
     .cases-panel {
       padding: 16px;
-    }
-    
-    .cases-switcher li {
-      padding: 6px 10px;
-      font-size: 12px;
     }
   }
 </style>

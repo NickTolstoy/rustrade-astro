@@ -81,19 +81,23 @@ const services = [
 const advantages = [
   {
     title: 'Официальный представитель',
-    description: 'Эксклюзивный представитель ведущих производителей энергетического оборудования из дружественных стран'
+    description: 'Эксклюзивный представитель ведущих производителей энергетического оборудования из дружественных стран',
+    icon: '/img/lopatki/icons/like_6016641.png'
   },
   {
     title: 'Проверенные партнёры',
-    description: 'Тщательный аудит производственных мощностей и референтных объектов перед началом сотрудничества'
+    description: 'Тщательный аудит производственных мощностей и референтных объектов перед началом сотрудничества',
+    icon: '/img/lopatki/icons/eac_17379530.png'
   },
   {
     title: 'Широкий ассортимент',
-    description: 'Все типы паровых турбин: Т, ПТ, К, Р — приводные и генерационные, обычные и высокооборотистые'
+    description: 'Все типы паровых турбин: Т, ПТ, К, Р — приводные и генерационные, обычные и высокооборотистые',
+    icon: '/img/lopatki/icons/industrial-robot_9837143.png'
   },
   {
     title: 'Сервис 24/7',
-    description: 'Локализованная сервисная служба с круглосуточной поддержкой и оперативным реагированием'
+    description: 'Локализованная сервисная служба с круглосуточной поддержкой и оперативным реагированием',
+    icon: '/img/lopatki/icons/long-term_9966603.png'
   }
 ];
 ---
@@ -112,9 +116,13 @@ const advantages = [
       <h1>Проектирование и поставка паровых турбин</h1>
       <p>Миссия компании – обеспечить Заказчика возможностью приобрести качественные и эффективные по стоимости решения на базе паровых турбин</p>
       <div class="hero-buttons">
-        <button class="btn btn-accent" data-modal="turbine">
-          <img src="/img/arrow_right.svg" alt="" width="16" height="16" />
-          <span>Заказать турбину</span>
+        <button class="button-47" data-modal="turbine">
+          <span class="button-47__circle">
+            <svg class="button-47__icon-svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path class="icon-fan" d="M12 12c0-3 2.5-5 5-5 2.5 0 5 1.5 5 5s-2.5 5-5 5c-2.5 0-5-2-5-5zm0 0c0 3-2.5 5-5 5-2.5 0-5-1.5-5-5s2.5-5 5-5c2.5 0 5 2 5 5zm0 0c3 0 5-2.5 5-5 0-2.5-1.5-5-5-5-3 0-5 2.5-5 5 0 2.5 2 5 5 5zm0 0c-3 0-5 2.5-5 5 0 2.5 1.5 5 5 5 3 0 5-2.5 5-5 0-2.5-2-5-5-5z"/>
+            </svg>
+          </span>
+          <span class="button-47__text">Заказать турбину</span>
         </button>
       </div>
     </div>
@@ -260,11 +268,14 @@ const advantages = [
   <section class="section advantages">
     <div class="section-header">
       <h2>Преимущества работы с нами</h2>
+      <p>Комплексный подход к проектированию и поставке паровых турбин с гарантией качества и сервисной поддержкой</p>
     </div>
     <div class="advantages-grid">
       {advantages.map((adv, index) => (
         <div class="advantage-card">
-          <div class="advantage-number">{String(index + 1).padStart(2, '0')}</div>
+          <div class="advantage-icon">
+            <img src={adv.icon} alt={adv.title} />
+          </div>
           <h3>{adv.title}</h3>
           <p>{adv.description}</p>
         </div>
@@ -545,14 +556,22 @@ const advantages = [
   .advantage-card:hover {
     border-color: var(--color-accent);
     box-shadow: var(--shadow-md);
+    transform: translateY(-4px);
   }
 
-  .advantage-number {
-    font-size: var(--text-3xl);
-    font-weight: 700;
-    color: var(--color-accent);
+  .advantage-icon {
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     margin-bottom: var(--space-4);
-    opacity: 0.5;
+  }
+
+  .advantage-icon img {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
   }
 
   .advantage-card h3 {
