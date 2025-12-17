@@ -1,0 +1,63 @@
+<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1e3a5f"/>
+      <stop offset="100%" stop-color="#0f172a"/>
+    </linearGradient>
+    <linearGradient id="skinGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#f5d0b9"/>
+      <stop offset="100%" stop-color="#e8c4a8"/>
+    </linearGradient>
+  </defs>
+  
+  <!-- Background circle -->
+  <circle cx="100" cy="100" r="100" fill="url(#bgGrad)"/>
+  
+  <!-- Neck -->
+  <rect x="70" y="140" width="60" height="40" fill="url(#skinGrad)"/>
+  
+  <!-- Shirt/collar -->
+  <path d="M50 200 L70 155 L100 165 L130 155 L150 200 Z" fill="#ffffff"/>
+  <path d="M85 165 L100 180 L115 165" fill="none" stroke="#1e3a5f" stroke-width="2"/>
+  
+  <!-- Face -->
+  <ellipse cx="100" cy="100" rx="55" ry="65" fill="url(#skinGrad)"/>
+  
+  <!-- Hair -->
+  <path d="M45 85 Q50 40 100 35 Q150 40 155 85 L150 75 Q145 55 100 50 Q55 55 50 75 Z" fill="#374151"/>
+  <path d="M45 85 Q48 75 55 78 Q50 85 52 95" fill="#374151"/>
+  <path d="M155 85 Q152 75 145 78 Q150 85 148 95" fill="#374151"/>
+  
+  <!-- Eyebrows -->
+  <path d="M65 80 Q80 75 90 80" stroke="#4b5563" stroke-width="2" fill="none"/>
+  <path d="M110 80 Q120 75 135 80" stroke="#4b5563" stroke-width="2" fill="none"/>
+  
+  <!-- Eyes -->
+  <ellipse cx="77" cy="95" rx="10" ry="7" fill="#ffffff"/>
+  <ellipse cx="123" cy="95" rx="10" ry="7" fill="#ffffff"/>
+  <circle cx="77" cy="95" r="4" fill="#3b4f63"/>
+  <circle cx="123" cy="95" r="4" fill="#3b4f63"/>
+  <circle cx="78" cy="94" r="1.5" fill="#ffffff"/>
+  <circle cx="124" cy="94" r="1.5" fill="#ffffff"/>
+  
+  <!-- Nose -->
+  <path d="M100 95 L100 115 L95 120 Q100 122 105 120 L100 115" fill="none" stroke="#d4a574" stroke-width="1.5"/>
+  
+  <!-- Mouth -->
+  <path d="M85 135 Q100 142 115 135" fill="none" stroke="#c87f6e" stroke-width="2"/>
+  
+  <!-- Ears -->
+  <ellipse cx="45" cy="100" rx="8" ry="15" fill="url(#skinGrad)"/>
+  <ellipse cx="155" cy="100" rx="8" ry="15" fill="url(#skinGrad)"/>
+  
+  <!-- Glasses -->
+  <rect x="60" y="85" width="32" height="22" rx="4" fill="none" stroke="#1e3a5f" stroke-width="2"/>
+  <rect x="108" y="85" width="32" height="22" rx="4" fill="none" stroke="#1e3a5f" stroke-width="2"/>
+  <line x1="92" y1="95" x2="108" y2="95" stroke="#1e3a5f" stroke-width="2"/>
+  <line x1="60" y1="95" x2="45" y2="92" stroke="#1e3a5f" stroke-width="2"/>
+  <line x1="140" y1="95" x2="155" y2="92" stroke="#1e3a5f" stroke-width="2"/>
+  
+  <!-- Light reflection on glasses -->
+  <rect x="62" y="87" width="8" height="4" rx="1" fill="#ffffff" opacity="0.3"/>
+  <rect x="110" y="87" width="8" height="4" rx="1" fill="#ffffff" opacity="0.3"/>
+</svg>

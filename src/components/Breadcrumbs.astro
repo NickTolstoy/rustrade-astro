@@ -1,4 +1,7 @@
 ---
+import type { Lang } from '@/i18n';
+import { getBaseUrl } from '@/i18n';
+
 export interface BreadcrumbItem {
   label: string;
   href?: string;
@@ -6,13 +9,17 @@ export interface BreadcrumbItem {
 
 interface Props {
   items: BreadcrumbItem[];
+  lang?: Lang;
 }
 
-const { items } = Astro.props;
+const { items, lang = 'ru' } = Astro.props;
+const base = getBaseUrl(lang);
+const homeLabel = lang === 'en' ? 'Home' : 'Главная';
+const ariaLabel = lang === 'en' ? 'Site navigation' : 'Навигация по сайту';
 ---
 
-<nav class="breadcrumbs" aria-label="Навигация по сайту">
-  <a href="/">Главная</a>
+<nav class="breadcrumbs" aria-label={ariaLabel}>
+  <a href={base || '/'}>{homeLabel}</a>
   {items.map((item, index) => (
     <>
       <span class="separator">/</span>
@@ -69,4 +76,6 @@ const { items } = Astro.props;
   }
 }
 </style>
+
+
 

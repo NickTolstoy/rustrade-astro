@@ -1,0 +1,55 @@
+---
+import type { Lang } from '@/i18n';
+import { t, getBaseUrl } from '@/i18n';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Breadcrumbs from '@/components/Breadcrumbs.astro';
+import Faq from '@/components/Faq.astro';
+
+const lang: Lang = 'en';
+const base = getBaseUrl(lang);
+
+const faqItems = [
+  {
+    question: "What are the equipment delivery times?",
+    answer: "Delivery times depend on equipment type and project complexity. Standard items can be shipped within 2-4 weeks, while complex custom orders may require 4 to 12 months for production and delivery. We always provide an accurate schedule when finalizing the order."
+  },
+  {
+    question: "Do you provide warranty on equipment?",
+    answer: "Yes, all equipment we supply is covered by warranty. Standard warranty period is 12 months from commissioning, but no more than 18 months from delivery. Extended warranty is available upon agreement."
+  },
+  {
+    question: "Do you perform installation and commissioning?",
+    answer: "Yes, our company offers a full range of services including supervision, installation and commissioning. Our specialists have extensive experience with power equipment and guarantee quality work."
+  },
+  {
+    question: "Do you work on turnkey projects?",
+    answer: "Yes, we specialize in turnkey project implementation. We handle all stages: from design and equipment selection to delivery, installation and commissioning."
+  },
+  {
+    question: "What payment terms do you offer?",
+    answer: "We offer flexible payment terms discussed individually with each customer. Stage payments, leasing and other financial instruments are available."
+  },
+  {
+    question: "Where is your production located?",
+    answer: "We cooperate with leading production facilities in Russia and abroad. Our partners undergo strict quality control to ensure equipment meets all required standards."
+  }
+];
+---
+
+<BaseLayout 
+  lang={lang} 
+  title="FAQ — Answers About Steam Turbines and Equipment | RUSTRADE"
+  description="Frequently asked questions about RUSTRADE: turbine delivery times, equipment warranty, installation and commissioning, payment terms. Expert answers."
+  keywords="FAQ RUSTRADE, turbine questions, turbine warranty, equipment delivery times, turbine installation"
+  faqData={faqItems}
+  breadcrumbs={[{ name: 'FAQ', url: '/eng/faq' }]}
+>
+  <Breadcrumbs items={[{ label: 'FAQ' }]} lang={lang} />
+
+  <Faq 
+    items={faqItems} 
+    lang={lang}
+    title="FAQ"
+    subtitle="Here you will find answers to the most popular questions about our work, equipment and services."
+  />
+</BaseLayout>

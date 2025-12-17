@@ -3,13 +3,55 @@ import type { Lang } from '@/i18n';
 import { t, getBaseUrl } from '@/i18n';
 import BaseLayout from '@/layouts/BaseLayout.astro';
 
+import CtaFaq from '@/components/CtaFaq.astro';
+import Faq from '@/components/Faq.astro';
+
 const lang: Lang = 'en';
 const base = getBaseUrl(lang);
+
+const partners = [
+  { name: "Gazprom", logo: "/img/partners/gazprom.png" },
+  { name: "Tatneft", logo: "/img/partners/tatneft.png" },
+  { name: "Ural Steel", logo: "/img/partners/ural_steel.png" },
+  { name: "URALCHEM", logo: "/img/partners/uralchem.png" },
+  { name: "Severstal", logo: "/img/partners/severstal.png" },
+  { name: "SIBUR", logo: "/img/partners/sibur.png" },
+  { name: "Rosneft", logo: "/img/partners/rosneft.png" },
+  { name: "Segezha Group", logo: "/img/partners/segezha.png" },
+  { name: "EuroChem", logo: "/img/partners/Evrohim.svg" },
+  { name: "Lukoil", logo: "/img/partners/LUK_OIL.svg" },
+  { name: "NLMK", logo: "/img/partners/NLMK.svg" },
+  { name: "Gubakhinsky Coke", logo: "/img/partners/Gubahinskiy Koks.svg" }
+];
+
+const faqItems = [
+  {
+    question: "Why choose RUSTRADE for turbine supply?",
+    answer: "We offer a comprehensive approach: from design to commissioning supervision. Our equipment combines reliability, high efficiency and affordable cost, being an excellent alternative to European analogues."
+  },
+  {
+    question: "Which regions do you deliver to?",
+    answer: "We operate throughout Russia and CIS countries. Our logistics service ensures safe and timely delivery of large-scale power equipment to any location."
+  },
+  {
+    question: "What are the average project implementation timelines?",
+    answer: "Timelines depend on the complexity of the task. Standard component delivery takes from 2 weeks. Manufacturing and delivery of a turnkey turbogenerator unit usually takes from 6 to 12 months."
+  },
+  {
+    question: "Do you provide maintenance services?",
+    answer: "Yes, we provide warranty and post-warranty maintenance, spare parts supply and scheduled repairs for the entire range of supplied equipment."
+  }
+];
 ---
 
 <BaseLayout 
   lang={lang} 
-  keywords="steam turbines, power equipment, turbogenerators, Rustrade"
+  title="RUSTRADE — Steam Turbines, Turbogenerators, Power Equipment"
+  description="RUSTRADE LLC — design and supply of steam turbines from 25 kW to 40 MW, turbogenerators, condensers, oil coolers and turbine blades. Operating throughout Russia."
+  keywords="steam turbines, turbogenerators, power equipment, condensers, oil coolers, turbine blades, RUSTRADE, buy turbine"
+  image="/img/og-default.jpg"
+  isHomePage={true}
+  faqData={faqItems}
 >
   <!-- Hero Section -->
   <section class="hero">
@@ -17,8 +59,8 @@ const base = getBaseUrl(lang);
       <h1>{t('hero.title', lang)}</h1>
       <p>{t('hero.description', lang)}</p>
       <div class="hero-buttons">
-        <a href={`${base}/cases`} class="btn btn-primary">
-          <img src="/img/arrow_right.svg" alt="" width="16" height="16" />
+        <a href={`${base}/cases`} class="btn btn-cases">
+          <img src="/img/arrow_right.svg" alt="" width="16" height="16" class="icon-dark" />
           <span>{t('hero.cta', lang)}</span>
         </a>
         <button class="btn btn-accent" data-modal="contact">
@@ -128,12 +170,45 @@ const base = getBaseUrl(lang);
       <p>{t('services.chiefDesc', lang)}</p>
     </div>
   </section>
+
+  <!-- Partners Marquee Section -->
+  <section class="partners-section">
+    <div class="block-header">
+      <h2>Trusted by</h2>
+    </div>
+    
+    <div class="marquee-container">
+      <div class="marquee-track">
+        {/* First set of partners */}
+        {partners.map(partner => (
+          <div class="partner-item">
+            <div class="partner-logo">
+              <img src={partner.logo} alt={partner.name} />
+            </div>
+          </div>
+        ))}
+        {/* Duplicate set for seamless loop */}
+        {partners.map(partner => (
+          <div class="partner-item">
+            <div class="partner-logo">
+              <img src={partner.logo} alt={partner.name} />
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <Faq items={faqItems} lang={lang} />
+
+  <CtaFaq lang={lang} />
 </BaseLayout>
 
 <style>
+  /* Hero Section */
   .hero {
     background: linear-gradient(59deg, rgba(42, 45, 46, 0.70) 0%, rgba(0, 0, 0, 0.40) 31.59%, rgba(42, 45, 46, 0.70) 100%), 
-                url('/img/main/main_image.webp') center/cover no-repeat;
+                url('/img/main/main.webp') center/cover no-repeat;
     border-radius: var(--radius-xl);
     padding: var(--space-12) var(--space-8);
     margin-bottom: var(--space-8);
@@ -147,6 +222,18 @@ const base = getBaseUrl(lang);
   .hero p { font-size: var(--text-lg); opacity: 0.9; margin-bottom: var(--space-6); line-height: 1.6; }
   .hero-buttons { display: flex; flex-wrap: wrap; gap: var(--space-3); }
   .hero-buttons .btn { display: inline-flex; align-items: center; gap: var(--space-2); }
+  .hero-buttons .btn-cases { 
+    background: #A3DAF3; 
+    color: #1a1a1a; 
+    border: none;
+  }
+  .hero-buttons .btn-cases:hover { 
+    background: #8ECFE8;
+    box-shadow: 0 4px 15px rgba(163, 218, 243, 0.4);
+  }
+  .hero-buttons .btn-cases .icon-dark {
+    filter: brightness(0);
+  }
 
   .block-header { margin-bottom: var(--space-6); }
   .block-header a { display: inline-block; }
@@ -157,16 +244,69 @@ const base = getBaseUrl(lang);
 
   .services-section { margin-bottom: var(--space-8); }
   .services-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--space-4); }
-  .service-card { position: relative; display: flex; flex-direction: column; padding: var(--space-5); background: var(--color-white); border: 1px solid var(--color-border); border-radius: var(--radius-lg); overflow: hidden; transition: all var(--transition-base); min-height: 280px; }
+  .service-card { 
+    position: relative; 
+    display: flex; 
+    flex-direction: column; 
+    padding: var(--space-5); 
+    padding-top: 260px;
+    background: var(--color-white); 
+    border: 1px solid var(--color-border); 
+    border-radius: var(--radius-lg); 
+    overflow: hidden; 
+    transition: all var(--transition-base); 
+    min-height: 400px; 
+  }
   .service-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
-  .service-card-icon { margin-bottom: var(--space-4); }
-  .service-card-content { flex: 1; }
+  .service-card-icon { 
+    position: absolute;
+    top: var(--space-4);
+    left: var(--space-5);
+    z-index: 2;
+    width: 80px;
+    height: 80px;
+    background: var(--color-white);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  }
+  .service-card-icon img {
+    width: 56px;
+    height: 56px;
+  }
+  .service-card-content { 
+    flex: 1; 
+    position: relative;
+    z-index: 2;
+    margin-top: auto;
+    padding-top: var(--space-4);
+  }
   .service-card-content h4 { font-size: var(--text-lg); margin-bottom: var(--space-2); }
   .service-card-content p { color: var(--color-text-muted); font-size: var(--text-base); }
-  .service-card-arrow { position: absolute; top: var(--space-5); right: var(--space-5); opacity: 0; transform: translate(-10px, 10px); transition: all var(--transition-base); }
+  .service-card-arrow { 
+    position: absolute; 
+    top: var(--space-4); 
+    right: var(--space-5); 
+    z-index: 2;
+    opacity: 0; 
+    transform: translate(-10px, 10px); 
+    transition: all var(--transition-base); 
+  }
   .service-card:hover .service-card-arrow { opacity: 1; transform: translate(0, 0); }
-  .service-card-bg { position: absolute; bottom: 0; right: 0; width: 150px; height: auto; opacity: 0.8; transition: opacity var(--transition-base); }
-  .service-card:hover .service-card-bg { opacity: 1; }
+  .service-card-bg { 
+    position: absolute; 
+    top: 0; 
+    right: 0; 
+    width: 100%; 
+    height: 250px; 
+    object-fit: contain;
+    object-position: right bottom;
+    opacity: 0.9; 
+    transition: all var(--transition-base); 
+  }
+  .service-card:hover .service-card-bg { opacity: 1; transform: scale(1.05); }
 
   .service-kinds { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: var(--space-4); margin-bottom: var(--space-8); }
   .service-kind-card { padding: var(--space-5); background: var(--color-bg-card); border-radius: var(--radius-lg); transition: all var(--transition-base); }
@@ -181,4 +321,100 @@ const base = getBaseUrl(lang);
     .service-kinds { grid-template-columns: repeat(2, 1fr); }
   }
   @media (max-width: 480px) { .service-kinds { grid-template-columns: 1fr; } }
+
+  /* Partners Marquee */
+  .partners-section { margin-bottom: var(--space-8); }
+  .marquee-container {
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+    padding: var(--space-4) 0;
+    mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+    -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+  }
+
+  .marquee-track {
+    display: flex;
+    gap: var(--space-8);
+    width: max-content;
+    animation: scroll 40s linear infinite;
+  }
+
+  .marquee-track:hover {
+    animation-play-state: paused;
+  }
+
+  .partner-item {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .partner-logo {
+    padding: var(--space-4) var(--space-8);
+    background: var(--color-white);
+    border: 1px solid var(--color-border);
+    border-radius: 20px;
+    transition: all 0.3s ease;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 200px;
+  }
+
+  .partner-logo img {
+    max-height: 100%;
+    max-width: 100%;
+    object-fit: contain;
+    filter: grayscale(100%);
+    transition: all 0.3s ease;
+    opacity: 0.7;
+  }
+
+  .partner-item:hover .partner-logo {
+    border-color: var(--color-accent);
+    transform: scale(1.05);
+    box-shadow: var(--shadow-sm);
+  }
+  
+  .partner-item:hover .partner-logo img {
+    filter: grayscale(0%);
+    opacity: 1;
+  }
+
+  @keyframes scroll {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+
+  /* CTA Section */
+  .section { margin-bottom: var(--space-8); }
+  .cta {
+    background: var(--color-bg-card);
+    border-radius: var(--radius-xl);
+    padding: var(--space-12) var(--space-8);
+    text-align: center;
+  }
+
+  .cta-content {
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .cta h2 {
+    font-size: var(--text-3xl);
+    margin-bottom: var(--space-4);
+  }
+
+  .cta p {
+    font-size: var(--text-lg);
+    color: var(--color-text-muted);
+    margin-bottom: var(--space-8);
+  }
 </style>

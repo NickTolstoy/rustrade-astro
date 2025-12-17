@@ -1,5 +1,11 @@
 ---
-// Partners/Trust Section Component
+import type { Lang } from '@/i18n';
+
+interface Props {
+  lang?: Lang;
+}
+
+const { lang = 'ru' } = Astro.props;
 
 const partners = [
   { name: "Газпром", logo: "/img/partners/gazprom.png" },
@@ -19,7 +25,7 @@ const partners = [
 
 <section class="partners-section">
   <div class="block-header">
-    <h2>Нам доверяют</h2>
+    <h2>{lang === 'en' ? 'Trusted by' : 'Нам доверяют'}</h2>
   </div>
   
   <div class="marquee-container">

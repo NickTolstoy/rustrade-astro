@@ -16,9 +16,16 @@ const base = getBaseUrl(lang);
 
 <footer>
   <div class="footer-contacts">
-    <a href={base || '/'}>
-      <img src="/img/logo.svg" alt="Rustrade" class="footer-logo" width="120" height="32" />
-    </a>
+    <div class="footer-brand">
+      <a href={base || '/'}>
+        <img src="/img/logo.svg" alt="Rustrade" class="footer-logo" width="160" height="44" />
+      </a>
+      <span class="footer-brand-divider"></span>
+      <p class="footer-slogan">
+        <span>{lang === 'ru' ? 'Энергетические решения,' : 'Energy solutions'}</span>
+        <span>{lang === 'ru' ? 'которые окупаются' : 'that pay off'}</span>
+      </p>
+    </div>
     
     <div class="contact-item">
       <img src="/img/mail.svg" alt="email" width="20" height="20" />
@@ -35,7 +42,16 @@ const base = getBaseUrl(lang);
       <span>{currentCity?.address[lang]}</span>
     </div>
     
-    <p>{currentCity?.workingHours[lang]}</p>
+    <div class="contact-item contact-item-hours">
+      <svg class="footer-clock" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <circle cx="12" cy="12" r="10"/>
+        <path d="M12 6v6l4 2"/>
+      </svg>
+      <span class="working-hours">
+        <span>{t('footer.workingHoursLabel', lang)}</span>
+        <span>{currentCity?.workingHours[lang]}</span>
+      </span>
+    </div>
   </div>
 
   <nav class="footer-nav">

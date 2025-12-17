@@ -1,0 +1,1198 @@
+---
+import type { Lang } from '@/i18n';
+import { getBaseUrl } from '@/i18n';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Breadcrumbs from '@/components/Breadcrumbs.astro';
+import CtaFaq from '@/components/CtaFaq.astro';
+import Faq from '@/components/Faq.astro';
+import Partners from '@/components/Partners.astro';
+
+const lang: Lang = 'en';
+const base = getBaseUrl(lang);
+
+const faqItems = [
+  {
+    question: "What types of steam turbines do you supply?",
+    answer: "We supply all types of steam turbines: backpressure (R), condensing (K), with extraction (P), with heat extraction (T), and combined (PT). Power range from 25 kW to 40 MW."
+  },
+  {
+    question: "What are the delivery times for a turbine?",
+    answer: "Delivery times depend on the type and power of the turbine. Standard models — from 6 to 12 months, custom turbines — from 12 to 18 months. Exact terms are agreed upon when signing the contract."
+  },
+  {
+    question: "Do you provide warranty on equipment?",
+    answer: "Yes, all supplied equipment comes with a warranty from 12 to 24 months depending on the turbine type. Extended service contracts for 5-10 years are also available."
+  },
+  {
+    question: "Do you provide installation and commissioning?",
+    answer: "Yes, we offer a full range of services: supervision of installation, commissioning, customer personnel training and subsequent maintenance service. Our specialists have extensive experience with turbine equipment."
+  }
+];
+
+const turbineTypes = [
+  {
+    title: 'Drive Steam Turbines',
+    description: 'Equipment drive or alternative to electric motor. Ideal solution for pumps, compressors and other industrial equipment.',
+    image: '/img/main/priv_turbine.webp',
+    href: '/eng/turbines/drive'
+  },
+  {
+    title: 'Low Power Steam Turbines',
+    description: 'High-speed steam turbines of full factory readiness with power from 15 to 4000 kW.',
+    image: '/img/main/low_turbine.webp',
+    href: '/eng/turbines/low-power'
+  },
+  {
+    title: 'Condensing Turbines',
+    description: 'Maximum use of steam energy for electricity generation. Direct condensation, extraction and double extraction types.',
+    image: '/img/main/usual_turbine.webp',
+    href: '/eng/turbines/condensing'
+  }
+];
+
+const services = [
+  {
+    title: 'Design and Construction',
+    description: 'Turnkey design and construction of energy facilities',
+    icon: '/img/main/kinds/build.svg'
+  },
+  {
+    title: 'Documentation',
+    description: 'Adaptation and translation of design documentation',
+    icon: '/img/main/kinds/rkd.svg'
+  },
+  {
+    title: 'Certification',
+    description: 'TR CU certification services',
+    icon: '/img/main/kinds/cert.svg'
+  },
+  {
+    title: 'Delivery',
+    description: 'DDP delivery to Customer warehouse',
+    icon: '/img/main/kinds/delivery.svg'
+  },
+  {
+    title: 'Supervision',
+    description: 'Installation supervision and commissioning',
+    icon: '/img/main/kinds/chief.svg'
+  }
+];
+
+const advantages = [
+  {
+    title: 'Official Representative',
+    description: 'Exclusive representative of leading power equipment manufacturers from friendly countries',
+    icon: '/img/lopatki/icons/like_6016641.png'
+  },
+  {
+    title: 'Verified Partners',
+    description: 'Thorough audit of production facilities and reference objects before cooperation',
+    icon: '/img/lopatki/icons/eac_17379530.png'
+  },
+  {
+    title: 'Wide Range',
+    description: 'All types of steam turbines: T, PT, K, R — drive and generation, standard and high-speed',
+    icon: '/img/lopatki/icons/industrial-robot_9837143.png'
+  },
+  {
+    title: '24/7 Service',
+    description: 'Localized service with round-the-clock support and rapid response',
+    icon: '/img/lopatki/icons/long-term_9966603.png'
+  }
+];
+---
+
+<BaseLayout 
+  lang={lang} 
+  title="Steam Turbines from 25 kW to 40 MW — Buy at RUSTRADE"
+  description="Design and supply of steam turbines: drive, low power, condensing. Power from 25 kW to 40 MW. Warranty up to 24 months. Turnkey installation and commissioning."
+  keywords="buy steam turbines, turbines from 25 kW, drive turbines, condensing turbines, low power turbines, RUSTRADE"
+  image="/img/main/priv_turbine.webp"
+  faqData={faqItems}
+  breadcrumbs={[{ name: 'Steam Turbines', url: '/eng/turbines' }]}
+  productData={{
+    name: 'Steam Turbines',
+    description: 'Design and supply of low and medium power steam turbines from 25 kW to 40 MW',
+    image: '/img/main/priv_turbine.webp',
+    category: 'Power Equipment'
+  }}
+>
+  <Breadcrumbs items={[{ label: 'Steam Turbines' }]} lang={lang} />
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-content">
+      <h1>Design and Supply of Steam Turbines</h1>
+      <p>Our mission is to provide customers with the opportunity to acquire high-quality and cost-effective solutions based on steam turbines</p>
+      <div class="hero-buttons">
+        <button class="button-47" data-modal="turbine">
+          <span class="button-47__circle">
+            <svg class="button-47__icon-svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path class="icon-fan" d="M12 12c0-3 2.5-5 5-5 2.5 0 5 1.5 5 5s-2.5 5-5 5c-2.5 0-5-2-5-5zm0 0c0 3-2.5 5-5 5-2.5 0-5-1.5-5-5s2.5-5 5-5c2.5 0 5 2 5 5zm0 0c3 0 5-2.5 5-5 0-2.5-1.5-5-5-5-3 0-5 2.5-5 5 0 2.5 2 5 5 5zm0 0c-3 0-5 2.5-5 5 0 2.5 1.5 5 5 5 3 0 5-2.5 5-5 0-2.5-2-5-5-5z"/>
+            </svg>
+          </span>
+          <span class="button-47__text">Order Turbine</span>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section class="section about-turbines">
+    <div class="section-header">
+      <h2>About Turbines</h2>
+    </div>
+    <div class="about-content">
+      <div class="about-text">
+        <p>
+          RUSTRADE LLC is the official exclusive representative of a number of leading manufacturers of power and auxiliary equipment from friendly countries, including low and medium power steam turbines (from 25 kW to 40 MW).
+        </p>
+        <p>
+          RUSTRADE LLC carefully approaches the selection of manufacturing partners. Before starting cooperation, we conducted a comprehensive technical and economic assessment, as well as an audit of production facilities and customer reference sites.
+        </p>
+        <p>
+          RUSTRADE LLC partners have the capability to produce all types of steam turbines (T, PT, K, R), drive and generation, standard and high-speed, with impulse and reaction blading, variable and constant speed.
+        </p>
+        <p>
+          We strive to fill the void that has formed in the steam turbine market after the departure of European brands and give our Clients the opportunity to implement projects based on steam turbines even where it was previously economically unfeasible.
+        </p>
+      </div>
+      <div class="about-image">
+        <img src="/img/turbines/majer_5.jpg" alt="Steam Turbine" />
+      </div>
+    </div>
+  </section>
+
+  <!-- Turbine Types Section -->
+  <section class="section turbine-types">
+    <div class="section-header">
+      <h2>Types of Steam Turbines</h2>
+      <p>We supply a wide range of steam turbines for various tasks and operating conditions</p>
+    </div>
+    <div class="turbine-types-grid">
+      {turbineTypes.map(turbine => (
+        <a class="turbine-card" href={turbine.href}>
+          <div class="turbine-card-content">
+            <h3>{turbine.title}</h3>
+            <p>{turbine.description}</p>
+          </div>
+          <div class="turbine-card-arrow">
+            <img src="/img/main/black_arrow_diagonal.svg" alt="" />
+          </div>
+          <img class="turbine-card-image" src={turbine.image} alt={turbine.title} />
+        </a>
+      ))}
+    </div>
+  </section>
+
+  <!-- Services Section -->
+  <section class="section services">
+    <div class="section-header">
+      <h2>Services</h2>
+      <p>Comprehensive project support from design to commissioning</p>
+    </div>
+    <div class="services-grid">
+      {services.map(service => (
+        <div class="service-card">
+          <div class="service-icon">
+            <img src={service.icon} alt={service.title} />
+          </div>
+          <h3>{service.title}</h3>
+          <p>{service.description}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- Technical Features Section with 3D Turbine -->
+  <section class="section tech-features-infographic">
+    <!-- 3D Turbine as full background -->
+    <div class="turbine-3d-container" id="turbine-canvas"></div>
+    
+    <!-- Content overlay -->
+    <div class="tech-features-content">
+      <div class="section-header">
+        <h2>Technical Specifications</h2>
+        <p>Professional equipment designed to meet all requirements of the power industry</p>
+      </div>
+      
+      <!-- Feature Cards - vertical stack on left -->
+      <div class="tech-features-cards">
+        <div class="infographic-card">
+          <div class="card-icon">
+            <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M24 4L4 14V34L24 44L44 34V14L24 4Z" stroke="currentColor" stroke-width="2"/>
+              <path d="M24 18L14 23V33L24 38L34 33V23L24 18Z" fill="currentColor" opacity="0.2"/>
+              <path d="M24 4V18M4 14L24 24M44 14L24 24" stroke="currentColor" stroke-width="2"/>
+              <circle cx="24" cy="24" r="6" stroke="currentColor" stroke-width="2"/>
+              <path d="M21 24L23 26L27 22" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <h3>High Quality</h3>
+          <p>Steam turbines from leading world manufacturers with multi-stage quality control and international certification</p>
+        </div>
+        
+        <div class="infographic-card">
+          <div class="card-icon">
+            <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="24" cy="24" r="18" stroke="currentColor" stroke-width="2"/>
+              <path d="M24 12V24L32 28" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+              <path d="M38 24C38 31.732 31.732 38 24 38" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+              <path d="M12 18L8 14M36 18L40 14M24 6V10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+              <circle cx="24" cy="24" r="4" fill="currentColor" opacity="0.3"/>
+            </svg>
+          </div>
+          <h3>Increased Efficiency</h3>
+          <p>Up to 92% efficiency thanks to modern blading technologies and optimized turbine flow paths</p>
+        </div>
+        
+        <div class="infographic-card">
+          <div class="card-icon">
+            <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M24 4L6 12V24C6 35 24 44 24 44C24 44 42 35 42 24V12L24 4Z" stroke="currentColor" stroke-width="2"/>
+              <path d="M24 10L12 16V24C12 31 24 38 24 38C24 38 36 31 36 24V16L24 10Z" fill="currentColor" opacity="0.15"/>
+              <path d="M17 24L22 29L31 20" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <h3>Operational Reliability</h3>
+          <p>Designed turbine lifespan over 200,000 hours with overhaul intervals up to 8 years under proper operating conditions</p>
+        </div>
+        
+        <div class="infographic-card">
+          <div class="card-icon">
+            <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 8c-3.3 0-6 2.7-6 6s2.7 6 6 6c1.1 0 2.1-.3 3-.8L28 32.2c-.5.9-.8 1.9-.8 3 0 3.3 2.7 6 6 6s6-2.7 6-6-2.7-6-6-6c-1.1 0-2.1.3-3 .8L17.2 17c.5-.9.8-1.9.8-3 0-3.3-2.7-6-6-6z" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="currentColor" fill-opacity="0.15"/>
+              <circle cx="12" cy="14" r="2.5" fill="currentColor"/>
+              <circle cx="33.2" cy="35.2" r="2.5" fill="currentColor"/>
+            </svg>
+          </div>
+          <h3>Full Service Support</h3>
+          <p>Installation supervision, commissioning, personnel training and 24/7 technical support throughout the entire service life</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Advantages Section -->
+  <section class="section advantages">
+    <div class="section-header">
+      <h2>Advantages of Working with Us</h2>
+      <p>Comprehensive approach to steam turbine design and supply with quality guarantee and service support</p>
+    </div>
+    <div class="advantages-grid">
+      {advantages.map((adv, index) => (
+        <div class="advantage-card">
+          <div class="advantage-icon">
+            <img src={adv.icon} alt={adv.title} />
+          </div>
+          <h3>{adv.title}</h3>
+          <p>{adv.description}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- Partners Section -->
+  <Partners lang={lang} />
+
+  <Faq items={faqItems} lang={lang} />
+
+  <CtaFaq lang={lang} />
+</BaseLayout>
+
+<style>
+  /* Common Styles */
+  .section {
+    margin-bottom: var(--space-12);
+  }
+
+  .section-header {
+    margin-bottom: var(--space-8);
+  }
+
+  .section-header h2 {
+    font-size: var(--text-3xl);
+    margin-bottom: var(--space-3);
+  }
+
+  .section-header p {
+    color: var(--color-text-muted);
+    font-size: var(--text-lg);
+    max-width: 700px;
+  }
+
+  /* Hero Section */
+  .hero {
+    background: linear-gradient(59deg, rgba(42, 45, 46, 0.85) 0%, rgba(0, 0, 0, 0.60) 31.59%, rgba(42, 45, 46, 0.85) 100%), 
+                url('/img/turbines/turbines_1.png') center/cover no-repeat;
+    border-radius: var(--radius-xl);
+    padding: var(--space-12) var(--space-8);
+    margin-bottom: var(--space-12);
+    min-height: 450px;
+    display: flex;
+    align-items: center;
+  }
+
+  .hero-content {
+    max-width: 700px;
+    color: var(--color-white);
+  }
+
+  .hero h1 {
+    font-size: clamp(32px, 5vw, 48px);
+    color: var(--color-white);
+    margin-bottom: var(--space-4);
+    letter-spacing: -1px;
+  }
+
+  .hero p {
+    font-size: var(--text-lg);
+    opacity: 0.9;
+    margin-bottom: var(--space-8);
+    line-height: 1.6;
+    max-width: 600px;
+  }
+
+  .hero-buttons {
+    display: flex;
+    gap: var(--space-4);
+  }
+
+  /* About Section */
+  .about-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-8);
+    align-items: start;
+  }
+
+  .about-text {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+  }
+
+  .about-text p {
+    font-size: var(--text-base);
+    line-height: 1.7;
+    color: var(--color-text-muted);
+  }
+
+  .about-image {
+    border-radius: var(--radius-xl);
+    overflow: hidden;
+    height: 100%;
+    min-height: 400px;
+  }
+
+  .about-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+  }
+
+  .about-image:hover img {
+    transform: scale(1.03);
+  }
+
+  /* Turbine Types */
+  .turbine-types-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-4);
+  }
+
+  .turbine-card {
+    position: relative;
+    background: linear-gradient(90deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.7) 60%, rgba(255, 255, 255, 0.3) 100%);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-xl);
+    padding: var(--space-6);
+    min-height: 260px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .turbine-card:last-child .turbine-card-image {
+    right: -5%;
+    width: 60%;
+    bottom: 0;
+    height: 90%;
+    object-fit: contain;
+    object-position: right bottom;
+  }
+
+  .turbine-card:last-child .turbine-card-content {
+    max-width: 50%;
+  }
+
+  .turbine-card:hover {
+    border-color: var(--color-accent);
+    box-shadow: var(--shadow-lg);
+    transform: translateY(-4px);
+  }
+
+  .turbine-card-content {
+    position: relative;
+    z-index: 2;
+    max-width: 65%;
+  }
+
+  .turbine-card-content h3 {
+    font-size: var(--text-xl);
+    margin-bottom: var(--space-3);
+    color: var(--color-primary);
+    font-weight: 700;
+  }
+
+  .turbine-card-content p {
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+    line-height: 1.6;
+  }
+
+  .turbine-card-arrow {
+    position: absolute;
+    bottom: var(--space-4);
+    left: var(--space-6);
+    z-index: 2;
+    width: 40px;
+    height: 40px;
+    background: var(--color-white);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: var(--shadow-sm);
+    transition: all 0.3s ease;
+  }
+
+  .turbine-card:hover .turbine-card-arrow {
+    background: var(--color-accent);
+    transform: scale(1.1);
+  }
+
+  .turbine-card-arrow img {
+    width: 20px;
+    height: 20px;
+  }
+
+  .turbine-card-image {
+    position: absolute;
+    right: -10%;
+    bottom: 0;
+    width: 60%;
+    height: 100%;
+    object-fit: contain;
+    object-position: right bottom;
+    z-index: 1;
+    transition: transform 0.4s ease;
+  }
+
+  .turbine-card:hover .turbine-card-image {
+    transform: scale(1.05);
+  }
+
+  /* Services */
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: var(--space-4);
+  }
+
+  .service-card {
+    background: var(--color-white);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: var(--space-5);
+    text-align: center;
+    transition: all 0.3s ease;
+  }
+
+  .service-card:hover {
+    border-color: var(--color-accent);
+    box-shadow: var(--shadow-md);
+  }
+
+  .service-icon {
+    width: 48px;
+    height: 48px;
+    margin: 0 auto var(--space-4);
+    background: var(--color-bg-card);
+    border-radius: var(--radius-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .service-icon img {
+    width: 28px;
+    height: 28px;
+  }
+
+  .service-card h3 {
+    font-size: var(--text-base);
+    margin-bottom: var(--space-2);
+    color: var(--color-primary);
+  }
+
+  .service-card p {
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+    line-height: 1.5;
+  }
+
+  /* Advantages */
+  .advantages-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-4);
+  }
+
+  .advantage-card {
+    background: var(--color-white);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-xl);
+    padding: var(--space-6);
+    transition: all 0.3s ease;
+  }
+
+  .advantage-card:hover {
+    border-color: var(--color-accent);
+    box-shadow: var(--shadow-md);
+    transform: translateY(-4px);
+  }
+
+  .advantage-icon {
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: var(--space-4);
+  }
+
+  .advantage-icon img {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+  }
+
+  .advantage-card h3 {
+    font-size: var(--text-lg);
+    margin-bottom: var(--space-3);
+    color: var(--color-primary);
+  }
+
+  .advantage-card p {
+    font-size: var(--text-base);
+    color: var(--color-text-muted);
+    line-height: 1.6;
+  }
+
+  /* Responsive */
+  @media (max-width: 1200px) {
+    .services-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    .advantages-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 1024px) {
+    .about-content {
+      grid-template-columns: 1fr;
+    }
+
+    .about-image {
+      order: -1;
+      min-height: 300px;
+    }
+
+    .turbine-types-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .turbine-card {
+      min-height: 180px;
+    }
+
+    .turbine-card-content {
+      max-width: 55%;
+    }
+
+    .turbine-card-image {
+      right: -5%;
+      width: 50%;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .hero {
+      padding: var(--space-8) var(--space-5);
+      min-height: 350px;
+    }
+
+    .services-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .advantages-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .section-header h2 {
+      font-size: var(--text-2xl);
+    }
+  }
+
+  @media (max-width: 480px) {
+    .services-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  /* Technical Features Infographic Section */
+  .tech-features-infographic {
+    position: relative;
+    min-height: 700px;
+    overflow: hidden;
+    border-radius: var(--radius-xl);
+  }
+  
+  .tech-features-content {
+    position: relative;
+    z-index: 2;
+    padding: var(--space-8);
+  }
+  
+  .tech-features-content .section-header {
+    margin-bottom: var(--space-6);
+  }
+  
+  .tech-features-content .section-header h2,
+  .tech-features-content .section-header p {
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .tech-features-cards {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+    max-width: 420px;
+  }
+
+  @keyframes windSway {
+    0%, 100% {
+      transform: translateX(0) rotate(0deg);
+    }
+    25% {
+      transform: translateX(-3px) rotate(-0.3deg);
+    }
+    50% {
+      transform: translateX(-5px) rotate(-0.5deg);
+    }
+    75% {
+      transform: translateX(-2px) rotate(-0.2deg);
+    }
+  }
+  
+  .infographic-card {
+    background: rgba(255, 255, 255, 0.92);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    border-radius: var(--radius-xl);
+    padding: var(--space-5);
+    position: relative;
+    transition: box-shadow 0.4s ease, border-color 0.4s ease;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    animation: windSway 3s ease-in-out infinite;
+  }
+  
+  .infographic-card:nth-child(1) { animation-delay: 0s; }
+  .infographic-card:nth-child(2) { animation-delay: 0.4s; }
+  .infographic-card:nth-child(3) { animation-delay: 0.8s; }
+  .infographic-card:nth-child(4) { animation-delay: 1.2s; }
+
+  .infographic-card:hover {
+    animation-play-state: paused;
+    transform: translateX(-5px) rotate(-0.3deg);
+    box-shadow: 
+      0 20px 40px rgba(163, 218, 243, 0.2),
+      0 10px 20px rgba(0, 0, 0, 0.1);
+    border-color: var(--color-accent);
+  }
+  
+  .card-icon {
+    width: 44px;
+    height: 44px;
+    color: var(--color-primary);
+    margin-bottom: var(--space-3);
+    transition: all 0.3s ease;
+  }
+  
+  .card-icon svg {
+    width: 100%;
+    height: 100%;
+  }
+  
+  .infographic-card:hover .card-icon {
+    color: var(--color-accent);
+    transform: scale(1.1);
+  }
+  
+  .infographic-card h3 {
+    font-size: var(--text-md);
+    font-weight: 700;
+    color: var(--color-primary);
+    margin-bottom: var(--space-2);
+    line-height: 1.3;
+  }
+  
+  .infographic-card p {
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+    line-height: 1.5;
+    margin: 0;
+  }
+  
+  .turbine-3d-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    background: transparent;
+  }
+  
+  .turbine-3d-container canvas {
+    width: 100% !important;
+    height: 100% !important;
+    display: block;
+  }
+  
+  @media (max-width: 1200px) {
+    .tech-features-infographic {
+      min-height: 650px;
+    }
+    
+    .tech-features-cards {
+      max-width: 380px;
+    }
+  }
+  
+  @media (max-width: 1024px) {
+    .tech-features-infographic {
+      min-height: 750px;
+    }
+    
+    .tech-features-cards {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-3);
+      max-width: 320px;
+    }
+    
+    .infographic-card:hover {
+      transform: translateY(-4px);
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .tech-features-infographic {
+      min-height: 700px;
+      padding-bottom: var(--space-6);
+    }
+    
+    .tech-features-content {
+      padding: var(--space-4);
+    }
+    
+    .tech-features-cards {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-3);
+      max-width: 260px;
+    }
+    
+    .infographic-card {
+      padding: var(--space-3) var(--space-4);
+      animation: none;
+    }
+    
+    .infographic-card h3 {
+      font-size: var(--text-sm);
+      margin-bottom: 4px;
+    }
+    
+    .infographic-card p {
+      font-size: 12px;
+      line-height: 1.4;
+    }
+    
+    .card-icon {
+      width: 32px;
+      height: 32px;
+      margin-bottom: var(--space-2);
+    }
+    
+    .tech-features-content .section-header h2 {
+      font-size: var(--text-xl);
+    }
+    
+    .tech-features-content .section-header p {
+      font-size: var(--text-sm);
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .tech-features-infographic {
+      min-height: 650px;
+    }
+    
+    .tech-features-content {
+      padding: var(--space-3);
+    }
+    
+    .tech-features-cards {
+      max-width: 220px;
+      gap: var(--space-2);
+    }
+    
+    .infographic-card {
+      padding: var(--space-3);
+      border-radius: var(--radius-md);
+    }
+    
+    .infographic-card h3 {
+      font-size: 13px;
+    }
+    
+    .infographic-card p {
+      font-size: 11px;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    
+    .card-icon {
+      width: 28px;
+      height: 28px;
+      margin-bottom: var(--space-1);
+    }
+  }
+</style>
+
+<script>
+  // 3D Realistic Steel Turbine
+  async function init3DTurbine() {
+    const container = document.getElementById('turbine-canvas');
+    if (!container) return;
+    
+    const THREE = await import('https://unpkg.com/three@0.153.0/build/three.module.js');
+    const { OrbitControls } = await import('https://unpkg.com/three@0.153.0/examples/jsm/controls/OrbitControls.js');
+    const { GPUComputationRenderer } = await import('https://unpkg.com/three@0.153.0/examples/jsm/misc/GPUComputationRenderer.js');
+    
+    const scene = new THREE.Scene();
+    scene.background = null;
+    
+    const width = container.clientWidth;
+    const height = container.clientHeight;
+    
+    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+    renderer.setSize(width, height);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.shadowMap.enabled = true;
+    renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+    renderer.toneMapping = THREE.ACESFilmicToneMapping;
+    renderer.toneMappingExposure = 1.2;
+    renderer.setClearColor(0x000000, 0);
+    container.appendChild(renderer.domElement);
+    
+    const camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 100);
+    camera.position.set(0, 3, 14);
+    camera.lookAt(0, 0, 0);
+    
+    const controls = new OrbitControls(camera, renderer.domElement);
+    controls.enableDamping = true;
+    controls.dampingFactor = 0.05;
+    controls.target.set(0, 0, 0);
+    controls.enableZoom = false;
+    controls.enablePan = false;
+    
+    const isMobile = width < 400;
+    scene.position.x = isMobile ? 4 - 0.75 : 4;
+    scene.rotation.y = Math.PI;
+    scene.scale.setScalar(1.5);
+    
+    const steelMaterials = {
+      polishedSteel: new THREE.MeshStandardMaterial({
+        color: 0xB0B0B0,
+        metalness: 0.6,
+        roughness: 0.25
+      }),
+      brushedSteel: new THREE.MeshStandardMaterial({
+        color: 0x909090,
+        metalness: 0.5,
+        roughness: 0.4
+      }),
+      darkSteel: new THREE.MeshStandardMaterial({
+        color: 0x606060,
+        metalness: 0.4,
+        roughness: 0.5
+      }),
+      bladeSteel: new THREE.MeshStandardMaterial({
+        color: 0xA8A8A8,
+        metalness: 0.55,
+        roughness: 0.3
+      }),
+      chromeSteel: new THREE.MeshStandardMaterial({
+        color: 0xC8C8C8,
+        metalness: 0.7,
+        roughness: 0.15
+      })
+    };
+    
+    const ambient = new THREE.AmbientLight(0xffffff, 0.8);
+    scene.add(ambient);
+    
+    const keyLight = new THREE.DirectionalLight(0xffffff, 2.0);
+    keyLight.position.set(8, 12, 10);
+    keyLight.castShadow = true;
+    keyLight.shadow.mapSize.width = 2048;
+    keyLight.shadow.mapSize.height = 2048;
+    scene.add(keyLight);
+    
+    const fillLight = new THREE.DirectionalLight(0xaabbcc, 1.0);
+    fillLight.position.set(-8, 4, -6);
+    scene.add(fillLight);
+    
+    const rimLight = new THREE.DirectionalLight(0xccddff, 1.2);
+    rimLight.position.set(-3, -3, 8);
+    scene.add(rimLight);
+    
+    const topLight = new THREE.DirectionalLight(0xffffff, 0.8);
+    topLight.position.set(0, 15, 0);
+    scene.add(topLight);
+    
+    const backLight = new THREE.DirectionalLight(0xffffff, 0.6);
+    backLight.position.set(0, 5, -10);
+    scene.add(backLight);
+    
+    function createTurbineStage(params) {
+      const group = new THREE.Group();
+      group.position.x = params.xOffset;
+      
+      const discGeometry = new THREE.CylinderGeometry(params.radius, params.radius * 0.95, params.thickness, 128);
+      discGeometry.rotateZ(Math.PI / 2);
+      const discMesh = new THREE.Mesh(discGeometry, steelMaterials.brushedSteel.clone());
+      discMesh.castShadow = true;
+      discMesh.receiveShadow = true;
+      group.add(discMesh);
+      
+      const hubRingGeo = new THREE.TorusGeometry(params.radius * 0.4, 0.05, 16, 64);
+      hubRingGeo.rotateY(Math.PI / 2);
+      const hubRingMesh = new THREE.Mesh(hubRingGeo, steelMaterials.chromeSteel);
+      hubRingMesh.position.x = params.thickness / 2 + 0.02;
+      group.add(hubRingMesh);
+      
+      const hubRingMesh2 = hubRingMesh.clone();
+      hubRingMesh2.position.x = -params.thickness / 2 - 0.02;
+      group.add(hubRingMesh2);
+      
+      const boltCount = 12;
+      for (let i = 0; i < boltCount; i++) {
+        const angle = (2 * Math.PI * i) / boltCount;
+        const boltRadius = params.radius * 0.7;
+        
+        const boltGeo = new THREE.CylinderGeometry(0.03, 0.03, 0.08, 8);
+        boltGeo.rotateZ(Math.PI / 2);
+        const boltMesh = new THREE.Mesh(boltGeo, steelMaterials.chromeSteel);
+        boltMesh.position.set(
+          params.thickness / 2 + 0.04,
+          Math.cos(angle) * boltRadius,
+          Math.sin(angle) * boltRadius
+        );
+        group.add(boltMesh);
+        
+        const boltHeadGeo = new THREE.CylinderGeometry(0.045, 0.045, 0.02, 6);
+        boltHeadGeo.rotateZ(Math.PI / 2);
+        const boltHeadMesh = new THREE.Mesh(boltHeadGeo, steelMaterials.darkSteel);
+        boltHeadMesh.position.set(
+          params.thickness / 2 + 0.09,
+          Math.cos(angle) * boltRadius,
+          Math.sin(angle) * boltRadius
+        );
+        group.add(boltHeadMesh);
+      }
+      
+      for (let i = 0; i < params.bladeCount; i++) {
+        const angle = (2 * Math.PI * i) / params.bladeCount;
+        
+        const bladeGeo = new THREE.BoxGeometry(params.bladeThickness, params.bladeLength, params.bladeWidth);
+        
+        const bladeMat = (i % 3 === 0) ? steelMaterials.bladeSteel.clone() : 
+                         (i % 3 === 1) ? steelMaterials.polishedSteel.clone() : 
+                         steelMaterials.brushedSteel.clone();
+        
+        const bladeMesh = new THREE.Mesh(bladeGeo, bladeMat);
+        bladeMesh.castShadow = true;
+        bladeMesh.receiveShadow = true;
+        
+        const radial = new THREE.Vector3(0, Math.cos(angle), Math.sin(angle));
+        const offset = params.radius + params.bladeLength / 2;
+        bladeMesh.position.copy(radial.clone().multiplyScalar(offset));
+        
+        const quaternion = new THREE.Quaternion();
+        quaternion.setFromUnitVectors(new THREE.Vector3(0, 1, 0), radial);
+        bladeMesh.quaternion.copy(quaternion);
+        
+        group.add(bladeMesh);
+      }
+      
+      return group;
+    }
+    
+    const stages = [
+      { radius: 2.2, thickness: 0.4, bladeCount: 52, bladeLength: 0.85, bladeWidth: 0.12, bladeThickness: 0.08, xOffset: -1.4 },
+      { radius: 2.0, thickness: 0.38, bladeCount: 48, bladeLength: 0.75, bladeWidth: 0.11, bladeThickness: 0.07, xOffset: 0.0 },
+      { radius: 1.8, thickness: 0.35, bladeCount: 44, bladeLength: 0.65, bladeWidth: 0.10, bladeThickness: 0.065, xOffset: 1.2 },
+    ];
+    
+    const totalLength = stages[stages.length - 1].xOffset - stages[0].xOffset + 2.5;
+    const shaftGroup = new THREE.Group();
+    
+    const shaftGeo = new THREE.CylinderGeometry(0.45, 0.45, totalLength, 64);
+    shaftGeo.rotateZ(Math.PI / 2);
+    const shaftMesh = new THREE.Mesh(shaftGeo, steelMaterials.polishedSteel);
+    shaftMesh.castShadow = true;
+    shaftMesh.receiveShadow = true;
+    shaftMesh.position.x = (stages[0].xOffset + stages[stages.length - 1].xOffset) / 2;
+    shaftGroup.add(shaftMesh);
+    
+    const journalPositions = [-2.0, 2.0];
+    journalPositions.forEach(pos => {
+      const journalGeo = new THREE.CylinderGeometry(0.52, 0.52, 0.3, 32);
+      journalGeo.rotateZ(Math.PI / 2);
+      const journalMesh = new THREE.Mesh(journalGeo, steelMaterials.chromeSteel);
+      journalMesh.position.x = pos;
+      journalMesh.castShadow = true;
+      shaftGroup.add(journalMesh);
+      
+      const ringGeo = new THREE.TorusGeometry(0.53, 0.03, 12, 32);
+      ringGeo.rotateY(Math.PI / 2);
+      const ringMesh1 = new THREE.Mesh(ringGeo, steelMaterials.darkSteel);
+      ringMesh1.position.x = pos + 0.15;
+      shaftGroup.add(ringMesh1);
+      const ringMesh2 = ringMesh1.clone();
+      ringMesh2.position.x = pos - 0.15;
+      shaftGroup.add(ringMesh2);
+    });
+    
+    stages.forEach((stage, idx) => {
+      if (idx < stages.length - 1) {
+        const midX = (stage.xOffset + stages[idx + 1].xOffset) / 2;
+        const grooveGeo = new THREE.TorusGeometry(0.46, 0.02, 8, 32);
+        grooveGeo.rotateY(Math.PI / 2);
+        const grooveMesh = new THREE.Mesh(grooveGeo, steelMaterials.darkSteel);
+        grooveMesh.position.x = midX;
+        shaftGroup.add(grooveMesh);
+      }
+    });
+    
+    scene.add(shaftGroup);
+    
+    const stageGroups = [];
+    stages.forEach((params, idx) => {
+      const stageGroup = createTurbineStage(params);
+      stageGroup.userData.isRotatingStage = true;
+      stageGroup.userData.stageIndex = idx;
+      scene.add(stageGroup);
+      stageGroups.push(stageGroup);
+    });
+    
+    let turbineRotation = 0;
+    const clock = new THREE.Clock();
+    
+    let targetRotationY = 0;
+    let targetRotationZ = 0;
+    let currentRotationY = 0;
+    let currentRotationZ = 0;
+    const baseRotationY = Math.PI;
+    let isMouseOverTurbine = false;
+    
+    document.addEventListener('mousemove', (event) => {
+      const rect = container.getBoundingClientRect();
+      const isOver = event.clientX >= rect.left && event.clientX <= rect.right &&
+                     event.clientY >= rect.top && event.clientY <= rect.bottom;
+      
+      if (isOver) {
+        isMouseOverTurbine = true;
+        const mouseX = ((event.clientX - rect.left) / rect.width) * 2 - 1;
+        const mouseY = ((event.clientY - rect.top) / rect.height) * 2 - 1;
+        targetRotationY = mouseX * 0.25;
+        targetRotationZ = -mouseY * 0.15;
+      } else if (isMouseOverTurbine) {
+        isMouseOverTurbine = false;
+        targetRotationY = 0;
+        targetRotationZ = 0;
+      }
+    });
+    
+    function animate() {
+      requestAnimationFrame(animate);
+      
+      const elapsed = clock.getElapsedTime();
+      
+      scene.traverse((obj) => {
+        if (obj.userData && obj.userData.isRotatingStage) {
+          if (obj.userData.stageIndex === 1) {
+            obj.rotation.x -= 0.035;
+          } else {
+            obj.rotation.x += 0.035;
+          }
+        }
+      });
+      turbineRotation += 0.035;
+      shaftGroup.rotation.x += 0.035;
+      
+      currentRotationY += (targetRotationY - currentRotationY) * 0.08;
+      currentRotationZ += (targetRotationZ - currentRotationZ) * 0.08;
+      scene.rotation.y = baseRotationY + currentRotationY;
+      scene.rotation.z = currentRotationZ;
+      
+      keyLight.intensity = 1.4 + Math.sin(elapsed * 1.5) * 0.1;
+      
+      controls.update();
+      renderer.render(scene, camera);
+    }
+    
+    animate();
+    
+    const resizeObserver = new ResizeObserver(() => {
+      const newWidth = container.clientWidth;
+      const newHeight = container.clientHeight;
+      camera.aspect = newWidth / newHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(newWidth, newHeight);
+      scene.position.x = newWidth < 400 ? 4 - 0.75 : 4;
+    });
+    resizeObserver.observe(container);
+  }
+  
+  document.addEventListener('astro:page-load', () => { init3DTurbine(); });
+  document.addEventListener('DOMContentLoaded', () => { init3DTurbine(); });
+</script>

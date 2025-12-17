@@ -2,22 +2,111 @@
 import type { Lang } from '@/i18n';
 import { t, getBaseUrl } from '@/i18n';
 import BaseLayout from '@/layouts/BaseLayout.astro';
+import Breadcrumbs from '@/components/Breadcrumbs.astro';
+import Faq from '@/components/Faq.astro';
+import CtaFaq from '@/components/CtaFaq.astro';
 import { getNewsArticles, newsCategories, formatDate, getPopularArticles } from '@/data/news';
+import '@/styles/components/news.css';
 
 const lang: Lang = 'en';
 const base = getBaseUrl(lang);
 const articles = getNewsArticles(lang);
 const popularArticles = getPopularArticles(3);
+
+const faqItems = [
+  {
+    question: "Where can I find information about new products?",
+    answer: "We regularly publish information about new developments, equipment arrivals and technological solutions in the News section. Subscribe to our newsletter to stay updated on important news."
+  },
+  {
+    question: "Do you participate in industry exhibitions?",
+    answer: "Yes, RUSTRADE is an active participant in major energy exhibitions and conferences. We post event announcements and participation reports in this section."
+  },
+  {
+    question: "Can I reprint materials from your website?",
+    answer: "Use of site materials is permitted only with written permission from the copyright holder and with an active link to the source."
+  }
+];
 ---
 
 <BaseLayout 
   lang={lang} 
-  title="News & Articles"
-  description="Rustrade company news, articles about energy and steam turbines"
+  title="News and Articles about Steam Turbines — RUSTRADE"
+  description="RUSTRADE company news, expert articles about steam turbines, energy efficiency and modern technologies in the energy sector. Up-to-date information from specialists."
+  keywords="RUSTRADE news, turbine articles, energy news, steam turbine articles"
   activeMenu={t('news.title', lang)}
+  faqData={faqItems}
+  breadcrumbs={[{ name: 'News & Articles', url: '/eng/news' }]}
 >
+  <Breadcrumbs items={[{ label: 'News & Articles' }]} lang={lang} />
+
   <div class="news-page">
+    <div class="news-page-header">
+      <div class="news-header-info">
+        <h1>News & Articles</h1>
+        <p class="news-count">Found: <span id="news-count">{articles.length}</span> <span id="news-count-label">articles</span></p>
+      </div>
+      <div class="view-switcher-wrapper">
+        <div class="view-switcher">
+          <button id="view-grid" class="view-btn active" aria-label="Grid view">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+              <path d="M3,3V11H11V3M9,9H5V5H9M3,13V21H11V13M9,19H5V15H9M13,3V11H21V3M19,9H15V5H19M13,13V21H21V13M19,19H15V15H19Z"/>
+            </svg>
+          </button>
+          <button id="view-list" class="view-btn" aria-label="List view">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+              <path d="M3,4H21V6H3V4M3,11H21V13H3V11M3,18H21V20H3V18Z"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
     <div class="news-layout">
+      <!-- Main Content -->
+      <div class="news-main">
+        <main class="news-content">
+          <div id="news-container" class="news-grid">
+            {articles.map((article, idx) => (
+              <a 
+                href={`${base}/news/${article.slug}`} 
+                class="news-card" 
+                data-category={article.category} 
+                data-full-excerpt={article.excerpt[lang]}
+              >
+                <div class="news-card-image">
+                  <img src={article.image} alt={article.title[lang]} loading={idx < 4 ? "eager" : "lazy"} />
+                  <span class="news-card-category">{newsCategories[article.category]?.[lang]}</span>
+                </div>
+                <div class="news-card-body">
+                  <div class="news-card-meta">
+                    <span class="news-date">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+                        <line x1="16" y1="2" x2="16" y2="6"/>
+                        <line x1="8" y1="2" x2="8" y2="6"/>
+                        <line x1="3" y1="10" x2="21" y2="10"/>
+                      </svg>
+                      {formatDate(article.date, lang)}
+                    </span>
+                  </div>
+                  <h2 class="news-title">{article.title[lang]}</h2>
+                  <p class="news-excerpt">{article.excerpt[lang]}</p>
+                  <div class="news-card-footer">
+                    <span class="read-more">
+                      Read more
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M5 12h14M12 5l7 7-7 7"/>
+                      </svg>
+                    </span>
+                  </div>
+                </div>
+              </a>
+            ))}
+          </div>
+        </main>
+      </div>
+
       <!-- Sidebar -->
       <aside class="news-sidebar">
         <!-- Search Block -->
@@ -61,575 +150,23 @@ const popularArticles = getPopularArticles(3);
           </div>
         </div>
       </aside>
-
-      <!-- Main Content -->
-      <div class="news-main">
-        <div class="news-header">
-          <div class="news-header-info">
-            <h1>News & Articles</h1>
-            <p class="news-count">Found: <span id="news-count">{articles.length}</span> articles</p>
-          </div>
-          <div class="view-switcher">
-            <button id="view-grid" class="view-btn active" aria-label="Grid view">
-              <svg viewBox="0 0 24 24" fill="currentColor">
-                <path d="M3,3V11H11V3M9,9H5V5H9M3,13V21H11V13M9,19H5V15H9M13,3V11H21V3M19,9H15V5H19M13,13V21H21V13M19,19H15V15H19Z"/>
-              </svg>
-            </button>
-            <button id="view-list" class="view-btn" aria-label="List view">
-              <svg viewBox="0 0 24 24" fill="currentColor">
-                <path d="M3,4H21V6H3V4M3,11H21V13H3V11M3,18H21V20H3V18Z"/>
-              </svg>
-            </button>
-          </div>
-        </div>
-
-        <main class="news-content">
-          <div id="news-container" class="news-grid">
-            {articles.map((article, idx) => (
-              <a 
-                href={`${base}/news/${article.slug}`} 
-                class="news-card" 
-                data-category={article.category} 
-                data-full-excerpt={article.excerpt[lang]}
-              >
-                <div class="news-card-image">
-                  <img src={article.image} alt={article.title[lang]} loading={idx < 4 ? "eager" : "lazy"} />
-                  <span class="news-card-category">{newsCategories[article.category]?.[lang]}</span>
-                </div>
-                <div class="news-card-body">
-                  <div class="news-card-meta">
-                    <span class="news-date">
-                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
-                        <line x1="16" y1="2" x2="16" y2="6"/>
-                        <line x1="8" y1="2" x2="8" y2="6"/>
-                        <line x1="3" y1="10" x2="21" y2="10"/>
-                      </svg>
-                      {formatDate(article.date, lang)}
-                    </span>
-                  </div>
-                  <h2 class="news-title">{article.title[lang]}</h2>
-                  <p class="news-excerpt">{article.excerpt[lang]}</p>
-                  <div class="news-card-footer">
-                    <span class="read-more">
-                      Read more
-                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M5 12h14M12 5l7 7-7 7"/>
-                      </svg>
-                    </span>
-                  </div>
-                </div>
-              </a>
-            ))}
-          </div>
-        </main>
-      </div>
     </div>
 
     <section class="page-description">
-      <h2>Rustrade: Stay Updated on Energy Industry Events</h2>
+      <h2>RUSTRADE: Stay Informed About the Energy World</h2>
       <p>
-        This section is designed to keep you informed about the most important and interesting events in the world of energy and steam turbines. Here we share Rustrade company news, talk about launching new projects, and announce participation in key industry exhibitions and conferences.
+        This section is designed to keep you informed about the most important and interesting events in the world of energy and steam turbines. Here we share RUSTRADE company news, talk about new project launches, and announce participation in key industry exhibitions and conferences.
       </p>
       <p>
-        Follow our publications to be the first to learn about technological innovations, trends and get practical advice from experts. We strive to be not just a supplier of quality turbines for you, but also a reliable source of inspiration and up-to-date information.
+        Follow our publications to be the first to learn about technological innovations, trends and get practical advice from experts. We strive to be not just a supplier of quality turbines, but also a reliable source of inspiration and up-to-date information.
       </p>
     </section>
+
+    <Faq items={faqItems} lang={lang} />
+
+    <CtaFaq lang={lang} />
   </div>
 </BaseLayout>
-
-<style>
-  /* ===== Page Layout ===== */
-  .news-page {
-    padding: 24px 0 60px;
-  }
-
-  .news-layout {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 32px;
-  }
-
-  @media (min-width: 1024px) {
-    .news-layout {
-      grid-template-columns: 340px 1fr;
-      gap: 40px;
-    }
-  }
-
-  /* ===== Sidebar - Light Theme ===== */
-  .news-sidebar {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-  }
-
-  @media (min-width: 1024px) {
-    .news-sidebar {
-      position: sticky;
-      top: 24px;
-      max-height: calc(100vh - 48px);
-      overflow-y: auto;
-    }
-  }
-
-  .sidebar-block {
-    background: var(--color-white, #fff);
-    border: 1px solid var(--color-border, #E7E5E6);
-    border-radius: 16px;
-    padding: 20px;
-  }
-
-  .sidebar-block h3 {
-    margin: 0 0 16px;
-    font-size: 15px;
-    font-weight: 700;
-    color: var(--color-primary, #2A2D2E);
-    font-family: var(--font-heading, 'Onest', sans-serif);
-  }
-
-  /* Search Block */
-  .search-input-wrapper {
-    position: relative;
-  }
-
-  .search-input-wrapper input {
-    width: 100%;
-    padding: 12px 12px 12px 40px;
-    border: 1px solid var(--color-border, #E7E5E6);
-    border-radius: 10px;
-    background: var(--color-bg, #F8F8F8);
-    color: var(--color-primary, #2A2D2E);
-    font-size: 14px;
-    font-family: var(--font-body, 'Manrope', sans-serif);
-    transition: all 0.3s ease;
-  }
-
-  .search-input-wrapper input::placeholder {
-    color: var(--color-text-muted, #5C5A5A);
-  }
-
-  .search-input-wrapper input:focus {
-    outline: none;
-    border-color: var(--color-accent, #A3DAF3);
-    background: var(--color-white, #fff);
-    box-shadow: 0 0 0 3px rgba(163, 218, 243, 0.2);
-  }
-
-  .search-input-wrapper .search-icon {
-    position: absolute;
-    left: 12px;
-    top: 50%;
-    transform: translateY(-50%);
-    color: var(--color-text-muted, #5C5A5A);
-    pointer-events: none;
-  }
-
-  /* Categories Block - Horizontal Pills */
-  .filter-tags-horizontal {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-  }
-
-  .filter-tag-pill {
-    padding: 8px 16px;
-    background: var(--color-bg, #F8F8F8);
-    border: 1px solid var(--color-border, #E7E5E6);
-    border-radius: 20px;
-    color: var(--color-text-muted, #5C5A5A);
-    font-size: 13px;
-    font-family: var(--font-body, 'Manrope', sans-serif);
-    font-weight: 500;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    white-space: nowrap;
-  }
-
-  .filter-tag-pill:hover {
-    background: var(--color-border, #E7E5E6);
-    color: var(--color-primary, #2A2D2E);
-  }
-
-  .filter-tag-pill.active {
-    background: var(--color-accent, #A3DAF3);
-    border-color: var(--color-accent, #A3DAF3);
-    color: var(--color-primary, #2A2D2E);
-    font-weight: 700;
-  }
-
-  /* Popular Posts Block */
-  .popular-posts-list {
-    display: flex;
-    flex-direction: column;
-    gap: 0;
-  }
-
-  .popular-post-item {
-    display: flex;
-    align-items: flex-start;
-    gap: 12px;
-    padding: 12px 0;
-    text-decoration: none;
-    border-bottom: 1px solid var(--color-border, #E7E5E6);
-    transition: all 0.3s ease;
-  }
-
-  .popular-post-item:last-child {
-    border-bottom: none;
-    padding-bottom: 0;
-  }
-
-  .popular-post-item:first-child {
-    padding-top: 0;
-  }
-
-  .popular-post-item:hover {
-    transform: translateX(4px);
-  }
-
-  .popular-post-item:hover .popular-post-title {
-    color: var(--color-accent, #A3DAF3);
-  }
-
-  .popular-post-number {
-    font-size: 20px;
-    font-weight: 700;
-    color: var(--color-accent, #A3DAF3);
-    font-family: var(--font-heading, 'Onest', sans-serif);
-    line-height: 1;
-    min-width: 28px;
-  }
-
-  .popular-post-content {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-    flex: 1;
-  }
-
-  .popular-post-title {
-    font-size: 13px;
-    font-weight: 500;
-    color: var(--color-primary, #2A2D2E);
-    line-height: 1.4;
-    transition: color 0.3s ease;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-  }
-
-  .popular-post-date {
-    font-size: 11px;
-    color: var(--color-text-muted, #5C5A5A);
-  }
-
-  /* ===== Main Content ===== */
-  .news-main {
-    min-width: 0;
-  }
-
-  .news-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    margin-bottom: 28px;
-    gap: 20px;
-    flex-wrap: wrap;
-  }
-
-  .news-header-info h1 {
-    margin: 0 0 8px;
-    font-size: 32px;
-    font-weight: 700;
-    color: var(--color-primary, #2A2D2E);
-    font-family: var(--font-heading, 'Onest', sans-serif);
-  }
-
-  .news-count {
-    margin: 0;
-    font-size: 14px;
-    color: var(--color-text-muted, #5C5A5A);
-  }
-
-  .view-switcher {
-    display: flex;
-    gap: 8px;
-    background: var(--color-border, #E7E5E6);
-    padding: 4px;
-    border-radius: 10px;
-  }
-
-  .view-btn {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 40px;
-    height: 40px;
-    background: transparent;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    color: var(--color-text-muted, #5C5A5A);
-  }
-
-  .view-btn:hover {
-    color: var(--color-primary, #2A2D2E);
-  }
-
-  .view-btn.active {
-    background: var(--color-white, #fff);
-    color: var(--color-primary, #2A2D2E);
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  }
-
-  .view-btn svg {
-    width: 20px;
-    height: 20px;
-  }
-
-  /* ===== News Grid ===== */
-  .news-grid {
-    display: grid;
-    gap: 28px;
-    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-  }
-
-  /* ===== News Card ===== */
-  .news-card {
-    position: relative;
-    background: var(--color-white, #fff);
-    border-radius: 16px;
-    overflow: hidden;
-    text-decoration: none;
-    border: 1px solid var(--color-border, #E7E5E6);
-    display: flex;
-    flex-direction: column;
-    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  }
-
-  .news-card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
-    border-color: transparent;
-  }
-
-  .news-card-image {
-    position: relative;
-    overflow: hidden;
-  }
-
-  .news-card-image img {
-    width: 100%;
-    aspect-ratio: 16/10;
-    object-fit: cover;
-    transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  }
-
-  .news-card:hover .news-card-image img {
-    transform: scale(1.08);
-  }
-
-  .news-card-category {
-    position: absolute;
-    top: 14px;
-    left: 14px;
-    padding: 6px 14px;
-    background: var(--color-accent, #A3DAF3);
-    border-radius: 50px;
-    font-size: 12px;
-    font-weight: 700;
-    color: var(--color-bg-dark, #2A2D2E);
-    font-family: var(--font-body, 'Manrope', sans-serif);
-    backdrop-filter: blur(4px);
-    z-index: 1;
-  }
-
-  .news-card-body {
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    flex-grow: 1;
-  }
-
-  .news-card-meta {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    margin-bottom: 12px;
-  }
-
-  .news-date {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    font-size: 13px;
-    color: var(--color-text-muted, #5C5A5A);
-  }
-
-  .news-date svg {
-    opacity: 0.6;
-  }
-
-  .news-title {
-    margin: 0 0 10px;
-    font-size: 18px;
-    font-weight: 700;
-    color: var(--color-primary, #2A2D2E);
-    line-height: 1.4;
-    font-family: var(--font-heading, 'Onest', sans-serif);
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-    transition: color 0.3s ease;
-  }
-
-  .news-card:hover .news-title {
-    color: var(--color-accent, #A3DAF3);
-  }
-
-  .news-excerpt {
-    margin: 0 0 16px;
-    font-size: 14px;
-    line-height: 1.6;
-    color: var(--color-text-muted, #5C5A5A);
-    flex-grow: 1;
-    display: -webkit-box;
-    -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-  }
-
-  .news-card-footer {
-    margin-top: auto;
-    padding-top: 16px;
-    border-top: 1px solid var(--color-border, #E7E5E6);
-  }
-
-  .read-more {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    font-size: 14px;
-    font-weight: 700;
-    color: var(--color-primary, #2A2D2E);
-    transition: all 0.3s ease;
-  }
-
-  .read-more svg {
-    transition: transform 0.3s ease;
-  }
-
-  .news-card:hover .read-more {
-    color: var(--color-accent, #A3DAF3);
-  }
-
-  .news-card:hover .read-more svg {
-    transform: translateX(4px);
-  }
-
-  /* ===== News List View ===== */
-  .news-list {
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
-  }
-
-  :global(.news-list-item) {
-    display: grid;
-    grid-template-columns: 1fr;
-    background: var(--color-white, #fff);
-    border: 1px solid var(--color-border, #E7E5E6);
-    border-radius: 16px;
-    overflow: hidden;
-    text-decoration: none;
-    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  }
-
-  @media (min-width: 640px) {
-    :global(.news-list-item) {
-      grid-template-columns: 280px 1fr;
-    }
-  }
-
-  :global(.news-list-item):hover {
-    transform: translateY(-4px);
-    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.1);
-    border-color: transparent;
-  }
-
-  :global(.news-list-item) .news-card-image {
-    height: 100%;
-    min-height: 200px;
-  }
-
-  :global(.news-list-item) .news-card-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    aspect-ratio: auto;
-  }
-
-  :global(.news-list-item) .news-card-body {
-    padding: 24px;
-  }
-
-  :global(.news-list-item) .news-excerpt {
-    -webkit-line-clamp: 2;
-  }
-
-  :global(.news-list-item) .news-card-category {
-    display: none;
-  }
-
-  /* ===== Page Description ===== */
-  .page-description {
-    margin-top: 60px;
-    padding-top: 40px;
-    border-top: 1px solid var(--color-border, #E7E5E6);
-  }
-
-  .page-description h2 {
-    margin: 0 0 20px;
-    font-size: clamp(24px, 4vw, 32px);
-    font-weight: 700;
-    color: var(--color-primary, #2A2D2E);
-    font-family: var(--font-heading, 'Onest', sans-serif);
-  }
-
-  .page-description p {
-    margin: 0 0 16px;
-    font-size: 16px;
-    line-height: 1.75;
-    color: var(--color-text-muted, #5C5A5A);
-  }
-
-  .page-description p:last-child {
-    margin-bottom: 0;
-  }
-
-  /* ===== Responsive ===== */
-  @media (max-width: 1023px) {
-    .news-sidebar {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 16px;
-    }
-  }
-
-  @media (max-width: 640px) {
-    .news-header-info h1 {
-      font-size: 26px;
-    }
-
-    .news-grid {
-      grid-template-columns: 1fr;
-    }
-  }
-</style>
 
 <script>
   document.addEventListener('DOMContentLoaded', function() {
@@ -641,14 +178,34 @@ const popularArticles = getPopularArticles(3);
     const searchInput = document.getElementById('search-input') as HTMLInputElement;
     const filterButtons = document.querySelectorAll('.filter-tag-pill');
 
-    function pluralize(count: number) {
-      return count === 1 ? 'article' : 'articles';
+    function pluralize(count: number, forms: string[]) {
+      // English pluralization - simple
+      return count === 1 ? forms[0] : forms[1];
     }
+
+    const newsCountLabel = document.getElementById('news-count-label');
 
     function updateCounter() {
       const visibleItems = newsItems.filter(item => (item as HTMLElement).style.display !== 'none').length;
+      const activeCategoryButton = document.querySelector('.filter-tag-pill.active');
+      const selectedCategory = activeCategoryButton?.getAttribute('data-category') || 'all';
+      
+      let forms: string[];
+      if (selectedCategory === 'all') {
+        forms = ['article', 'articles'];
+      } else if (selectedCategory === 'company' || selectedCategory === 'industry') {
+        forms = ['news item', 'news items'];
+      } else if (selectedCategory === 'articles') {
+        forms = ['article', 'articles'];
+      } else {
+        forms = ['article', 'articles'];
+      }
+      
       if (newsCountSpan) {
-        newsCountSpan.textContent = `${visibleItems} ${pluralize(visibleItems)}`;
+        newsCountSpan.textContent = String(visibleItems);
+      }
+      if (newsCountLabel) {
+        newsCountLabel.textContent = pluralize(visibleItems, forms);
       }
     }
 

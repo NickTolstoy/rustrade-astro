@@ -1,0 +1,1044 @@
+---
+import type { Lang } from '@/i18n';
+import { t, getBaseUrl } from '@/i18n';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import '@/styles/components/news.css';
+import Faq from '@/components/Faq.astro';
+import CtaFaq from '@/components/CtaFaq.astro';
+import { newsArticles, newsCategories, formatDate, getPopularArticles, getNewsArticleBySlug } from '@/data/news';
+
+export function getStaticPaths() {
+  return newsArticles.map(article => ({
+    params: { slug: article.slug },
+    props: { article }
+  }));
+}
+
+const { slug } = Astro.params;
+const { article } = Astro.props;
+
+const lang: Lang = 'en';
+const base = getBaseUrl(lang);
+
+// Get popular articles excluding current
+const popularArticles = getPopularArticles(4).filter(a => a.slug !== slug);
+
+// Get related articles (same category or with matching tags)
+const relatedArticles = newsArticles
+  .filter(a => a.slug !== slug && (a.category === article.category || a.tags?.some(tag => article.tags?.includes(tag))))
+  .slice(0, 3);
+
+// Extract headings for table of contents
+const content = article.content[lang];
+const headingMatches = content.match(/<h2>(.*?)<\/h2>/g) || [];
+const tableOfContents = headingMatches.map((match, index) => {
+  const text = match.replace(/<\/?h2>/g, '');
+  const id = `section-${index + 1}`;
+  return { text, id };
+});
+
+// Modify content to add IDs to headings
+let modifiedContent = content;
+tableOfContents.forEach((item, index) => {
+  modifiedContent = modifiedContent.replace(
+    `<h2>${item.text}</h2>`,
+    `<h2 id="${item.id}">${item.text}</h2>`
+  );
+});
+
+// Services for sidebar
+const services = [
+  { name: 'Steam Turbines', href: '/eng/turbines', icon: '/img/icons/turbine.svg' },
+  { name: 'Condensers', href: '/eng/condensers', icon: '/img/icons/condenser.svg' },
+  { name: 'Oil Coolers', href: '/eng/oil-coolers', icon: '/img/icons/oil-cooler.svg' },
+  { name: 'Turbine Blades', href: '/eng/blades', icon: '/img/icons/blades.svg' },
+  { name: 'Turbogenerators', href: '/eng/turbogenerators', icon: '/img/icons/generator.svg' },
+  { name: 'Engineering', href: '/eng/design', icon: '/img/icons/design.svg' }
+];
+
+const faqItems = [
+  {
+    question: "How can I contact you for consultation?",
+    answer: "You can contact us by phone +7 (499) 707-51-72 or leave a request on the website. Our specialists will contact you shortly."
+  },
+  {
+    question: "What is the equipment delivery time?",
+    answer: "Delivery times depend on the type and configuration of equipment. On average, the period is from 3 to 12 months. Exact terms are agreed individually."
+  },
+  {
+    question: "Do you provide warranty on equipment?",
+    answer: "Yes, all supplied equipment comes with a warranty from 12 to 24 months depending on the equipment type."
+  }
+];
+---
+
+<BaseLayout 
+  lang={lang} 
+  title={`${article.title[lang]} | RUSTRADE`}
+  description={article.excerpt[lang]}
+  keywords={article.tags?.join(', ')}
+  image={article.image}
+  type="article"
+  publishedTime={article.date}
+  activeMenu={t('news.title', lang)}
+  faqData={faqItems}
+  breadcrumbs={[{ name: 'News & Articles', url: '/eng/news' }, { name: article.title[lang], url: `/eng/news/${article.slug}` }]}
+  articleData={{
+    headline: article.title[lang],
+    description: article.excerpt[lang],
+    image: article.image,
+    datePublished: article.date,
+    articleType: article.category === 'industry' ? 'NewsArticle' : article.category === 'articles' ? 'TechArticle' : 'Article'
+  }}
+>
+  <div class="article-page">
+    <!-- Breadcrumbs -->
+    <nav class="breadcrumbs">
+      <a href={`${base}/`}>Home</a>
+      <span class="separator">/</span>
+      <a href={`${base}/news`}>News & Articles</a>
+      <span class="separator">/</span>
+      <span class="current">{article.title[lang]}</span>
+    </nav>
+
+    <div class="article-layout">
+      <div class="article-grid">
+        <!-- Main Content -->
+        <main class="article-main">
+          <article class="article-content">
+          <!-- Article Header -->
+          <header class="article-header">
+            <div class="article-meta">
+              <span class="article-category">{newsCategories[article.category]?.[lang]}</span>
+              <span class="article-date">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+                  <line x1="16" y1="2" x2="16" y2="6"/>
+                  <line x1="8" y1="2" x2="8" y2="6"/>
+                  <line x1="3" y1="10" x2="21" y2="10"/>
+                </svg>
+                {formatDate(article.date, lang)}
+              </span>
+              {article.readTime && (
+                <span class="article-read-time">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"/>
+                    <polyline points="12 6 12 12 16 14"/>
+                  </svg>
+                  {article.readTime} min read
+                </span>
+              )}
+              {article.category === 'articles' && (
+                <span class="article-author">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                    <circle cx="12" cy="7" r="4"/>
+                  </svg>
+                  Автор материала: _______
+                </span>
+              )}
+            </div>
+            <h1>{article.title[lang]}</h1>
+            {article.tags && article.tags.length > 0 && (
+              <div class="article-tags">
+                {article.tags.map(tag => (
+                  <span class="article-tag">#{tag}</span>
+                ))}
+              </div>
+            )}
+          </header>
+
+          <!-- Article Image -->
+          <div class="article-image">
+            <img src={article.image} alt={article.title[lang]} />
+          </div>
+
+          <!-- Article Body -->
+          <div class="article-body" set:html={modifiedContent} />
+
+          <!-- Share & Actions -->
+          <div class="article-actions">
+            <div class="share-section">
+              <span class="share-label">Share:</span>
+              <div class="share-buttons">
+                <button class="share-btn" data-share="telegram" aria-label="Share on Telegram">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/>
+                  </svg>
+                </button>
+                <button class="share-btn" data-share="vk" aria-label="Share on VK">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M15.684 0H8.316C1.592 0 0 1.592 0 8.316v7.368C0 22.408 1.592 24 8.316 24h7.368C22.408 24 24 22.408 24 15.684V8.316C24 1.592 22.408 0 15.684 0zm3.692 17.123h-1.744c-.66 0-.862-.523-2.049-1.713-1.033-1.033-1.49-1.173-1.744-1.173-.356 0-.458.102-.458.593v1.565c0 .424-.135.678-1.253.678-1.846 0-3.896-1.118-5.335-3.202C4.624 10.857 4 8.678 4 8.213c0-.254.102-.491.593-.491h1.744c.44 0 .61.203.78.677.847 2.455 2.268 4.606 2.853 4.606.22 0 .322-.102.322-.66V9.721c-.068-1.186-.695-1.287-.695-1.71 0-.203.17-.407.44-.407h2.744c.372 0 .508.203.508.643v3.473c0 .372.17.508.271.508.22 0 .407-.136.813-.542 1.254-1.406 2.151-3.574 2.151-3.574.118-.254.322-.491.763-.491h1.744c.525 0 .644.27.525.643-.22 1.017-2.354 4.031-2.354 4.031-.186.305-.254.44 0 .78.186.254.796.779 1.203 1.253.745.847 1.32 1.558 1.473 2.049.17.474-.085.713-.576.713z"/>
+                  </svg>
+                </button>
+                <button class="share-btn" data-share="copy" aria-label="Copy link">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
+                    <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+                  </svg>
+                </button>
+              </div>
+            </div>
+            <a href={`${base}/news`} class="back-link">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M19 12H5M12 19l-7-7 7-7"/>
+              </svg>
+              All Articles
+            </a>
+          </div>
+        </article>
+        </main>
+
+        <!-- Right Sidebar -->
+        <aside class="article-sidebar article-sidebar-right">
+        <div class="sidebar-sticky">
+          <!-- Table of Contents (Wiki-style) - Only for articles -->
+          {article.category === 'articles' && tableOfContents.length > 0 && (
+            <div class="sidebar-section toc-section">
+              <h3>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <line x1="8" y1="6" x2="21" y2="6"/>
+                  <line x1="8" y1="12" x2="21" y2="12"/>
+                  <line x1="8" y1="18" x2="21" y2="18"/>
+                  <circle cx="4" cy="6" r="1" fill="currentColor"/>
+                  <circle cx="4" cy="12" r="1" fill="currentColor"/>
+                  <circle cx="4" cy="18" r="1" fill="currentColor"/>
+                </svg>
+                Table of Contents
+              </h3>
+              <nav class="toc-nav">
+                {tableOfContents.map((item, index) => (
+                  <a href={`#${item.id}`} class="toc-link">
+                    <span class="toc-number">{index + 1}</span>
+                    <span class="toc-text">{item.text}</span>
+                  </a>
+                ))}
+              </nav>
+            </div>
+          )}
+
+          <!-- Popular Materials -->
+          <div class="sidebar-section popular-section">
+            <h3>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+              </svg>
+              Popular Articles
+            </h3>
+            <div class="popular-list">
+              {popularArticles.slice(0, 3).map((popArticle) => (
+                <a href={`${base}/news/${popArticle.slug}`} class="popular-card">
+                  <div class="popular-card-image">
+                    <img src={popArticle.image} alt={popArticle.title[lang]} loading="lazy" />
+                  </div>
+                  <div class="popular-card-content">
+                    <span class="popular-card-category">{newsCategories[popArticle.category]?.[lang]}</span>
+                    <h4>{popArticle.title[lang]}</h4>
+                    <span class="popular-card-date">{formatDate(popArticle.date, lang)}</span>
+                  </div>
+                </a>
+              ))}
+            </div>
+          </div>
+
+          <!-- Company Solutions -->
+          <div class="sidebar-section services-section">
+            <h3>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>
+              </svg>
+              Our Solutions
+            </h3>
+            <div class="services-list">
+              {services.map((service) => (
+                <a href={service.href} class="service-link">
+                  <span class="service-name">{service.name}</span>
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M5 12h14M12 5l7 7-7 7"/>
+                  </svg>
+                </a>
+              ))}
+            </div>
+          </div>
+
+          <!-- Contact Info -->
+          <div class="sidebar-section contact-section">
+            <h3>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+              </svg>
+              Contacts
+            </h3>
+            <div class="contact-info">
+              <a href="tel:+74997075172" class="contact-item">
+                <span>+7 (499) 707-51-72</span>
+              </a>
+              <a href="mailto:info@rustrade.pro" class="contact-item">
+                <span>info@rustrade.pro</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </aside>
+    </div>
+
+    <!-- Related Articles -->
+    {relatedArticles.length > 0 && (
+      <section class="related-section">
+        <h2>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
+          </svg>
+          Related Articles
+        </h2>
+        <div class="related-grid">
+          {relatedArticles.map((relArticle) => (
+            <a href={`${base}/news/${relArticle.slug}`} class="related-card">
+              <div class="related-card-image">
+                <img src={relArticle.image} alt={relArticle.title[lang]} loading="lazy" />
+                <span class="related-card-category">{newsCategories[relArticle.category]?.[lang]}</span>
+              </div>
+              <div class="related-card-content">
+                <h3>{relArticle.title[lang]}</h3>
+                <p>{relArticle.excerpt[lang]}</p>
+                <span class="related-card-date">{formatDate(relArticle.date, lang)}</span>
+              </div>
+            </a>
+          ))}
+        </div>
+      </section>
+    )}
+  </div>
+
+    <div class={`article-faq ${article.category === 'industry' ? 'article-faq--industry' : ''}`}>
+      <Faq items={faqItems} lang={lang} />
+    </div>
+
+    <CtaFaq lang={lang} />
+  </div>
+</BaseLayout>
+
+<style>
+/* Article Page Layout */
+.article-page {
+  padding: 24px 0 60px;
+}
+
+/* Breadcrumbs */
+.breadcrumbs {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  margin-bottom: 32px;
+  flex-wrap: wrap;
+}
+
+.breadcrumbs a {
+  color: var(--color-text-muted, #5C5A5A);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.breadcrumbs a:hover {
+  color: var(--color-accent, #A3DAF3);
+}
+
+.breadcrumbs .separator {
+  color: var(--color-border, #E7E5E6);
+}
+
+.breadcrumbs .current {
+  color: var(--color-primary, #2A2D2E);
+  font-weight: 500;
+  max-width: 300px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Extra spacing between news content and FAQ (industry details) */
+.article-faq {
+  margin-top: 24px;
+}
+.article-faq--industry {
+  margin-top: 56px;
+}
+
+/* Two-column Layout */
+.article-layout {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.article-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+}
+
+@media (min-width: 1024px) {
+  .article-grid {
+    grid-template-columns: 1fr 320px;
+    gap: 10px;
+    align-items: start;
+  }
+  
+  .article-main {
+    min-height: 0;
+  }
+}
+
+/* Sidebars */
+.article-sidebar {
+  display: none;
+}
+
+@media (min-width: 1024px) {
+  .article-sidebar {
+    display: flex;
+    flex-direction: column;
+    align-self: stretch;
+    max-height: 100%;
+  }
+  .article-sidebar-right {
+    display: flex;
+  }
+}
+
+.sidebar-sticky {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  position: sticky;
+  top: 24px;
+  max-height: calc(100vh - 48px);
+  overflow-y: auto;
+  align-self: start;
+}
+
+.sidebar-section {
+  background: var(--color-white, #fff);
+  border: 1px solid var(--color-border, #E7E5E6);
+  border-radius: 16px;
+  padding: 20px;
+}
+
+.sidebar-section h3 {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0 0 16px;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--color-primary, #2A2D2E);
+  font-family: var(--font-heading, 'Onest', sans-serif);
+}
+
+.sidebar-section h3 svg {
+  color: rgb(14, 165, 233);
+  opacity: 1;
+}
+
+/* Table of Contents */
+.toc-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.toc-link {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 8px 12px;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  background: var(--color-bg, #F8F8F8);
+}
+
+.toc-link:hover {
+  background: linear-gradient(135deg, 
+    rgba(2, 132, 199, 0.15) 0%, 
+    rgba(14, 165, 233, 0.1) 50%,
+    rgba(56, 189, 248, 0.1) 100%);
+}
+
+.toc-link:hover .toc-number {
+  background: linear-gradient(135deg, 
+    rgba(2, 132, 199, 0.95) 0%, 
+    rgba(14, 165, 233, 0.9) 50%,
+    rgba(56, 189, 248, 0.9) 100%);
+  color: white;
+}
+
+.toc-number {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  min-width: 22px;
+  background: var(--color-border, #E7E5E6);
+  border-radius: 6px;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--color-text-muted, #5C5A5A);
+  transition: all 0.2s ease;
+}
+
+.toc-text {
+  font-size: 13px;
+  color: var(--color-primary, #2A2D2E);
+  line-height: 1.4;
+}
+
+/* Popular Materials */
+.popular-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.popular-card {
+  display: flex;
+  gap: 12px;
+  text-decoration: none;
+  transition: transform 0.2s ease;
+}
+
+.popular-card:hover {
+  transform: translateX(4px);
+}
+
+.popular-card-image {
+  width: 70px;
+  height: 70px;
+  min-width: 70px;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.popular-card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.popular-card:hover .popular-card-image img {
+  transform: scale(1.1);
+}
+
+.popular-card-content {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1;
+  min-width: 0;
+}
+
+.popular-card-category {
+  font-size: 10px;
+  font-weight: 700;
+  color: rgb(2, 132, 199);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.popular-card-content h4 {
+  margin: 0;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--color-primary, #2A2D2E);
+  line-height: 1.3;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.popular-card-date {
+  font-size: 11px;
+  color: var(--color-text-muted, #5C5A5A);
+}
+
+/* Services List */
+.services-list {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.service-link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 14px;
+  background: var(--color-bg, #F8F8F8);
+  border-radius: 10px;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.service-link:hover {
+  background: linear-gradient(135deg, 
+    rgba(2, 132, 199, 0.15) 0%, 
+    rgba(14, 165, 233, 0.1) 50%,
+    rgba(56, 189, 248, 0.1) 100%);
+}
+
+.service-link:hover .service-name {
+  color: rgb(2, 132, 199);
+}
+
+.service-name {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--color-primary, #2A2D2E);
+}
+
+.service-link svg {
+  opacity: 0.5;
+  transition: all 0.2s ease;
+}
+
+.service-link:hover svg {
+  opacity: 1;
+  transform: translateX(4px);
+}
+
+/* Contact Section */
+.contact-info {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.contact-item {
+  display: flex;
+  align-items: center;
+  padding: 10px 14px;
+  background: var(--color-bg, #F8F8F8);
+  border-radius: 10px;
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--color-primary, #2A2D2E);
+  transition: all 0.2s ease;
+}
+
+.contact-item:hover {
+  background: linear-gradient(135deg, 
+    rgba(2, 132, 199, 0.15) 0%, 
+    rgba(14, 165, 233, 0.1) 50%,
+    rgba(56, 189, 248, 0.1) 100%);
+  color: rgb(2, 132, 199);
+}
+
+/* Main Content */
+.article-main {
+  min-width: 0;
+}
+
+.article-content {
+  background: var(--color-white, #fff);
+  border: 1px solid var(--color-border, #E7E5E6);
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+/* Article Header */
+.article-header {
+  padding: 32px 32px 0;
+}
+
+.article-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.article-category {
+  padding: 6px 14px;
+  background: linear-gradient(135deg, 
+    rgba(2, 132, 199, 0.95) 0%, 
+    rgba(14, 165, 233, 0.9) 50%,
+    rgba(56, 189, 248, 0.9) 100%);
+  border-radius: 50px;
+  font-size: 12px;
+  font-weight: 700;
+  color: white;
+  box-shadow: 0 2px 8px rgba(14, 165, 233, 0.3);
+}
+
+.article-date,
+.article-read-time,
+.article-author {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  color: var(--color-text-muted, #5C5A5A);
+}
+
+.article-date svg,
+.article-read-time svg,
+.article-author svg {
+  opacity: 0.6;
+}
+
+.article-header h1 {
+  margin: 0 0 16px;
+  font-size: clamp(24px, 5vw, 36px);
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--color-primary, #2A2D2E);
+  font-family: var(--font-heading, 'Onest', sans-serif);
+}
+
+.article-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.article-tag {
+  font-size: 12px;
+  color: var(--color-text-muted, #5C5A5A);
+}
+
+/* Article Image */
+.article-image {
+  margin: 24px 32px;
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.article-image img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Article Body */
+.article-body {
+  padding: 0 32px 32px;
+  font-size: 16px;
+  line-height: 1.8;
+  color: var(--color-text, #3a3d3e);
+}
+
+.article-body h2 {
+  margin-top: 64px !important;
+  margin-bottom: 32px !important;
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--color-primary, #2A2D2E);
+  font-family: var(--font-heading, 'Onest', sans-serif);
+  scroll-margin-top: 80px;
+}
+
+.article-body h3 {
+  margin-top: 48px !important;
+  margin-bottom: 24px !important;
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--color-primary, #2A2D2E);
+}
+
+.article-body p {
+  margin: 0 0 24px;
+}
+
+.article-body ul,
+.article-body ol {
+  margin: 0 0 16px;
+  padding-left: 24px;
+}
+
+.article-body li {
+  margin-bottom: 8px;
+}
+
+.article-body a {
+  color: var(--color-accent, #A3DAF3);
+  text-decoration: underline;
+}
+
+/* Article Actions */
+.article-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+  padding: 24px 32px;
+  border-top: 1px solid var(--color-border, #E7E5E6);
+  background: var(--color-bg, #F8F8F8);
+}
+
+.share-section {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.share-label {
+  font-size: 13px;
+  color: var(--color-text-muted, #5C5A5A);
+}
+
+.share-buttons {
+  display: flex;
+  gap: 8px;
+}
+
+.share-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background: var(--color-white, #fff);
+  border: 1px solid var(--color-border, #E7E5E6);
+  border-radius: 10px;
+  color: var(--color-text-muted, #5C5A5A);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.share-btn:hover {
+  background: linear-gradient(135deg, 
+    rgba(2, 132, 199, 0.95) 0%, 
+    rgba(14, 165, 233, 0.9) 50%,
+    rgba(56, 189, 248, 0.9) 100%);
+  border-color: transparent;
+  color: white;
+  box-shadow: 0 4px 12px rgba(14, 165, 233, 0.3);
+  transform: translateY(-2px);
+}
+
+.back-link {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--color-primary, #2A2D2E);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.back-link:hover {
+  color: var(--color-accent, #A3DAF3);
+}
+
+.back-link svg {
+  transition: transform 0.2s ease;
+}
+
+.back-link:hover svg {
+  transform: translateX(-4px);
+}
+
+/* Related Section */
+.related-section {
+  margin-top: 32px;
+  margin-bottom: var(--space-12);
+}
+
+.related-section h2 {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 0 0 24px;
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--color-primary, #2A2D2E);
+  font-family: var(--font-heading, 'Onest', sans-serif);
+}
+
+.related-section h2 svg {
+  opacity: 0.6;
+}
+
+.related-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 16px;
+}
+
+.related-card {
+  background: var(--color-white, #fff);
+  border: 1px solid var(--color-border, #E7E5E6);
+  border-radius: 16px;
+  overflow: hidden;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.related-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.1);
+}
+
+.related-card-image {
+  position: relative;
+  height: 160px;
+  overflow: hidden;
+}
+
+.related-card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.related-card:hover .related-card-image img {
+  transform: scale(1.05);
+}
+
+.related-card-category {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  padding: 4px 12px;
+  background: linear-gradient(135deg, 
+    rgba(2, 132, 199, 0.95) 0%, 
+    rgba(14, 165, 233, 0.9) 50%,
+    rgba(56, 189, 248, 0.9) 100%);
+  border-radius: 50px;
+  font-size: 11px;
+  font-weight: 700;
+  color: white;
+  box-shadow: 0 2px 6px rgba(14, 165, 233, 0.3);
+}
+
+.related-card-content {
+  padding: 20px;
+}
+
+.related-card-content h3 {
+  margin: 0 0 8px;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--color-primary, #2A2D2E);
+  line-height: 1.3;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.related-card-content p {
+  margin: 0 0 12px;
+  font-size: 13px;
+  color: var(--color-text-muted, #5C5A5A);
+  line-height: 1.5;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.related-card-date {
+  font-size: 12px;
+  color: var(--color-text-muted, #5C5A5A);
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .article-header {
+    padding: 24px 20px 0;
+  }
+  
+  .article-image {
+    margin: 20px;
+    border-radius: 12px;
+  }
+  
+  .article-body {
+    padding: 0 20px 24px;
+  }
+  
+  .article-actions {
+    padding: 20px;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .related-grid {
+    grid-template-columns: 1fr;
+  }
+}
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // Share buttons functionality
+    const shareButtons = document.querySelectorAll('.share-btn');
+    const currentUrl = window.location.href;
+    const pageTitle = document.querySelector('h1')?.textContent || '';
+    
+    shareButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const shareType = btn.getAttribute('data-share');
+        
+        switch(shareType) {
+          case 'telegram':
+            window.open(`https://t.me/share/url?url=${encodeURIComponent(currentUrl)}&text=${encodeURIComponent(pageTitle)}`, '_blank');
+            break;
+          case 'vk':
+            window.open(`https://vk.com/share.php?url=${encodeURIComponent(currentUrl)}&title=${encodeURIComponent(pageTitle)}`, '_blank');
+            break;
+          case 'copy':
+            navigator.clipboard.writeText(currentUrl).then(() => {
+              const originalHTML = btn.innerHTML;
+              btn.innerHTML = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>';
+              setTimeout(() => {
+                btn.innerHTML = originalHTML;
+              }, 2000);
+            });
+            break;
+        }
+      });
+    });
+
+    // Smooth scroll for TOC links
+    const tocLinks = document.querySelectorAll('.toc-link');
+    tocLinks.forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const targetId = link.getAttribute('href')?.slice(1);
+        const targetElement = document.getElementById(targetId || '');
+        if (targetElement) {
+          targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+
+    // Active TOC link on scroll
+    const headings = document.querySelectorAll('.article-body h2[id]');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          tocLinks.forEach(link => link.classList.remove('active'));
+          const activeLink = document.querySelector(`.toc-link[href="#${entry.target.id}"]`);
+          activeLink?.classList.add('active');
+        }
+      });
+    }, { rootMargin: '-20% 0px -80% 0px' });
+
+    headings.forEach(heading => observer.observe(heading));
+
+    });
+</script>
+

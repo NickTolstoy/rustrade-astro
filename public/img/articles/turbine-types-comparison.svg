@@ -1,0 +1,81 @@
+<svg viewBox="0 0 900 500" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="900" height="500" fill="#ffffff"/>
+  
+  <!-- Title -->
+  <text x="450" y="35" text-anchor="middle" fill="#1e293b" font-family="system-ui" font-size="16" font-weight="700">
+    Сравнительная эффективность типов паровых турбин
+  </text>
+  
+  <!-- Axes -->
+  <line x1="100" y1="420" x2="850" y2="420" stroke="#334155" stroke-width="2"/>
+  <line x1="100" y1="420" x2="100" y2="80" stroke="#334155" stroke-width="2"/>
+  
+  <!-- Y-axis labels -->
+  <text x="50" y="250" text-anchor="middle" fill="#475569" font-family="system-ui" font-size="12" transform="rotate(-90 50 250)">КПД использования топлива, %</text>
+  <text x="85" y="425" fill="#64748b" font-family="system-ui" font-size="10">0</text>
+  <text x="85" y="340" fill="#64748b" font-family="system-ui" font-size="10">25</text>
+  <text x="85" y="255" fill="#64748b" font-family="system-ui" font-size="10">50</text>
+  <text x="85" y="170" fill="#64748b" font-family="system-ui" font-size="10">75</text>
+  <text x="80" y="88" fill="#64748b" font-family="system-ui" font-size="10">100</text>
+  
+  <!-- Grid lines -->
+  <g stroke="#e2e8f0" stroke-width="1">
+    <line x1="100" y1="335" x2="850" y2="335"/>
+    <line x1="100" y1="250" x2="850" y2="250"/>
+    <line x1="100" y1="165" x2="850" y2="165"/>
+    <line x1="100" y1="80" x2="850" y2="80"/>
+  </g>
+  
+  <!-- X-axis label -->
+  <text x="475" y="470" text-anchor="middle" fill="#475569" font-family="system-ui" font-size="12">Режим работы / Тип турбины</text>
+  
+  <!-- Bar groups -->
+  <!-- Condensing -->
+  <rect x="150" y="280" width="60" height="140" fill="#3b82f6" rx="4"/>
+  <rect x="150" y="280" width="60" height="20" fill="#60a5fa" rx="4"/>
+  <text x="180" y="445" text-anchor="middle" fill="#1e293b" font-family="system-ui" font-size="11" font-weight="600">Конденс.</text>
+  <text x="180" y="270" text-anchor="middle" fill="#3b82f6" font-family="system-ui" font-size="11" font-weight="600">38-42%</text>
+  
+  <!-- Backpressure with process -->
+  <rect x="280" y="130" width="60" height="290" fill="#22c55e" rx="4"/>
+  <rect x="280" y="130" width="60" height="80" fill="#4ade80" rx="4"/>
+  <text x="310" y="445" text-anchor="middle" fill="#1e293b" font-family="system-ui" font-size="11" font-weight="600">Противод.</text>
+  <text x="310" y="120" text-anchor="middle" fill="#22c55e" font-family="system-ui" font-size="11" font-weight="600">80-85%</text>
+  <text x="310" y="175" text-anchor="middle" fill="#ffffff" font-family="system-ui" font-size="9">тепло</text>
+  <text x="310" y="340" text-anchor="middle" fill="#ffffff" font-family="system-ui" font-size="9">эл-во</text>
+  
+  <!-- Extraction -->
+  <rect x="410" y="160" width="60" height="260" fill="#f59e0b" rx="4"/>
+  <rect x="410" y="160" width="60" height="100" fill="#fbbf24" rx="4"/>
+  <text x="440" y="445" text-anchor="middle" fill="#1e293b" font-family="system-ui" font-size="11" font-weight="600">С отбором</text>
+  <text x="440" y="150" text-anchor="middle" fill="#f59e0b" font-family="system-ui" font-size="11" font-weight="600">70-78%</text>
+  <text x="440" y="205" text-anchor="middle" fill="#ffffff" font-family="system-ui" font-size="9">тепло</text>
+  <text x="440" y="340" text-anchor="middle" fill="#ffffff" font-family="system-ui" font-size="9">эл-во</text>
+  
+  <!-- Condensing partial load -->
+  <rect x="540" y="320" width="60" height="100" fill="#94a3b8" rx="4"/>
+  <text x="570" y="445" text-anchor="middle" fill="#1e293b" font-family="system-ui" font-size="11" font-weight="600">Конд. 50%</text>
+  <text x="570" y="310" text-anchor="middle" fill="#64748b" font-family="system-ui" font-size="11" font-weight="600">28-32%</text>
+  
+  <!-- Real conditions -->
+  <rect x="670" y="260" width="60" height="160" fill="#ef4444" rx="4"/>
+  <text x="700" y="445" text-anchor="middle" fill="#1e293b" font-family="system-ui" font-size="10" font-weight="600">Конд.реал.</text>
+  <text x="700" y="250" text-anchor="middle" fill="#ef4444" font-family="system-ui" font-size="11" font-weight="600">33-38%</text>
+  
+  <!-- Legend -->
+  <rect x="720" y="70" width="160" height="120" fill="#f8fafc" stroke="#e2e8f0" rx="8"/>
+  <text x="800" y="92" text-anchor="middle" fill="#1e293b" font-family="system-ui" font-size="11" font-weight="600">Легенда:</text>
+  
+  <rect x="735" y="105" width="15" height="15" fill="#3b82f6" rx="2"/>
+  <text x="758" y="117" fill="#475569" font-family="system-ui" font-size="10">Электроэнергия</text>
+  
+  <rect x="735" y="128" width="15" height="15" fill="#4ade80" rx="2"/>
+  <text x="758" y="140" fill="#475569" font-family="system-ui" font-size="10">Тепло (пар)</text>
+  
+  <rect x="735" y="151" width="15" height="15" fill="#94a3b8" rx="2"/>
+  <text x="758" y="163" fill="#475569" font-family="system-ui" font-size="10">Частичная нагр.</text>
+  
+  <rect x="735" y="174" width="15" height="15" fill="#ef4444" rx="2"/>
+  <text x="758" y="186" fill="#475569" font-family="system-ui" font-size="10">Реальн. условия</text>
+</svg>

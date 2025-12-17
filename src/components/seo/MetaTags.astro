@@ -26,9 +26,11 @@ const {
 } = Astro.props;
 
 const siteUrl = 'https://rustrade.pro';
-const currentUrl = canonical || Astro.url.href;
+const rawUrl = canonical || Astro.url.href;
+const currentUrl = rawUrl.replace('http://localhost:4321', siteUrl).replace('http://localhost:3000', siteUrl);
 const fullImageUrl = image.startsWith('http') ? image : `${siteUrl}${image}`;
 const siteName = lang === 'ru' ? 'РУСТРЕЙД' : 'RUSTRADE';
+const slogan = lang === 'ru' ? 'Энергетические решения, которые окупаются' : 'Energy solutions that pay off';
 const locale = lang === 'ru' ? 'ru_RU' : 'en_US';
 const altLocale = lang === 'ru' ? 'en_US' : 'ru_RU';
 
@@ -67,6 +69,7 @@ const finalDescription = description || defaultDescription;
 <title>{finalTitle}</title>
 <meta name="title" content={finalTitle} />
 <meta name="description" content={finalDescription} />
+<meta name="slogan" content={slogan} />
 <meta name="keywords" content={lang === 'ru' 
   ? 'паровые турбины, турбогенераторы, энергетическое оборудование, лопатки турбин, маслоохладители, конденсаторы, РУСТРЕЙД'
   : 'steam turbines, turbogenerators, power equipment, turbine blades, oil coolers, condensers, Rustrade'} />

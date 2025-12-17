@@ -1,0 +1,1146 @@
+---
+import type { Lang } from '@/i18n';
+import { getBaseUrl } from '@/i18n';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Breadcrumbs from '@/components/Breadcrumbs.astro';
+
+const lang: Lang = 'en';
+const base = getBaseUrl(lang);
+
+const tableData = [
+  { num: '1', name: 'Power, MW', existing: '2.2', proposed: '3.85' },
+  { num: '2', name: 'Steam at TGU inlet', existing: '', proposed: '', isGroup: true },
+  { num: '', name: 'Steam flow, t/h', existing: '42.5', proposed: '42.5', indent: true },
+  { num: '', name: 'Steam temperature, °C', existing: '350', proposed: '350', indent: true },
+  { num: '', name: 'Steam pressure, MPa', existing: '1.8', proposed: '1.8', indent: true },
+  { num: '3', name: 'Steam at TGU outlet', existing: '', proposed: '', isGroup: true },
+  { num: '', name: 'Steam flow, t/h', existing: '42.5', proposed: '42.5', indent: true },
+  { num: '', name: 'Steam temperature, °C', existing: '350', proposed: '350', indent: true },
+  { num: '', name: 'Steam pressure, MPa', existing: '0.32', proposed: '0.32', indent: true },
+  { num: '4', name: 'Average operating hours, h', existing: '5000', proposed: '5000' },
+  { num: '5', name: 'Electricity tariff, RUB/kWh', existing: '7', proposed: '7' },
+  { num: '6', name: 'Implementation effect, RUB/year', existing: '0', proposed: '57,750,000.00', highlight: true },
+  { num: '7', name: 'Simple TGU payback period, years', existing: '—', proposed: '1.5-2.5', highlight: true },
+  { num: '8', name: 'Implementation effect over 30 years, RUB', existing: '—', proposed: '1,732,500,000.00', highlight: true },
+];
+---
+
+<BaseLayout 
+  lang={lang} 
+  title="Case Study: Sugar Factory — savings 57M ₽/year | RUSTRADE" 
+  description="Replacement of outdated TGU with high-efficiency full factory ready turbogenerator unit. Economic effect 57M ₽/year, payback period less than 2.5 years."
+  keywords="sugar factory case study, sugar factory turbogenerator, TGU replacement, factory energy savings, RUSTRADE"
+  image="/img/cases/sugar_1_enhanced_2k.webp"
+  breadcrumbs={[{ name: 'Cases', url: '/eng/cases' }, { name: 'Sugar Factory', url: '/eng/cases/sugar-factory' }]}
+  articleData={{
+    headline: 'Sugar Factory — replacement of outdated turbogenerator unit',
+    description: 'Replacement of outdated TGU with high-efficiency full factory ready turbogenerator unit',
+    image: '/img/cases/sugar_1_enhanced_2k.webp',
+    datePublished: '2024-01-15',
+    articleType: 'TechArticle'
+  }}
+>
+  <Breadcrumbs items={[
+    { label: 'Cases', href: `${base}/cases` },
+    { label: 'Sugar Factory' }
+  ]} lang={lang} />
+
+  <main class="case-page fade-in">
+    <!-- Hero Section -->
+    <div class="case-hero" style="background-image: linear-gradient(180deg, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.6) 100%), url('/img/cases/sugar_main.webp');">
+      <div class="hero-content">
+        <h1>Sugar Factory</h1>
+        <p>Replacement of outdated backpressure turbogenerator unit (TGU) with high-efficiency full factory ready TGU</p>
+      </div>
+    </div>
+
+    <!-- Description Section -->
+    <section class="case-section">
+      <div class="section-grid">
+        <div class="section-label">
+          <h2>Description</h2>
+        </div>
+        <div class="section-content">
+          <p>
+            The sugar factory approached RUSTRADE LLC with a request whether it was possible to replace the existing turbogenerator unit operating in parallel with PRV with a new high-efficiency steam turbine with increased power while maintaining the same steam flow to the TGU.
+          </p>
+          <p>
+            The customer was confident that it would not be possible to find an economically efficient replacement, since the plant operates only 5000 hours per year.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tasks Section -->
+    <section class="case-section tasks-section">
+      <div class="section-grid">
+        <div class="section-label">
+          <h2>Objectives</h2>
+        </div>
+        <div class="section-content">
+          <div class="tasks-list">
+            <div class="task-item">
+              <span class="task-number">1</span>
+              <p>Reduce grid electricity purchase costs by increasing own generation capacity</p>
+            </div>
+            <div class="task-item">
+              <span class="task-number">2</span>
+              <p>Replace physically worn equipment before failure occurs</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Data Table Section -->
+    <section class="case-section table-section">
+      <div class="table-header">
+        <h3>Based on the survey and calculations performed by RUSTRADE LLC specialists, the following data was obtained:</h3>
+      </div>
+      
+      <div class="table-wrapper">
+        <table class="stats-table">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Parameter</th>
+              <th>Existing TGU</th>
+              <th>Proposed TGU</th>
+            </tr>
+          </thead>
+          <tbody>
+            {tableData.map((row) => (
+              <tr class:list={[{ 'highlight-row': row.highlight, 'group-row': row.isGroup }]}>
+                <td>{row.num}</td>
+                <td class:list={[{ 'indent': row.indent, 'bold': row.highlight }]}>{row.name}</td>
+                <td>{row.existing}</td>
+                <td class:list={[{ 'accent': row.highlight }]}>{row.proposed}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Results Section -->
+    <section class="case-section results-section">
+      <div class="section-grid">
+        <div class="section-label">
+          <h2>Results</h2>
+        </div>
+        <div class="section-content">
+          <div class="results-list">
+            <div class="result-item">
+              <span class="result-number">1</span>
+              <p>RUSTRADE LLC solution meets the Customer's goal of increasing own generation capacity</p>
+            </div>
+            <div class="result-item">
+              <span class="result-number">2</span>
+              <p>Replacing existing TGU with more efficient and powerful RUSTRADE LLC TGU allows saving more than <strong>57 million RUB</strong> per year on electricity purchases</p>
+            </div>
+            <div class="result-item">
+              <span class="result-number">3</span>
+              <p>Project payback period – <strong>less than 2.5 years</strong>, making this project extremely attractive from an investment perspective</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Summary Stats -->
+    <section class="summary-section">
+      <div class="summary-glass-container">
+        <!-- Animated background blobs -->
+        <div class="glass-blob blob-1"></div>
+        <div class="glass-blob blob-2"></div>
+        <div class="glass-blob blob-3"></div>
+        
+        <!-- Animated lines -->
+        <svg class="summary-lines" viewBox="0 0 1200 200" preserveAspectRatio="none">
+          <defs>
+            <linearGradient id="lineGradGreen" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stop-color="#10B981" stop-opacity="0.9"/>
+              <stop offset="100%" stop-color="#34D399" stop-opacity="0.7"/>
+            </linearGradient>
+            <linearGradient id="lineGradRed" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stop-color="#EF4444" stop-opacity="0.9"/>
+              <stop offset="100%" stop-color="#F87171" stop-opacity="0.7"/>
+            </linearGradient>
+            <filter id="glowLine" x="-50%" y="-50%" width="200%" height="200%">
+              <feGaussianBlur stdDeviation="4" result="blur"/>
+              <feMerge>
+                <feMergeNode in="blur"/>
+                <feMergeNode in="SourceGraphic"/>
+              </feMerge>
+            </filter>
+          </defs>
+          
+          <!-- Green Line - trending UP -->
+          <g class="line-group line-green">
+            <path id="pathGreen" class="trace-path" data-duration="8000"
+                  d="M0 160 L70 150 L120 165 L180 140 L250 155 L310 125 L380 145 L450 115 L530 135 L600 100 L680 120 L750 85 L830 105 L910 70 L990 90 L1070 55 L1150 70 L1200 45" 
+                  fill="none" stroke="url(#lineGradGreen)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle id="dotGreen" r="6" fill="#10B981" filter="url(#glowLine)" class="lead-dot"/>
+            <circle id="pulseGreen" r="12" fill="#10B981" opacity="0.4" class="pulse-dot"/>
+          </g>
+          
+          <!-- Red Line - trending DOWN -->
+          <g class="line-group line-red">
+            <path id="pathRed" class="trace-path" data-duration="10000"
+                  d="M0 60 L80 75 L150 55 L220 85 L300 65 L370 100 L450 80 L520 115 L610 95 L690 130 L770 110 L850 145 L940 125 L1020 155 L1100 140 L1200 165" 
+                  fill="none" stroke="url(#lineGradRed)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle id="dotRed" r="5" fill="#EF4444" filter="url(#glowLine)" class="lead-dot"/>
+            <circle id="pulseRed" r="10" fill="#EF4444" opacity="0.4" class="pulse-dot"/>
+          </g>
+        </svg>
+        
+        <div class="summary-cards">
+          <div class="summary-card">
+            <div class="summary-content">
+              <div class="summary-value"><span class="counter" data-target="57" data-duration="8000">0</span> <span>M ₽</span></div>
+              <div class="summary-label">Economic effect per year</div>
+            </div>
+            <div class="summary-glow"></div>
+          </div>
+          
+          <div class="summary-card">
+            <div class="summary-content">
+              <div class="summary-value">&lt; <span class="counter" data-target="2.5" data-start="10" data-decimal="true" data-direction="down" data-duration="10000">10</span> <span>years</span></div>
+              <div class="summary-label">Project payback period</div>
+            </div>
+            <div class="summary-glow"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Gallery -->
+    <section class="gallery-section">
+      <div class="gallery-grid">
+        <div class="gallery-item">
+          <img src="/img/cases/sugar_1_enhanced_2k.webp" alt="Sugar factory - photo 1" loading="lazy" />
+        </div>
+        <div class="gallery-item">
+          <img src="/img/cases/sugar_2_enhanced_2k.webp" alt="Sugar factory - photo 2" loading="lazy" />
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+      <div class="cta-cards">
+        <div class="cta-card">
+          <h3>Get Consultation</h3>
+          <p>Our specialists will help you choose the optimal solution for your enterprise and calculate the economic effect</p>
+          <button class="btn btn-accent" data-modal="consultation">
+            <img src="/img/arrow_right.svg" alt="" width="16" height="16" />
+            <span>Contact Us</span>
+          </button>
+          <div class="cta-card-glow"></div>
+        </div>
+        
+        <div class="cta-card">
+          <h3>All Questions & Answers</h3>
+          <p>Answers to frequently asked questions about turbogenerator units, delivery times and cooperation terms</p>
+          <a href="/faq" class="btn btn-accent">
+            <img src="/img/arrow_right.svg" alt="" width="16" height="16" />
+            <span>Go to FAQ</span>
+          </a>
+          <div class="cta-card-glow"></div>
+        </div>
+      </div>
+    </section>
+  </main>
+</BaseLayout>
+
+<style>
+  .case-page {
+    padding-bottom: var(--space-12);
+  }
+
+  /* Hero */
+  .case-hero {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-start;
+    min-height: 420px;
+    padding: 32px;
+    border-radius: var(--radius-lg);
+    background-size: cover;
+    background-position: center;
+    margin-bottom: 8px;
+  }
+
+  .hero-content {
+    max-width: 700px;
+  }
+
+  .hero-content h1 {
+    color: white;
+    font-family: var(--font-heading);
+    font-size: 48px;
+    font-weight: 500;
+    line-height: 1.1;
+    letter-spacing: -1.5px;
+    margin: 0 0 16px 0;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  }
+
+  .hero-content p {
+    color: rgba(255, 255, 255, 0.95);
+    font-family: var(--font-body);
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 1.5;
+    margin: 0;
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+  }
+
+  /* Sections */
+  .case-section {
+    background: white;
+    border-radius: var(--radius-lg);
+    padding: 40px;
+    margin-bottom: 8px;
+    border: 1px solid var(--color-border);
+  }
+
+  .section-grid {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 48px;
+  }
+
+  .section-label {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .section-label h2 {
+    font-family: var(--font-heading);
+    font-size: 28px;
+    font-weight: 500;
+    color: var(--color-text);
+    margin: 0;
+  }
+
+  .section-content p {
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: 1.7;
+    color: var(--color-text);
+    margin: 0 0 16px 0;
+  }
+
+  .section-content p:last-child {
+    margin-bottom: 0;
+  }
+
+  /* Tasks */
+  .tasks-list, .results-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .task-item, .result-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  .task-number, .result-number {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 32px;
+    height: 32px;
+    background: linear-gradient(135deg, #0EA5E9 0%, #38BDF8 100%);
+    color: white;
+    font-family: var(--font-heading);
+    font-size: 14px;
+    font-weight: 500;
+    border-radius: var(--radius-circle);
+    box-shadow: 0 2px 8px rgba(14, 165, 233, 0.3);
+  }
+
+  .task-item p, .result-item p {
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: 1.7;
+    color: var(--color-text);
+    margin: 4px 0 0 0;
+  }
+
+  .result-item strong {
+    color: var(--color-success);
+    font-weight: 700;
+  }
+
+  /* Table Section */
+  .table-section {
+    padding: 32px;
+  }
+
+  .table-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    margin-bottom: 32px;
+  }
+
+  .table-header h3 {
+    font-family: var(--font-body);
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 1.5;
+    color: var(--color-text);
+    margin: 0;
+    max-width: 700px;
+  }
+
+  .table-wrapper {
+    overflow-x: auto;
+  }
+
+  .stats-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    font-family: var(--font-body);
+  }
+
+  .stats-table thead {
+    background: linear-gradient(135deg, #0284C7 0%, #0EA5E9 50%, #38BDF8 100%);
+  }
+
+  .stats-table th {
+    background: transparent;
+    color: white;
+    padding: 16px 20px;
+    text-align: left;
+    font-size: 14px;
+    font-weight: 500;
+  }
+
+  .stats-table th:first-child {
+    width: 50px;
+    border-radius: var(--radius-lg) 0 0 0;
+  }
+
+  .stats-table th:last-child {
+    border-radius: 0 var(--radius-lg) 0 0;
+  }
+
+  .stats-table td {
+    padding: 14px 20px;
+    border-bottom: 1px solid var(--color-border);
+    font-size: 14px;
+    color: var(--color-text);
+  }
+
+  .stats-table tr:last-child td:first-child {
+    border-radius: 0 0 0 var(--radius-lg);
+  }
+
+  .stats-table tr:last-child td:last-child {
+    border-radius: 0 0 var(--radius-lg) 0;
+  }
+
+  .stats-table td.indent {
+    padding-left: 48px;
+    color: var(--color-text-muted);
+  }
+
+  .stats-table td.bold {
+    font-weight: 700;
+  }
+
+  .stats-table td.accent {
+    color: var(--color-success);
+    font-weight: 700;
+  }
+
+  .stats-table .highlight-row {
+    background: rgba(0, 150, 78, 0.05);
+  }
+
+  .stats-table .group-row td {
+    font-weight: 500;
+    background: var(--color-bg);
+  }
+
+  /* Summary - Premium Glassmorphism */
+  .summary-section {
+    margin-bottom: 8px;
+  }
+
+  .summary-glass-container {
+    position: relative;
+    padding: 64px 48px;
+    border-radius: 24px;
+    background: linear-gradient(135deg, 
+      rgba(240, 253, 250, 0.6) 0%, 
+      rgba(236, 253, 245, 0.5) 25%,
+      rgba(248, 250, 252, 0.7) 50%,
+      rgba(240, 253, 250, 0.5) 75%,
+      rgba(236, 253, 245, 0.4) 100%);
+    backdrop-filter: blur(24px) saturate(180%);
+    -webkit-backdrop-filter: blur(24px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    box-shadow: 
+      0 8px 32px rgba(16, 185, 129, 0.08),
+      0 24px 80px rgba(16, 185, 129, 0.05),
+      inset 0 1px 0 rgba(255, 255, 255, 0.8),
+      inset 0 -1px 0 rgba(16, 185, 129, 0.08);
+    overflow: hidden;
+  }
+
+  /* Shimmer effect */
+  .summary-glass-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -150%;
+    width: 200%;
+    height: 100%;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(255, 255, 255, 0.1) 25%,
+      rgba(255, 255, 255, 0.4) 50%,
+      rgba(255, 255, 255, 0.1) 75%,
+      transparent 100%
+    );
+    animation: shimmer 6s ease-in-out infinite;
+    pointer-events: none;
+  }
+
+  @keyframes shimmer {
+    0% { left: -150%; }
+    50% { left: 150%; }
+    100% { left: 150%; }
+  }
+
+  /* Animated blobs */
+  .glass-blob {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(100px);
+    opacity: 0.3;
+    animation: blob-float 10s ease-in-out infinite;
+  }
+
+  .blob-1 {
+    width: 400px;
+    height: 400px;
+    background: linear-gradient(135deg, #A7F3D0 0%, #6EE7B7 50%, #34D399 100%);
+    top: -150px;
+    left: -100px;
+    animation-delay: 0s;
+  }
+
+  .blob-2 {
+    width: 350px;
+    height: 350px;
+    background: linear-gradient(135deg, #D1FAE5 0%, #A7F3D0 50%, #6EE7B7 100%);
+    bottom: -120px;
+    right: -80px;
+    animation-delay: -4s;
+  }
+
+  .blob-3 {
+    width: 280px;
+    height: 280px;
+    background: linear-gradient(135deg, #ECFDF5 0%, #D1FAE5 50%, #A7F3D0 100%);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation-delay: -7s;
+  }
+
+  @keyframes blob-float {
+    0%, 100% {
+      transform: translate(0, 0) scale(1) rotate(0deg);
+    }
+    25% {
+      transform: translate(40px, -30px) scale(1.15) rotate(5deg);
+    }
+    50% {
+      transform: translate(-30px, 40px) scale(0.9) rotate(-5deg);
+    }
+    75% {
+      transform: translate(20px, 20px) scale(1.1) rotate(3deg);
+    }
+  }
+
+  /* Animated lines */
+  .summary-lines {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.8;
+  }
+
+  .lead-dot, .pulse-dot {
+    transition: opacity 0.5s ease;
+  }
+
+  .summary-cards {
+    display: flex;
+    align-items: stretch;
+    justify-content: center;
+    gap: 32px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .summary-divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+
+  .summary-divider::before {
+    content: '';
+    position: absolute;
+    width: 80px;
+    height: 80px;
+    background: radial-gradient(circle, rgba(14, 165, 233, 0.2) 0%, transparent 70%);
+    border-radius: 50%;
+    animation: pulse-glow 3s ease-in-out infinite;
+  }
+
+  @keyframes pulse-glow {
+    0%, 100% { transform: scale(1); opacity: 0.5; }
+    50% { transform: scale(1.3); opacity: 0.8; }
+  }
+
+  .summary-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    padding: 48px 56px;
+    min-width: 320px;
+    background: linear-gradient(135deg, 
+      rgba(255, 255, 255, 0.7) 0%, 
+      rgba(255, 255, 255, 0.5) 50%,
+      rgba(236, 253, 245, 0.6) 100%);
+    backdrop-filter: blur(16px) saturate(150%);
+    -webkit-backdrop-filter: blur(16px) saturate(150%);
+    border-radius: 24px;
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    box-shadow: 
+      0 8px 32px rgba(14, 165, 233, 0.12),
+      0 2px 8px rgba(14, 165, 233, 0.08),
+      inset 0 1px 0 rgba(255, 255, 255, 1),
+      inset 0 -1px 0 rgba(14, 165, 233, 0.1);
+    position: relative;
+    overflow: hidden;
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    text-align: center;
+  }
+
+  .summary-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 50%;
+    background: linear-gradient(180deg, 
+      rgba(255, 255, 255, 0.4) 0%, 
+      transparent 100%);
+    pointer-events: none;
+  }
+
+  .summary-card::after {
+    content: '';
+    position: absolute;
+    bottom: -50%;
+    left: -50%;
+    width: 200%;
+    height: 100%;
+    background: radial-gradient(ellipse, rgba(16, 185, 129, 0.15) 0%, transparent 60%);
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    pointer-events: none;
+  }
+
+  .summary-card:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 
+      0 20px 60px rgba(16, 185, 129, 0.2),
+      0 8px 24px rgba(16, 185, 129, 0.15),
+      inset 0 1px 0 rgba(255, 255, 255, 1),
+      inset 0 -1px 0 rgba(16, 185, 129, 0.15);
+    background: linear-gradient(135deg, 
+      rgba(255, 255, 255, 0.85) 0%, 
+      rgba(255, 255, 255, 0.7) 50%,
+      rgba(236, 253, 245, 0.8) 100%);
+  }
+
+  .summary-card:hover::after {
+    opacity: 1;
+  }
+
+  .summary-card:hover .summary-glow {
+    opacity: 1;
+    animation: glow-sweep 1.5s ease-in-out;
+  }
+
+  @keyframes glow-sweep {
+    0% { left: -100%; }
+    100% { left: 100%; }
+  }
+
+  .summary-glow {
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, 
+      transparent 0%, 
+      rgba(16, 185, 129, 0.8) 50%, 
+      transparent 100%);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+  }
+
+  .summary-icon {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    z-index: 1;
+  }
+
+  .summary-icon::before {
+    content: '';
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    background: radial-gradient(circle, rgba(14, 165, 233, 0.15) 0%, transparent 70%);
+    border-radius: 50%;
+    animation: icon-pulse 4s ease-in-out infinite;
+  }
+
+  @keyframes icon-pulse {
+    0%, 100% { transform: scale(1); opacity: 0.5; }
+    50% { transform: scale(1.2); opacity: 0.8; }
+  }
+
+  .summary-icon svg {
+    width: 80px;
+    height: 80px;
+    filter: drop-shadow(0 8px 24px rgba(14, 165, 233, 0.3));
+    position: relative;
+    z-index: 1;
+  }
+
+  .summary-content {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .summary-value {
+    font-family: var(--font-heading);
+    font-size: 56px;
+    font-weight: 700;
+    color: #10B981;
+    line-height: 1.1;
+  }
+
+  .summary-value .counter {
+    font-size: 56px;
+    font-weight: 700;
+    color: #10B981;
+  }
+
+  @keyframes gradient-shift {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+  }
+
+  .summary-value span:not(.counter) {
+    font-size: 24px;
+    font-weight: 600;
+    color: #475569;
+  }
+
+  .summary-label {
+    font-family: var(--font-body);
+    font-size: 16px;
+    font-weight: 600;
+    color: #64748B;
+    letter-spacing: 0.02em;
+  }
+
+  /* Gallery */
+  .gallery-section {
+    margin-bottom: 8px;
+  }
+
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+  }
+
+  .gallery-item {
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    aspect-ratio: 16/10;
+  }
+
+  .gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform var(--transition-slow);
+  }
+
+  .gallery-item:hover img {
+    transform: scale(1.05);
+  }
+
+  /* CTA Section */
+  .cta-section {
+    margin-top: var(--space-12);
+    margin-bottom: 8px;
+  }
+
+  .cta-cards {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+  }
+
+  .cta-card {
+    display: flex;
+    flex-direction: column;
+    padding: 32px;
+    background: linear-gradient(135deg, 
+      #F8FAFC 0%,
+      #F1F5F9 50%,
+      #F8FAFC 100%);
+    border-radius: var(--radius-lg);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+    position: relative;
+    overflow: hidden;
+    transition: all 0.4s ease;
+  }
+
+  .cta-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 50%;
+    background: linear-gradient(180deg, 
+      rgba(255, 255, 255, 0.6) 0%, 
+      transparent 100%);
+    pointer-events: none;
+  }
+
+  .cta-card:hover {
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+  }
+
+  .cta-card:hover .cta-card-glow {
+    opacity: 1;
+  }
+
+  .cta-card-glow {
+    display: none;
+  }
+
+  .cta-card h3 {
+    font-family: var(--font-heading);
+    font-size: 24px;
+    font-weight: 600;
+    color: #1E293B;
+    margin: 0 0 12px 0;
+    position: relative;
+    z-index: 1;
+  }
+
+  .cta-card p {
+    font-family: var(--font-body);
+    font-size: 15px;
+    line-height: 1.6;
+    color: #475569;
+    margin: 0 0 24px 0;
+    flex: 1;
+    position: relative;
+    z-index: 1;
+  }
+
+  .cta-card .btn {
+    align-self: flex-start;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* Responsive */
+  @media (max-width: 1024px) {
+    .section-grid {
+      grid-template-columns: 1fr;
+      gap: 24px;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .case-hero {
+      min-height: 320px;
+      padding: 24px;
+    }
+
+    .hero-content h1 {
+      font-size: 32px;
+    }
+
+    .hero-content p {
+      font-size: 16px;
+    }
+
+    .case-section {
+      padding: 24px;
+    }
+
+    .section-label h2 {
+      font-size: 24px;
+    }
+
+    .gallery-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .summary-glass-container {
+      padding: 40px 24px;
+    }
+
+    .summary-cards {
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .summary-divider {
+      display: none;
+    }
+
+    .summary-card {
+      width: 100%;
+      min-width: unset;
+      padding: 36px 32px;
+    }
+
+    .summary-value {
+      font-size: 44px;
+    }
+
+    .summary-value span {
+      font-size: 20px;
+    }
+
+    .summary-icon svg {
+      width: 64px;
+      height: 64px;
+    }
+
+    .summary-icon::before {
+      width: 80px;
+      height: 80px;
+    }
+
+    .cta-cards {
+      grid-template-columns: 1fr;
+    }
+
+    .cta-card {
+      padding: 24px;
+    }
+
+    .cta-card h3 {
+      font-size: 20px;
+    }
+
+    .stats-table th,
+    .stats-table td {
+      padding: 10px 12px;
+      font-size: 12px;
+    }
+
+    .stats-table td.indent {
+      padding-left: 24px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .case-hero {
+      min-height: 280px;
+    }
+
+    .hero-content h1 {
+      font-size: 26px;
+    }
+
+    .task-item, .result-item {
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .task-number, .result-number {
+      min-width: 28px;
+      height: 28px;
+      font-size: 12px;
+    }
+  }
+</style>
+
+<script>
+  function animateCounters() {
+    const counters = document.querySelectorAll('.counter');
+    
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const counter = entry.target as HTMLElement;
+          const target = parseFloat(counter.dataset.target || '0');
+          const start = parseFloat(counter.dataset.start || '0');
+          const isDecimal = counter.dataset.decimal === 'true';
+          const isDown = counter.dataset.direction === 'down';
+          const duration = parseInt(counter.dataset.duration || '2000');
+          const startTime = performance.now();
+          
+          function updateCounter(currentTime: number) {
+            const elapsed = currentTime - startTime;
+            const progress = Math.min(elapsed / duration, 1);
+            const easeOut = 1 - Math.pow(1 - progress, 3);
+            
+            let current: number;
+            if (isDown) {
+              current = start - (start - target) * easeOut;
+            } else {
+              current = start + (target - start) * easeOut;
+            }
+            
+            if (isDecimal) {
+              counter.textContent = current.toFixed(1).replace('.', ',');
+            } else {
+              counter.textContent = Math.floor(current).toString();
+            }
+            
+            if (progress < 1) {
+              requestAnimationFrame(updateCounter);
+            } else {
+              if (isDecimal) {
+                counter.textContent = target.toFixed(1).replace('.', ',');
+              } else {
+                counter.textContent = target.toString();
+              }
+            }
+          }
+          
+          requestAnimationFrame(updateCounter);
+          observer.unobserve(counter);
+        }
+      });
+    }, { threshold: 0.5 });
+    
+    counters.forEach(counter => observer.observe(counter));
+  }
+  
+  // Animated lines with dots
+  function animateLines() {
+    const paths = document.querySelectorAll('.trace-path') as NodeListOf<SVGPathElement>;
+    
+    paths.forEach(path => {
+      const pathLength = path.getTotalLength();
+      const duration = parseInt(path.dataset.duration || '8000');
+      const pathId = path.id;
+      
+      // Get corresponding dots
+      const dotId = pathId.replace('path', 'dot');
+      const pulseId = pathId.replace('path', 'pulse');
+      const dot = document.getElementById(dotId) as SVGCircleElement;
+      const pulse = document.getElementById(pulseId) as SVGCircleElement;
+      
+      // Set up path for drawing
+      path.style.strokeDasharray = pathLength.toString();
+      path.style.strokeDashoffset = pathLength.toString();
+      
+      // Pulse animation
+      let pulseScale = 0;
+      
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const startTime = performance.now();
+            
+            function animate(currentTime: number) {
+              const elapsed = currentTime - startTime;
+              const progress = Math.min(elapsed / duration, 1);
+              
+              // Draw line up to current progress
+              const drawLength = pathLength * progress;
+              path.style.strokeDashoffset = (pathLength - drawLength).toString();
+              
+              // Move dot to current position
+              const point = path.getPointAtLength(drawLength);
+              if (dot) {
+                dot.setAttribute('cx', point.x.toString());
+                dot.setAttribute('cy', point.y.toString());
+              }
+              if (pulse) {
+                pulse.setAttribute('cx', point.x.toString());
+                pulse.setAttribute('cy', point.y.toString());
+                // Pulsing effect
+                pulseScale = 1 + 0.5 * Math.sin(elapsed * 0.01);
+                pulse.setAttribute('r', (parseFloat(pulse.getAttribute('r') || '10') * (0.8 + 0.4 * Math.sin(elapsed * 0.015))).toString());
+                pulse.setAttribute('opacity', (0.2 + 0.3 * Math.abs(Math.sin(elapsed * 0.01))).toString());
+              }
+              
+              if (progress < 1) {
+                requestAnimationFrame(animate);
+              } else {
+                // Hide dots at end
+                if (dot) dot.style.opacity = '0';
+                if (pulse) pulse.style.opacity = '0';
+              }
+            }
+            
+            requestAnimationFrame(animate);
+            observer.unobserve(path);
+          }
+        });
+      }, { threshold: 0.3 });
+      
+      observer.observe(path);
+    });
+  }
+  
+  document.addEventListener('DOMContentLoaded', () => {
+    animateCounters();
+    animateLines();
+  });
+  document.addEventListener('astro:page-load', () => {
+    animateCounters();
+    animateLines();
+  });
+</script>

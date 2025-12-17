@@ -1,24 +1,53 @@
 ---
-// Combined CTA + FAQ section component
+import type { Lang } from '@/i18n';
+import { getBaseUrl } from '@/i18n';
+
+interface Props {
+  lang?: Lang;
+}
+
+const { lang = 'ru' } = Astro.props;
+const base = getBaseUrl(lang);
+
+const texts = {
+  ru: {
+    consultTitle: "Получить консультацию",
+    consultDesc: "Наши специалисты помогут подобрать оптимальное решение для вашего предприятия и рассчитают экономический эффект",
+    consultBtn: "Связаться с нами",
+    faqTitle: "Все вопросы и ответы",
+    faqDesc: "Ответы на часто задаваемые вопросы о турбогенераторных установках, сроках поставки и условиях сотрудничества",
+    faqBtn: "Перейти в FAQ"
+  },
+  en: {
+    consultTitle: "Get a Consultation",
+    consultDesc: "Our specialists will help you find the optimal solution for your enterprise and calculate the economic effect",
+    consultBtn: "Contact Us",
+    faqTitle: "All Questions & Answers",
+    faqDesc: "Answers to frequently asked questions about turbogenerator units, delivery times and cooperation terms",
+    faqBtn: "Go to FAQ"
+  }
+};
+
+const t = texts[lang];
 ---
 
 <section class="cta-faq-section">
   <div class="cta-faq-cards">
     <div class="cta-faq-card">
-      <h3>Получить консультацию</h3>
-      <p>Наши специалисты помогут подобрать оптимальное решение для вашего предприятия и рассчитают экономический эффект</p>
+      <h3>{t.consultTitle}</h3>
+      <p>{t.consultDesc}</p>
       <button class="btn btn-accent" data-modal="consultation">
         <img src="/img/arrow_right.svg" alt="" width="16" height="16" />
-        <span>Связаться с нами</span>
+        <span>{t.consultBtn}</span>
       </button>
     </div>
     
     <div class="cta-faq-card">
-      <h3>Все вопросы и ответы</h3>
-      <p>Ответы на часто задаваемые вопросы о турбогенераторных установках, сроках поставки и условиях сотрудничества</p>
-      <a href="/faq" class="btn btn-accent">
+      <h3>{t.faqTitle}</h3>
+      <p>{t.faqDesc}</p>
+      <a href={`${base}/faq`} class="btn btn-accent">
         <img src="/img/arrow_right.svg" alt="" width="16" height="16" />
-        <span>Перейти в FAQ</span>
+        <span>{t.faqBtn}</span>
       </a>
     </div>
   </div>

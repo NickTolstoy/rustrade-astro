@@ -1,0 +1,123 @@
+<svg viewBox="0 0 1200 600" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0f172a"/>
+      <stop offset="50%" stop-color="#1e293b"/>
+      <stop offset="100%" stop-color="#0f172a"/>
+    </linearGradient>
+    <linearGradient id="metalGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#94a3b8"/>
+      <stop offset="50%" stop-color="#64748b"/>
+      <stop offset="100%" stop-color="#475569"/>
+    </linearGradient>
+    <linearGradient id="steamGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#3b82f6" stop-opacity="0.8"/>
+      <stop offset="50%" stop-color="#60a5fa" stop-opacity="0.5"/>
+      <stop offset="100%" stop-color="#93c5fd" stop-opacity="0.2"/>
+    </linearGradient>
+    <linearGradient id="bladeGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#f59e0b"/>
+      <stop offset="100%" stop-color="#d97706"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="1200" height="600" fill="url(#bgGrad)"/>
+  
+  <!-- Grid pattern -->
+  <g stroke="#334155" stroke-width="0.5" opacity="0.3">
+    <path d="M0 100h1200M0 200h1200M0 300h1200M0 400h1200M0 500h1200"/>
+    <path d="M100 0v600M200 0v600M300 0v600M400 0v600M500 0v600M600 0v600M700 0v600M800 0v600M900 0v600M1000 0v600M1100 0v600"/>
+  </g>
+  
+  <!-- Turbine casing -->
+  <ellipse cx="600" cy="300" rx="280" ry="180" fill="url(#metalGrad)" opacity="0.9"/>
+  <ellipse cx="600" cy="300" rx="260" ry="160" fill="#1e293b" stroke="#475569" stroke-width="2"/>
+  
+  <!-- Shaft -->
+  <rect x="200" y="285" width="700" height="30" fill="url(#metalGrad)" rx="5"/>
+  
+  <!-- Blades -->
+  <g fill="url(#bladeGrad)" filter="url(#glow)">
+    <path d="M380 300 L380 220 L400 200 L400 280 Z" transform="rotate(0 390 300)"/>
+    <path d="M380 300 L380 220 L400 200 L400 280 Z" transform="rotate(45 390 300)"/>
+    <path d="M380 300 L380 220 L400 200 L400 280 Z" transform="rotate(90 390 300)"/>
+    <path d="M380 300 L380 220 L400 200 L400 280 Z" transform="rotate(135 390 300)"/>
+    <path d="M380 300 L380 220 L400 200 L400 280 Z" transform="rotate(180 390 300)"/>
+    <path d="M380 300 L380 220 L400 200 L400 280 Z" transform="rotate(225 390 300)"/>
+    <path d="M380 300 L380 220 L400 200 L400 280 Z" transform="rotate(270 390 300)"/>
+    <path d="M380 300 L380 220 L400 200 L400 280 Z" transform="rotate(315 390 300)"/>
+  </g>
+  
+  <g fill="url(#bladeGrad)" filter="url(#glow)">
+    <path d="M500 300 L500 210 L525 185 L525 275 Z" transform="rotate(22 512 300)"/>
+    <path d="M500 300 L500 210 L525 185 L525 275 Z" transform="rotate(67 512 300)"/>
+    <path d="M500 300 L500 210 L525 185 L525 275 Z" transform="rotate(112 512 300)"/>
+    <path d="M500 300 L500 210 L525 185 L525 275 Z" transform="rotate(157 512 300)"/>
+    <path d="M500 300 L500 210 L525 185 L525 275 Z" transform="rotate(202 512 300)"/>
+    <path d="M500 300 L500 210 L525 185 L525 275 Z" transform="rotate(247 512 300)"/>
+    <path d="M500 300 L500 210 L525 185 L525 275 Z" transform="rotate(292 512 300)"/>
+    <path d="M500 300 L500 210 L525 185 L525 275 Z" transform="rotate(337 512 300)"/>
+  </g>
+  
+  <g fill="url(#bladeGrad)" filter="url(#glow)">
+    <path d="M650 300 L650 200 L680 170 L680 270 Z" transform="rotate(10 665 300)"/>
+    <path d="M650 300 L650 200 L680 170 L680 270 Z" transform="rotate(55 665 300)"/>
+    <path d="M650 300 L650 200 L680 170 L680 270 Z" transform="rotate(100 665 300)"/>
+    <path d="M650 300 L650 200 L680 170 L680 270 Z" transform="rotate(145 665 300)"/>
+    <path d="M650 300 L650 200 L680 170 L680 270 Z" transform="rotate(190 665 300)"/>
+    <path d="M650 300 L650 200 L680 170 L680 270 Z" transform="rotate(235 665 300)"/>
+    <path d="M650 300 L650 200 L680 170 L680 270 Z" transform="rotate(280 665 300)"/>
+    <path d="M650 300 L650 200 L680 170 L680 270 Z" transform="rotate(325 665 300)"/>
+  </g>
+  
+  <g fill="url(#bladeGrad)" filter="url(#glow)">
+    <path d="M780 300 L780 180 L815 145 L815 265 Z" transform="rotate(30 797 300)"/>
+    <path d="M780 300 L780 180 L815 145 L815 265 Z" transform="rotate(75 797 300)"/>
+    <path d="M780 300 L780 180 L815 145 L815 265 Z" transform="rotate(120 797 300)"/>
+    <path d="M780 300 L780 180 L815 145 L815 265 Z" transform="rotate(165 797 300)"/>
+    <path d="M780 300 L780 180 L815 145 L815 265 Z" transform="rotate(210 797 300)"/>
+    <path d="M780 300 L780 180 L815 145 L815 265 Z" transform="rotate(255 797 300)"/>
+    <path d="M780 300 L780 180 L815 145 L815 265 Z" transform="rotate(300 797 300)"/>
+    <path d="M780 300 L780 180 L815 145 L815 265 Z" transform="rotate(345 797 300)"/>
+  </g>
+  
+  <!-- Steam flow -->
+  <path d="M100 280 Q200 260 300 280 Q350 290 380 285" stroke="url(#steamGrad)" stroke-width="40" fill="none" opacity="0.6">
+    <animate attributeName="opacity" values="0.4;0.7;0.4" dur="3s" repeatCount="indefinite"/>
+  </path>
+  
+  <!-- Labels -->
+  <text x="60" y="50" fill="#f1f5f9" font-family="system-ui" font-size="28" font-weight="700">ПАРОВАЯ ТУРБИНА</text>
+  <text x="60" y="80" fill="#94a3b8" font-family="system-ui" font-size="16">Проточная часть с многоступенчатым расширением</text>
+  
+  <!-- Annotations -->
+  <g fill="none" stroke="#60a5fa" stroke-width="1.5">
+    <line x1="390" y1="180" x2="390" y2="100"/>
+    <circle cx="390" cy="95" r="4" fill="#60a5fa"/>
+    <line x1="665" y1="150" x2="665" y2="80"/>
+    <circle cx="665" cy="75" r="4" fill="#60a5fa"/>
+    <line x1="800" y1="130" x2="800" y2="60"/>
+    <circle cx="800" cy="55" r="4" fill="#60a5fa"/>
+  </g>
+  
+  <text x="350" y="90" fill="#60a5fa" font-family="system-ui" font-size="12">ВД ступень</text>
+  <text x="620" y="70" fill="#60a5fa" font-family="system-ui" font-size="12">СД ступень</text>
+  <text x="755" y="50" fill="#60a5fa" font-family="system-ui" font-size="12">НД ступень</text>
+  
+  <!-- Parameters -->
+  <rect x="950" y="50" width="200" height="150" fill="#1e293b" stroke="#334155" rx="8"/>
+  <text x="970" y="80" fill="#f1f5f9" font-family="system-ui" font-size="14" font-weight="600">Параметры:</text>
+  <text x="970" y="105" fill="#94a3b8" font-family="system-ui" font-size="12">P вх: 4.0–13.0 МПа</text>
+  <text x="970" y="125" fill="#94a3b8" font-family="system-ui" font-size="12">T вх: 400–540 °C</text>
+  <text x="970" y="145" fill="#94a3b8" font-family="system-ui" font-size="12">N: 0.5–60 МВт</text>
+  <text x="970" y="165" fill="#94a3b8" font-family="system-ui" font-size="12">η: до 85%</text>
+  <text x="970" y="185" fill="#94a3b8" font-family="system-ui" font-size="12">n: 3000–12000 об/мин</text>
+</svg>

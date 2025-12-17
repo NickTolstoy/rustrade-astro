@@ -1,0 +1,110 @@
+<svg viewBox="0 0 900 500" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="dataArrow" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#3b82f6"/>
+    </marker>
+    <marker id="ctrlArrow" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#22c55e"/>
+    </marker>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="900" height="500" fill="#ffffff"/>
+  
+  <!-- Title -->
+  <text x="450" y="30" text-anchor="middle" fill="#1e293b" font-family="system-ui" font-size="16" font-weight="700">
+    Архитектура АСУ ТП паровой турбины
+  </text>
+  
+  <!-- Level 3: SCADA/HMI -->
+  <rect x="50" y="60" width="800" height="70" fill="#f0f9ff" stroke="#0ea5e9" stroke-width="2" rx="8"/>
+  <text x="450" y="85" text-anchor="middle" fill="#0369a1" font-family="system-ui" font-size="14" font-weight="700">Уровень 3: SCADA / HMI</text>
+  <text x="450" y="105" text-anchor="middle" fill="#0284c7" font-family="system-ui" font-size="11">Визуализация • Архивирование • Отчёты • Тренды</text>
+  <text x="450" y="120" text-anchor="middle" fill="#0284c7" font-family="system-ui" font-size="10">Операторские станции, исторические данные, аналитика</text>
+  
+  <!-- Level 2: PLC/DCS -->
+  <rect x="50" y="160" width="800" height="100" fill="#f0fdf4" stroke="#22c55e" stroke-width="2" rx="8"/>
+  <text x="450" y="185" text-anchor="middle" fill="#166534" font-family="system-ui" font-size="14" font-weight="700">Уровень 2: Контроллеры (ПЛК / DCS)</text>
+  
+  <!-- Controller modules -->
+  <rect x="80" y="200" width="150" height="50" fill="#dcfce7" stroke="#16a34a" rx="4"/>
+  <text x="155" y="220" text-anchor="middle" fill="#166534" font-family="system-ui" font-size="10" font-weight="600">Регулятор</text>
+  <text x="155" y="235" text-anchor="middle" fill="#166534" font-family="system-ui" font-size="10">скорости/мощности</text>
+  
+  <rect x="250" y="200" width="150" height="50" fill="#dcfce7" stroke="#16a34a" rx="4"/>
+  <text x="325" y="220" text-anchor="middle" fill="#166534" font-family="system-ui" font-size="10" font-weight="600">Защиты</text>
+  <text x="325" y="235" text-anchor="middle" fill="#166534" font-family="system-ui" font-size="10">и блокировки</text>
+  
+  <rect x="420" y="200" width="150" height="50" fill="#dcfce7" stroke="#16a34a" rx="4"/>
+  <text x="495" y="220" text-anchor="middle" fill="#166534" font-family="system-ui" font-size="10" font-weight="600">Термоконтроль</text>
+  <text x="495" y="235" text-anchor="middle" fill="#166534" font-family="system-ui" font-size="10">металла</text>
+  
+  <rect x="590" y="200" width="150" height="50" fill="#dcfce7" stroke="#16a34a" rx="4"/>
+  <text x="665" y="220" text-anchor="middle" fill="#166534" font-family="system-ui" font-size="10" font-weight="600">Вибромониторинг</text>
+  <text x="665" y="235" text-anchor="middle" fill="#166534" font-family="system-ui" font-size="10">и диагностика</text>
+  
+  <rect x="760" y="200" width="70" height="50" fill="#fef3c7" stroke="#f59e0b" rx="4"/>
+  <text x="795" y="228" text-anchor="middle" fill="#92400e" font-family="system-ui" font-size="10" font-weight="600">ESD</text>
+  
+  <!-- Level 1: Field devices -->
+  <rect x="50" y="290" width="800" height="100" fill="#fef3c7" stroke="#f59e0b" stroke-width="2" rx="8"/>
+  <text x="450" y="315" text-anchor="middle" fill="#92400e" font-family="system-ui" font-size="14" font-weight="700">Уровень 1: Полевое оборудование</text>
+  
+  <!-- Sensors -->
+  <g transform="translate(80, 330)">
+    <rect width="100" height="50" fill="#fef9c3" stroke="#ca8a04" rx="4"/>
+    <text x="50" y="20" text-anchor="middle" fill="#854d0e" font-family="system-ui" font-size="9" font-weight="600">Датчики P, T</text>
+    <text x="50" y="35" text-anchor="middle" fill="#854d0e" font-family="system-ui" font-size="9">давления, темп.</text>
+  </g>
+  
+  <g transform="translate(200, 330)">
+    <rect width="100" height="50" fill="#fef9c3" stroke="#ca8a04" rx="4"/>
+    <text x="50" y="20" text-anchor="middle" fill="#854d0e" font-family="system-ui" font-size="9" font-weight="600">Виброметры</text>
+    <text x="50" y="35" text-anchor="middle" fill="#854d0e" font-family="system-ui" font-size="9">подшипников</text>
+  </g>
+  
+  <g transform="translate(320, 330)">
+    <rect width="100" height="50" fill="#fef9c3" stroke="#ca8a04" rx="4"/>
+    <text x="50" y="20" text-anchor="middle" fill="#854d0e" font-family="system-ui" font-size="9" font-weight="600">Термопары</text>
+    <text x="50" y="35" text-anchor="middle" fill="#854d0e" font-family="system-ui" font-size="9">металла</text>
+  </g>
+  
+  <g transform="translate(440, 330)">
+    <rect width="100" height="50" fill="#fef9c3" stroke="#ca8a04" rx="4"/>
+    <text x="50" y="20" text-anchor="middle" fill="#854d0e" font-family="system-ui" font-size="9" font-weight="600">Датчики</text>
+    <text x="50" y="35" text-anchor="middle" fill="#854d0e" font-family="system-ui" font-size="9">оборотов</text>
+  </g>
+  
+  <g transform="translate(560, 330)">
+    <rect width="100" height="50" fill="#e0e7ff" stroke="#4f46e5" rx="4"/>
+    <text x="50" y="20" text-anchor="middle" fill="#3730a3" font-family="system-ui" font-size="9" font-weight="600">Регулирующие</text>
+    <text x="50" y="35" text-anchor="middle" fill="#3730a3" font-family="system-ui" font-size="9">клапаны</text>
+  </g>
+  
+  <g transform="translate(680, 330)">
+    <rect width="100" height="50" fill="#e0e7ff" stroke="#4f46e5" rx="4"/>
+    <text x="50" y="20" text-anchor="middle" fill="#3730a3" font-family="system-ui" font-size="9" font-weight="600">Стопорные</text>
+    <text x="50" y="35" text-anchor="middle" fill="#3730a3" font-family="system-ui" font-size="9">клапаны</text>
+  </g>
+  
+  <!-- Level 0: Physical process -->
+  <rect x="50" y="410" width="800" height="50" fill="#e2e8f0" stroke="#64748b" stroke-width="2" rx="8"/>
+  <text x="450" y="440" text-anchor="middle" fill="#334155" font-family="system-ui" font-size="14" font-weight="700">Уровень 0: Технологический процесс (паровая турбина)</text>
+  
+  <!-- Data flow arrows -->
+  <path d="M450 130 L450 155" stroke="#3b82f6" stroke-width="2" marker-end="url(#dataArrow)"/>
+  <path d="M450 260 L450 285" stroke="#3b82f6" stroke-width="2" marker-end="url(#dataArrow)"/>
+  <path d="M450 390 L450 405" stroke="#3b82f6" stroke-width="2" marker-end="url(#dataArrow)"/>
+  
+  <!-- Control flow arrows -->
+  <path d="M470 155 L470 130" stroke="#22c55e" stroke-width="2" marker-end="url(#ctrlArrow)"/>
+  <path d="M470 285 L470 260" stroke="#22c55e" stroke-width="2" marker-end="url(#ctrlArrow)"/>
+  <path d="M470 405 L470 390" stroke="#22c55e" stroke-width="2" marker-end="url(#ctrlArrow)"/>
+  
+  <!-- Legend -->
+  <rect x="760" y="430" width="80" height="30" fill="#f8fafc" stroke="#e2e8f0" rx="4"/>
+  <line x1="770" y1="440" x2="790" y2="440" stroke="#3b82f6" stroke-width="2"/>
+  <text x="795" y="444" fill="#3b82f6" font-family="system-ui" font-size="9">Данные</text>
+  <line x1="770" y1="452" x2="790" y2="452" stroke="#22c55e" stroke-width="2"/>
+  <text x="795" y="456" fill="#22c55e" font-family="system-ui" font-size="9">Команды</text>
+</svg>

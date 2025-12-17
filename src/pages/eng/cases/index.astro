@@ -1,0 +1,292 @@
+---
+import type { Lang } from '@/i18n';
+import { getBaseUrl } from '@/i18n';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Breadcrumbs from '@/components/Breadcrumbs.astro';
+import Faq from '@/components/Faq.astro';
+import CtaFaq from '@/components/CtaFaq.astro';
+
+const lang: Lang = 'en';
+const base = getBaseUrl(lang);
+
+const faqItems = [
+  {
+    question: "In which industries do you implement projects?",
+    answer: "We have successful experience implementing projects in various industries: energy, chemical industry, food industry (sugar and oil extraction plants), metallurgy and others."
+  },
+  {
+    question: "What is the average project implementation duration?",
+    answer: "Timeframes depend on the scale and complexity of the task. On average, equipment delivery takes 6 to 12 months, and a full turnkey project cycle takes 12 to 18 months."
+  },
+  {
+    question: "Do you provide warranty on completed work?",
+    answer: "Yes, we provide warranty on supplied equipment and completed work. Standard warranty period is 12-24 months from commissioning."
+  }
+];
+
+const cases = [
+  {
+    id: 'sugar-factory',
+    title: 'Sugar Factory',
+    description: 'Replacement of outdated backpressure turbogenerator unit (TGU) with high-efficiency full factory ready TGU',
+    category: 'Sugar',
+    image: '/img/cases/sugar_main.webp',
+    href: `${base}/cases/sugar-factory`
+  },
+  {
+    id: 'oil-factory',
+    title: 'Oil Extraction Plant',
+    description: 'Installation of 5 MW turbogenerator unit at Oil Extraction Plant',
+    category: 'Food Industry',
+    image: '/img/cases/oil.webp',
+    href: `${base}/cases/oil-factory`
+  },
+  {
+    id: 'tgk',
+    title: 'Territorial Generating Company',
+    description: 'Installation of 2.5 MW turbogenerator unit',
+    category: 'Energy',
+    image: '/img/cases/tgk_main.webp',
+    href: `${base}/cases/tgk`
+  },
+  {
+    id: 'chemist-factory',
+    title: 'Chemical Plant',
+    description: 'Installation of 3.8 MW turbogenerator unit',
+    category: 'Chemical',
+    image: '/img/cases/chemist_main.webp',
+    href: `${base}/cases/chemist-factory`
+  }
+];
+
+---
+
+<BaseLayout 
+  lang={lang} 
+  title="Case Studies and Completed Projects — RUSTRADE" 
+  description="Completed projects by RUSTRADE: turbogenerator installation at sugar factories, TGK, chemical and oil extraction plants. Economic effect up to 57 million ₽/year."
+  keywords="RUSTRADE case studies, completed projects, factory turbogenerators, enterprise energy efficiency"
+  image="/img/cases/sugar_1_enhanced_2k.webp"
+  faqData={faqItems}
+  breadcrumbs={[{ name: 'Cases', url: '/eng/cases' }]}
+>
+  <Breadcrumbs items={[{ label: 'Cases' }]} lang={lang} />
+
+  <main class="fade-in">
+    <div class="cases-panel">
+      <h1 class="cases-header">Case Studies</h1>
+    </div>
+
+    <div class="cases-list">
+      {cases.map((item) => (
+        <a class="case-item" href={item.href} style={`background-image: linear-gradient(50deg, rgba(0, 0, 0, 0.75) 0%, rgba(0, 0, 0, 0.00) 100%), url(${item.image});`}>
+          <div class="category-row">
+            <p>{item.category}</p>
+          </div>
+
+          <div class="short-desc">
+            <h2>{item.title}</h2>
+            <p>{item.description}</p>
+            <div class="nav-arrow">
+              <img src="/img/main/black_arrow_diagonal.svg" alt="arrow" />
+            </div>
+          </div>
+        </a>
+      ))}
+    </div>
+
+    <Faq items={faqItems} lang={lang} />
+
+    <CtaFaq lang={lang} />
+  </main>
+</BaseLayout>
+
+<style>
+  main {
+    padding-bottom: var(--space-12);
+  }
+
+  .cases-panel {
+    display: flex;
+    padding: 32px 0px;
+    align-items: flex-start;
+    gap: 8px;
+    border-radius: 10px;
+    border: 1px solid #5C5A5A;
+    margin-bottom: 8px;
+  }
+
+  .cases-header {
+    color: #000;
+    font-family: var(--font-heading);
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    letter-spacing: -0.96px;
+    padding: 0 64px;
+    flex: 1 0 0;
+    margin: 0;
+  }
+
+  .cases-list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+    margin-bottom: var(--space-12);
+  }
+
+  .case-item {
+    display: flex;
+    box-sizing: border-box;
+    width: 100%;
+    height: 400px;
+    padding: 32px;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    border-radius: 10px;
+    position: relative;
+    cursor: pointer;
+    background-size: cover !important;
+    background-position: center center !important;
+    text-decoration: none;
+    transition: all 0.5s ease;
+    filter: grayscale(100%);
+  }
+
+  .case-item:hover {
+    filter: grayscale(0%);
+  }
+
+  @media (max-width: 1024px) {
+    .cases-list {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .nav-arrow {
+    display: flex;
+    box-sizing: border-box;
+    width: 36px;
+    height: 36px;
+    padding: 8px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    border-radius: 50%;
+    background: #FFF;
+    margin-top: 12px;
+  }
+
+  .nav-arrow img {
+    transition: transform 0.5s;
+    width: 100%;
+    height: 100%;
+  }
+
+  .case-item:hover .nav-arrow img {
+    transform: rotate(45deg);
+  }
+
+  .case-item:hover::after {
+    content: '';
+    position: absolute;
+    left: 0; 
+    top: 0;
+    width: 100%; 
+    height: 100%;
+    border-radius: 10px;
+    background: linear-gradient(45deg, rgba(0, 0, 0, 0.80) 0%, rgba(41, 41, 41, 0.67) 15.93%, rgba(255, 255, 255, 0.00) 100%);
+    pointer-events: none;
+  }
+
+  .category-row, .short-desc {
+    z-index: 10;
+    position: relative;
+  }
+
+  .category-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+  }
+
+  .category-row img {
+    margin-right: 8px;
+  }
+
+  .category-row p {
+    color: #FFF;
+    font-family: var(--font-body);
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 20px;
+    letter-spacing: -0.42px;
+    display: flex;
+    align-items: center;
+  }
+  
+  .category-row p:last-child {
+    flex: 1 0 0;
+  }
+
+  .short-desc h2 {
+    color: white;
+    font-family: var(--font-heading);
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    letter-spacing: -0.96px;
+    margin-bottom: 12px;
+    margin-top: 0;
+  }
+
+  .short-desc p {
+    max-width: 530px;
+    color: white;
+    font-family: var(--font-body);
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 20px;
+    letter-spacing: -0.42px;
+    margin: 0;
+  }
+
+  /* Responsive */
+  @media (max-width: 810px) {
+    .cases-header {
+      padding: 0 24px;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .cases-panel {
+      padding: 24px;
+    }
+    
+    .cases-header {
+      padding: 0;
+      font-size: 24px;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .case-item {
+      height: 350px;
+      padding: 24px;
+    }
+    
+    .short-desc h2 {
+      font-size: 24px;
+    }
+    
+    .cases-panel {
+      padding: 16px;
+    }
+  }
+</style>

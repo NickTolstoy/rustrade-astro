@@ -1,12 +1,16 @@
 import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
+import node from '@astrojs/node';
 
 export default defineConfig({
   site: 'https://rustrade.pro',
   devToolbar: {
     enabled: false
   },
-  output: 'static',
+  output: 'hybrid',
+  adapter: node({
+    mode: 'standalone'
+  }),
   trailingSlash: 'never',
   build: {
     format: 'directory',

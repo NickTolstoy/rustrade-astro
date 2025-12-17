@@ -1,0 +1,90 @@
+<svg viewBox="0 0 800 420" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="800" height="420" fill="#ffffff"/>
+  
+  <!-- Title -->
+  <text x="400" y="30" text-anchor="middle" fill="#1e293b" font-family="system-ui" font-size="16" font-weight="700">
+    Стадии эрозионного износа рабочих лопаток
+  </text>
+  
+  <!-- Stage 1: New blade -->
+  <g transform="translate(80, 60)">
+    <rect x="0" y="0" width="140" height="300" fill="#f0fdf4" stroke="#22c55e" stroke-width="2" rx="8"/>
+    <text x="70" y="25" text-anchor="middle" fill="#166534" font-family="system-ui" font-size="12" font-weight="600">Новая лопатка</text>
+    
+    <!-- Blade shape -->
+    <path d="M50 50 Q60 80 55 150 Q50 220 60 250 L90 250 Q80 220 85 150 Q90 80 80 50 Z" 
+          fill="#64748b" stroke="#334155" stroke-width="2"/>
+    <line x1="55" y1="50" x2="85" y2="50" stroke="#334155" stroke-width="2"/>
+    
+    <text x="70" y="275" text-anchor="middle" fill="#475569" font-family="system-ui" font-size="10">Наработка: 0 ч</text>
+  </g>
+  
+  <!-- Stage 2: 20,000 hours -->
+  <g transform="translate(240, 60)">
+    <rect x="0" y="0" width="140" height="300" fill="#fefce8" stroke="#eab308" stroke-width="2" rx="8"/>
+    <text x="70" y="25" text-anchor="middle" fill="#a16207" font-family="system-ui" font-size="12" font-weight="600">Начальный износ</text>
+    
+    <!-- Blade shape with minor erosion -->
+    <path d="M50 52 Q60 82 55 150 Q50 220 60 250 L90 250 Q80 220 85 150 Q90 82 78 52 Z" 
+          fill="#64748b" stroke="#334155" stroke-width="2"/>
+    <path d="M55 50 Q60 55 70 52 Q78 50 83 55" stroke="#ef4444" stroke-width="2" fill="none"/>
+    
+    <!-- Erosion markers -->
+    <circle cx="58" cy="52" r="3" fill="#ef4444"/>
+    <circle cx="78" cy="52" r="3" fill="#ef4444"/>
+    
+    <text x="70" y="275" text-anchor="middle" fill="#475569" font-family="system-ui" font-size="10">Наработка: 20 000 ч</text>
+  </g>
+  
+  <!-- Stage 3: 50,000 hours -->
+  <g transform="translate(400, 60)">
+    <rect x="0" y="0" width="140" height="300" fill="#fff7ed" stroke="#f97316" stroke-width="2" rx="8"/>
+    <text x="70" y="25" text-anchor="middle" fill="#c2410c" font-family="system-ui" font-size="12" font-weight="600">Умеренный износ</text>
+    
+    <!-- Blade shape with moderate erosion -->
+    <path d="M52 58 Q62 85 57 150 Q52 220 62 250 L88 250 Q78 220 83 150 Q88 85 75 58 Z" 
+          fill="#64748b" stroke="#334155" stroke-width="2"/>
+    <path d="M55 55 Q62 65 70 60 Q78 55 82 62" stroke="#ef4444" stroke-width="2" fill="none"/>
+    
+    <!-- Erosion zone -->
+    <ellipse cx="70" cy="58" rx="18" ry="12" fill="#fecaca" fill-opacity="0.5" stroke="#ef4444" stroke-dasharray="3,2"/>
+    
+    <text x="70" y="270" text-anchor="middle" fill="#475569" font-family="system-ui" font-size="10">Наработка: 50 000 ч</text>
+    <text x="70" y="285" text-anchor="middle" fill="#f97316" font-family="system-ui" font-size="9">Потеря КПД: 1-2%</text>
+  </g>
+  
+  <!-- Stage 4: Critical -->
+  <g transform="translate(560, 60)">
+    <rect x="0" y="0" width="140" height="300" fill="#fef2f2" stroke="#ef4444" stroke-width="2" rx="8"/>
+    <text x="70" y="25" text-anchor="middle" fill="#b91c1c" font-family="system-ui" font-size="12" font-weight="600">Критический износ</text>
+    
+    <!-- Blade shape with severe erosion -->
+    <path d="M55 70 Q65 95 60 150 Q55 220 65 250 L85 250 Q75 220 80 150 Q85 95 72 70 Z" 
+          fill="#64748b" stroke="#334155" stroke-width="2"/>
+    <path d="M58 68 Q65 82 70 75 Q75 68 78 78" stroke="#ef4444" stroke-width="3" fill="none"/>
+    
+    <!-- Critical erosion zone -->
+    <ellipse cx="68" cy="72" rx="20" ry="18" fill="#fecaca" fill-opacity="0.6" stroke="#dc2626" stroke-width="2" stroke-dasharray="4,2"/>
+    
+    <!-- Warning icon -->
+    <polygon points="70,100 60,120 80,120" fill="#ef4444"/>
+    <text x="70" y="117" text-anchor="middle" fill="#ffffff" font-family="system-ui" font-size="12" font-weight="700">!</text>
+    
+    <text x="70" y="270" text-anchor="middle" fill="#475569" font-family="system-ui" font-size="10">Наработка: 80 000+ ч</text>
+    <text x="70" y="285" text-anchor="middle" fill="#ef4444" font-family="system-ui" font-size="9">Потеря КПД: 3-5%</text>
+  </g>
+  
+  <!-- Arrow progression -->
+  <g fill="#94a3b8">
+    <polygon points="225,210 235,200 235,220"/>
+    <polygon points="385,210 395,200 395,220"/>
+    <polygon points="545,210 555,200 555,220"/>
+  </g>
+  
+  <!-- Bottom note -->
+  <rect x="100" y="370" width="600" height="40" fill="#f1f5f9" stroke="#e2e8f0" rx="6"/>
+  <text x="400" y="395" text-anchor="middle" fill="#475569" font-family="system-ui" font-size="11">
+    Капельная эрозия входных кромок — основная причина деградации последних ступеней влажнопаровых турбин
+  </text>
+</svg>

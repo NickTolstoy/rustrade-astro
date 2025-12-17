@@ -28,7 +28,7 @@ const stats = [
   { value: 57, unit: 'МВт', label: 'Суммарная установочная мощность', icon: '/img/icons/effective.svg' },
   { value: 8, unit: 'шт', label: 'Успешно реализованных проектов', icon: '/img/icons/checked_bookmark.svg' },
   { value: 10, unit: 'шт', label: 'Проектов в стадии реализации', icon: '/img/settings.svg' },
-  { value: 15, unit: 'лет', label: 'Опыта работы на рынке', icon: '/img/icons/quality.svg' }
+  { value: 5, unit: 'лет', label: 'Опыта работы на рынке', icon: '/img/icons/quality.svg' }
 ];
 
 
@@ -50,8 +50,12 @@ const partners = [
 
 <BaseLayout 
   lang={lang} 
-  title="О компании | РУСТРЕЙД"
-  description="ООО «РУСТРЕЙД» — проектирование и поставка паровых турбин, турбогенераторов и комплектующих"
+  title="О компании РУСТРЕЙД — производитель паровых турбин"
+  description="ООО «РУСТРЕЙД» — российская компания, основанная в 2020 году. Проектирование и поставка паровых турбин от 25 кВт до 40 МВт, турбогенераторов и энергетического оборудования. 57 МВт суммарной мощности, 8 реализованных проектов."
+  keywords="о компании РУСТРЕЙД, производитель турбин, энергетическое оборудование Россия, ООО РУСТРЕЙД"
+  image="/img/about/chairs.jpg"
+  faqData={faqItems}
+  breadcrumbs={[{ name: 'О компании', url: '/about' }]}
 >
   <Breadcrumbs items={[{ label: 'О компании' }]} />
 
@@ -89,20 +93,148 @@ const partners = [
   <!-- Stats Section -->
   <section class="section stats">
     <div class="stats-grid">
-      {stats.map(stat => (
+      <!-- Мощность -->
+      <div class="stat-card">
+        <div class="stat-icon stat-icon-power">
+          <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="aboutPowerGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#3F9BD6"/>
+                <stop offset="55%" stop-color="#2E80C7"/>
+                <stop offset="100%" stop-color="#1D4ED8"/>
+              </linearGradient>
+              <filter id="aboutPowerGlow" x="-50%" y="-50%" width="200%" height="200%">
+                <feGaussianBlur stdDeviation="1.8" result="coloredBlur"/>
+                <feMerge>
+                  <feMergeNode in="coloredBlur"/>
+                  <feMergeNode in="SourceGraphic"/>
+                </feMerge>
+              </filter>
+            </defs>
+            <circle class="icon-bg" cx="32" cy="32" r="28" fill="url(#aboutPowerGrad)" opacity="0.14"/>
+            <circle class="power-ring" cx="32" cy="32" r="22" stroke="url(#aboutPowerGrad)" stroke-width="2" opacity="0.55"/>
+            <g class="turbine-rotor" filter="url(#aboutPowerGlow)">
+              <circle cx="32" cy="32" r="6" fill="url(#aboutPowerGrad)"/>
+              <g stroke="url(#aboutPowerGrad)" stroke-width="3.2" stroke-linecap="round">
+                <line x1="32" y1="10" x2="32" y2="20"/>
+                <line x1="32" y1="44" x2="32" y2="54"/>
+                <line x1="10" y1="32" x2="20" y2="32"/>
+                <line x1="44" y1="32" x2="54" y2="32"/>
+                <line x1="17.2" y1="17.2" x2="24.3" y2="24.3"/>
+                <line x1="39.7" y1="39.7" x2="46.8" y2="46.8"/>
+                <line x1="17.2" y1="46.8" x2="24.3" y2="39.7"/>
+                <line x1="39.7" y1="24.3" x2="46.8" y2="17.2"/>
+              </g>
+            </g>
+            <path class="energy-wave" d="M14 37c4-9 10-9 14 0s10 9 14 0 10-9 14 0" stroke="#E0F2FE" stroke-opacity="0.9" stroke-width="2.2" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div class="stat-content-wrapper">
+          <div class="stat-value-wrapper">
+            <span class="stat-value" data-value="57">0</span>
+            <span class="stat-unit">МВт</span>
+          </div>
+          <p class="stat-label">Суммарная установочная мощность</p>
+        </div>
+      </div>
+
+      <!-- Реализованные проекты -->
         <div class="stat-card">
-          <div class="stat-icon">
-            <img src={stat.icon} alt={stat.label} />
+        <div class="stat-icon stat-icon-projects">
+          <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="aboutProjectGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#22C55E"/>
+                <stop offset="50%" stop-color="#16A34A"/>
+                <stop offset="100%" stop-color="#15803D"/>
+              </linearGradient>
+            </defs>
+            <circle class="icon-bg" cx="32" cy="32" r="28" fill="url(#aboutProjectGrad)" opacity="0.12"/>
+            <!-- Blueprint sheet -->
+            <path class="blueprint-sheet" d="M18 14h20l8 8v28a4 4 0 0 1-4 4H18a4 4 0 0 1-4-4V18a4 4 0 0 1 4-4Z" stroke="url(#aboutProjectGrad)" stroke-width="2.6" fill="none"/>
+            <path class="blueprint-fold" d="M38 14v8h8" stroke="url(#aboutProjectGrad)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+            <!-- Blueprint lines -->
+            <g class="blueprint-lines" stroke="url(#aboutProjectGrad)" stroke-width="2" stroke-linecap="round" opacity="0.9">
+              <path class="draw-line" d="M22 28h14"/>
+              <path class="draw-line" d="M22 34h20"/>
+              <path class="draw-line" d="M22 40h12"/>
+            </g>
+            <!-- Check badge -->
+            <circle class="check-circle" cx="42" cy="42" r="10" stroke="url(#aboutProjectGrad)" stroke-width="2.6" fill="rgba(240,253,244,0.6)" stroke-dasharray="64" stroke-dashoffset="64"/>
+            <path class="check-mark" d="M37.5 42l2.8 2.8 6.6-7" stroke="url(#aboutProjectGrad)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none" stroke-dasharray="24" stroke-dashoffset="24"/>
+          </svg>
+        </div>
+        <div class="stat-content-wrapper">
+          <div class="stat-value-wrapper">
+            <span class="stat-value" data-value="8">0</span>
+            <span class="stat-unit">шт</span>
+          </div>
+          <p class="stat-label">Успешно реализованных проектов</p>
+        </div>
+      </div>
+
+      <!-- В процессе -->
+      <div class="stat-card">
+        <div class="stat-icon stat-icon-progress">
+          <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="aboutProgressGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#3b82f6"/>
+                <stop offset="100%" stop-color="#1d4ed8"/>
+              </linearGradient>
+            </defs>
+            <circle class="icon-bg" cx="32" cy="32" r="28" fill="url(#aboutProgressGrad)" opacity="0.12"/>
+            <!-- Pipeline / roadmap -->
+            <path class="progress-track" d="M16 40c0-7 6-12 13-12h6c7 0 13-5 13-12" stroke="url(#aboutProgressGrad)" stroke-width="3.2" stroke-linecap="round" stroke-dasharray="6 6"/>
+            <circle cx="16" cy="40" r="4.5" fill="rgba(239,246,255,0.9)" stroke="url(#aboutProgressGrad)" stroke-width="2.2"/>
+            <circle cx="32" cy="28" r="4.5" fill="rgba(239,246,255,0.9)" stroke="url(#aboutProgressGrad)" stroke-width="2.2"/>
+            <circle cx="48" cy="16" r="4.5" fill="rgba(239,246,255,0.9)" stroke="url(#aboutProgressGrad)" stroke-width="2.2"/>
+            <!-- Moving dot -->
+            <circle class="progress-dot" cx="16" cy="40" r="2.6" fill="#E0F2FE"/>
+            <!-- Small bars -->
+            <g class="progress-bars" fill="url(#aboutProgressGrad)" opacity="0.85">
+              <rect x="18" y="46" width="6" height="6" rx="2"/>
+              <rect x="28" y="44" width="6" height="8" rx="2"/>
+              <rect x="38" y="42" width="6" height="10" rx="2"/>
+            </g>
+          </svg>
           </div>
           <div class="stat-content-wrapper">
             <div class="stat-value-wrapper">
-              <span class="stat-value" data-value={stat.value}>0</span>
-              <span class="stat-unit">{stat.unit}</span>
-            </div>
-            <p class="stat-label">{stat.label}</p>
+            <span class="stat-value" data-value="10">0</span>
+            <span class="stat-unit">шт</span>
           </div>
+          <p class="stat-label">Проектов в стадии реализации</p>
         </div>
-      ))}
+      </div>
+
+      <!-- Опыт -->
+      <div class="stat-card">
+        <div class="stat-icon stat-icon-experience">
+          <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="aboutExpGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#A78BFA"/>
+                <stop offset="55%" stop-color="#7C3AED"/>
+                <stop offset="100%" stop-color="#6D28D9"/>
+              </linearGradient>
+            </defs>
+            <circle class="icon-bg" cx="32" cy="32" r="28" fill="url(#aboutExpGrad)" opacity="0.11"/>
+            <!-- Hourglass -->
+            <path class="hourglass-frame" d="M22 14h20M22 50h20M24 14c0 9 8 10 8 18s-8 9-8 18M40 14c0 9-8 10-8 18s8 9 8 18" stroke="url(#aboutExpGrad)" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/>
+            <path class="sand-top" d="M27 18h10c0 5-3 7-5 9-2-2-5-4-5-9Z" fill="rgba(237,233,254,0.85)"/>
+            <path class="sand-bottom" d="M27 46h10c0-5-3-7-5-9-2 2-5 4-5 9Z" fill="rgba(237,233,254,0.55)"/>
+            <path class="sand-stream" d="M32 30v8" stroke="rgba(237,233,254,0.9)" stroke-width="2.2" stroke-linecap="round"/>
+          </svg>
+            </div>
+        <div class="stat-content-wrapper">
+          <div class="stat-value-wrapper">
+            <span class="stat-value" data-value="5">0</span>
+            <span class="stat-unit">лет</span>
+          </div>
+          <p class="stat-label">Опыта работы на рынке</p>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -330,22 +462,184 @@ const partners = [
   }
 
   .stat-icon {
-    width: 48px;
-    height: 48px;
+    width: 80px;
+    height: 80px;
     display: flex;
     align-items: center;
     justify-content: center;
-    background: var(--color-white);
-    border-radius: 12px;
-    padding: 8px;
-    margin-bottom: 8px;
-    box-shadow: var(--shadow-sm);
+    background: transparent;
+    border-radius: 0;
+    padding: 0;
+    margin: 0 auto 12px;
+    align-self: center;
+    box-shadow: none;
+    transition: all 0.3s ease;
   }
 
-  .stat-icon img {
+  .stat-card:hover .stat-icon {
+    transform: translateY(-2px);
+  }
+
+  .stat-icon img,
+  .stat-icon svg {
     width: 100%;
     height: 100%;
     object-fit: contain;
+  }
+
+  /* New icon animations (mission-context: turbines / projects / delivery / experience) */
+  .stat-icon .icon-bg {
+    animation: iconBgBreath 4.5s ease-in-out infinite;
+    transform-origin: 32px 32px;
+  }
+
+  /* Power: rotor spin + gentle ring pulse */
+  .stat-icon-power .turbine-rotor {
+    animation: rotorSpin 7.5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+    transform-origin: 32px 32px;
+  }
+  .stat-icon-power .power-ring {
+    animation: ringPulse 2.8s ease-in-out infinite;
+    transform-origin: 32px 32px;
+  }
+  .stat-icon-power .energy-wave {
+    stroke-dasharray: 18 10;
+    animation: waveFlow 2.6s linear infinite;
+  }
+
+  /* Projects: blueprint lines draw + check draw loop */
+  .stat-icon-projects .draw-line {
+    stroke-dasharray: 40;
+    stroke-dashoffset: 40;
+    animation: lineDraw 2.2s ease-out infinite;
+  }
+  .stat-icon-projects .draw-line:nth-child(2) { animation-delay: 0.18s; }
+  .stat-icon-projects .draw-line:nth-child(3) { animation-delay: 0.34s; }
+  .stat-icon-projects .check-circle {
+    stroke-dashoffset: 64;
+    animation: drawCircle 2.2s ease-out infinite;
+  }
+  .stat-icon-projects .check-mark {
+    stroke-dashoffset: 24;
+    animation: drawCheck 2.2s ease-out infinite;
+  }
+
+  /* In progress: moving dashed track + dot travel + bars pulse */
+  .stat-icon-progress .progress-track {
+    animation: dashMove 2.6s linear infinite;
+  }
+  .stat-icon-progress .progress-dot {
+    animation: dotTravel 2.6s ease-in-out infinite;
+    transform-origin: 0 0;
+  }
+  .stat-icon-progress .progress-bars rect {
+    animation: barPulse 1.8s ease-in-out infinite;
+    transform-origin: center bottom;
+  }
+  .stat-icon-progress .progress-bars rect:nth-child(2) { animation-delay: 0.12s; }
+  .stat-icon-progress .progress-bars rect:nth-child(3) { animation-delay: 0.24s; }
+
+  /* Experience: sand flows */
+  .stat-icon-experience .sand-top {
+    transform-origin: 32px 22px;
+    animation: sandTop 3.2s ease-in-out infinite;
+  }
+  .stat-icon-experience .sand-bottom {
+    transform-origin: 32px 44px;
+    animation: sandBottom 3.2s ease-in-out infinite;
+  }
+  .stat-icon-experience .sand-stream {
+    stroke-dasharray: 6 6;
+    animation: streamFlicker 1.6s linear infinite;
+  }
+
+  @keyframes iconBgBreath {
+    0%, 100% { opacity: 0.11; transform: scale(1); }
+    50% { opacity: 0.17; transform: scale(1.02); }
+  }
+
+  @keyframes rotorSpin {
+    0% { transform: rotate(0deg); }
+    70% { transform: rotate(360deg); }
+    100% { transform: rotate(420deg); }
+  }
+  @keyframes ringPulse {
+    0%, 100% { opacity: 0.55; transform: scale(1); }
+    50% { opacity: 0.9; transform: scale(1.03); }
+  }
+  @keyframes waveFlow {
+    from { stroke-dashoffset: 0; opacity: 0.85; }
+    to { stroke-dashoffset: -56; opacity: 1; }
+  }
+
+  @keyframes lineDraw {
+    0% { stroke-dashoffset: 40; opacity: 0.55; }
+    45% { stroke-dashoffset: 0; opacity: 1; }
+    100% { stroke-dashoffset: 0; opacity: 0.9; }
+  }
+  @keyframes drawCircle {
+    0% { stroke-dashoffset: 64; opacity: 0.8; }
+    55% { stroke-dashoffset: 0; opacity: 1; }
+    100% { stroke-dashoffset: 0; opacity: 0.9; }
+  }
+  @keyframes drawCheck {
+    0%, 20% { stroke-dashoffset: 24; opacity: 0.7; }
+    70% { stroke-dashoffset: 0; opacity: 1; }
+    100% { stroke-dashoffset: 0; opacity: 0.9; }
+  }
+
+  @keyframes dashMove {
+    from { stroke-dashoffset: 0; opacity: 0.9; }
+    to { stroke-dashoffset: -24; opacity: 1; }
+  }
+  @keyframes dotTravel {
+    0% { transform: translate(0, 0); opacity: 0.8; filter: drop-shadow(0 0 0 rgba(224,242,254,0)); }
+    45% { transform: translate(16px, -12px); opacity: 1; filter: drop-shadow(0 0 8px rgba(59,130,246,0.35)); }
+    100% { transform: translate(32px, -24px); opacity: 0.95; filter: drop-shadow(0 0 10px rgba(59,130,246,0.4)); }
+  }
+  @keyframes barPulse {
+    0%, 100% { transform: scaleY(1); opacity: 0.85; }
+    50% { transform: scaleY(1.18); opacity: 1; }
+  }
+
+  @keyframes sandTop {
+    0%, 100% { transform: scaleY(1); opacity: 0.9; }
+    60% { transform: scaleY(0.25); opacity: 0.35; }
+  }
+  @keyframes sandBottom {
+    0%, 100% { transform: scaleY(0.25); opacity: 0.45; }
+    60% { transform: scaleY(1); opacity: 0.85; }
+  }
+  @keyframes streamFlicker {
+    from { stroke-dashoffset: 0; opacity: 0.65; }
+    to { stroke-dashoffset: -12; opacity: 1; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .stat-icon .icon-bg,
+    .stat-icon-power .turbine-rotor,
+    .stat-icon-power .power-ring,
+    .stat-icon-power .energy-wave,
+    .stat-icon-projects .draw-line,
+    .stat-icon-projects .check-circle,
+    .stat-icon-projects .check-mark,
+    .stat-icon-progress .progress-track,
+    .stat-icon-progress .progress-dot,
+    .stat-icon-progress .progress-bars rect,
+    .stat-icon-experience .sand-top,
+    .stat-icon-experience .sand-bottom,
+    .stat-icon-experience .sand-stream {
+      animation: none !important;
+    }
+  }
+
+  /* Hover effects for all stat icons */
+  .stat-card:hover .stat-icon svg {
+    transform: scale(1.1);
+    transition: transform 0.3s ease;
+  }
+  .stat-icon svg {
+    transition: transform 0.3s ease;
   }
 
   .stat-value-wrapper {

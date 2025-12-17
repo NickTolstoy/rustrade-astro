@@ -1,4 +1,6 @@
 ---
+import type { Lang } from '@/i18n';
+
 interface Props {
   items: {
     question: string;
@@ -6,21 +8,31 @@ interface Props {
   }[];
   title?: string;
   subtitle?: string;
+  lang?: Lang;
 }
 
 const { 
   items, 
-  title = "Ответы на вопросы",
-  subtitle = "Мы собрали ответы на самые популярные вопросы наших клиентов. Если вы не нашли ответ на свой вопрос — свяжитесь с нами."
+  title,
+  subtitle,
+  lang = 'ru'
 } = Astro.props;
+
+const defaultTitle = lang === 'en' ? "Frequently Asked Questions" : "Ответы на вопросы";
+const defaultSubtitle = lang === 'en' 
+  ? "We've collected answers to the most common questions from our clients. If you haven't found an answer to your question — contact us."
+  : "Мы собрали ответы на самые популярные вопросы наших клиентов. Если вы не нашли ответ на свой вопрос — свяжитесь с нами.";
+
+const finalTitle = title || defaultTitle;
+const finalSubtitle = subtitle || defaultSubtitle;
 ---
 
 <section class="section faq-section">
   <!-- Header: Full Width -->
   <div class="faq-header">
     <div class="faq-header-content">
-      <h2>{title}</h2>
-      <p>{subtitle}</p>
+      <h2>{finalTitle}</h2>
+      <p>{finalSubtitle}</p>
       <div class="faq-decoration">
         <img src="/img/faq-decoration.svg" alt="" />
       </div>

@@ -5,7 +5,7 @@ import { cities } from '@/data/cities';
 
 interface Props {
   lang: Lang;
-  type?: 'organization' | 'article' | 'product' | 'faq' | 'breadcrumb';
+  type?: 'organization' | 'article' | 'product' | 'faq' | 'breadcrumb' | 'service' | 'localBusiness';
   pageTitle?: string;
   pageDescription?: string;
   articleData?: {
@@ -15,15 +15,27 @@ interface Props {
     datePublished: string;
     dateModified?: string;
     author?: string;
+    articleType?: 'Article' | 'NewsArticle' | 'TechArticle';
   };
   productData?: {
     name: string;
     description: string;
     image: string;
     brand?: string;
+    sku?: string;
+    category?: string;
+  };
+  serviceData?: {
+    name: string;
+    description: string;
+    image?: string;
+    provider?: string;
+    areaServed?: string;
+    serviceType?: string;
   };
   faqData?: Array<{ question: string; answer: string }>;
   breadcrumbs?: Array<{ name: string; url: string }>;
+  isHomePage?: boolean;
 }
 
 const {
@@ -33,111 +45,284 @@ const {
   pageDescription,
   articleData,
   productData,
+  serviceData,
   faqData,
-  breadcrumbs
+  breadcrumbs,
+  isHomePage = false
 } = Astro.props;
 
 const currentCity = cities[0]; // Default to Moscow for contact info
 const siteUrl = 'https://rustrade.pro';
 const base = getBaseUrl(lang);
+const currentUrl = Astro.url.href.replace('http://localhost:4321', siteUrl).replace('http://localhost:3000', siteUrl);
 
-// Organization Schema (always included)
+// Organization Schema (always included) — улучшенная версия для Google/Yandex
 const organizationSchema = {
   '@context': 'https://schema.org',
-  '@type': 'Organization',
+  '@type': ['Organization', 'Corporation'],
   '@id': `${siteUrl}/#organization`,
-  name: t('meta.siteName', lang),
+  name: 'РУСТРЕЙД',
+  alternateName: ['Rustrade', 'ООО РУСТРЕЙД', 'RUSTRADE LLC'],
+  legalName: 'ООО «РУСТРЕЙД»',
   url: siteUrl,
   logo: {
     '@type': 'ImageObject',
+    '@id': `${siteUrl}/#logo`,
     url: `${siteUrl}/img/logo.svg`,
+    contentUrl: `${siteUrl}/img/logo.svg`,
     width: 200,
-    height: 60
+    height: 60,
+    caption: 'РУСТРЕЙД - логотип'
   },
-  description: t('meta.defaultDescription', lang),
+  image: {
+    '@type': 'ImageObject',
+    url: `${siteUrl}/img/og-default.jpg`,
+    width: 1200,
+    height: 630
+  },
+  description: lang === 'ru' 
+    ? 'ООО «РУСТРЕЙД» — проектирование и поставка паровых турбин, турбогенераторов, конденсаторов, маслоохладителей и турбинных лопаток. Мощность от 25 кВт до 40 МВт.'
+    : 'RUSTRADE LLC — design and supply of steam turbines, turbogenerators, condensers, oil coolers and turbine blades. Power from 25 kW to 40 MW.',
   foundingDate: '2020',
+  foundingLocation: {
+    '@type': 'Place',
+    address: {
+      '@type': 'PostalAddress',
+      addressLocality: 'Москва',
+      addressCountry: 'RU'
+    }
+  },
+  numberOfEmployees: {
+    '@type': 'QuantitativeValue',
+    minValue: 10,
+    maxValue: 50
+  },
+  slogan: t('meta.slogan', lang),
+  knowsAbout: [
+    'Паровые турбины',
+    'Турбогенераторы', 
+    'Конденсаторы',
+    'Маслоохладители',
+    'Турбинные лопатки',
+    'Энергетическое оборудование',
+    'Проектирование ПТУ'
+  ],
   address: cities.map(c => ({
     '@type': 'PostalAddress',
     addressLocality: c.name[lang],
+    addressRegion: c.name[lang],
     addressCountry: 'RU',
-    streetAddress: c.address[lang]
+    streetAddress: c.address[lang],
+    postalCode: c.id === 'moscow' ? '123112' : undefined
   })),
-  contactPoint: cities.map(c => ({
-    '@type': 'ContactPoint',
-    telephone: c.phone,
-    email: c.email,
-    contactType: 'customer service',
-    availableLanguage: ['Russian', 'English'],
-    areaServed: 'RU'
-  })),
+  contactPoint: [
+    {
+      '@type': 'ContactPoint',
+      telephone: '+7-499-707-51-72',
+      email: 'info@rustrade.pro',
+      contactType: 'customer service',
+      availableLanguage: ['Russian', 'English'],
+      areaServed: 'RU',
+      hoursAvailable: {
+        '@type': 'OpeningHoursSpecification',
+        dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
+        opens: '09:00',
+        closes: '18:00'
+      }
+    },
+    {
+      '@type': 'ContactPoint',
+      telephone: '+7-499-707-51-72',
+      contactType: 'sales',
+      availableLanguage: ['Russian', 'English'],
+      areaServed: 'RU'
+    }
+  ],
   sameAs: [
-    'https://t.me/rustrade',
-    'https://vk.com/rustrade'
-  ]
+    'https://t.me/rustrade_pro',
+    'https://vk.com/rustrade_pro'
+  ],
+  hasOfferCatalog: {
+    '@type': 'OfferCatalog',
+    name: 'Каталог продукции РУСТРЕЙД',
+    itemListElement: [
+      {
+        '@type': 'OfferCatalog',
+        name: 'Паровые турбины',
+        itemListElement: [
+          { '@type': 'Offer', itemOffered: { '@type': 'Product', name: 'Приводные турбины' } },
+          { '@type': 'Offer', itemOffered: { '@type': 'Product', name: 'Турбины малой мощности' } },
+          { '@type': 'Offer', itemOffered: { '@type': 'Product', name: 'Конденсационные турбины' } }
+        ]
+      },
+      { '@type': 'Offer', itemOffered: { '@type': 'Product', name: 'Турбогенераторы' } },
+      { '@type': 'Offer', itemOffered: { '@type': 'Product', name: 'Конденсаторы' } },
+      { '@type': 'Offer', itemOffered: { '@type': 'Product', name: 'Маслоохладители' } },
+      { '@type': 'Offer', itemOffered: { '@type': 'Product', name: 'Турбинные лопатки' } }
+    ]
+  }
 };
 
-// Website Schema with Sitelinks SearchBox
+// Website Schema with Sitelinks SearchBox и потенциальными действиями
 const websiteSchema = {
   '@context': 'https://schema.org',
   '@type': 'WebSite',
   '@id': `${siteUrl}/#website`,
   url: siteUrl,
-  name: t('meta.siteName', lang),
-  description: t('meta.defaultDescription', lang),
+  name: 'РУСТРЕЙД',
+  alternateName: 'Rustrade',
+  description: lang === 'ru'
+    ? 'Официальный сайт компании РУСТРЕЙД — проектирование и поставка паровых турбин и энергетического оборудования'
+    : 'Official website of RUSTRADE — design and supply of steam turbines and power equipment',
   publisher: { '@id': `${siteUrl}/#organization` },
   inLanguage: lang === 'ru' ? 'ru-RU' : 'en-US',
-  potentialAction: {
-    '@type': 'SearchAction',
-    target: {
-      '@type': 'EntryPoint',
-      urlTemplate: `${siteUrl}${base}/search?q={search_term_string}`
+  potentialAction: [
+    {
+      '@type': 'SearchAction',
+      target: {
+        '@type': 'EntryPoint',
+        urlTemplate: `${siteUrl}/news?q={search_term_string}`
+      },
+      'query-input': 'required name=search_term_string'
     },
-    'query-input': 'required name=search_term_string'
+    {
+      '@type': 'ReadAction',
+      target: [`${siteUrl}/news`, `${siteUrl}/cases`]
+    }
+  ]
+};
+
+// LocalBusiness Schema — для локального SEO
+const localBusinessSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'LocalBusiness',
+  '@id': `${siteUrl}/#localbusiness`,
+  name: 'РУСТРЕЙД',
+  slogan: t('meta.slogan', lang),
+  image: `${siteUrl}/img/og-default.jpg`,
+  telephone: '+7-499-707-51-72',
+  email: 'info@rustrade.pro',
+  url: siteUrl,
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: currentCity.address[lang],
+    addressLocality: currentCity.name[lang],
+    addressCountry: 'RU',
+    postalCode: '123112'
+  },
+  geo: {
+    '@type': 'GeoCoordinates',
+    latitude: 55.7558,
+    longitude: 37.6173
+  },
+  openingHoursSpecification: {
+    '@type': 'OpeningHoursSpecification',
+    dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
+    opens: '09:00',
+    closes: '18:00'
+  },
+  priceRange: '$$$$',
+  currenciesAccepted: 'RUB',
+  paymentAccepted: 'Bank Transfer',
+  areaServed: {
+    '@type': 'Country',
+    name: 'Россия'
   }
 };
 
-// Article Schema
+// Article Schema — улучшенная версия
 const articleSchema = articleData ? {
   '@context': 'https://schema.org',
-  '@type': 'Article',
+  '@type': articleData.articleType || 'Article',
+  '@id': `${currentUrl}#article`,
   headline: articleData.headline,
   description: articleData.description,
-  image: articleData.image.startsWith('http') ? articleData.image : `${siteUrl}${articleData.image}`,
+  image: {
+    '@type': 'ImageObject',
+    url: articleData.image.startsWith('http') ? articleData.image : `${siteUrl}${articleData.image}`,
+    width: 1200,
+    height: 630
+  },
   datePublished: articleData.datePublished,
   dateModified: articleData.dateModified || articleData.datePublished,
   author: {
     '@type': 'Organization',
-    name: t('meta.siteName', lang),
+    '@id': `${siteUrl}/#organization`,
+    name: 'РУСТРЕЙД',
     url: siteUrl
   },
   publisher: {
     '@type': 'Organization',
-    name: t('meta.siteName', lang),
+    '@id': `${siteUrl}/#organization`,
+    name: 'РУСТРЕЙД',
     logo: {
       '@type': 'ImageObject',
-      url: `${siteUrl}/img/logo.svg`
+      url: `${siteUrl}/img/logo.svg`,
+      width: 200,
+      height: 60
     }
   },
   mainEntityOfPage: {
     '@type': 'WebPage',
-    '@id': Astro.url.href
+    '@id': currentUrl
+  },
+  inLanguage: lang === 'ru' ? 'ru-RU' : 'en-US',
+  isPartOf: { '@id': `${siteUrl}/#website` },
+  about: {
+    '@type': 'Thing',
+    name: 'Энергетическое оборудование'
   }
 } : null;
 
-// Product Schema
+// Product Schema — улучшенная версия
 const productSchema = productData ? {
   '@context': 'https://schema.org',
   '@type': 'Product',
+  '@id': `${currentUrl}#product`,
   name: productData.name,
   description: productData.description,
   image: productData.image.startsWith('http') ? productData.image : `${siteUrl}${productData.image}`,
+  sku: productData.sku || undefined,
+  category: productData.category || 'Энергетическое оборудование',
   brand: {
     '@type': 'Brand',
-    name: productData.brand || t('meta.siteName', lang)
+    name: productData.brand || 'РУСТРЕЙД'
   },
   manufacturer: {
     '@type': 'Organization',
-    name: t('meta.siteName', lang)
+    '@id': `${siteUrl}/#organization`,
+    name: 'РУСТРЕЙД'
+  },
+  offers: {
+    '@type': 'Offer',
+    url: currentUrl,
+    priceCurrency: 'RUB',
+    availability: 'https://schema.org/InStock',
+    seller: { '@id': `${siteUrl}/#organization` }
+  }
+} : null;
+
+// Service Schema — для страниц услуг (проектирование и т.д.)
+const serviceSchema = serviceData ? {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  '@id': `${currentUrl}#service`,
+  name: serviceData.name,
+  description: serviceData.description,
+  image: serviceData.image ? (serviceData.image.startsWith('http') ? serviceData.image : `${siteUrl}${serviceData.image}`) : `${siteUrl}/img/og-default.jpg`,
+  provider: {
+    '@type': 'Organization',
+    '@id': `${siteUrl}/#organization`,
+    name: 'РУСТРЕЙД'
+  },
+  areaServed: {
+    '@type': 'Country',
+    name: serviceData.areaServed || 'Россия'
+  },
+  serviceType: serviceData.serviceType || 'Энергетические услуги',
+  hasOfferCatalog: {
+    '@type': 'OfferCatalog',
+    name: serviceData.name
   }
 } : null;
 
@@ -155,16 +340,65 @@ const faqSchema = faqData && faqData.length > 0 ? {
   }))
 } : null;
 
-// Breadcrumb Schema
+// Breadcrumb Schema — улучшенная версия
 const breadcrumbSchema = breadcrumbs && breadcrumbs.length > 0 ? {
   '@context': 'https://schema.org',
   '@type': 'BreadcrumbList',
-  itemListElement: breadcrumbs.map((item, index) => ({
-    '@type': 'ListItem',
-    position: index + 1,
-    name: item.name,
-    item: item.url.startsWith('http') ? item.url : `${siteUrl}${item.url}`
-  }))
+  '@id': `${currentUrl}#breadcrumb`,
+  itemListElement: [
+    {
+      '@type': 'ListItem',
+      position: 1,
+      name: 'Главная',
+      item: siteUrl
+    },
+    ...breadcrumbs.map((item, index) => ({
+      '@type': 'ListItem',
+      position: index + 2,
+      name: item.name,
+      item: item.url.startsWith('http') ? item.url : `${siteUrl}${item.url}`
+    }))
+  ]
+} : null;
+
+// WebPage Schema — для каждой страницы
+const webPageSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  '@id': `${currentUrl}#webpage`,
+  url: currentUrl,
+  name: pageTitle || 'РУСТРЕЙД',
+  description: pageDescription || organizationSchema.description,
+  isPartOf: { '@id': `${siteUrl}/#website` },
+  about: { '@id': `${siteUrl}/#organization` },
+  inLanguage: lang === 'ru' ? 'ru-RU' : 'en-US',
+  potentialAction: [
+    {
+      '@type': 'ReadAction',
+      target: [currentUrl]
+    }
+  ],
+  breadcrumb: breadcrumbSchema ? { '@id': `${currentUrl}#breadcrumb` } : undefined
+};
+
+// Sitelinks для главной страницы (Google)
+const siteNavigationSchema = isHomePage ? {
+  '@context': 'https://schema.org',
+  '@type': 'SiteNavigationElement',
+  '@id': `${siteUrl}/#sitenav`,
+  name: 'Навигация по сайту',
+  hasPart: [
+    { '@type': 'SiteNavigationElement', name: 'Турбины', url: `${siteUrl}/turbines` },
+    { '@type': 'SiteNavigationElement', name: 'Турбогенераторы', url: `${siteUrl}/turbogenerators` },
+    { '@type': 'SiteNavigationElement', name: 'Конденсаторы', url: `${siteUrl}/condensers` },
+    { '@type': 'SiteNavigationElement', name: 'Маслоохладители', url: `${siteUrl}/oil-coolers` },
+    { '@type': 'SiteNavigationElement', name: 'Лопатки', url: `${siteUrl}/blades` },
+    { '@type': 'SiteNavigationElement', name: 'Проектирование', url: `${siteUrl}/design` },
+    { '@type': 'SiteNavigationElement', name: 'Кейсы', url: `${siteUrl}/cases` },
+    { '@type': 'SiteNavigationElement', name: 'О компании', url: `${siteUrl}/about` },
+    { '@type': 'SiteNavigationElement', name: 'Контакты', url: `${siteUrl}/contacts` },
+    { '@type': 'SiteNavigationElement', name: 'FAQ', url: `${siteUrl}/faq` }
+  ]
 } : null;
 ---
 
@@ -174,6 +408,19 @@ const breadcrumbSchema = breadcrumbs && breadcrumbs.length > 0 ? {
 <!-- Website Schema -->
 <script type="application/ld+json" set:html={JSON.stringify(websiteSchema)} />
 
+<!-- WebPage Schema -->
+<script type="application/ld+json" set:html={JSON.stringify(webPageSchema)} />
+
+<!-- LocalBusiness Schema (для локального SEO) -->
+{isHomePage && (
+  <script type="application/ld+json" set:html={JSON.stringify(localBusinessSchema)} />
+)}
+
+<!-- SiteNavigation Schema (только на главной для sitelinks) -->
+{siteNavigationSchema && (
+  <script type="application/ld+json" set:html={JSON.stringify(siteNavigationSchema)} />
+)}
+
 <!-- Article Schema (if provided) -->
 {articleSchema && (
   <script type="application/ld+json" set:html={JSON.stringify(articleSchema)} />
@@ -182,6 +429,11 @@ const breadcrumbSchema = breadcrumbs && breadcrumbs.length > 0 ? {
 <!-- Product Schema (if provided) -->
 {productSchema && (
   <script type="application/ld+json" set:html={JSON.stringify(productSchema)} />
+)}
+
+<!-- Service Schema (if provided) -->
+{serviceSchema && (
+  <script type="application/ld+json" set:html={JSON.stringify(serviceSchema)} />
 )}
 
 <!-- FAQ Schema (if provided) -->

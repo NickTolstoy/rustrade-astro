@@ -1,0 +1,159 @@
+<svg viewBox="0 0 900 550" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- Blueprint grid pattern -->
+    <pattern id="smallGrid" width="10" height="10" patternUnits="userSpaceOnUse">
+      <path d="M 10 0 L 0 0 0 10" fill="none" stroke="#d1d5db" stroke-width="0.3"/>
+    </pattern>
+    <pattern id="grid" width="50" height="50" patternUnits="userSpaceOnUse">
+      <rect width="50" height="50" fill="url(#smallGrid)"/>
+      <path d="M 50 0 L 0 0 0 50" fill="none" stroke="#9ca3af" stroke-width="0.5"/>
+    </pattern>
+    
+    <!-- Markers -->
+    <marker id="flowArrowBP" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#374151"/>
+    </marker>
+    <marker id="steamArrowBP" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#dc2626"/>
+    </marker>
+  </defs>
+  
+  <!-- Paper background -->
+  <rect width="900" height="550" fill="#fefefe"/>
+  
+  <!-- Grid -->
+  <rect x="20" y="20" width="860" height="470" fill="url(#grid)"/>
+  
+  <!-- Drawing frame -->
+  <rect x="20" y="20" width="860" height="470" fill="none" stroke="#374151" stroke-width="2"/>
+  <rect x="25" y="25" width="850" height="460" fill="none" stroke="#374151" stroke-width="0.5"/>
+  
+  <!-- Title block -->
+  <rect x="580" y="495" width="300" height="45" fill="#f9fafb" stroke="#374151" stroke-width="1.5"/>
+  <line x1="580" y1="520" x2="880" y2="520" stroke="#374151" stroke-width="0.5"/>
+  <line x1="720" y1="495" x2="720" y2="540" stroke="#374151" stroke-width="0.5"/>
+  <text x="650" y="512" text-anchor="middle" fill="#374151" font-family="'Courier New', monospace" font-size="9">РУСТРЕЙД</text>
+  <text x="800" y="512" text-anchor="middle" fill="#374151" font-family="'Courier New', monospace" font-size="8">Лист 1</text>
+  <text x="730" y="535" text-anchor="middle" fill="#1f2937" font-family="'Courier New', monospace" font-size="10" font-weight="600">Тепловая схема с противодавлением</text>
+  
+  <!-- Boiler (Котёл) -->
+  <rect x="70" y="100" width="120" height="180" fill="none" stroke="#374151" stroke-width="2"/>
+  <line x1="70" y1="130" x2="190" y2="130" stroke="#374151" stroke-width="1"/>
+  <line x1="70" y1="250" x2="190" y2="250" stroke="#374151" stroke-width="1"/>
+  
+  <!-- Boiler tubes -->
+  <path d="M90 140 L90 240 M110 140 L110 240 M130 140 L130 240 M150 140 L150 240 M170 140 L170 240" 
+        stroke="#6b7280" stroke-width="1.5" fill="none"/>
+  
+  <!-- Flame symbol -->
+  <path d="M115 260 Q120 250 130 260 Q125 250 115 260" stroke="#dc2626" stroke-width="1.5" fill="none"/>
+  <path d="M135 260 Q140 250 150 260 Q145 250 135 260" stroke="#dc2626" stroke-width="1.5" fill="none"/>
+  
+  <text x="130" y="118" text-anchor="middle" fill="#1f2937" font-family="'Courier New', monospace" font-size="11" font-weight="600">КОТЁЛ</text>
+  <text x="130" y="295" text-anchor="middle" fill="#374151" font-family="'Courier New', monospace" font-size="9">P₁=4-13 МПа</text>
+  <text x="130" y="308" text-anchor="middle" fill="#374151" font-family="'Courier New', monospace" font-size="9">T₁=400-540°C</text>
+  
+  <!-- Steam pipe to turbine -->
+  <line x1="190" y1="160" x2="280" y2="160" stroke="#dc2626" stroke-width="3"/>
+  <line x1="190" y1="160" x2="190" y2="155" stroke="#374151" stroke-width="1"/>
+  <line x1="190" y1="160" x2="190" y2="165" stroke="#374151" stroke-width="1"/>
+  <text x="235" y="150" text-anchor="middle" fill="#dc2626" font-family="'Courier New', monospace" font-size="9" font-weight="600">ОСТРЫЙ ПАР</text>
+  
+  <!-- Turbine -->
+  <path d="M290 90 L400 130 L400 250 L290 290 Z" fill="none" stroke="#374151" stroke-width="2"/>
+  
+  <!-- Turbine blades (simplified) -->
+  <line x1="310" y1="120" x2="380" y2="140" stroke="#6b7280" stroke-width="1"/>
+  <line x1="310" y1="150" x2="380" y2="160" stroke="#6b7280" stroke-width="1"/>
+  <line x1="310" y1="180" x2="380" y2="180" stroke="#6b7280" stroke-width="1"/>
+  <line x1="310" y1="210" x2="380" y2="200" stroke="#6b7280" stroke-width="1"/>
+  <line x1="310" y1="240" x2="380" y2="220" stroke="#6b7280" stroke-width="1"/>
+  <line x1="310" y1="270" x2="380" y2="240" stroke="#6b7280" stroke-width="1"/>
+  
+  <!-- Shaft -->
+  <rect x="400" y="175" width="80" height="20" fill="none" stroke="#374151" stroke-width="2"/>
+  <line x1="400" y1="185" x2="480" y2="185" stroke="#374151" stroke-width="1" stroke-dasharray="4,2"/>
+  
+  <text x="345" y="80" text-anchor="middle" fill="#1f2937" font-family="'Courier New', monospace" font-size="11" font-weight="600">ТУРБИНА</text>
+  <text x="345" y="320" text-anchor="middle" fill="#374151" font-family="'Courier New', monospace" font-size="9">N=2-25 МВт</text>
+  
+  <!-- Generator -->
+  <circle cx="540" cy="185" r="55" fill="none" stroke="#374151" stroke-width="2"/>
+  <circle cx="540" cy="185" r="40" fill="none" stroke="#6b7280" stroke-width="1"/>
+  
+  <!-- Generator windings -->
+  <path d="M510 160 Q540 140 570 160" stroke="#6b7280" stroke-width="1" fill="none"/>
+  <path d="M510 210 Q540 230 570 210" stroke="#6b7280" stroke-width="1" fill="none"/>
+  
+  <text x="540" y="182" text-anchor="middle" fill="#1f2937" font-family="'Courier New', monospace" font-size="12" font-weight="600">G</text>
+  <text x="540" y="195" text-anchor="middle" fill="#374151" font-family="'Courier New', monospace" font-size="16">~</text>
+  <text x="540" y="260" text-anchor="middle" fill="#1f2937" font-family="'Courier New', monospace" font-size="10">ГЕНЕРАТОР</text>
+  
+  <!-- Electric output -->
+  <line x1="595" y1="185" x2="680" y2="185" stroke="#374151" stroke-width="2"/>
+  <path d="M670 175 L680 185 L670 195" stroke="#374151" stroke-width="2" fill="none"/>
+  
+  <!-- Electrical grid symbol -->
+  <rect x="690" y="155" width="80" height="60" fill="none" stroke="#374151" stroke-width="2"/>
+  <line x1="705" y1="185" x2="755" y2="185" stroke="#374151" stroke-width="1"/>
+  <line x1="720" y1="170" x2="720" y2="200" stroke="#374151" stroke-width="1"/>
+  <line x1="740" y1="170" x2="740" y2="200" stroke="#374151" stroke-width="1"/>
+  
+  <text x="730" y="145" text-anchor="middle" fill="#1f2937" font-family="'Courier New', monospace" font-size="9">В СЕТЬ</text>
+  <text x="730" y="230" text-anchor="middle" fill="#374151" font-family="'Courier New', monospace" font-size="9">W=1.5-20 МВт</text>
+  
+  <!-- Backpressure steam output -->
+  <line x1="345" y1="290" x2="345" y2="350" stroke="#f97316" stroke-width="3"/>
+  <line x1="345" y1="350" x2="580" y2="350" stroke="#f97316" stroke-width="3"/>
+  <path d="M570 340 L580 350 L570 360" stroke="#374151" stroke-width="2" fill="none"/>
+  
+  <text x="460" y="340" text-anchor="middle" fill="#f97316" font-family="'Courier New', monospace" font-size="9" font-weight="600">ПАР ПРОТИВОДАВЛЕНИЯ</text>
+  <text x="460" y="380" text-anchor="middle" fill="#374151" font-family="'Courier New', monospace" font-size="9">P₂=0.3-1.5 МПа, T₂=150-250°C</text>
+  
+  <!-- Process consumer -->
+  <rect x="590" y="310" width="150" height="80" fill="none" stroke="#374151" stroke-width="2"/>
+  <line x1="590" y1="340" x2="740" y2="340" stroke="#374151" stroke-width="0.5"/>
+  
+  <!-- Heat exchanger symbol inside -->
+  <path d="M620 355 Q640 345 660 355 Q680 365 700 355" stroke="#6b7280" stroke-width="1.5" fill="none"/>
+  <path d="M620 375 Q640 365 660 375 Q680 385 700 375" stroke="#6b7280" stroke-width="1.5" fill="none"/>
+  
+  <text x="665" y="330" text-anchor="middle" fill="#1f2937" font-family="'Courier New', monospace" font-size="10" font-weight="600">ПОТРЕБИТЕЛЬ</text>
+  <text x="665" y="405" text-anchor="middle" fill="#374151" font-family="'Courier New', monospace" font-size="9">Q=5-50 Гкал/ч</text>
+  
+  <!-- Condensate return -->
+  <line x1="665" y1="390" x2="665" y2="440" stroke="#3b82f6" stroke-width="2"/>
+  <line x1="665" y1="440" x2="130" y2="440" stroke="#3b82f6" stroke-width="2"/>
+  <line x1="130" y1="440" x2="130" y2="290" stroke="#3b82f6" stroke-width="2"/>
+  <path d="M120 300 L130 290 L140 300" stroke="#374151" stroke-width="2" fill="none"/>
+  
+  <text x="400" y="455" text-anchor="middle" fill="#3b82f6" font-family="'Courier New', monospace" font-size="9">ВОЗВРАТ КОНДЕНСАТА</text>
+  
+  <!-- Feed pump -->
+  <circle cx="300" cy="440" r="25" fill="none" stroke="#374151" stroke-width="2"/>
+  <path d="M285 425 L300 440 L285 455" stroke="#374151" stroke-width="1.5" fill="none"/>
+  <path d="M290 440 L310 440" stroke="#374151" stroke-width="1.5"/>
+  
+  <text x="300" y="480" text-anchor="middle" fill="#1f2937" font-family="'Courier New', monospace" font-size="9">НАСОС</text>
+  
+  <!-- Info panel -->
+  <rect x="750" y="50" width="120" height="130" fill="#f9fafb" stroke="#374151" stroke-width="1"/>
+  <line x1="750" y1="70" x2="870" y2="70" stroke="#374151" stroke-width="0.5"/>
+  <text x="810" y="63" text-anchor="middle" fill="#1f2937" font-family="'Courier New', monospace" font-size="9" font-weight="600">ПОКАЗАТЕЛИ</text>
+  <text x="760" y="90" fill="#374151" font-family="'Courier New', monospace" font-size="8">КПД топлива: 80-85%</text>
+  <text x="760" y="108" fill="#374151" font-family="'Courier New', monospace" font-size="8">Выработка эл.:</text>
+  <text x="760" y="121" fill="#374151" font-family="'Courier New', monospace" font-size="8">  150-200 кВт·ч/Гкал</text>
+  <text x="760" y="139" fill="#374151" font-family="'Courier New', monospace" font-size="8">Удельный расход:</text>
+  <text x="760" y="152" fill="#374151" font-family="'Courier New', monospace" font-size="8">  4-6 т пара/МВт·ч</text>
+  <text x="760" y="170" fill="#374151" font-family="'Courier New', monospace" font-size="8">Без конденсатора</text>
+  
+  <!-- Legend -->
+  <rect x="50" y="350" width="140" height="90" fill="#f9fafb" stroke="#374151" stroke-width="1"/>
+  <text x="120" y="367" text-anchor="middle" fill="#1f2937" font-family="'Courier New', monospace" font-size="9" font-weight="600">УСЛОВНЫЕ ОБОЗН.</text>
+  <line x1="60" y1="380" x2="90" y2="380" stroke="#dc2626" stroke-width="3"/>
+  <text x="100" y="384" fill="#374151" font-family="'Courier New', monospace" font-size="8">Острый пар</text>
+  <line x1="60" y1="400" x2="90" y2="400" stroke="#f97316" stroke-width="3"/>
+  <text x="100" y="404" fill="#374151" font-family="'Courier New', monospace" font-size="8">Отборный пар</text>
+  <line x1="60" y1="420" x2="90" y2="420" stroke="#3b82f6" stroke-width="2"/>
+  <text x="100" y="424" fill="#374151" font-family="'Courier New', monospace" font-size="8">Конденсат</text>
+</svg>

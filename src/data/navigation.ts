@@ -10,6 +10,9 @@ export interface NavItem {
 
 // Icon definitions for dropdown items
 export const dropdownIcons = {
+  // Home icon
+  home: '<g class="icon-home"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></g>',
+  
   // Components icons
   blades: '<path class="icon-blades" d="M10.827 16.379a6.082 6.082 0 0 1-8.618-7.002l5.412 1.45a6.082 6.082 0 0 1 7.002-8.618l-1.45 5.412a6.082 6.082 0 0 1 8.618 7.002l-5.412-1.45a6.082 6.082 0 0 1-7.002 8.618l1.45-5.412Z" /><circle cx="12" cy="12" r="2" />',
   oilCoolers: '<g class="icon-cooler"><rect x="2" y="3" width="20" height="18" rx="2" /><path d="M6 3v18M10 3v18M14 3v18M18 3v18" /></g>',
@@ -78,18 +81,19 @@ export function getMobileNavigation(lang: Lang): NavItem[] {
   const base = getBaseUrl(lang);
   
   return [
-    { name: t('nav.home', lang), href: base || '/' },
-    { name: t('nav.design', lang), href: `${base}/design` },
-    { name: t('nav.turbines', lang), href: `${base}/turbines` },
-    { name: t('nav.turbogenerators', lang), href: `${base}/turbogenerators` },
-    { name: t('components.blades', lang), href: `${base}/blades` },
-    { name: t('components.oilCoolers', lang), href: `${base}/oil-coolers` },
-    { name: t('components.condensers', lang), href: `${base}/condensers` },
-    { name: t('nav.about', lang), href: `${base}/about` },
-    { name: t('cases.title', lang), href: `${base}/cases` },
-    { name: t('nav.faq', lang), href: `${base}/faq` },
-    { name: t('nav.cooperation', lang), href: `${base}/cooperation` },
-    { name: t('nav.contacts', lang), href: `${base}/contacts` }
+    { name: t('nav.home', lang), href: base || '/', icon: 'home' },
+    { name: t('nav.design', lang), href: `${base}/design`, icon: 'design' },
+    { name: t('nav.turbines', lang), href: `${base}/turbines`, icon: 'turbines' },
+    { name: t('nav.turbogenerators', lang), href: `${base}/turbogenerators`, icon: 'turbogenerators' },
+    { name: t('components.blades', lang), href: `${base}/blades`, icon: 'blades' },
+    { name: t('components.oilCoolers', lang), href: `${base}/oil-coolers`, icon: 'oilCoolers' },
+    { name: t('components.condensers', lang), href: `${base}/condensers`, icon: 'condensers' },
+    { name: t('nav.about', lang), href: `${base}/about`, icon: 'about' },
+    { name: t('cases.title', lang), href: `${base}/cases`, icon: 'cases' },
+    { name: t('news.title', lang), href: `${base}/news`, icon: 'news' },
+    { name: t('nav.faq', lang), href: `${base}/faq`, icon: 'faq' },
+    { name: t('nav.cooperation', lang), href: `${base}/cooperation`, icon: 'cooperation' },
+    { name: t('nav.contacts', lang), href: `${base}/contacts`, icon: 'contacts' }
   ];
 }
 

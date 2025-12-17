@@ -207,19 +207,19 @@ const recaptchaSiteKey = '6LfNRK8pAAAAAH_LHUf8KKIPEHunNcHtvejUlqu5';
 <div class="modal-overlay" id="consultation-modal">
   <div class="modal modal-large">
     <div class="modal-header">
-      <h3 class="modal-title">Получить консультацию</h3>
+      <h3 class="modal-title">{t('forms.consultation', lang)}</h3>
       <button class="modal-close" data-close-modal aria-label={t('common.close', lang)}>
         <img src="/img/close.svg" alt="close" width="16" height="16" />
       </button>
     </div>
     
     <div class="modal-body">
-      <p class="modal-notice">Мы принимаем на себя обязательство о том, что информация, полученная в рамках консультации, является конфиденциальной и не подлежит разглашению или передаче третьим лицам.</p>
+      <p class="modal-notice">{t('forms.caseConsultationNotice', lang)}</p>
       
       <form class="modal-form" data-form="consultation">
       <!-- Ваши контакты -->
       <div class="form-section">
-        <h4 class="form-section-title">Ваши контакты</h4>
+        <h4 class="form-section-title">{t('forms.yourContacts', lang)}</h4>
       </div>
       <div class="form-row">
         <div class="form-group">
@@ -228,7 +228,7 @@ const recaptchaSiteKey = '6LfNRK8pAAAAAH_LHUf8KKIPEHunNcHtvejUlqu5';
             type="text" 
             id="consult-name" 
             name="name" 
-            placeholder="Введите ваше имя"
+            placeholder={t('forms.namePlaceholder', lang)}
             required 
           />
         </div>
@@ -240,7 +240,7 @@ const recaptchaSiteKey = '6LfNRK8pAAAAAH_LHUf8KKIPEHunNcHtvejUlqu5';
             id="consult-phone" 
             name="phone" 
             class="phone-mask"
-            placeholder="+7 (___) ___-__-__"
+            placeholder={t('forms.phonePlaceholder', lang)}
             required 
           />
           <span class="error-message hidden">{t('forms.phoneError', lang)}</span>
@@ -249,63 +249,63 @@ const recaptchaSiteKey = '6LfNRK8pAAAAAH_LHUf8KKIPEHunNcHtvejUlqu5';
       
       <div class="form-row">
         <div class="form-group">
-          <label for="consult-email">E-mail</label>
+          <label for="consult-email">{t('forms.email', lang)}</label>
           <input 
             type="email" 
             id="consult-email" 
             name="email" 
             class="email-input"
-            placeholder="example@mail.ru"
+            placeholder={t('forms.emailPlaceholder', lang)}
           />
           <span class="error-message hidden">{t('forms.emailError', lang)}</span>
         </div>
         
         <div class="form-group">
-          <label for="consult-company">Компания</label>
+          <label for="consult-company">{t('forms.company', lang)}</label>
           <input 
             type="text" 
             id="consult-company" 
             name="company" 
-            placeholder="Название компании"
+            placeholder={t('forms.companyPlaceholder', lang)}
           />
         </div>
       </div>
       
       <!-- Тема консультации -->
       <div class="form-section">
-        <h4 class="form-section-title">Тема консультации</h4>
+        <h4 class="form-section-title">{t('forms.consultationTopic', lang)}</h4>
         <div class="checkbox-buttons-grid">
           <label class="checkbox-btn">
             <input type="checkbox" name="consultation_technical" />
-            <span class="checkbox-btn-label">Технический вопрос</span>
+            <span class="checkbox-btn-label">{t('forms.technicalQuestion', lang)}</span>
           </label>
           <label class="checkbox-btn">
             <input type="checkbox" name="consultation_commercial" />
-            <span class="checkbox-btn-label">Коммерческое предложение</span>
+            <span class="checkbox-btn-label">{t('forms.commercialOffer', lang)}</span>
           </label>
           <label class="checkbox-btn">
             <input type="checkbox" name="consultation_service" />
-            <span class="checkbox-btn-label">Сервис и обслуживание</span>
+            <span class="checkbox-btn-label">{t('forms.serviceSupport', lang)}</span>
           </label>
           <label class="checkbox-btn">
             <input type="checkbox" name="consultation_documentation" />
-            <span class="checkbox-btn-label">Разработка документации</span>
+            <span class="checkbox-btn-label">{t('forms.docDevelopment', lang)}</span>
           </label>
           <label class="checkbox-btn">
             <input type="checkbox" name="consultation_other" />
-            <span class="checkbox-btn-label">Другое</span>
+            <span class="checkbox-btn-label">{t('forms.other', lang)}</span>
           </label>
         </div>
       </div>
       
       <!-- Ваш вопрос -->
       <div class="form-section">
-        <h4 class="form-section-title">Ваш вопрос</h4>
+        <h4 class="form-section-title">{t('forms.yourQuestion', lang)}</h4>
         <div class="form-group">
           <textarea 
             id="consult-message" 
             name="message" 
-            placeholder="Опишите ваш вопрос"
+            placeholder={t('forms.describeQuestion', lang)}
             rows="4"
           ></textarea>
         </div>
@@ -313,15 +313,15 @@ const recaptchaSiteKey = '6LfNRK8pAAAAAH_LHUf8KKIPEHunNcHtvejUlqu5';
       
       <!-- Как с вами связаться? -->
       <div class="form-section">
-        <h4 class="form-section-title">Как с вами связаться?</h4>
+        <h4 class="form-section-title">{t('forms.howToContact', lang)}</h4>
         <div class="radio-buttons-row">
           <label class="radio-btn">
             <input type="radio" name="contact_method" value="phone" />
-            <span class="radio-btn-label">По телефону</span>
+            <span class="radio-btn-label">{t('forms.byPhone', lang)}</span>
           </label>
           <label class="radio-btn">
             <input type="radio" name="contact_method" value="email" />
-            <span class="radio-btn-label">По email</span>
+            <span class="radio-btn-label">{t('forms.byEmail', lang)}</span>
           </label>
         </div>
       </div>
@@ -522,40 +522,40 @@ const recaptchaSiteKey = '6LfNRK8pAAAAAH_LHUf8KKIPEHunNcHtvejUlqu5';
 <div class="modal-overlay" id="blades-modal">
   <div class="modal modal-large">
     <div class="modal-header">
-      <h3 class="modal-title">Заказать изготовление лопаток</h3>
+      <h3 class="modal-title">{t('forms.orderBlades', lang)}</h3>
       <button class="modal-close" data-close-modal aria-label={t('common.close', lang)}>
         <img src="/img/close.svg" alt="close" width="16" height="16" />
       </button>
     </div>
     
     <div class="modal-body">
-      <p class="modal-notice">Мы гарантируем конфиденциальность ваших данных и предложим оптимальное решение для вашего проекта в кратчайшие сроки.</p>
+      <p class="modal-notice">{t('forms.bladesNotice', lang)}</p>
       
       <form class="modal-form" data-form="blades">
       <!-- Ваши контакты -->
       <div class="form-section">
-        <h4 class="form-section-title">Ваши контакты</h4>
+        <h4 class="form-section-title">{t('forms.yourContacts', lang)}</h4>
       </div>
       <div class="form-row">
         <div class="form-group">
-          <label for="blades-name">Имя<span class="required">*</span></label>
+          <label for="blades-name">{t('forms.name', lang)}<span class="required">*</span></label>
           <input 
             type="text" 
             id="blades-name" 
             name="name" 
-            placeholder="Введите ваше имя"
+            placeholder={t('forms.namePlaceholder', lang)}
             required 
           />
         </div>
         
         <div class="form-group">
-          <label for="blades-phone">Телефон<span class="required">*</span></label>
+          <label for="blades-phone">{t('forms.phone', lang)}<span class="required">*</span></label>
           <input 
             type="tel" 
             id="blades-phone" 
             name="phone" 
             class="phone-mask"
-            placeholder="+7 (___) ___-__-__"
+            placeholder={t('forms.phonePlaceholder', lang)}
             required 
           />
           <span class="error-message hidden">{t('forms.phoneError', lang)}</span>
@@ -564,97 +564,97 @@ const recaptchaSiteKey = '6LfNRK8pAAAAAH_LHUf8KKIPEHunNcHtvejUlqu5';
       
       <div class="form-row">
         <div class="form-group">
-          <label for="blades-email">E-mail</label>
+          <label for="blades-email">{t('forms.email', lang)}</label>
           <input 
             type="email" 
             id="blades-email" 
             name="email" 
             class="email-input"
-            placeholder="example@mail.ru"
+            placeholder={t('forms.emailPlaceholder', lang)}
           />
           <span class="error-message hidden">{t('forms.emailError', lang)}</span>
         </div>
         
         <div class="form-group">
-          <label for="blades-company">Компания</label>
+          <label for="blades-company">{t('forms.company', lang)}</label>
           <input 
             type="text" 
             id="blades-company" 
             name="company" 
-            placeholder="Название компании"
+            placeholder={t('forms.companyPlaceholder', lang)}
           />
         </div>
       </div>
       
       <!-- Оригинальный бренд лопаток -->
       <div class="form-section">
-        <h4 class="form-section-title">Укажите оригинальный бренд лопаток</h4>
+        <h4 class="form-section-title">{t('forms.bladesBrand', lang)}</h4>
       </div>
       <div class="form-group">
         <input 
           type="text" 
           id="blades-brand" 
           name="brand" 
-          placeholder="Введите оригинальный бренд лопаток"
+          placeholder={t('forms.bladesBrandPlaceholder', lang)}
         />
       </div>
       
       <!-- Необходимое количество -->
       <div class="form-section">
-        <h4 class="form-section-title">Необходимое количество</h4>
+        <h4 class="form-section-title">{t('forms.requiredQuantity', lang)}</h4>
       </div>
       <div class="form-group">
         <input 
           type="text" 
           id="blades-quantity" 
           name="quantity" 
-          placeholder="Укажите количество"
+          placeholder={t('forms.quantityPlaceholder', lang)}
         />
       </div>
       
       <!-- Нанесение защитных покрытий -->
       <div class="form-section">
-        <h4 class="form-section-title">Нанесение защитных покрытий</h4>
+        <h4 class="form-section-title">{t('forms.protectiveCoatings', lang)}</h4>
         <div class="radio-buttons-row">
           <label class="radio-btn">
             <input type="radio" name="coating" value="yes" />
-            <span class="radio-btn-label">Да</span>
+            <span class="radio-btn-label">{t('forms.yes', lang)}</span>
           </label>
           <label class="radio-btn">
             <input type="radio" name="coating" value="no" />
-            <span class="radio-btn-label">Нет</span>
+            <span class="radio-btn-label">{t('forms.no', lang)}</span>
           </label>
         </div>
       </div>
       
       <!-- Сроки изготовления -->
       <div class="form-section">
-        <h4 class="form-section-title">Сроки изготовления</h4>
+        <h4 class="form-section-title">{t('forms.productionDeadlines', lang)}</h4>
       </div>
       <div class="form-group">
         <input 
           type="text" 
           id="blades-deadline" 
           name="deadline" 
-          placeholder="Укажите срок в месяцах (при необходимости)"
+          placeholder={t('forms.deadlinePlaceholder', lang)}
         />
       </div>
       
       <!-- Как с вами связаться? -->
       <div class="form-section">
-        <h4 class="form-section-title">Как с вами связаться?</h4>
+        <h4 class="form-section-title">{t('forms.howToContact', lang)}</h4>
         <div class="radio-buttons-row">
           <label class="radio-btn">
             <input type="radio" name="contact_method" value="phone" />
-            <span class="radio-btn-label">По телефону</span>
+            <span class="radio-btn-label">{t('forms.byPhone', lang)}</span>
           </label>
           <label class="radio-btn">
             <input type="radio" name="contact_method" value="email" />
-            <span class="radio-btn-label">По email</span>
+            <span class="radio-btn-label">{t('forms.byEmail', lang)}</span>
           </label>
           <label class="radio-btn">
             <input type="radio" name="contact_method" value="any" />
-            <span class="radio-btn-label">Любым способом</span>
+            <span class="radio-btn-label">{t('forms.anyMethod', lang)}</span>
           </label>
         </div>
       </div>
@@ -694,40 +694,40 @@ const recaptchaSiteKey = '6LfNRK8pAAAAAH_LHUf8KKIPEHunNcHtvejUlqu5';
 <div class="modal-overlay" id="oil-cooler-modal">
   <div class="modal modal-large">
     <div class="modal-header">
-      <h3 class="modal-title">Заказать маслоохладитель</h3>
+      <h3 class="modal-title">{t('forms.orderOilCooler', lang)}</h3>
       <button class="modal-close" data-close-modal aria-label={t('common.close', lang)}>
         <img src="/img/close.svg" alt="close" width="16" height="16" />
       </button>
     </div>
     
     <div class="modal-body">
-      <p class="modal-notice">Мы гарантируем конфиденциальность ваших данных и предложим оптимальное решение для вашего проекта в кратчайшие сроки.</p>
+      <p class="modal-notice">{t('forms.bladesNotice', lang)}</p>
       
       <form class="modal-form" data-form="oil-cooler">
       <!-- Ваши контакты -->
       <div class="form-section">
-        <h4 class="form-section-title">Ваши контакты</h4>
+        <h4 class="form-section-title">{t('forms.yourContacts', lang)}</h4>
       </div>
       <div class="form-row">
         <div class="form-group">
-          <label for="oilcooler-name">Имя<span class="required">*</span></label>
+          <label for="oilcooler-name">{t('forms.name', lang)}<span class="required">*</span></label>
           <input 
             type="text" 
             id="oilcooler-name" 
             name="name" 
-            placeholder="Введите ваше имя"
+            placeholder={t('forms.namePlaceholder', lang)}
             required 
           />
         </div>
         
         <div class="form-group">
-          <label for="oilcooler-phone">Телефон<span class="required">*</span></label>
+          <label for="oilcooler-phone">{t('forms.phone', lang)}<span class="required">*</span></label>
           <input 
             type="tel" 
             id="oilcooler-phone" 
             name="phone" 
             class="phone-mask"
-            placeholder="+7 (___) ___-__-__"
+            placeholder={t('forms.phonePlaceholder', lang)}
             required 
           />
           <span class="error-message hidden">{t('forms.phoneError', lang)}</span>
@@ -736,118 +736,118 @@ const recaptchaSiteKey = '6LfNRK8pAAAAAH_LHUf8KKIPEHunNcHtvejUlqu5';
       
       <div class="form-row">
         <div class="form-group">
-          <label for="oilcooler-email">E-mail</label>
+          <label for="oilcooler-email">{t('forms.email', lang)}</label>
           <input 
             type="email" 
             id="oilcooler-email" 
             name="email" 
             class="email-input"
-            placeholder="example@mail.ru"
+            placeholder={t('forms.emailPlaceholder', lang)}
           />
           <span class="error-message hidden">{t('forms.emailError', lang)}</span>
         </div>
         
         <div class="form-group">
-          <label for="oilcooler-company">Компания</label>
+          <label for="oilcooler-company">{t('forms.company', lang)}</label>
           <input 
             type="text" 
             id="oilcooler-company" 
             name="company" 
-            placeholder="Название компании"
+            placeholder={t('forms.companyPlaceholder', lang)}
           />
         </div>
       </div>
       
       <!-- Тип маслоохладителя -->
       <div class="form-section">
-        <h4 class="form-section-title">Тип маслоохладителя</h4>
+        <h4 class="form-section-title">{t('forms.oilCoolerType', lang)}</h4>
         <div class="radio-buttons-wrap">
           <label class="radio-btn">
             <input type="radio" name="cooler_type" value="single_pass" />
-            <span class="radio-btn-label">Одноходовой</span>
+            <span class="radio-btn-label">{t('forms.singlePass', lang)}</span>
           </label>
           <label class="radio-btn">
             <input type="radio" name="cooler_type" value="double_pass" />
-            <span class="radio-btn-label">Двухходовой</span>
+            <span class="radio-btn-label">{t('forms.doublePass', lang)}</span>
           </label>
           <label class="radio-btn">
             <input type="radio" name="cooler_type" value="block" />
-            <span class="radio-btn-label">Блочное исполнение</span>
+            <span class="radio-btn-label">{t('forms.blockExecution', lang)}</span>
           </label>
           <label class="radio-btn">
             <input type="radio" name="cooler_type" value="other" />
-            <span class="radio-btn-label">Другой</span>
+            <span class="radio-btn-label">{t('forms.otherType', lang)}</span>
           </label>
         </div>
       </div>
       
       <!-- Параметры турбины -->
       <div class="form-section">
-        <h4 class="form-section-title">Параметры турбины</h4>
+        <h4 class="form-section-title">{t('forms.turbineParams', lang)}</h4>
       </div>
       <div class="form-row">
         <div class="form-group">
-          <label for="oilcooler-power">Мощность турбины (МВт)</label>
+          <label for="oilcooler-power">{t('forms.turbinePower', lang)}</label>
           <input 
             type="text" 
             id="oilcooler-power" 
             name="turbine_power" 
-            placeholder="Укажите мощность"
+            placeholder={t('forms.powerPlaceholder', lang)}
           />
         </div>
         
         <div class="form-group">
-          <label for="oilcooler-oil-flow">Расход масла (м³/ч)</label>
+          <label for="oilcooler-oil-flow">{t('forms.oilFlow', lang)}</label>
           <input 
             type="text" 
             id="oilcooler-oil-flow" 
             name="oil_flow" 
-            placeholder="Укажите расход"
+            placeholder={t('forms.flowPlaceholder', lang)}
           />
         </div>
       </div>
       
       <!-- Дополнительная информация -->
       <div class="form-section">
-        <h4 class="form-section-title">Дополнительная информация</h4>
+        <h4 class="form-section-title">{t('forms.additionalInfo', lang)}</h4>
       </div>
       <div class="form-group">
         <textarea 
           id="oilcooler-message" 
           name="message" 
-          placeholder="Сообщение или дополнительные требования"
+          placeholder={t('forms.additionalRequirements', lang)}
           rows="3"
         ></textarea>
       </div>
       
       <!-- Сроки поставки -->
       <div class="form-section">
-        <h4 class="form-section-title">Сроки поставки</h4>
+        <h4 class="form-section-title">{t('forms.deliveryDeadlines', lang)}</h4>
       </div>
       <div class="form-group">
         <input 
           type="text" 
           id="oilcooler-deadline" 
           name="deadline" 
-          placeholder="Укажите срок в месяцах (при необходимости)"
+          placeholder={t('forms.deadlinePlaceholder', lang)}
         />
       </div>
       
       <!-- Как с вами связаться? -->
       <div class="form-section">
-        <h4 class="form-section-title">Как с вами связаться?</h4>
+        <h4 class="form-section-title">{t('forms.howToContact', lang)}</h4>
         <div class="radio-buttons-row">
           <label class="radio-btn">
             <input type="radio" name="contact_method" value="phone" />
-            <span class="radio-btn-label">По телефону</span>
+            <span class="radio-btn-label">{t('forms.byPhone', lang)}</span>
           </label>
           <label class="radio-btn">
             <input type="radio" name="contact_method" value="email" />
-            <span class="radio-btn-label">По email</span>
+            <span class="radio-btn-label">{t('forms.byEmail', lang)}</span>
           </label>
           <label class="radio-btn">
             <input type="radio" name="contact_method" value="any" />
-            <span class="radio-btn-label">Любым способом</span>
+            <span class="radio-btn-label">{t('forms.anyMethod', lang)}</span>
           </label>
         </div>
       </div>
@@ -887,18 +887,18 @@ const recaptchaSiteKey = '6LfNRK8pAAAAAH_LHUf8KKIPEHunNcHtvejUlqu5';
 <div class="modal-overlay" id="case-consultation-modal">
   <div class="modal modal-large">
     <div class="modal-header">
-      <h3 class="modal-title">Получить консультацию</h3>
+      <h3 class="modal-title">{t('forms.caseConsultation', lang)}</h3>
       <button class="modal-close" data-close-modal aria-label={t('common.close', lang)}>
         <img src="/img/close.svg" alt="close" width="16" height="16" />
       </button>
     </div>
     
     <div class="modal-body">
-      <p class="modal-notice">Мы принимаем на себя обязательство о том, что информация, полученная в рамках консультации, является конфиденциальной и не подлежит разглашению или передаче третьим лицам.</p>
+      <p class="modal-notice">{t('forms.caseConsultationNotice', lang)}</p>
       
       <form class="modal-form" data-form="case-consultation">
       <!-- Contact Fields -->
-      <h4 class="form-section-title">Ваши контакты</h4>
+      <h4 class="form-section-title">{t('forms.yourContacts', lang)}</h4>
       <div class="form-row">
         <div class="form-group">
           <label for="case-consult-name">{t('forms.name', lang)}<span class="required">*</span></label>
@@ -951,38 +951,38 @@ const recaptchaSiteKey = '6LfNRK8pAAAAAH_LHUf8KKIPEHunNcHtvejUlqu5';
       
       <!-- Consultation Topic -->
       <div class="form-section">
-        <h4 class="form-section-title">Тема консультации</h4>
+        <h4 class="form-section-title">{t('forms.consultationTopic', lang)}</h4>
         <div class="radio-buttons-wrap">
           <label class="radio-btn">
             <input type="radio" name="consultation_topic" value="technical" />
-            <span class="radio-btn-label">Технический вопрос</span>
+            <span class="radio-btn-label">{t('forms.technicalQuestion', lang)}</span>
           </label>
           <label class="radio-btn">
             <input type="radio" name="consultation_topic" value="commercial" />
-            <span class="radio-btn-label">Коммерческое предложение</span>
+            <span class="radio-btn-label">{t('forms.commercialOffer', lang)}</span>
           </label>
           <label class="radio-btn">
             <input type="radio" name="consultation_topic" value="service" />
-            <span class="radio-btn-label">Сервис и обслуживание</span>
+            <span class="radio-btn-label">{t('forms.serviceSupport', lang)}</span>
           </label>
           <label class="radio-btn">
             <input type="radio" name="consultation_topic" value="documentation" />
-            <span class="radio-btn-label">Разработка документации</span>
+            <span class="radio-btn-label">{t('forms.docDevelopment', lang)}</span>
           </label>
           <label class="radio-btn">
             <input type="radio" name="consultation_topic" value="other" />
-            <span class="radio-btn-label">Другое</span>
+            <span class="radio-btn-label">{t('forms.other', lang)}</span>
           </label>
         </div>
       </div>
 
       <!-- Question -->
       <div class="form-group" style="margin-top: var(--space-4);">
-        <label for="case-consult-question">Ваш вопрос</label>
+        <label for="case-consult-question">{t('forms.yourQuestion', lang)}</label>
         <textarea 
           id="case-consult-question" 
           name="question" 
-          placeholder="Опишите ваш вопрос"
+          placeholder={t('forms.describeQuestion', lang)}
           rows="4"
           style="width: 100%; padding: 12px; border: 1px solid var(--color-border); border-radius: 30px; font-family: inherit; resize: vertical;"
         ></textarea>
@@ -990,15 +990,15 @@ const recaptchaSiteKey = '6LfNRK8pAAAAAH_LHUf8KKIPEHunNcHtvejUlqu5';
       
       <!-- Contact Preference -->
       <div class="form-section">
-        <h4 class="form-section-title">Как с вами связаться?</h4>
+        <h4 class="form-section-title">{t('forms.howToContact', lang)}</h4>
         <div class="radio-buttons-row">
           <label class="radio-btn">
             <input type="radio" name="contact_method" value="phone" />
-            <span class="radio-btn-label">По телефону</span>
+            <span class="radio-btn-label">{t('forms.byPhone', lang)}</span>
           </label>
           <label class="radio-btn">
             <input type="radio" name="contact_method" value="email" />
-            <span class="radio-btn-label">По email</span>
+            <span class="radio-btn-label">{t('forms.byEmail', lang)}</span>
           </label>
         </div>
       </div>
@@ -1038,18 +1038,18 @@ const recaptchaSiteKey = '6LfNRK8pAAAAAH_LHUf8KKIPEHunNcHtvejUlqu5';
 <div class="modal-overlay" id="turbogenerator-modal">
   <div class="modal modal-large">
     <div class="modal-header">
-      <h3 class="modal-title">Заказать турбогенератор</h3>
+      <h3 class="modal-title">{t('forms.orderTurbogenerator', lang)}</h3>
       <button class="modal-close" data-close-modal aria-label={t('common.close', lang)}>
         <img src="/img/close.svg" alt="close" width="16" height="16" />
       </button>
     </div>
     
     <div class="modal-body">
-      <p class="modal-notice">Мы гарантируем конфиденциальность ваших данных. Наши специалисты помогут подобрать оптимальное решение для вашего проекта.</p>
+      <p class="modal-notice">{t('forms.turbogeneratorNotice', lang)}</p>
       
       <form class="modal-form" data-form="turbogenerator">
       <!-- Contact Fields -->
-      <h4 class="form-section-title">Ваши контакты</h4>
+      <h4 class="form-section-title">{t('forms.yourContacts', lang)}</h4>
       <div class="form-row">
         <div class="form-group">
           <label for="turbogen-name">{t('forms.name', lang)}<span class="required">*</span></label>
@@ -1102,60 +1102,60 @@ const recaptchaSiteKey = '6LfNRK8pAAAAAH_LHUf8KKIPEHunNcHtvejUlqu5';
       
       <!-- Generator Type -->
       <div class="form-section">
-        <h4 class="form-section-title">Тип турбогенератора</h4>
+        <h4 class="form-section-title">{t('forms.turbogeneratorType', lang)}</h4>
         <div class="radio-buttons-wrap">
           <label class="radio-btn">
             <input type="radio" name="generator_type" value="synchronous" />
-            <span class="radio-btn-label">Синхронный</span>
+            <span class="radio-btn-label">{t('forms.synchronous', lang)}</span>
           </label>
           <label class="radio-btn">
             <input type="radio" name="generator_type" value="asynchronous" />
-            <span class="radio-btn-label">Асинхронный</span>
+            <span class="radio-btn-label">{t('forms.asynchronous', lang)}</span>
           </label>
         </div>
       </div>
       
       <!-- Voltage -->
       <div class="form-section">
-        <h4 class="form-section-title">Напряжение</h4>
+        <h4 class="form-section-title">{t('forms.voltage', lang)}</h4>
         <div class="radio-buttons-wrap">
           <label class="radio-btn">
             <input type="radio" name="voltage" value="0.4" />
-            <span class="radio-btn-label">0,4 кВ</span>
+            <span class="radio-btn-label">{t('forms.voltage04', lang)}</span>
           </label>
           <label class="radio-btn">
             <input type="radio" name="voltage" value="6.3" />
-            <span class="radio-btn-label">6,3 кВ</span>
+            <span class="radio-btn-label">{t('forms.voltage63', lang)}</span>
           </label>
           <label class="radio-btn">
             <input type="radio" name="voltage" value="10.5" />
-            <span class="radio-btn-label">10,5 кВ</span>
+            <span class="radio-btn-label">{t('forms.voltage105', lang)}</span>
           </label>
         </div>
       </div>
       
       <!-- Excitation System -->
       <div class="form-section">
-        <h4 class="form-section-title">Система возбуждения</h4>
+        <h4 class="form-section-title">{t('forms.excitationSystem', lang)}</h4>
         <div class="radio-buttons-wrap">
           <label class="radio-btn">
             <input type="radio" name="excitation" value="static" />
-            <span class="radio-btn-label">Статическая</span>
+            <span class="radio-btn-label">{t('forms.staticExcitation', lang)}</span>
           </label>
           <label class="radio-btn">
             <input type="radio" name="excitation" value="brushless" />
-            <span class="radio-btn-label">Бесщеточная</span>
+            <span class="radio-btn-label">{t('forms.brushless', lang)}</span>
           </label>
         </div>
       </div>
 
       <!-- Additional Info -->
       <div class="form-group" style="margin-top: var(--space-4);">
-        <label for="turbogen-message">Дополнительная информация</label>
+        <label for="turbogen-message">{t('forms.additionalInfo', lang)}</label>
         <textarea 
           id="turbogen-message" 
           name="message" 
-          placeholder="Сообщение или дополнительные требования"
+          placeholder={t('forms.additionalRequirements', lang)}
           rows="3"
           style="width: 100%; padding: 12px; border: 1px solid var(--color-border); border-radius: 30px; font-family: inherit; resize: vertical;"
         ></textarea>
@@ -1163,30 +1163,30 @@ const recaptchaSiteKey = '6LfNRK8pAAAAAH_LHUf8KKIPEHunNcHtvejUlqu5';
       
       <!-- Delivery Time -->
       <div class="form-group">
-        <label for="turbogen-deadline">Сроки поставки</label>
+        <label for="turbogen-deadline">{t('forms.deliveryDeadlines', lang)}</label>
         <input 
           type="text" 
           id="turbogen-deadline" 
           name="deadline" 
-          placeholder="Укажите срок в месяцах (при необходимости)"
+          placeholder={t('forms.deadlinePlaceholder', lang)}
         />
       </div>
       
       <!-- Contact Preference -->
       <div class="form-section">
-        <h4 class="form-section-title">Как с вами связаться?</h4>
+        <h4 class="form-section-title">{t('forms.howToContact', lang)}</h4>
         <div class="radio-buttons-row">
           <label class="radio-btn">
             <input type="radio" name="contact_method" value="phone" />
-            <span class="radio-btn-label">По телефону</span>
+            <span class="radio-btn-label">{t('forms.byPhone', lang)}</span>
           </label>
           <label class="radio-btn">
             <input type="radio" name="contact_method" value="email" />
-            <span class="radio-btn-label">По email</span>
+            <span class="radio-btn-label">{t('forms.byEmail', lang)}</span>
           </label>
           <label class="radio-btn">
             <input type="radio" name="contact_method" value="any" />
-            <span class="radio-btn-label">Любым способом</span>
+            <span class="radio-btn-label">{t('forms.anyMethod', lang)}</span>
           </label>
         </div>
       </div>
@@ -1226,40 +1226,40 @@ const recaptchaSiteKey = '6LfNRK8pAAAAAH_LHUf8KKIPEHunNcHtvejUlqu5';
 <div class="modal-overlay" id="condenser-modal">
   <div class="modal modal-large">
     <div class="modal-header">
-      <h3 class="modal-title">Заказать конденсатор</h3>
+      <h3 class="modal-title">{t('forms.orderCondenser', lang)}</h3>
       <button class="modal-close" data-close-modal aria-label={t('common.close', lang)}>
         <img src="/img/close.svg" alt="close" width="16" height="16" />
       </button>
     </div>
     
     <div class="modal-body">
-      <p class="modal-notice">Мы гарантируем конфиденциальность ваших данных и предложим оптимальное решение для вашего проекта в кратчайшие сроки.</p>
+      <p class="modal-notice">{t('forms.bladesNotice', lang)}</p>
       
       <form class="modal-form" data-form="condenser">
       <!-- Ваши контакты -->
       <div class="form-section">
-        <h4 class="form-section-title">Ваши контакты</h4>
+        <h4 class="form-section-title">{t('forms.yourContacts', lang)}</h4>
       </div>
       <div class="form-row">
         <div class="form-group">
-          <label for="condenser-name">Имя<span class="required">*</span></label>
+          <label for="condenser-name">{t('forms.name', lang)}<span class="required">*</span></label>
           <input 
             type="text" 
             id="condenser-name" 
             name="name" 
-            placeholder="Введите ваше имя"
+            placeholder={t('forms.namePlaceholder', lang)}
             required 
           />
         </div>
         
         <div class="form-group">
-          <label for="condenser-phone">Телефон<span class="required">*</span></label>
+          <label for="condenser-phone">{t('forms.phone', lang)}<span class="required">*</span></label>
           <input 
             type="tel" 
             id="condenser-phone" 
             name="phone" 
             class="phone-mask"
-            placeholder="+7 (___) ___-__-__"
+            placeholder={t('forms.phonePlaceholder', lang)}
             required 
           />
           <span class="error-message hidden">{t('forms.phoneError', lang)}</span>
@@ -1268,118 +1268,118 @@ const recaptchaSiteKey = '6LfNRK8pAAAAAH_LHUf8KKIPEHunNcHtvejUlqu5';
       
       <div class="form-row">
         <div class="form-group">
-          <label for="condenser-email">E-mail</label>
+          <label for="condenser-email">{t('forms.email', lang)}</label>
           <input 
             type="email" 
             id="condenser-email" 
             name="email" 
             class="email-input"
-            placeholder="example@mail.ru"
+            placeholder={t('forms.emailPlaceholder', lang)}
           />
           <span class="error-message hidden">{t('forms.emailError', lang)}</span>
         </div>
         
         <div class="form-group">
-          <label for="condenser-company">Компания</label>
+          <label for="condenser-company">{t('forms.company', lang)}</label>
           <input 
             type="text" 
             id="condenser-company" 
             name="company" 
-            placeholder="Название компании"
+            placeholder={t('forms.companyPlaceholder', lang)}
           />
         </div>
       </div>
       
       <!-- Тип конденсатора -->
       <div class="form-section">
-        <h4 class="form-section-title">Тип конденсатора</h4>
+        <h4 class="form-section-title">{t('forms.condenserType', lang)}</h4>
         <div class="radio-buttons-wrap">
           <label class="radio-btn">
             <input type="radio" name="condenser_type" value="single_pass" />
-            <span class="radio-btn-label">Одноходовой</span>
+            <span class="radio-btn-label">{t('forms.singlePass', lang)}</span>
           </label>
           <label class="radio-btn">
             <input type="radio" name="condenser_type" value="double_pass" />
-            <span class="radio-btn-label">Двухходовой</span>
+            <span class="radio-btn-label">{t('forms.doublePass', lang)}</span>
           </label>
           <label class="radio-btn">
             <input type="radio" name="condenser_type" value="combined" />
-            <span class="radio-btn-label">Комбинированный</span>
+            <span class="radio-btn-label">{t('forms.combined', lang)}</span>
           </label>
           <label class="radio-btn">
             <input type="radio" name="condenser_type" value="other" />
-            <span class="radio-btn-label">Другой</span>
+            <span class="radio-btn-label">{t('forms.otherType', lang)}</span>
           </label>
         </div>
       </div>
       
       <!-- Параметры турбины -->
       <div class="form-section">
-        <h4 class="form-section-title">Параметры турбины</h4>
+        <h4 class="form-section-title">{t('forms.turbineParams', lang)}</h4>
       </div>
       <div class="form-row">
         <div class="form-group">
-          <label for="condenser-power">Мощность турбины (МВт)</label>
+          <label for="condenser-power">{t('forms.turbinePower', lang)}</label>
           <input 
             type="text" 
             id="condenser-power" 
             name="turbine_power" 
-            placeholder="Укажите мощность"
+            placeholder={t('forms.powerPlaceholder', lang)}
           />
         </div>
         
         <div class="form-group">
-          <label for="condenser-steam-flow">Расход пара (т/ч)</label>
+          <label for="condenser-steam-flow">{t('forms.steamFlow', lang)}</label>
           <input 
             type="text" 
             id="condenser-steam-flow" 
             name="steam_flow" 
-            placeholder="Укажите расход пара"
+            placeholder={t('forms.steamFlowPlaceholder', lang)}
           />
         </div>
       </div>
       
       <!-- Дополнительная информация -->
       <div class="form-section">
-        <h4 class="form-section-title">Дополнительная информация</h4>
+        <h4 class="form-section-title">{t('forms.additionalInfo', lang)}</h4>
       </div>
       <div class="form-group">
         <textarea 
           id="condenser-message" 
           name="message" 
-          placeholder="Сообщение или дополнительные требования"
+          placeholder={t('forms.additionalRequirements', lang)}
           rows="3"
         ></textarea>
       </div>
       
       <!-- Сроки поставки -->
       <div class="form-section">
-        <h4 class="form-section-title">Сроки поставки</h4>
+        <h4 class="form-section-title">{t('forms.deliveryDeadlines', lang)}</h4>
       </div>
       <div class="form-group">
         <input 
           type="text" 
           id="condenser-deadline" 
           name="deadline" 
-          placeholder="Укажите срок в месяцах (при необходимости)"
+          placeholder={t('forms.deadlinePlaceholder', lang)}
         />
       </div>
       
       <!-- Как с вами связаться? -->
       <div class="form-section">
-        <h4 class="form-section-title">Как с вами связаться?</h4>
+        <h4 class="form-section-title">{t('forms.howToContact', lang)}</h4>
         <div class="radio-buttons-row">
           <label class="radio-btn">
             <input type="radio" name="contact_method" value="phone" />
-            <span class="radio-btn-label">По телефону</span>
+            <span class="radio-btn-label">{t('forms.byPhone', lang)}</span>
           </label>
           <label class="radio-btn">
             <input type="radio" name="contact_method" value="email" />
-            <span class="radio-btn-label">По email</span>
+            <span class="radio-btn-label">{t('forms.byEmail', lang)}</span>
           </label>
           <label class="radio-btn">
             <input type="radio" name="contact_method" value="any" />
-            <span class="radio-btn-label">Любым способом</span>
+            <span class="radio-btn-label">{t('forms.anyMethod', lang)}</span>
           </label>
         </div>
       </div>
@@ -1419,40 +1419,40 @@ const recaptchaSiteKey = '6LfNRK8pAAAAAH_LHUf8KKIPEHunNcHtvejUlqu5';
 <div class="modal-overlay" id="turbine-modal">
   <div class="modal modal-large">
     <div class="modal-header">
-      <h3 class="modal-title">Заказать турбину</h3>
+      <h3 class="modal-title">{t('forms.orderTurbine', lang)}</h3>
       <button class="modal-close" data-close-modal aria-label={t('common.close', lang)}>
         <img src="/img/close.svg" alt="close" width="16" height="16" />
       </button>
     </div>
     
     <div class="modal-body">
-      <p class="modal-notice">Мы гарантируем конфиденциальность ваших данных и предложим оптимальное решение для вашего проекта в кратчайшие сроки.</p>
+      <p class="modal-notice">{t('forms.bladesNotice', lang)}</p>
       
       <form class="modal-form" data-form="turbine">
       <!-- Ваши контакты -->
       <div class="form-section">
-        <h4 class="form-section-title">Ваши контакты</h4>
+        <h4 class="form-section-title">{t('forms.yourContacts', lang)}</h4>
       </div>
       <div class="form-row">
         <div class="form-group">
-          <label for="turbine-name">Имя<span class="required">*</span></label>
+          <label for="turbine-name">{t('forms.name', lang)}<span class="required">*</span></label>
           <input 
             type="text" 
             id="turbine-name" 
             name="name" 
-            placeholder="Введите ваше имя"
+            placeholder={t('forms.namePlaceholder', lang)}
             required 
           />
         </div>
         
         <div class="form-group">
-          <label for="turbine-phone">Телефон<span class="required">*</span></label>
+          <label for="turbine-phone">{t('forms.phone', lang)}<span class="required">*</span></label>
           <input 
             type="tel" 
             id="turbine-phone" 
             name="phone" 
             class="phone-mask"
-            placeholder="+7 (___) ___-__-__"
+            placeholder={t('forms.phonePlaceholder', lang)}
             required 
           />
           <span class="error-message hidden">{t('forms.phoneError', lang)}</span>
@@ -1461,118 +1461,118 @@ const recaptchaSiteKey = '6LfNRK8pAAAAAH_LHUf8KKIPEHunNcHtvejUlqu5';
       
       <div class="form-row">
         <div class="form-group">
-          <label for="turbine-email">E-mail</label>
+          <label for="turbine-email">{t('forms.email', lang)}</label>
           <input 
             type="email" 
             id="turbine-email" 
             name="email" 
             class="email-input"
-            placeholder="example@mail.ru"
+            placeholder={t('forms.emailPlaceholder', lang)}
           />
           <span class="error-message hidden">{t('forms.emailError', lang)}</span>
         </div>
         
         <div class="form-group">
-          <label for="turbine-company">Компания</label>
+          <label for="turbine-company">{t('forms.company', lang)}</label>
           <input 
             type="text" 
             id="turbine-company" 
             name="company" 
-            placeholder="Название компании"
+            placeholder={t('forms.companyPlaceholder', lang)}
           />
         </div>
       </div>
       
       <!-- Тип турбины -->
       <div class="form-section">
-        <h4 class="form-section-title">Тип турбины</h4>
+        <h4 class="form-section-title">{t('forms.turbineType', lang)}</h4>
         <div class="radio-buttons-wrap">
           <label class="radio-btn">
             <input type="radio" name="turbine_type" value="drive" />
-            <span class="radio-btn-label">Приводная</span>
+            <span class="radio-btn-label">{t('forms.drive', lang)}</span>
           </label>
           <label class="radio-btn">
             <input type="radio" name="turbine_type" value="generation" />
-            <span class="radio-btn-label">Генерационная</span>
+            <span class="radio-btn-label">{t('forms.generation', lang)}</span>
           </label>
           <label class="radio-btn">
             <input type="radio" name="turbine_type" value="condensing" />
-            <span class="radio-btn-label">Конденсационная</span>
+            <span class="radio-btn-label">{t('forms.condensing', lang)}</span>
           </label>
           <label class="radio-btn">
             <input type="radio" name="turbine_type" value="backpressure" />
-            <span class="radio-btn-label">Противодавленческая</span>
+            <span class="radio-btn-label">{t('forms.backpressure', lang)}</span>
           </label>
         </div>
       </div>
       
       <!-- Параметры турбины -->
       <div class="form-section">
-        <h4 class="form-section-title">Параметры турбины</h4>
+        <h4 class="form-section-title">{t('forms.turbineParams', lang)}</h4>
       </div>
       <div class="form-row">
         <div class="form-group">
-          <label for="turbine-power">Мощность турбины (МВт)</label>
+          <label for="turbine-power">{t('forms.turbinePower', lang)}</label>
           <input 
             type="text" 
             id="turbine-power" 
             name="turbine_power" 
-            placeholder="Укажите мощность"
+            placeholder={t('forms.powerPlaceholder', lang)}
           />
         </div>
         
         <div class="form-group">
-          <label for="turbine-steam-flow">Расход пара (т/ч)</label>
+          <label for="turbine-steam-flow">{t('forms.steamFlow', lang)}</label>
           <input 
             type="text" 
             id="turbine-steam-flow" 
             name="steam_flow" 
-            placeholder="Укажите расход пара"
+            placeholder={t('forms.steamFlowPlaceholder', lang)}
           />
         </div>
       </div>
       
       <!-- Дополнительная информация -->
       <div class="form-section">
-        <h4 class="form-section-title">Дополнительная информация</h4>
+        <h4 class="form-section-title">{t('forms.additionalInfo', lang)}</h4>
       </div>
       <div class="form-group">
         <textarea 
           id="turbine-message" 
           name="message" 
-          placeholder="Сообщение или дополнительные требования"
+          placeholder={t('forms.additionalRequirements', lang)}
           rows="3"
         ></textarea>
       </div>
       
       <!-- Сроки поставки -->
       <div class="form-section">
-        <h4 class="form-section-title">Сроки поставки</h4>
+        <h4 class="form-section-title">{t('forms.deliveryDeadlines', lang)}</h4>
       </div>
       <div class="form-group">
         <input 
           type="text" 
           id="turbine-deadline" 
           name="deadline" 
-          placeholder="Укажите срок в месяцах (при необходимости)"
+          placeholder={t('forms.deadlinePlaceholder', lang)}
         />
       </div>
       
       <!-- Как с вами связаться? -->
       <div class="form-section">
-        <h4 class="form-section-title">Как с вами связаться?</h4>
+        <h4 class="form-section-title">{t('forms.howToContact', lang)}</h4>
         <div class="radio-buttons-row">
           <label class="radio-btn">
             <input type="radio" name="contact_method" value="phone" />
-            <span class="radio-btn-label">По телефону</span>
+            <span class="radio-btn-label">{t('forms.byPhone', lang)}</span>
           </label>
           <label class="radio-btn">
             <input type="radio" name="contact_method" value="email" />
-            <span class="radio-btn-label">По email</span>
+            <span class="radio-btn-label">{t('forms.byEmail', lang)}</span>
           </label>
           <label class="radio-btn">
             <input type="radio" name="contact_method" value="any" />
-            <span class="radio-btn-label">Любым способом</span>
+            <span class="radio-btn-label">{t('forms.anyMethod', lang)}</span>
           </label>
         </div>
       </div>
@@ -2229,6 +2229,7 @@ const recaptchaSiteKey = '6LfNRK8pAAAAAH_LHUf8KKIPEHunNcHtvejUlqu5';
         }
         
         // Disable submit button during submission
+        const originalBtnText = submitBtn.textContent;
         submitBtn.disabled = true;
         submitBtn.textContent = '...';
         
@@ -2261,7 +2262,7 @@ const recaptchaSiteKey = '6LfNRK8pAAAAAH_LHUf8KKIPEHunNcHtvejUlqu5';
         } catch (error) {
           console.error('Form submission error:', error);
           submitBtn.disabled = false;
-          submitBtn.textContent = 'Отправить';
+          submitBtn.textContent = originalBtnText;
         }
       });
     });

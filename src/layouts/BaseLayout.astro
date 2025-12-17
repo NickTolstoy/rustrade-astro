@@ -26,8 +26,10 @@ interface Props {
   noindex?: boolean;
   articleData?: any;
   productData?: any;
+  serviceData?: any;
   faqData?: any;
   breadcrumbs?: any;
+  isHomePage?: boolean;
 }
 
 const {
@@ -45,8 +47,10 @@ const {
   noindex = false,
   articleData,
   productData,
+  serviceData,
   faqData,
-  breadcrumbs
+  breadcrumbs,
+  isHomePage = false
 } = Astro.props;
 
 const base = getBaseUrl(lang);
@@ -74,10 +78,14 @@ const base = getBaseUrl(lang);
   
   <SchemaOrg
     lang={lang}
+    pageTitle={title}
+    pageDescription={description}
     articleData={articleData}
     productData={productData}
+    serviceData={serviceData}
     faqData={faqData}
     breadcrumbs={breadcrumbs}
+    isHomePage={isHomePage}
   />
   
   <!-- Preconnect to external resources -->

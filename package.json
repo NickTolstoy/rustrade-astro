@@ -11,12 +11,14 @@
     "astro": "astro"
   },
   "dependencies": {
+    "@astrojs/node": "^8.3.4",
+    "@astrojs/sitemap": "^3.2.0",
     "astro": "^4.16.0",
-    "@astrojs/sitemap": "^3.2.0"
+    "nodemailer": "^7.0.11"
   },
   "devDependencies": {
     "@types/node": "^20.0.0",
+    "@types/nodemailer": "^7.0.4",
     "typescript": "^5.0.0"
   }
 }
-

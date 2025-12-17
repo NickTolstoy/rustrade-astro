@@ -31,9 +31,12 @@ const faqItems = [
 
 <BaseLayout 
   lang={lang} 
-  title={t('nav.contacts', lang)}
-  description="Контакты компании РУСТРЕЙД"
+  title="Контакты РУСТРЕЙД — телефон, адрес, email"
+  description="Контакты компании РУСТРЕЙД: телефон +7 (499) 707-51-72, email info@rustrade.pro. Офисы в Москве и Перми. Свяжитесь с нами для консультации по паровым турбинам и энергетическому оборудованию."
+  keywords="контакты РУСТРЕЙД, телефон РУСТРЕЙД, адрес РУСТРЕЙД, email, связаться с РУСТРЕЙД"
   activeMenu={t('nav.contacts', lang)}
+  faqData={faqItems}
+  breadcrumbs={[{ name: 'Контакты', url: '/contacts' }]}
 >
   <Breadcrumbs items={[{ label: 'Контакты' }]} />
 

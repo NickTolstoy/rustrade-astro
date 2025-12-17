@@ -1,0 +1,2113 @@
+---
+import type { Lang } from '@/i18n';
+import { getBaseUrl } from '@/i18n';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Breadcrumbs from '@/components/Breadcrumbs.astro';
+import CtaFaq from '@/components/CtaFaq.astro';
+import Faq from '@/components/Faq.astro';
+import Partners from '@/components/Partners.astro';
+
+const lang: Lang = 'en';
+const base = getBaseUrl(lang);
+
+const faqItems = [
+  {
+    question: "What types of blades do you manufacture?",
+    answer: "We manufacture all types of turbine blades: rotor, guide and nozzle blades for steam and gas turbines. We work with customer drawings and samples, and also perform reverse engineering."
+  },
+  {
+    question: "For which turbine brands do you manufacture blades?",
+    answer: "We have experience manufacturing blades for turbines from leading manufacturers: Siemens, GE, Howden, Skoda, Ekol, Alstom Power, Ansaldo Energia, KTZ and others. We accept orders based on existing customer drawings."
+  },
+  {
+    question: "What are the manufacturing lead times for blades?",
+    answer: "Lead times depend on complexity, quantity and production workload. Standard lead times are 4 to 12 weeks. Exact terms are agreed individually upon contract signing."
+  },
+  {
+    question: "Do you apply protective coatings to blades?",
+    answer: "Yes, we offer services for applying modern protective coatings that increase corrosion and erosion resistance of blades, significantly extending their service life."
+  },
+  {
+    question: "What materials are used in manufacturing?",
+    answer: "We use a wide range of materials: heat-resistant steels (15Kh11MF, 15Kh12VNMF, 20Kh13), austenitic alloys (09Kh14N19V2BR1, KhN35VT), nickel superalloys (KhN70VMYuT, ZhS6K-VI) for operation at temperatures up to 950°C."
+  }
+];
+
+const services = [
+  {
+    title: 'Blade manufacturing to customer sample',
+    description: 'Using modern CNC machines and strict quality control requirements, we manufacture blades for virtually all leading manufacturers based on existing Customer drawings.'
+  },
+  {
+    title: 'Protective coating application',
+    description: 'Application of modern protective coatings on blades to increase their corrosion and erosion resistance and extend service life.'
+  },
+  {
+    title: 'Reverse engineering',
+    description: 'Recreation of blade design from existing samples while preserving all characteristics and improving operational properties.'
+  }
+];
+
+const manufacturingSteps = [
+  {
+    step: 'First stage',
+    title: 'Design',
+    description: 'Development of 3D blade model considering all requirements, performing aerodynamic calculations and strength analysis',
+    image: '/img/lopatki/large_1.jpg'
+  },
+  {
+    step: 'Second stage',
+    title: 'Blank casting',
+    description: 'Investment casting with ceramic cores providing high geometry accuracy and metal quality',
+    image: '/img/lopatki/0a6dc3f1e4ba84c3fd72fa87c9bf11ff.jpg'
+  },
+  {
+    step: 'Third stage',
+    title: 'Machining',
+    description: 'Precision machining on 5-axis CNC machines ensuring high accuracy of geometric parameters',
+    image: '/img/lopatki/turbine-blade-machining.jpg'
+  },
+  {
+    step: 'Fourth stage',
+    title: 'Heat treatment and coatings',
+    description: 'Special heat treatment modes and protective coating application to improve operational characteristics',
+    image: '/img/lopatki/1a.jpg'
+  }
+];
+
+const materials = [
+  {
+    title: 'Heat-resistant steels',
+    description: '15Kh11MF, 15Kh12VNMF, 20Kh13, 08Kh13 and 12Kh13 for operation at temperatures up to 540°C',
+    icon: '/img/lopatki/icons/fireproof_5321241.png'
+  },
+  {
+    title: 'Austenitic alloys',
+    description: '09Kh14N19V2BR1, KhN35VT, KhN35VTK for operation at temperatures up to 700°C',
+    icon: '/img/lopatki/icons/nuts_2194574.png'
+  },
+  {
+    title: 'Nickel superalloys',
+    description: 'KhN70VMYuT, KhN80TBYu, ChS70-VI, ZhS6K-VI for operation at temperatures up to 950°C',
+    icon: '/img/lopatki/icons/nickel_5937012.png'
+  }
+];
+
+const advantages = [
+  {
+    title: 'High Quality',
+    description: 'We use advanced technologies and materials ensuring durability and reliability of blades',
+    icon: '/img/lopatki/icons/like_6016641.png'
+  },
+  {
+    title: 'Modern Equipment',
+    description: 'Production is equipped with high-precision equipment from leading global manufacturers',
+    icon: '/img/lopatki/icons/industrial-robot_9837143.png'
+  },
+  {
+    title: 'Standards Compliance',
+    description: 'All products meet GOST, ISO and international quality standards requirements',
+    icon: '/img/lopatki/icons/eac_17379530.png'
+  },
+  {
+    title: 'Deadline Compliance',
+    description: 'Strict adherence to agreed manufacturing and delivery deadlines',
+    icon: '/img/lopatki/icons/long-term_9966603.png'
+  }
+];
+
+const stats = [
+  { value: 8, label: 'Completed projects' },
+  { value: 10, label: 'Regular clients' },
+  { value: 5, label: 'Years of experience' },
+  { value: 25, label: 'Leading specialists' }
+];
+---
+
+<BaseLayout 
+  lang={lang} 
+  title="Turbine Blades — Manufacturing and Supply | RUSTRADE"
+  description="Manufacturing high-precision turbine blades for steam turbines. Reverse engineering, protective coating application, work with Siemens, GE, MHI. Quality guarantee."
+  keywords="turbine blades, blade manufacturing, reverse engineering blades, steam turbine blades, RUSTRADE"
+  image="/img/blades/blades_hero.webp"
+  faqData={faqItems}
+  breadcrumbs={[{ name: 'Turbine Blades', url: '/eng/blades' }]}
+  productData={{
+    name: 'Turbine Blades',
+    description: 'Manufacturing high-precision turbine blades for industrial steam turbines',
+    image: '/img/blades/blades_hero.webp',
+    category: 'Turbine spare parts'
+  }}
+>
+  <Breadcrumbs items={[{ label: 'Turbine Blades' }]} lang={lang} />
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-content">
+      <h1>Turbine Blade Manufacturing for Industrial Turbines</h1>
+      <p>Professional manufacturing of high-precision blades for industrial turbines using advanced technologies and materials</p>
+      <div class="hero-buttons">
+        <button class="button-47" data-modal="blades">
+          <span class="button-47__circle">
+            <svg class="button-47__icon-svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path class="icon-blades" d="M10.827 16.379a6.082 6.082 0 0 1-8.618-7.002l5.412 1.45a6.082 6.082 0 0 1 7.002-8.618l-1.45 5.412a6.082 6.082 0 0 1 8.618 7.002l-5.412-1.45a6.082 6.082 0 0 1-7.002 8.618l1.45-5.412Z"/>
+              <circle cx="12" cy="12" r="2"/>
+            </svg>
+          </span>
+          <span class="button-47__text">Order Manufacturing</span>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section class="section about-blades">
+    <div class="section-header">
+      <h2>About Turbine Blades and Their Importance in Energy</h2>
+    </div>
+    <div class="about-content">
+      <div class="about-text">
+        <p>
+          Turbine blades are one of the key components of power plants, directly converting thermal or kinetic energy of the working fluid (steam) into mechanical rotational energy of the rotor. The reliability and efficiency of the entire turbine is largely determined by the quality of blade manufacturing.
+        </p>
+        <p>
+          RUSTRADE LLC has experience in manufacturing blades for leading brands such as <strong>Siemens, GE, Howden, Skoda, Ekol, Alstom Power, Ansaldo Energia, KTZ</strong>, using modern production technologies that reduce machining volume by four times and improve properties of the final product through partnership with Russian and foreign turbine manufacturers.
+        </p>
+        <p>
+          We provide our customers with reliable and efficient solutions with significant economic advantage compared to Russian or European counterparts.
+        </p>
+      </div>
+      <div class="about-image">
+        <img src="/img/lopatki/aaa1d5d4-1f59-405a-b903-20fff92a50f8.webp" alt="Turbine blades" />
+      </div>
+    </div>
+  </section>
+
+  <!-- Services Section -->
+  <section class="section services">
+    <div class="section-header">
+      <h2>Services</h2>
+      <p>Comprehensive approach to turbine blade manufacturing ensuring high quality and reliability</p>
+    </div>
+    <div class="services-grid">
+      {services.map(service => (
+        <div class="service-card">
+          <h3>{service.title}</h3>
+          <p>{service.description}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- Manufacturing Process Section -->
+  <section class="section stages">
+    <div class="section-header">
+      <h2>Blade Manufacturing Process</h2>
+      <p>Modern production technologies ensure high quality and reliability of turbine blades</p>
+    </div>
+
+    <div class="news">
+      <div class="large_news_card">
+        <div class="news_info">
+          <div class="news_card_head">
+            <span class="news_category">{manufacturingSteps[0].step}</span>
+            <img src="/img/main/news_icons/company_news.svg" alt="icon" />
+          </div>
+          <h4>{manufacturingSteps[0].title}</h4>
+          <div class="news_brief">
+            <p>{manufacturingSteps[0].description}</p>
+          </div>
+        </div>
+        <div class="news_img_area">
+          <img src={manufacturingSteps[0].image} alt={manufacturingSteps[0].title} loading="lazy" />
+        </div>
+      </div>
+
+      <div class="news_cards">
+        <div class="news_card">
+          <div class="news_card_head">
+            <span class="news_category">{manufacturingSteps[1].step}</span>
+            <img src="/img/main/news_icons/company_news.svg" alt="icon" />
+          </div>
+          <div class="news_card_content">
+            <div class="news_brief">
+              <h4>{manufacturingSteps[1].title}</h4>
+              <p>{manufacturingSteps[1].description}</p>
+            </div>
+            <div class="news_img_area">
+              <img src={manufacturingSteps[1].image} alt={manufacturingSteps[1].title} loading="lazy" />
+            </div>
+          </div>
+        </div>
+
+        <div class="news_card">
+          <div class="news_card_head">
+            <span class="news_category">{manufacturingSteps[2].step}</span>
+            <img src="/img/main/news_icons/company_news.svg" alt="icon" />
+          </div>
+          <div class="news_card_content">
+            <div class="news_brief">
+              <h4>{manufacturingSteps[2].title}</h4>
+              <p>{manufacturingSteps[2].description}</p>
+            </div>
+            <div class="news_img_area">
+              <img src={manufacturingSteps[2].image} alt={manufacturingSteps[2].title} loading="lazy" />
+            </div>
+          </div>
+        </div>
+
+        <div class="fourth_stage_card">
+          <div class="fourth_stage_header">
+            <span class="stage_label">{manufacturingSteps[3].step}</span>
+            <img src="/img/main/news_icons/company_news.svg" alt="icon" class="stage_icon" />
+          </div>
+          <div class="fourth_stage_content">
+            <div class="fourth_stage_text">
+              <h4>{manufacturingSteps[3].title}</h4>
+              <p>{manufacturingSteps[3].description}</p>
+            </div>
+            <div class="fourth_stage_image">
+              <img src={manufacturingSteps[3].image} alt={manufacturingSteps[3].title} loading="lazy" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats Section -->
+  <section class="section stats">
+    <div class="stats-grid">
+      {stats.map(stat => (
+        <div class="stat-card">
+          <div class="stat-value" data-value={stat.value}>0</div>
+          <div class="stat-label">{stat.label}</div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- Materials Section -->
+  <section class="section materials">
+    <div class="section-header">
+      <h2>Blade Manufacturing Materials</h2>
+      <p>Using high-quality materials ensures reliability and durability of turbine blades</p>
+    </div>
+    <div class="materials-grid">
+      {materials.map(material => (
+        <div class="material-card">
+          <div class="material-icon">
+            <img src={material.icon} alt={material.title} />
+          </div>
+          <h3>{material.title}</h3>
+          <p>{material.description}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- Technical Features Section with 3D Turbine -->
+  <section class="section tech-features-infographic">
+    <!-- 3D Turbine as full background -->
+    <div class="turbine-3d-container" id="turbine-canvas"></div>
+    
+    <!-- Content overlay -->
+    <div class="tech-features-content">
+      <div class="section-header">
+        <h2>Technical Specifications</h2>
+        <p>Professional blade manufacturing using advanced technologies and materials</p>
+      </div>
+      
+      <!-- Feature Cards - vertical stack on left -->
+      <div class="tech-features-cards">
+        <div class="infographic-card">
+          <div class="card-icon">
+            <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M24 4L4 14V34L24 44L44 34V14L24 4Z" stroke="currentColor" stroke-width="2"/>
+              <path d="M24 18L14 23V33L24 38L34 33V23L24 18Z" fill="currentColor" opacity="0.2"/>
+              <path d="M24 4V18M4 14L24 24M44 14L24 24" stroke="currentColor" stroke-width="2"/>
+              <circle cx="24" cy="24" r="6" stroke="currentColor" stroke-width="2"/>
+              <path d="M21 24L23 26L27 22" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <h3>High Quality</h3>
+          <p>Precision machining on 5-axis CNC machines, ensuring profile geometry accuracy up to 0.01 mm</p>
+        </div>
+        
+        <div class="infographic-card">
+          <div class="card-icon">
+            <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="24" cy="24" r="18" stroke="currentColor" stroke-width="2"/>
+              <path d="M24 12V24L32 28" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+              <path d="M38 24C38 31.732 31.732 38 24 38" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+              <path d="M12 18L8 14M36 18L40 14M24 6V10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+              <circle cx="24" cy="24" r="4" fill="currentColor" opacity="0.3"/>
+            </svg>
+          </div>
+          <h3>Enhanced Efficiency</h3>
+          <p>Optimized aerodynamic blade profiles that increase turbine efficiency by 2-3% compared to original</p>
+        </div>
+        
+        <div class="infographic-card">
+          <div class="card-icon">
+            <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M24 4L6 12V24C6 35 24 44 24 44C24 44 42 35 42 24V12L24 4Z" stroke="currentColor" stroke-width="2"/>
+              <path d="M24 10L12 16V24C12 31 24 38 24 38C24 38 36 31 36 24V16L24 10Z" fill="currentColor" opacity="0.15"/>
+              <path d="M17 24L22 29L31 20" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <h3>Operational Reliability</h3>
+          <p>Use of heat-resistant alloys and protective coatings ensures blade service life of over 100,000 operating hours</p>
+        </div>
+        
+        <div class="infographic-card">
+          <div class="card-icon">
+            <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 8c-3.3 0-6 2.7-6 6s2.7 6 6 6c1.1 0 2.1-.3 3-.8L28 32.2c-.5.9-.8 1.9-.8 3 0 3.3 2.7 6 6 6s6-2.7 6-6-2.7-6-6-6c-1.1 0-2.1.3-3 .8L17.2 17c.5-.9.8-1.9.8-3 0-3.3-2.7-6-6-6z" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="currentColor" fill-opacity="0.15"/>
+              <circle cx="12" cy="14" r="2.5" fill="currentColor"/>
+              <circle cx="33.2" cy="35.2" r="2.5" fill="currentColor"/>
+            </svg>
+          </div>
+          <h3>Full Service Support</h3>
+          <p>Reverse engineering, set balancing, protective coating application and technical support at all stages</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Advantages Section -->
+  <section class="section advantages">
+    <div class="section-header">
+      <h2>Advantages of Working With Us</h2>
+      <p>Professional team of engineers and technologists with extensive experience in turbine blade manufacturing</p>
+    </div>
+    <div class="advantages-grid">
+      {advantages.map(adv => (
+        <div class="advantage-card">
+          <div class="advantage-icon">
+            <img src={adv.icon} alt={adv.title} />
+          </div>
+          <h3>{adv.title}</h3>
+          <p>{adv.description}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- Partners Section -->
+  <Partners lang={lang} />
+
+  <Faq items={faqItems} lang={lang} />
+
+  <CtaFaq lang={lang} />
+</BaseLayout>
+
+<script>
+  function animateCounters() {
+    const counters = document.querySelectorAll('.stat-value[data-value]');
+    
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const target = entry.target as HTMLElement;
+          const endValue = parseInt(target.getAttribute('data-value') || '0');
+          const duration = 2000;
+          const startTime = performance.now();
+
+          function update(currentTime: number) {
+            const elapsed = currentTime - startTime;
+            const progress = Math.min(elapsed / duration, 1);
+            const ease = 1 - Math.pow(1 - progress, 4);
+            const current = Math.floor(endValue * ease);
+            target.textContent = current.toString();
+
+            if (progress < 1) {
+              requestAnimationFrame(update);
+            } else {
+              target.textContent = endValue.toString();
+            }
+          }
+          requestAnimationFrame(update);
+          observer.unobserve(target);
+        }
+      });
+    }, { threshold: 0.3 });
+
+    counters.forEach(counter => observer.observe(counter));
+  }
+
+  // 3D Realistic Steel Turbine
+  async function init3DTurbine() {
+    const container = document.getElementById('turbine-canvas');
+    if (!container) return;
+    
+    const THREE = await import('https://unpkg.com/three@0.153.0/build/three.module.js');
+    const { OrbitControls } = await import('https://unpkg.com/three@0.153.0/examples/jsm/controls/OrbitControls.js');
+    const { GPUComputationRenderer } = await import('https://unpkg.com/three@0.153.0/examples/jsm/misc/GPUComputationRenderer.js');
+    
+    const scene = new THREE.Scene();
+    scene.background = null;
+    
+    const width = container.clientWidth;
+    const height = container.clientHeight;
+    
+    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+    renderer.setSize(width, height);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.shadowMap.enabled = true;
+    renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+    renderer.toneMapping = THREE.ACESFilmicToneMapping;
+    renderer.toneMappingExposure = 1.2;
+    renderer.setClearColor(0x000000, 0);
+    container.appendChild(renderer.domElement);
+    
+    const camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 100);
+    camera.position.set(0, 3, 14);
+    camera.lookAt(0, 0, 0);
+    
+    const controls = new OrbitControls(camera, renderer.domElement);
+    controls.enableDamping = true;
+    controls.dampingFactor = 0.05;
+    controls.target.set(0, 0, 0);
+    controls.enableZoom = false;
+    controls.enablePan = false;
+    
+    // Adjust position based on screen width
+    const isMobile = width < 400;
+    scene.position.x = isMobile ? 4 - 0.75 : 4;
+    scene.rotation.y = Math.PI;
+    scene.scale.setScalar(1.5);
+    
+    // Steel Materials Library - balanced colors
+    const steelMaterials = {
+      polishedSteel: new THREE.MeshStandardMaterial({
+        color: 0xB0B0B0,
+        metalness: 0.6,
+        roughness: 0.25
+      }),
+      brushedSteel: new THREE.MeshStandardMaterial({
+        color: 0x909090,
+        metalness: 0.5,
+        roughness: 0.4
+      }),
+      darkSteel: new THREE.MeshStandardMaterial({
+        color: 0x606060,
+        metalness: 0.4,
+        roughness: 0.5
+      }),
+      bladeSteel: new THREE.MeshStandardMaterial({
+        color: 0xA8A8A8,
+        metalness: 0.55,
+        roughness: 0.3
+      }),
+      chromeSteel: new THREE.MeshStandardMaterial({
+        color: 0xC8C8C8,
+        metalness: 0.7,
+        roughness: 0.15
+      })
+    };
+    
+    // Enhanced Lighting Setup for steel look
+    const ambient = new THREE.AmbientLight(0xffffff, 0.8);
+    scene.add(ambient);
+    
+    const keyLight = new THREE.DirectionalLight(0xffffff, 2.0);
+    keyLight.position.set(8, 12, 10);
+    keyLight.castShadow = true;
+    keyLight.shadow.mapSize.width = 2048;
+    keyLight.shadow.mapSize.height = 2048;
+    scene.add(keyLight);
+    
+    const fillLight = new THREE.DirectionalLight(0xaabbcc, 1.0);
+    fillLight.position.set(-8, 4, -6);
+    scene.add(fillLight);
+    
+    const rimLight = new THREE.DirectionalLight(0xccddff, 1.2);
+    rimLight.position.set(-3, -3, 8);
+    scene.add(rimLight);
+    
+    const topLight = new THREE.DirectionalLight(0xffffff, 0.8);
+    topLight.position.set(0, 15, 0);
+    scene.add(topLight);
+    
+    const backLight = new THREE.DirectionalLight(0xffffff, 0.6);
+    backLight.position.set(0, 5, -10);
+    scene.add(backLight);
+    
+    function createTurbineStage(params) {
+      const group = new THREE.Group();
+      group.position.x = params.xOffset;
+      
+      // Main disc with hub details
+      const discGeometry = new THREE.CylinderGeometry(params.radius, params.radius * 0.95, params.thickness, 128);
+      discGeometry.rotateZ(Math.PI / 2);
+      const discMesh = new THREE.Mesh(discGeometry, steelMaterials.brushedSteel.clone());
+      discMesh.castShadow = true;
+      discMesh.receiveShadow = true;
+      group.add(discMesh);
+      
+      // Inner hub ring
+      const hubRingGeo = new THREE.TorusGeometry(params.radius * 0.4, 0.05, 16, 64);
+      hubRingGeo.rotateY(Math.PI / 2);
+      const hubRingMesh = new THREE.Mesh(hubRingGeo, steelMaterials.chromeSteel);
+      hubRingMesh.position.x = params.thickness / 2 + 0.02;
+      group.add(hubRingMesh);
+      
+      const hubRingMesh2 = hubRingMesh.clone();
+      hubRingMesh2.position.x = -params.thickness / 2 - 0.02;
+      group.add(hubRingMesh2);
+      
+      // Add bolts/rivets on disc face
+      const boltCount = 12;
+      for (let i = 0; i < boltCount; i++) {
+        const angle = (2 * Math.PI * i) / boltCount;
+        const boltRadius = params.radius * 0.7;
+        
+        const boltGeo = new THREE.CylinderGeometry(0.03, 0.03, 0.08, 8);
+        boltGeo.rotateZ(Math.PI / 2);
+        const boltMesh = new THREE.Mesh(boltGeo, steelMaterials.chromeSteel);
+        boltMesh.position.set(
+          params.thickness / 2 + 0.04,
+          Math.cos(angle) * boltRadius,
+          Math.sin(angle) * boltRadius
+        );
+        group.add(boltMesh);
+        
+        // Bolt head
+        const boltHeadGeo = new THREE.CylinderGeometry(0.045, 0.045, 0.02, 6);
+        boltHeadGeo.rotateZ(Math.PI / 2);
+        const boltHeadMesh = new THREE.Mesh(boltHeadGeo, steelMaterials.darkSteel);
+        boltHeadMesh.position.set(
+          params.thickness / 2 + 0.09,
+          Math.cos(angle) * boltRadius,
+          Math.sin(angle) * boltRadius
+        );
+        group.add(boltHeadMesh);
+      }
+      
+      // Create rectangular blades
+      for (let i = 0; i < params.bladeCount; i++) {
+        const angle = (2 * Math.PI * i) / params.bladeCount;
+        
+        // Simple rectangular blade using BoxGeometry
+        const bladeGeo = new THREE.BoxGeometry(params.bladeThickness, params.bladeLength, params.bladeWidth);
+        
+        // Alternate blade coloring for visual depth
+        const bladeMat = (i % 3 === 0) ? steelMaterials.bladeSteel.clone() : 
+                         (i % 3 === 1) ? steelMaterials.polishedSteel.clone() : 
+                         steelMaterials.brushedSteel.clone();
+        
+        const bladeMesh = new THREE.Mesh(bladeGeo, bladeMat);
+        bladeMesh.castShadow = true;
+        bladeMesh.receiveShadow = true;
+        
+        // Position blade radially outward from disc
+        const radial = new THREE.Vector3(0, Math.cos(angle), Math.sin(angle));
+        const offset = params.radius + params.bladeLength / 2;
+        bladeMesh.position.copy(radial.clone().multiplyScalar(offset));
+        
+        // Rotate blade to face outward
+        const quaternion = new THREE.Quaternion();
+        quaternion.setFromUnitVectors(new THREE.Vector3(0, 1, 0), radial);
+        bladeMesh.quaternion.copy(quaternion);
+        
+        group.add(bladeMesh);
+      }
+      
+      return group;
+    }
+    
+    // Stage configurations
+    const stages = [
+      { radius: 2.2, thickness: 0.4, bladeCount: 52, bladeLength: 0.85, bladeWidth: 0.12, bladeThickness: 0.08, xOffset: -1.4 },
+      { radius: 2.0, thickness: 0.38, bladeCount: 48, bladeLength: 0.75, bladeWidth: 0.11, bladeThickness: 0.07, xOffset: 0.0 },
+      { radius: 1.8, thickness: 0.35, bladeCount: 44, bladeLength: 0.65, bladeWidth: 0.10, bladeThickness: 0.065, xOffset: 1.2 },
+    ];
+    
+    // Create main shaft with details
+    const totalLength = stages[stages.length - 1].xOffset - stages[0].xOffset + 2.5;
+    const shaftGroup = new THREE.Group();
+    
+    // Main shaft body
+    const shaftGeo = new THREE.CylinderGeometry(0.45, 0.45, totalLength, 64);
+    shaftGeo.rotateZ(Math.PI / 2);
+    const shaftMesh = new THREE.Mesh(shaftGeo, steelMaterials.polishedSteel);
+    shaftMesh.castShadow = true;
+    shaftMesh.receiveShadow = true;
+    shaftMesh.position.x = (stages[0].xOffset + stages[stages.length - 1].xOffset) / 2;
+    shaftGroup.add(shaftMesh);
+    
+    // Shaft journals (bearing surfaces)
+    const journalPositions = [-2.0, 2.0];
+    journalPositions.forEach(pos => {
+      const journalGeo = new THREE.CylinderGeometry(0.52, 0.52, 0.3, 32);
+      journalGeo.rotateZ(Math.PI / 2);
+      const journalMesh = new THREE.Mesh(journalGeo, steelMaterials.chromeSteel);
+      journalMesh.position.x = pos;
+      journalMesh.castShadow = true;
+      shaftGroup.add(journalMesh);
+      
+      // Journal rings
+      const ringGeo = new THREE.TorusGeometry(0.53, 0.03, 12, 32);
+      ringGeo.rotateY(Math.PI / 2);
+      const ringMesh1 = new THREE.Mesh(ringGeo, steelMaterials.darkSteel);
+      ringMesh1.position.x = pos + 0.15;
+      shaftGroup.add(ringMesh1);
+      const ringMesh2 = ringMesh1.clone();
+      ringMesh2.position.x = pos - 0.15;
+      shaftGroup.add(ringMesh2);
+    });
+    
+    // Shaft grooves between stages
+    stages.forEach((stage, idx) => {
+      if (idx < stages.length - 1) {
+        const midX = (stage.xOffset + stages[idx + 1].xOffset) / 2;
+        const grooveGeo = new THREE.TorusGeometry(0.46, 0.02, 8, 32);
+        grooveGeo.rotateY(Math.PI / 2);
+        const grooveMesh = new THREE.Mesh(grooveGeo, steelMaterials.darkSteel);
+        grooveMesh.position.x = midX;
+        shaftGroup.add(grooveMesh);
+      }
+    });
+    
+    scene.add(shaftGroup);
+    
+    // Create stage groups
+    const stageGroups = [];
+    stages.forEach((params, idx) => {
+      const stageGroup = createTurbineStage(params);
+      stageGroup.userData.isRotatingStage = true;
+      stageGroup.userData.stageIndex = idx;
+      scene.add(stageGroup);
+      stageGroups.push(stageGroup);
+    });
+    
+    const simplexNoiseDerivatives4 = `
+vec4 mod289(vec4 x) { return x - floor(x * (1.0 / 289.0)) * 289.0; }
+float mod289(float x) { return x - floor(x * (1.0 / 289.0)) * 289.0; }
+vec4 permute(vec4 x) { return mod289(((x*34.0)+1.0)*x); }
+float permute(float x) { return mod289(((x*34.0)+1.0)*x); }
+vec4 taylorInvSqrt(vec4 r) { return 1.79284291400159 - 0.85373472095314 * r; }
+float taylorInvSqrt(float r) { return 1.79284291400159 - 0.85373472095314 * r; }
+vec4 grad4(float j, vec4 ip) {
+  const vec4 ones = vec4(1.0, 1.0, 1.0, -1.0);
+  vec4 p,s;
+  p.xyz = floor( fract (vec3(j) * ip.xyz) * 7.0) * ip.z - 1.0;
+  p.w = 1.5 - dot(abs(p.xyz), ones.xyz);
+  s = vec4(lessThan(p, vec4(0.0)));
+  p.xyz = p.xyz + (s.xyz*2.0 - 1.0) * s.www;
+  return p;
+}
+#define F4 0.309016994374947451
+vec4 snoise4(vec4 v) {
+  const vec4 C = vec4(0.138196601125011, 0.276393202250021, 0.414589803375032, -0.447213595499958);
+  vec4 i = floor(v + dot(v, vec4(F4)));
+  vec4 x0 = v - i + dot(i, C.xxxx);
+  vec4 i0;
+  vec3 isX = step(x0.yzw, x0.xxx);
+  vec3 isYZ = step(x0.zww, x0.yyz);
+  i0.x = isX.x + isX.y + isX.z;
+  i0.yzw = 1.0 - isX;
+  i0.y += isYZ.x + isYZ.y;
+  i0.zw += 1.0 - isYZ.xy;
+  i0.z += isYZ.z;
+  i0.w += 1.0 - isYZ.z;
+  vec4 i3 = clamp(i0, 0.0, 1.0);
+  vec4 i2 = clamp(i0 - 1.0, 0.0, 1.0);
+  vec4 i1 = clamp(i0 - 2.0, 0.0, 1.0);
+  vec4 x1 = x0 - i1 + C.xxxx;
+  vec4 x2 = x0 - i2 + C.yyyy;
+  vec4 x3 = x0 - i3 + C.zzzz;
+  vec4 x4 = x0 + C.wwww;
+  i = mod289(i);
+  float j0 = permute(permute(permute(permute(i.w) + i.z) + i.y) + i.x);
+  vec4 j1 = permute(permute(permute(permute(i.w + vec4(i1.w, i2.w, i3.w, 1.0)) + i.z + vec4(i1.z, i2.z, i3.z, 1.0)) + i.y + vec4(i1.y, i2.y, i3.y, 1.0)) + i.x + vec4(i1.x, i2.x, i3.x, 1.0));
+  vec4 ip = vec4(1.0/294.0, 1.0/49.0, 1.0/7.0, 0.0);
+  vec4 p0 = grad4(j0, ip);
+  vec4 p1 = grad4(j1.x, ip);
+  vec4 p2 = grad4(j1.y, ip);
+  vec4 p3 = grad4(j1.z, ip);
+  vec4 p4 = grad4(j1.w, ip);
+  vec4 norm = taylorInvSqrt(vec4(dot(p0,p0), dot(p1,p1), dot(p2,p2), dot(p3,p3)));
+  p0 *= norm.x; p1 *= norm.y; p2 *= norm.z; p3 *= norm.w;
+  p4 *= taylorInvSqrt(dot(p4,p4));
+  vec3 values0 = vec3(dot(p0, x0), dot(p1, x1), dot(p2, x2));
+  vec2 values1 = vec2(dot(p3, x3), dot(p4, x4));
+  vec3 m0 = max(0.5 - vec3(dot(x0,x0), dot(x1,x1), dot(x2,x2)), 0.0);
+  vec2 m1 = max(0.5 - vec2(dot(x3,x3), dot(x4,x4)), 0.0);
+  vec3 temp0 = -6.0 * m0 * m0 * values0;
+  vec2 temp1 = -6.0 * m1 * m1 * values1;
+  vec3 mmm0 = m0 * m0 * m0;
+  vec2 mmm1 = m1 * m1 * m1;
+  float dx = temp0[0] * x0.x + temp0[1] * x1.x + temp0[2] * x2.x + temp1[0] * x3.x + temp1[1] * x4.x + mmm0[0] * p0.x + mmm0[1] * p1.x + mmm0[2] * p2.x + mmm1[0] * p3.x + mmm1[1] * p4.x;
+  float dy = temp0[0] * x0.y + temp0[1] * x1.y + temp0[2] * x2.y + temp1[0] * x3.y + temp1[1] * x4.y + mmm0[0] * p0.y + mmm0[1] * p1.y + mmm0[2] * p2.y + mmm1[0] * p3.y + mmm1[1] * p4.y;
+  float dz = temp0[0] * x0.z + temp0[1] * x1.z + temp0[2] * x2.z + temp1[0] * x3.z + temp1[1] * x4.z + mmm0[0] * p0.z + mmm0[1] * p1.z + mmm0[2] * p2.z + mmm1[0] * p3.z + mmm1[1] * p4.z;
+  float dw = temp0[0] * x0.w + temp0[1] * x1.w + temp0[2] * x2.w + temp1[0] * x3.w + temp1[1] * x4.w + mmm0[0] * p0.w + mmm0[1] * p1.w + mmm0[2] * p2.w + mmm1[0] * p3.w + mmm1[1] * p4.w;
+  return vec4(dx, dy, dz, dw) * 49.0;
+}
+`;
+
+    const curlNoise = `
+${simplexNoiseDerivatives4}
+vec3 curl(vec3 p, float noiseTime, float persistence) {
+  vec4 xNoisePotentialDerivatives = vec4(0.0);
+  vec4 yNoisePotentialDerivatives = vec4(0.0);
+  vec4 zNoisePotentialDerivatives = vec4(0.0);
+  for (int i = 0; i < 3; ++i) {
+    float twoPowI = pow(2.0, float(i));
+    float scale = 0.5 * twoPowI * pow(persistence, float(i));
+    xNoisePotentialDerivatives += snoise4(vec4(p * twoPowI, noiseTime)) * scale;
+    yNoisePotentialDerivatives += snoise4(vec4((p + vec3(123.4, 129845.6, -1239.1)) * twoPowI, noiseTime)) * scale;
+    zNoisePotentialDerivatives += snoise4(vec4((p + vec3(-9519.0, 9051.0, -123.0)) * twoPowI, noiseTime)) * scale;
+  }
+  return vec3(
+    zNoisePotentialDerivatives[1] - yNoisePotentialDerivatives[2],
+    xNoisePotentialDerivatives[2] - zNoisePotentialDerivatives[0],
+    yNoisePotentialDerivatives[0] - xNoisePotentialDerivatives[1]
+  );
+}
+`;
+
+    const PARTICLE_COUNT = 90;
+    const gpuCompute = new GPUComputationRenderer(PARTICLE_COUNT, PARTICLE_COUNT, renderer);
+    
+    const dtPosition = gpuCompute.createTexture();
+    const dtDefaultPosition = gpuCompute.createTexture();
+    
+    const posArray = dtPosition.image.data;
+    const defaultPosArray = dtDefaultPosition.image.data;
+    
+    for (let i = 0; i < posArray.length; i += 4) {
+      defaultPosArray[i] = Math.random();
+      defaultPosArray[i + 1] = Math.random();
+      defaultPosArray[i + 2] = Math.random();
+      defaultPosArray[i + 3] = Math.random();
+      
+      const angle = defaultPosArray[i + 3] * Math.PI * 2;
+      const radius = 2.5 + defaultPosArray[i] * 0.8;
+      const axial = defaultPosArray[i + 1] * 2.3 - 1.15;
+      
+      posArray[i] = axial;
+      posArray[i + 1] = Math.cos(angle) * radius;
+      posArray[i + 2] = Math.sin(angle) * radius;
+      posArray[i + 3] = Math.random();
+    }
+    
+    const positionFragmentShader = `
+uniform sampler2D textureDefaultPosition;
+uniform float time;
+uniform float speed;
+uniform float dieSpeed;
+uniform float curlSize;
+uniform float turbineRotation;
+
+${curlNoise}
+
+void main() {
+  vec2 uv = gl_FragCoord.xy / resolution.xy;
+  vec4 positionInfo = texture2D(texturePosition, uv);
+  vec3 position = positionInfo.xyz;
+  float life = positionInfo.a - dieSpeed;
+  
+  if (life < 0.0) {
+    vec4 defaultPos = texture2D(textureDefaultPosition, uv);
+    // Spawn at blade tip radius with rotation - tighter spiral start
+    float spawnAngle = defaultPos.w * 6.28318 + turbineRotation * 3.0;
+    float radius = 2.6 + defaultPos.x * 0.6; // At blade tips
+    // Spawn near the turbine stages
+    float stageX = -1.2 + defaultPos.y * 2.4; // Spread across stages
+    position.x = stageX;
+    position.y = cos(spawnAngle) * radius;
+    position.z = sin(spawnAngle) * radius;
+    life = 0.5 + fract(defaultPos.z * 21.4131 + time * 0.12);
+  } else {
+    // Strong curl noise for visible swirling effect
+    vec3 curlForce = curl(position * curlSize * 2.0, time * 0.4, 0.35);
+    
+    // Main exhaust direction (positive X) - slower to see spiral
+    vec3 windForce = vec3(0.08 * speed, 0.0, 0.0);
+    
+    // Strong spiral swirl effect - rotate around X axis
+    float radialDist = length(vec2(position.y, position.z));
+    if (radialDist > 0.1) {
+      vec2 radialDir = normalize(vec2(position.y, position.z));
+      // Strong tangential swirl force for visible spiral
+      float swirlStrength = 0.08 * speed * (1.0 - smoothstep(2.5, 6.0, radialDist));
+      windForce.y += -radialDir.y * swirlStrength; // Tangential Y
+      windForce.z += radialDir.x * swirlStrength;  // Tangential Z
+      
+      // Gradual expansion as particles move
+      float expandRate = 0.012 * speed * smoothstep(0.0, 3.0, position.x);
+      windForce.y += radialDir.x * expandRate;
+      windForce.z += radialDir.y * expandRate;
+    }
+    
+    position += windForce;
+    position += curlForce * speed * 0.15;
+    
+    if (position.x > 12.0) {
+      life -= dieSpeed * 2.0;
+    }
+  }
+  
+  gl_FragColor = vec4(position, life);
+}
+`;
+    
+    const positionVariable = gpuCompute.addVariable('texturePosition', positionFragmentShader, dtPosition);
+    gpuCompute.setVariableDependencies(positionVariable, [positionVariable]);
+    
+    positionVariable.material.uniforms.textureDefaultPosition = { value: dtDefaultPosition };
+    positionVariable.material.uniforms.time = { value: 0 };
+    positionVariable.material.uniforms.speed = { value: 1.0 };
+    positionVariable.material.uniforms.dieSpeed = { value: 0.008 };
+    positionVariable.material.uniforms.curlSize = { value: 0.15 };
+    positionVariable.material.uniforms.turbineRotation = { value: 0 };
+    
+    gpuCompute.init();
+    
+    const geometry = new THREE.BufferGeometry();
+    const positions = new Float32Array(PARTICLE_COUNT * PARTICLE_COUNT * 3);
+    
+    for (let i = 0; i < PARTICLE_COUNT; i++) {
+      for (let j = 0; j < PARTICLE_COUNT; j++) {
+        const idx = (i * PARTICLE_COUNT + j) * 3;
+        positions[idx] = j / PARTICLE_COUNT;
+        positions[idx + 1] = i / PARTICLE_COUNT;
+        positions[idx + 2] = 0;
+      }
+    }
+    
+    geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+    
+    const particleVertexShader = `
+      uniform sampler2D texturePosition;
+      varying float vLife;
+      varying vec3 vPosition;
+      
+      void main() {
+        vec4 positionInfo = texture2D(texturePosition, position.xy);
+        vec4 worldPosition = modelMatrix * vec4(positionInfo.xyz, 1.0);
+        vec4 mvPosition = viewMatrix * worldPosition;
+        
+        vLife = positionInfo.w;
+        vPosition = positionInfo.xyz;
+        
+        float size = smoothstep(0.0, 0.2, positionInfo.w) * smoothstep(1.0, 0.5, positionInfo.w);
+        gl_PointSize = 80.0 / length(mvPosition.xyz) * size;
+        
+        gl_Position = projectionMatrix * mvPosition;
+      }
+    `;
+    
+    const particleFragmentShader = `
+      varying float vLife;
+      varying vec3 vPosition;
+      
+      uniform vec3 color1;
+      uniform vec3 color2;
+      uniform vec3 color3;
+      
+      void main() {
+        vec2 center = gl_PointCoord - vec2(0.5);
+        float dist = length(center);
+        if (dist > 0.5) discard;
+        
+        float alpha = smoothstep(0.5, 0.1, dist) * smoothstep(0.0, 0.15, vLife) * smoothstep(1.0, 0.6, vLife);
+        
+        float t = smoothstep(1.5, 8.0, vPosition.x);
+        vec3 color = mix(color1, color2, t * 0.7);
+        color = mix(color, color3, t);
+        
+        gl_FragColor = vec4(color, alpha * 0.5);
+      }
+    `;
+    
+    // Steam particle colors - dark blue-tinted steam
+    const material = new THREE.ShaderMaterial({
+      uniforms: {
+        texturePosition: { value: null },
+        color1: { value: new THREE.Color(0x3377aa) },  // Dark cyan steam
+        color2: { value: new THREE.Color(0x2a6688) },  // Darker blue steam
+        color3: { value: new THREE.Color(0x1f4466) },  // Deep blue steam
+      },
+      vertexShader: particleVertexShader,
+      fragmentShader: particleFragmentShader,
+      transparent: true,
+      blending: THREE.AdditiveBlending,
+      depthWrite: false,
+    });
+    
+    const particles = new THREE.Points(geometry, material);
+    scene.add(particles);
+    
+    let turbineRotation = 0;
+    const clock = new THREE.Clock();
+    
+    // Mouse tracking for subtle rotation
+    let targetRotationY = 0;
+    let targetRotationZ = 0;
+    let currentRotationY = 0;
+    let currentRotationZ = 0;
+    const baseRotationY = Math.PI;
+    let isMouseOverTurbine = false;
+    
+    document.addEventListener('mousemove', (event) => {
+      const rect = container.getBoundingClientRect();
+      const isOver = event.clientX >= rect.left && event.clientX <= rect.right &&
+                     event.clientY >= rect.top && event.clientY <= rect.bottom;
+      
+      if (isOver) {
+        isMouseOverTurbine = true;
+        const mouseX = ((event.clientX - rect.left) / rect.width) * 2 - 1;
+        const mouseY = ((event.clientY - rect.top) / rect.height) * 2 - 1;
+        targetRotationY = mouseX * 0.25;
+        targetRotationZ = -mouseY * 0.15;
+      } else if (isMouseOverTurbine) {
+        isMouseOverTurbine = false;
+        targetRotationY = 0;
+        targetRotationZ = 0;
+      }
+    });
+    
+    function animate() {
+      requestAnimationFrame(animate);
+      
+      const elapsed = clock.getElapsedTime();
+      
+      // Rotate turbine stages and shaft
+      scene.traverse((obj) => {
+        if (obj.userData && obj.userData.isRotatingStage) {
+          // Middle stage rotates opposite direction
+          if (obj.userData.stageIndex === 1) {
+            obj.rotation.x -= 0.035;
+          } else {
+            obj.rotation.x += 0.035;
+          }
+        }
+      });
+      turbineRotation += 0.035;
+      shaftGroup.rotation.x += 0.035;
+      
+      // Smooth mouse-follow rotation
+      currentRotationY += (targetRotationY - currentRotationY) * 0.08;
+      currentRotationZ += (targetRotationZ - currentRotationZ) * 0.08;
+      scene.rotation.y = baseRotationY + currentRotationY;
+      scene.rotation.z = currentRotationZ;
+      
+      positionVariable.material.uniforms.time.value = elapsed;
+      positionVariable.material.uniforms.turbineRotation.value = turbineRotation;
+      
+      gpuCompute.compute();
+      
+      material.uniforms.texturePosition.value = gpuCompute.getCurrentRenderTarget(positionVariable).texture;
+      
+      // Subtle light pulsing
+      keyLight.intensity = 1.4 + Math.sin(elapsed * 1.5) * 0.1;
+      
+      controls.update();
+      renderer.render(scene, camera);
+    }
+    
+    animate();
+    
+    const resizeObserver = new ResizeObserver(() => {
+      const newWidth = container.clientWidth;
+      const newHeight = container.clientHeight;
+      camera.aspect = newWidth / newHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(newWidth, newHeight);
+      // Update turbine position on resize
+      scene.position.x = newWidth < 400 ? 4 - 0.75 : 4;
+    });
+    resizeObserver.observe(container);
+  }
+
+  document.addEventListener('astro:page-load', () => { animateCounters(); init3DTurbine(); });
+  document.addEventListener('DOMContentLoaded', () => { animateCounters(); init3DTurbine(); });
+</script>
+
+<style>
+  /* Common Styles */
+  .section {
+    margin-bottom: var(--space-12);
+  }
+
+  .section-header {
+    margin-bottom: var(--space-8);
+  }
+
+  .section-header h2 {
+    font-size: var(--text-3xl);
+    margin-bottom: var(--space-3);
+  }
+
+  .section-header p {
+    color: var(--color-text-muted);
+    font-size: var(--text-lg);
+    max-width: 700px;
+  }
+
+  /* Hero Section */
+  .hero {
+    background: linear-gradient(59deg, rgba(42, 45, 46, 0.70) 0%, rgba(0, 0, 0, 0.40) 31.59%, rgba(42, 45, 46, 0.70) 100%), 
+                url('/img/lopatki/a779.webp') center/cover no-repeat;
+    border-radius: var(--radius-xl);
+    padding: var(--space-12) var(--space-8);
+    margin-bottom: var(--space-12);
+    min-height: 450px;
+    display: flex;
+    align-items: center;
+  }
+
+  .hero-content {
+    max-width: 700px;
+    color: var(--color-white);
+  }
+
+  .hero h1 {
+    font-size: clamp(32px, 5vw, 48px);
+    color: var(--color-white);
+    margin-bottom: var(--space-4);
+    letter-spacing: -1px;
+  }
+
+  .hero p {
+    font-size: var(--text-lg);
+    opacity: 0.9;
+    margin-bottom: var(--space-8);
+    line-height: 1.6;
+    max-width: 600px;
+  }
+
+  .hero-buttons {
+    display: flex;
+    gap: var(--space-4);
+  }
+
+  .hero-buttons .btn {
+    flex-direction: row;
+    gap: var(--space-2);
+  }
+
+  /* About Section */
+  .about-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-8);
+    align-items: start;
+  }
+
+  .about-text {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+  }
+
+  .about-text p {
+    font-size: var(--text-base);
+    line-height: 1.7;
+    color: var(--color-text-muted);
+  }
+
+  .about-text strong {
+    color: var(--color-primary);
+  }
+
+  .about-image {
+    border-radius: var(--radius-xl);
+    overflow: hidden;
+    height: 100%;
+    min-height: 350px;
+  }
+
+  .about-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+  }
+
+  .about-image:hover img {
+    transform: scale(1.03);
+  }
+
+  /* Services Section - без иконок */
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-4);
+  }
+
+  .service-card {
+    background: var(--color-white);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-xl);
+    padding: var(--space-6);
+    transition: all 0.3s ease;
+  }
+
+  .service-card:hover {
+    border-color: var(--color-accent);
+    box-shadow: var(--shadow-md);
+    transform: translateY(-4px);
+  }
+
+  .service-card h3 {
+    font-size: var(--text-lg);
+    margin-bottom: var(--space-3);
+    color: var(--color-primary);
+  }
+
+  .service-card p {
+    font-size: var(--text-base);
+    color: var(--color-text-muted);
+    line-height: 1.6;
+  }
+
+  /* Stages - Bento Grid Layout */
+  .news {
+    width: 100%;
+    max-width: 100%;
+    margin-bottom: 72px;
+    display: flex;
+    gap: 10px;
+    align-items: stretch;
+  }
+
+  .large_news_card {
+    display: flex;
+    width: 40%;
+    padding: 40px;
+    align-items: flex-start;
+    flex-direction: column;
+    border-radius: 10px;
+    background: #ffffff;
+    margin-bottom: 0;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    border: 1px solid var(--color-border);
+  }
+
+  .large_news_card:hover {
+    background-color: #ffffff;
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  }
+
+  .large_news_card .news_img_area {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    overflow: hidden;
+    border-radius: 10px;
+    margin-top: 30px;
+    order: 2;
+  }
+
+  .large_news_card .news_img_area img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    border-radius: 10px;
+    transition: transform 0.5s ease;
+  }
+
+  .large_news_card:hover .news_img_area img {
+    transform: scale(1.05);
+  }
+
+  .large_news_card .news_info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 24px;
+    width: 100%;
+    order: 1;
+  }
+
+  .large_news_card .news_info h4 {
+    align-self: stretch;
+    color: #0b002a;
+    font-size: 32px;
+    font-weight: 500;
+    line-height: 36px;
+    letter-spacing: -0.96px;
+    transition: all 0.3s ease;
+    position: relative;
+    margin: 0;
+  }
+
+  .large_news_card .news_info h4::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 0;
+    width: 40px;
+    height: 3px;
+    background: #A3DAF3;
+    transition: width 0.3s ease;
+  }
+
+  .large_news_card:hover .news_info h4::after {
+    width: 100px;
+  }
+
+  .large_news_card .news_brief {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    align-self: stretch;
+  }
+
+  .news_brief p {
+    color: #5C5A5A;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 20px;
+    letter-spacing: -0.36px;
+    transition: color 0.3s ease;
+    margin: 0;
+  }
+
+  .large_news_card:hover .news_brief p {
+    color: #333;
+  }
+
+  .news_card_head {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .news_card_head img {
+    width: 24px;
+    height: 24px;
+    transition: transform 0.3s ease;
+  }
+
+  .large_news_card:hover .news_card_head img,
+  .news_card:hover .news_card_head img,
+  .fourth_stage_card:hover .stage_icon {
+    transform: rotate(45deg);
+  }
+
+  .news_category {
+    display: flex;
+    padding: 4px 12px;
+    align-items: flex-start;
+    gap: 4px;
+    border-radius: 4px;
+    background: #A3DAF3;
+    color: #2A2D2E;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: normal;
+    transition: all 0.3s ease;
+  }
+
+  .news_card_head:hover .news_category {
+    background: #7FCBEC;
+  }
+
+  .news_cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 10px;
+    width: 60%;
+    height: 100%;
+  }
+
+  .news_card {
+    display: flex;
+    padding: 20px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+    border-radius: 10px;
+    background: #ffffff;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    position: relative;
+    overflow: hidden;
+    border: 1px solid var(--color-border);
+  }
+
+  .news_card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 3px;
+    height: 0;
+    background: #A3DAF3;
+    transition: height 0.3s ease;
+  }
+
+  .news_card:hover {
+    background: #FFFFFF;
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  }
+
+  .news_card:hover::before {
+    height: 100%;
+  }
+
+  .news_card_content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+    align-self: stretch;
+  }
+
+  .news_card_content h4 {
+    color: #2A2D2E;
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 22px;
+    letter-spacing: -0.6px;
+    transition: all 0.3s ease;
+    margin-bottom: 8px;
+  }
+
+  .news_card:hover .news_card_content h4 {
+    color: #000;
+  }
+
+  .news_card .news_img_area {
+    overflow: hidden;
+    border-radius: 10px;
+    width: 100%;
+  }
+
+  .news_card .news_img_area img {
+    width: 100%;
+    height: 120px;
+    background: #D9D9D9;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+  }
+
+  .news_card:hover .news_img_area img {
+    transform: scale(1.05);
+  }
+
+  /* Fourth Stage Card */
+  .fourth_stage_card {
+    grid-column: 1 / 3;
+    padding: 16px 24px;
+    border-radius: 10px;
+    background: #ffffff;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    position: relative;
+    overflow: hidden;
+    border: 1px solid var(--color-border);
+  }
+
+  .fourth_stage_card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 3px;
+    height: 0;
+    background: #A3DAF3;
+    transition: height 0.3s ease;
+  }
+
+  .fourth_stage_card:hover {
+    background: #FFFFFF;
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  }
+
+  .fourth_stage_card:hover::before {
+    height: 100%;
+  }
+
+  .fourth_stage_header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 10px;
+  }
+
+  .stage_label {
+    display: flex;
+    padding: 4px 12px;
+    align-items: flex-start;
+    border-radius: 4px;
+    background: #A3DAF3;
+    color: #2A2D2E;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: normal;
+    transition: all 0.3s ease;
+  }
+
+  .fourth_stage_card:hover .stage_label {
+    background: #7FCBEC;
+  }
+
+  .stage_icon {
+    width: 24px;
+    height: 24px;
+    transition: transform 0.3s ease;
+  }
+
+  .fourth_stage_content {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+  }
+
+  .fourth_stage_text {
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .fourth_stage_text h4 {
+    color: #2A2D2E;
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 24px;
+    letter-spacing: -0.6px;
+    transition: all 0.3s ease;
+    margin: 0;
+  }
+
+  .fourth_stage_card:hover .fourth_stage_text h4 {
+    color: #000;
+  }
+
+  .fourth_stage_text p {
+    color: #5C5A5A;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 20px;
+    letter-spacing: -0.36px;
+    transition: color 0.3s ease;
+    margin: 0;
+  }
+
+  .fourth_stage_card:hover .fourth_stage_text p {
+    color: #333;
+  }
+
+  .fourth_stage_image {
+    width: 35%;
+    overflow: hidden;
+    border-radius: 10px;
+    align-self: center;
+  }
+
+  .fourth_stage_image img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    border-radius: 10px;
+    transition: transform 0.5s ease;
+  }
+
+  .fourth_stage_card:hover .fourth_stage_image img {
+    transform: scale(1.05);
+  }
+
+  /* Stats Section - как на странице Проектирование */
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-4);
+    background: var(--color-white);
+    border-radius: var(--radius-xl);
+    padding: var(--space-8);
+    border: 1px solid var(--color-border);
+  }
+
+  .stat-card {
+    text-align: center;
+    padding: var(--space-4);
+    border-right: 1px solid var(--color-border);
+  }
+
+  .stat-card:last-child {
+    border-right: none;
+  }
+
+  .stat-value {
+    font-size: var(--text-4xl);
+    font-weight: 700;
+    margin-bottom: var(--space-2);
+    color: var(--color-primary);
+  }
+
+  .stat-label {
+    font-size: var(--text-base);
+    color: var(--color-text-muted);
+  }
+
+  /* Materials Section - без подложки у иконок */
+  .materials-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-4);
+  }
+
+  .material-card {
+    background: var(--color-white);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-xl);
+    padding: var(--space-6);
+    text-align: center;
+    transition: all 0.3s ease;
+  }
+
+  .material-card:hover {
+    border-color: var(--color-accent);
+    box-shadow: var(--shadow-md);
+    transform: translateY(-4px);
+  }
+
+  .material-icon {
+    width: 64px;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto var(--space-4);
+  }
+
+  .material-icon img {
+    width: 56px;
+    height: 56px;
+    object-fit: contain;
+  }
+
+  .material-card h3 {
+    font-size: var(--text-lg);
+    margin-bottom: var(--space-3);
+    color: var(--color-primary);
+  }
+
+  .material-card p {
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+    line-height: 1.6;
+  }
+
+  /* Advantages Section - без подложки у иконок */
+  .advantages-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-4);
+  }
+
+  .advantage-card {
+    background: var(--color-white);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-xl);
+    padding: var(--space-6);
+    transition: all 0.3s ease;
+  }
+
+  .advantage-card:hover {
+    border-color: var(--color-accent);
+    box-shadow: var(--shadow-md);
+    transform: translateY(-4px);
+  }
+
+  .advantage-icon {
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: var(--space-4);
+  }
+
+  .advantage-icon img {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+  }
+
+  .advantage-card h3 {
+    font-size: var(--text-lg);
+    margin-bottom: var(--space-3);
+    color: var(--color-primary);
+  }
+
+  .advantage-card p {
+    font-size: var(--text-base);
+    color: var(--color-text-muted);
+    line-height: 1.6;
+  }
+
+  /* CTA Section */
+  .cta {
+    background: var(--color-bg-card);
+    border-radius: var(--radius-xl);
+    padding: var(--space-12) var(--space-8);
+    text-align: center;
+  }
+
+  .cta-content {
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .cta h2 {
+    font-size: var(--text-3xl);
+    margin-bottom: var(--space-4);
+  }
+
+  .cta p {
+    font-size: var(--text-lg);
+    color: var(--color-text-muted);
+    margin-bottom: var(--space-8);
+  }
+
+  /* Responsive - Bento Grid */
+  @media (min-width: 1200px) {
+    .news {
+      display: flex;
+      align-items: stretch;
+    }
+    
+    .large_news_card {
+      display: flex;
+      flex-direction: column;
+      width: 40%;
+      height: auto;
+    }
+    
+    .news_cards {
+      display: grid;
+      grid-template-rows: max-content 1fr;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      width: 60%;
+    }
+    
+    .fourth_stage_card {
+      grid-column: 1 / 3;
+      height: 100%;
+      box-sizing: border-box;
+      padding: 16px 24px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    
+    .news_cards > .news_card:first-child,
+    .news_cards > .news_card:nth-child(2) {
+      height: 100%;
+    }
+    
+    .large_news_card .news_info {
+      flex: 1 0 auto;
+    }
+    
+    .large_news_card .news_img_area {
+      flex: 0 1 auto;
+      margin-top: auto;
+    }
+    
+    .news_card .news_img_area img {
+      height: 100px;
+    }
+    
+    .fourth_stage_content {
+      height: 100%;
+      align-items: center;
+      gap: 15px;
+    }
+    
+    .fourth_stage_image {
+      width: calc(35% + 30px);
+      margin-left: -30px;
+      margin-top: -20px;
+      height: 100%;
+      display: flex;
+      align-items: center;
+    }
+    
+    .fourth_stage_image img {
+      max-height: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    
+    .fourth_stage_text {
+      gap: 10px;
+      justify-content: center;
+    }
+  }
+
+  @media (max-width: 1200px) {
+    .news {
+      flex-direction: column;
+    }
+    
+    .large_news_card {
+      width: 100%;
+      margin-bottom: 20px;
+      box-sizing: border-box;
+      padding: 20px;
+    }
+    
+    .large_news_card .news_info h4, 
+    .large_news_card .news_brief {
+      max-width: 100%;
+      width: 100%;
+    }
+    
+    .large_news_card .news_img_area {
+      max-width: 100%;
+      width: 100%;
+    }
+    
+    .news_cards {
+      width: 100%;
+    }
+
+    .services-grid,
+    .materials-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .advantages-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .stats-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .stat-card {
+      border-right: none;
+      border-bottom: 1px solid var(--color-border);
+    }
+    
+    .stat-card:nth-child(3),
+    .stat-card:nth-child(4) {
+      border-bottom: none;
+    }
+  }
+
+  @media (max-width: 992px) {
+    .news {
+      flex-direction: column;
+    }
+
+    .large_news_card {
+      width: 100%;
+      padding: 20px;
+      margin-bottom: 20px;
+    }
+
+    .large_news_card .news_img_area img {
+      height: auto;
+      min-height: 200px;
+    }
+
+    .large_news_card .news_info h4 {
+      font-size: 20px;
+      line-height: 24px;
+    }
+
+    .large_news_card .news_brief {
+      margin-top: -12px;
+    }
+
+    .news_cards {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      gap: 12px;
+    }
+
+    .news_card {
+      padding: 20px;
+    }
+    
+    .news_card_content {
+      gap: 16px;
+    }
+
+    .news_card .news_brief {
+      gap: 8px;
+    }
+
+    .fourth_stage_card {
+      padding: 20px;
+    }
+    
+    .fourth_stage_content {
+      flex-direction: column;
+      gap: 20px;
+    }
+    
+    .fourth_stage_text {
+      width: 100%;
+      order: 0;
+    }
+    
+    .fourth_stage_image {
+      width: 100%;
+      order: 1;
+    }
+  }
+
+  @media (max-width: 1024px) {
+    .about-content {
+      grid-template-columns: 1fr;
+    }
+
+    .about-image {
+      order: -1;
+      min-height: 300px;
+    }
+
+    .stats-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--space-4);
+    }
+
+    .stat-card {
+      border-right: none;
+      border-bottom: 1px solid var(--color-border);
+    }
+    
+    .stat-card:nth-child(3),
+    .stat-card:nth-child(4) {
+      border-bottom: none;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .hero {
+      padding: var(--space-8) var(--space-5);
+      min-height: 350px;
+    }
+
+    .services-grid,
+    .materials-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .advantages-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .stats-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .section-header h2 {
+      font-size: var(--text-2xl);
+    }
+  }
+
+  /* Technical Features Infographic Section */
+  .tech-features-infographic {
+    position: relative;
+    min-height: 700px;
+    overflow: hidden;
+    border-radius: var(--radius-xl);
+  }
+  
+  .tech-features-content {
+    position: relative;
+    z-index: 2;
+    padding: var(--space-8);
+  }
+  
+  .tech-features-content .section-header {
+    margin-bottom: var(--space-6);
+  }
+  
+  .tech-features-content .section-header h2,
+  .tech-features-content .section-header p {
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .tech-features-cards {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+    max-width: 420px;
+  }
+
+  @keyframes windSway {
+    0%, 100% { transform: translateX(0) rotate(0deg); }
+    25% { transform: translateX(-3px) rotate(-0.3deg); }
+    50% { transform: translateX(-5px) rotate(-0.5deg); }
+    75% { transform: translateX(-2px) rotate(-0.2deg); }
+  }
+  
+  .infographic-card {
+    background: rgba(255, 255, 255, 0.92);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    border-radius: var(--radius-xl);
+    padding: var(--space-5);
+    position: relative;
+    transition: box-shadow 0.4s ease, border-color 0.4s ease;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    animation: windSway 3s ease-in-out infinite;
+  }
+  
+  .infographic-card:nth-child(1) { animation-delay: 0s; }
+  .infographic-card:nth-child(2) { animation-delay: 0.4s; }
+  .infographic-card:nth-child(3) { animation-delay: 0.8s; }
+  .infographic-card:nth-child(4) { animation-delay: 1.2s; }
+
+  .infographic-card:hover {
+    animation-play-state: paused;
+    transform: translateX(-5px) rotate(-0.3deg);
+    box-shadow: 0 20px 40px rgba(163, 218, 243, 0.2), 0 10px 20px rgba(0, 0, 0, 0.1);
+    border-color: var(--color-accent);
+  }
+  
+  .card-icon {
+    width: 44px;
+    height: 44px;
+    color: var(--color-primary);
+    margin-bottom: var(--space-3);
+    transition: all 0.3s ease;
+  }
+  
+  .card-icon svg {
+    width: 100%;
+    height: 100%;
+  }
+  
+  .infographic-card:hover .card-icon {
+    color: var(--color-accent);
+    transform: scale(1.1);
+  }
+  
+  .infographic-card h3 {
+    font-size: var(--text-md);
+    font-weight: 700;
+    color: var(--color-primary);
+    margin-bottom: var(--space-2);
+    line-height: 1.3;
+  }
+  
+  .infographic-card p {
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+    line-height: 1.5;
+    margin: 0;
+  }
+  
+  .turbine-3d-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    background: transparent;
+  }
+  
+  .turbine-3d-container canvas {
+    width: 100% !important;
+    height: 100% !important;
+    display: block;
+  }
+  
+  @media (max-width: 1200px) {
+    .tech-features-infographic { min-height: 650px; }
+    .tech-features-cards { max-width: 380px; }
+  }
+  
+  @media (max-width: 1024px) {
+    .tech-features-infographic { min-height: 750px; }
+    .tech-features-cards {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-3);
+      max-width: 320px;
+    }
+    .infographic-card:hover { transform: translateY(-4px); }
+  }
+  
+  @media (max-width: 768px) {
+    .tech-features-infographic { min-height: 700px; padding-bottom: var(--space-6); }
+    .tech-features-content { padding: var(--space-4); }
+    .tech-features-cards {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-3);
+      max-width: 260px;
+    }
+    .infographic-card { 
+      padding: var(--space-3) var(--space-4);
+      animation: none;
+    }
+    .infographic-card h3 {
+      font-size: var(--text-sm);
+      margin-bottom: 4px;
+    }
+    .infographic-card p {
+      font-size: 12px;
+      line-height: 1.4;
+    }
+    .card-icon { 
+      width: 32px; 
+      height: 32px;
+      margin-bottom: var(--space-2);
+    }
+    .tech-features-content .section-header h2 {
+      font-size: var(--text-xl);
+    }
+    .tech-features-content .section-header p {
+      font-size: var(--text-sm);
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .tech-features-infographic { min-height: 650px; }
+    .tech-features-content { padding: var(--space-3); }
+    .tech-features-cards {
+      max-width: 220px;
+      gap: var(--space-2);
+    }
+    .infographic-card { 
+      padding: var(--space-3);
+      border-radius: var(--radius-md);
+    }
+    .infographic-card h3 { font-size: 13px; }
+    .infographic-card p {
+      font-size: 11px;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    .card-icon { 
+      width: 28px; 
+      height: 28px;
+      margin-bottom: var(--space-1);
+    }
+  }
+</style>

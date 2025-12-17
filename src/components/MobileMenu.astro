@@ -1,7 +1,7 @@
 ---
 import type { Lang } from '@/i18n';
 import { t, languages, langLabels, getBaseUrl, getAlternateUrl } from '@/i18n';
-import { getMobileNavigation } from '@/data/navigation';
+import { getMobileNavigation, dropdownIcons } from '@/data/navigation';
 import { cities } from '@/data/cities';
 
 interface Props {
@@ -17,9 +17,16 @@ const base = getBaseUrl(lang);
 
 <div class="mobile-menu-overlay" id="mobile-menu">
   <div class="mobile-menu-header">
-    <a href={base || '/'}>
-      <img src="/img/logo.svg" alt="Rustrade" width="120" height="32" />
-    </a>
+    <div class="mobile-menu-brand">
+      <a href={base || '/'}>
+        <img src="/img/logo.svg" alt="Rustrade" width="120" height="32" />
+      </a>
+      <span class="mobile-menu-divider"></span>
+      <p class="mobile-menu-slogan">
+        <span>{lang === 'ru' ? 'Энергетические решения,' : 'Energy solutions'}</span>
+        <span>{lang === 'ru' ? 'которые окупаются' : 'that pay off'}</span>
+      </p>
+    </div>
     <button class="modal-close" data-close-menu aria-label={t('common.close', lang)}>
       <img src="/img/close.svg" alt="close" width="16" height="16" />
     </button>
@@ -40,10 +47,23 @@ const base = getBaseUrl(lang);
       </div>
     </div>
     
-    <!-- Navigation -->
+    <!-- Navigation with Icons -->
     {navigation.map((item) => (
       <a href={item.href} class="mobile-menu-item">
-        {item.name}
+        {item.icon && dropdownIcons[item.icon as keyof typeof dropdownIcons] && (
+          <span class="mobile-menu-icon">
+            <svg 
+              viewBox="0 0 24 24" 
+              fill="none" 
+              stroke="currentColor" 
+              stroke-width="2" 
+              stroke-linecap="round" 
+              stroke-linejoin="round"
+              set:html={dropdownIcons[item.icon as keyof typeof dropdownIcons]}
+            />
+          </span>
+        )}
+        <span class="mobile-menu-text">{item.name}</span>
       </a>
     ))}
   </div>
@@ -51,16 +71,37 @@ const base = getBaseUrl(lang);
   <div class="mobile-menu-footer">
     <div class="mobile-menu-contacts">
       <a href={`tel:${currentCity?.phone.replace(/[^+\d]/g, '')}`} class="mobile-phone">
-        <img src="/img/phone.svg" alt="phone" width="20" height="20" />
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+        </svg>
         {currentCity?.phone}
       </a>
       <a href={`mailto:${currentCity?.email}`} class="mobile-email">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+          <polyline points="22,6 12,13 2,6"/>
+        </svg>
         {currentCity?.email}
       </a>
     </div>
-    <button class="btn btn-accent" data-modal="callback">
-      {t('forms.orderCallback', lang)}
-    </button>
+    
+    <div class="mobile-menu-buttons">
+      <button class="mobile-btn mobile-btn-primary" id="mobile-callback-btn">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+        </svg>
+        {t('forms.orderCallback', lang)}
+      </button>
+      
+      <a href="/Презентация РУСТРЕЙД.pdf" class="mobile-btn mobile-btn-secondary" download>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+          <polyline points="7 10 12 15 17 10"/>
+          <line x1="12" y1="15" x2="12" y2="3"/>
+        </svg>
+        {t('footer.downloadPresentation', lang)}
+      </a>
+    </div>
   </div>
 </div>
 
@@ -91,6 +132,34 @@ const base = getBaseUrl(lang);
     flex-shrink: 0;
   }
 
+  .mobile-menu-brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .mobile-menu-divider {
+    width: 1px;
+    height: 32px;
+    background: var(--color-border, #E7E5E6);
+    flex-shrink: 0;
+  }
+
+  .mobile-menu-slogan {
+    display: flex;
+    flex-direction: column;
+    font-size: 11px;
+    font-weight: 300;
+    color: var(--color-text-muted, #5C5A5A);
+    line-height: 1.3;
+    margin: 0;
+  }
+
+  .mobile-menu-slogan span {
+    display: block;
+    white-space: nowrap;
+  }
+
   .mobile-menu-header .modal-close {
     width: 40px;
     height: 40px;
@@ -117,43 +186,208 @@ const base = getBaseUrl(lang);
     border-bottom: 1px solid var(--color-border, #E7E5E6);
   }
   
+  /* Language Buttons - Site Style */
   .mobile-lang-buttons {
     display: flex;
-    gap: 8px;
+    gap: 12px;
+    justify-content: center;
   }
   
   .mobile-lang-btn {
-    padding: 10px 20px;
-    background: var(--color-border, #E7E5E6);
-    border-radius: 8px;
-    font-size: 14px;
+    padding: 8px 20px;
+    background: linear-gradient(135deg, rgba(255,255,255,0.95) 0%, rgba(248,250,252,0.9) 100%);
+    border: 1px solid rgba(163, 218, 243, 0.4);
+    border-radius: 50px;
+    font-size: 13px;
     font-weight: 700;
     color: var(--color-text, #2A2D2E);
     text-decoration: none;
-    transition: all 0.2s ease;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    box-shadow: 
+      0 2px 10px rgba(0, 0, 0, 0.05),
+      inset 0 1px 0 rgba(255, 255, 255, 0.8);
   }
   
   .mobile-lang-btn.active {
-    background: var(--color-accent, #A3DAF3);
-    color: var(--color-primary, #2A2D2E);
+    background: linear-gradient(135deg, #5BB8E5 0%, #3F9BD6 50%, #2E80C7 100%);
+    color: #fff;
+    border-color: transparent;
+    box-shadow: 
+      0 4px 15px rgba(59, 155, 214, 0.35),
+      inset 0 1px 0 rgba(255, 255, 255, 0.2);
   }
 
+  .mobile-lang-btn:not(.active):hover {
+    background: linear-gradient(135deg, rgba(236, 243, 253, 0.95) 0%, rgba(220, 238, 250, 0.9) 100%);
+    border-color: rgba(163, 218, 243, 0.6);
+    transform: translateY(-2px);
+  }
+
+  /* Menu Items with Icons */
   .mobile-menu-item {
-    display: block;
+    display: flex;
+    align-items: center;
+    gap: 12px;
     padding: 14px 16px;
     font-size: 16px;
     font-weight: 500;
     color: var(--color-primary, #2A2D2E);
     text-decoration: none;
-    border-radius: 8px;
-    transition: background 0.2s ease;
+    border-radius: 12px;
+    transition: all 0.2s ease;
   }
 
   .mobile-menu-item:hover,
   .mobile-menu-item:active {
-    background: var(--color-border, #E7E5E6);
+    background: linear-gradient(135deg, rgba(236, 243, 253, 0.6) 0%, rgba(220, 238, 250, 0.4) 100%);
   }
 
+  .mobile-menu-icon {
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #3F9BD6;
+    flex-shrink: 0;
+  }
+
+  .mobile-menu-icon svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  .mobile-menu-text {
+    flex: 1;
+  }
+
+  /* Icon Animations */
+  .mobile-menu-item:hover .icon-fan {
+    animation: spinFan 2s linear infinite;
+  }
+  
+  .mobile-menu-item:hover .icon-bolt {
+    animation: pulseBolt 0.6s ease-in-out infinite;
+  }
+  
+  .mobile-menu-item:hover .icon-pen {
+    animation: drawPen 0.8s ease-in-out infinite;
+  }
+  
+  .mobile-menu-item:hover .icon-blades {
+    animation: spinBlades 3s linear infinite;
+    transform-origin: center;
+  }
+  
+  .mobile-menu-item:hover .icon-cooler {
+    animation: coolPulse 1s ease-in-out infinite;
+  }
+  
+  .mobile-menu-item:hover .icon-condenser {
+    animation: bubbleUp 1.5s ease-in-out infinite;
+  }
+  
+  .mobile-menu-item:hover .icon-home {
+    animation: homeWiggle 0.5s ease-in-out;
+  }
+  
+  .mobile-menu-item:hover .icon-about-sub {
+    animation: personWave 0.6s ease-in-out;
+  }
+  
+  .mobile-menu-item:hover .icon-case {
+    animation: folderOpen 0.5s ease-in-out;
+  }
+  
+  .mobile-menu-item:hover .icon-news {
+    animation: newsPulse 0.8s ease-in-out infinite;
+  }
+  
+  .mobile-menu-item:hover .icon-faq {
+    animation: questionBounce 0.6s ease-in-out infinite;
+  }
+  
+  .mobile-menu-item:hover .icon-cooperation {
+    animation: groupWave 0.7s ease-in-out;
+  }
+  
+  .mobile-menu-item:hover .icon-contact {
+    animation: phoneRing 0.5s ease-in-out infinite;
+  }
+
+  @keyframes spinFan {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+  
+  @keyframes pulseBolt {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.7; transform: scale(1.1); }
+  }
+  
+  @keyframes drawPen {
+    0%, 100% { transform: rotate(0deg); }
+    25% { transform: rotate(-5deg); }
+    75% { transform: rotate(5deg); }
+  }
+  
+  @keyframes spinBlades {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+  
+  @keyframes coolPulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.6; }
+  }
+  
+  @keyframes bubbleUp {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-2px); }
+  }
+  
+  @keyframes homeWiggle {
+    0%, 100% { transform: rotate(0deg); }
+    25% { transform: rotate(-3deg); }
+    75% { transform: rotate(3deg); }
+  }
+  
+  @keyframes personWave {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+  }
+  
+  @keyframes folderOpen {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1) translateY(-2px); }
+  }
+  
+  @keyframes newsPulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+  }
+  
+  @keyframes questionBounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-3px); }
+  }
+  
+  @keyframes groupWave {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+  }
+  
+  @keyframes phoneRing {
+    0%, 100% { transform: rotate(0deg); }
+    20% { transform: rotate(-10deg); }
+    40% { transform: rotate(10deg); }
+    60% { transform: rotate(-10deg); }
+    80% { transform: rotate(10deg); }
+  }
+
+  /* Footer */
   .mobile-menu-footer {
     padding: 20px;
     border-top: 1px solid var(--color-border, #E7E5E6);
@@ -161,11 +395,13 @@ const base = getBaseUrl(lang);
     background: var(--color-white, #fff);
   }
   
+  /* Contacts - Centered */
   .mobile-menu-contacts {
     display: flex;
     flex-direction: column;
+    align-items: center;
     gap: 8px;
-    margin-bottom: 16px;
+    margin-bottom: 20px;
   }
   
   .mobile-phone {
@@ -178,66 +414,111 @@ const base = getBaseUrl(lang);
     text-decoration: none;
   }
   
+  .mobile-phone svg {
+    color: #3F9BD6;
+  }
+  
   .mobile-email {
+    display: flex;
+    align-items: center;
+    gap: 8px;
     font-size: 14px;
     color: var(--color-text-muted, #5C5A5A);
     text-decoration: none;
   }
+  
+  .mobile-email svg {
+    color: #3F9BD6;
+  }
 
-  .mobile-menu-footer .btn {
+  /* Buttons */
+  .mobile-menu-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .mobile-btn {
     width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
     padding: 14px 20px;
-    background: linear-gradient(135deg, 
-      rgba(2, 132, 199, 0.95) 0%, 
-      rgba(14, 165, 233, 0.9) 50%,
-      rgba(56, 189, 248, 0.9) 100%);
-    color: white;
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    border-radius: 10px;
+    border-radius: 50px;
     font-size: 15px;
     font-weight: 700;
     cursor: pointer;
-    transition: all 0.4s ease;
-    box-shadow: 
-      0 4px 20px rgba(14, 165, 233, 0.3),
-      inset 0 1px 0 rgba(255, 255, 255, 0.4);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    text-decoration: none;
+    border: none;
     position: relative;
     overflow: hidden;
   }
 
-  .mobile-menu-footer .btn::before {
+  .mobile-btn-primary {
+    background: linear-gradient(135deg, #5BB8E5 0%, #3F9BD6 50%, #2E80C7 100%);
+    color: #fff;
+    box-shadow: 
+      0 4px 15px rgba(59, 155, 214, 0.35),
+      0 1px 3px rgba(0, 0, 0, 0.1),
+      inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  }
+
+  .mobile-btn-primary::before {
     content: '';
     position: absolute;
     top: 0;
     left: -100%;
     width: 100%;
     height: 100%;
-    background: linear-gradient(90deg, 
-      transparent 0%,
-      rgba(255, 255, 255, 0.3) 50%,
-      transparent 100%);
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.25),
+      transparent
+    );
     transition: left 0.5s ease;
   }
 
-  .mobile-menu-footer .btn:hover::before {
+  .mobile-btn-primary:hover::before {
     left: 100%;
   }
 
-  .mobile-menu-footer .btn:hover {
-    background: linear-gradient(135deg, 
-      rgba(3, 105, 161, 0.95) 0%, 
-      rgba(2, 132, 199, 0.95) 50%,
-      rgba(14, 165, 233, 0.95) 100%);
+  .mobile-btn-primary:hover {
+    transform: translateY(-2px);
     box-shadow: 
-      0 8px 32px rgba(14, 165, 233, 0.4),
-      inset 0 1px 0 rgba(255, 255, 255, 0.5);
+      0 8px 25px rgba(59, 155, 214, 0.45),
+      0 4px 10px rgba(0, 0, 0, 0.1),
+      inset 0 1px 0 rgba(255, 255, 255, 0.25);
   }
 
-  .mobile-menu-footer .btn img,
-  .mobile-menu-footer .btn svg {
-    filter: brightness(0) invert(1) drop-shadow(0 0 0.5px white);
-    width: 18px;
-    height: 18px;
+  .mobile-btn-primary svg {
+    filter: brightness(0) invert(1);
+  }
+
+  .mobile-btn-secondary {
+    background: linear-gradient(135deg, rgba(255,255,255,0.95) 0%, rgba(248,250,252,0.9) 100%);
+    color: var(--color-primary, #2A2D2E);
+    border: 1px solid rgba(163, 218, 243, 0.4);
+    box-shadow: 
+      0 2px 10px rgba(0, 0, 0, 0.05),
+      inset 0 1px 0 rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  }
+
+  .mobile-btn-secondary:hover {
+    background: linear-gradient(135deg, rgba(236, 243, 253, 0.95) 0%, rgba(220, 238, 250, 0.9) 100%);
+    border-color: rgba(163, 218, 243, 0.6);
+    transform: translateY(-2px);
+    box-shadow: 
+      0 6px 20px rgba(163, 218, 243, 0.25),
+      inset 0 1px 0 rgba(255, 255, 255, 0.9);
+  }
+
+  .mobile-btn-secondary svg {
+    color: #3F9BD6;
   }
 </style>
 
@@ -245,22 +526,37 @@ const base = getBaseUrl(lang);
   const burgerBtn = document.querySelector('[data-burger]');
   const closeBtn = document.querySelector('[data-close-menu]');
   const mobileMenu = document.getElementById('mobile-menu');
+  const callbackBtn = document.getElementById('mobile-callback-btn');
   
+  // Open menu
   burgerBtn?.addEventListener('click', () => {
     mobileMenu?.classList.add('active');
     document.body.style.overflow = 'hidden';
   });
   
-  closeBtn?.addEventListener('click', () => {
+  // Close menu
+  function closeMobileMenu() {
     mobileMenu?.classList.remove('active');
     document.body.style.overflow = '';
-  });
+  }
+  
+  closeBtn?.addEventListener('click', closeMobileMenu);
   
   // Close on link click
   document.querySelectorAll('.mobile-menu-item').forEach(item => {
-    item.addEventListener('click', () => {
-      mobileMenu?.classList.remove('active');
-      document.body.style.overflow = '';
-    });
+    item.addEventListener('click', closeMobileMenu);
+  });
+  
+  // Callback button - close menu first, then open modal
+  callbackBtn?.addEventListener('click', () => {
+    closeMobileMenu();
+    // Small delay to let menu close animation complete
+    setTimeout(() => {
+      const callbackModal = document.getElementById('callback-modal');
+      if (callbackModal) {
+        callbackModal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      }
+    }, 300);
   });
 </script>

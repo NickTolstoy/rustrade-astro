@@ -1,411 +1,898 @@
 ---
 import type { Lang } from '@/i18n';
 import { t, getBaseUrl } from '@/i18n';
-import { getCityById } from '@/data/cities';
 import BaseLayout from '@/layouts/BaseLayout.astro';
+import Breadcrumbs from '@/components/Breadcrumbs.astro';
+import Faq from '@/components/Faq.astro';
+import CtaFaq from '@/components/CtaFaq.astro';
 
 const lang: Lang = 'en';
 const base = getBaseUrl(lang);
-const currentCity = getCityById('moscow');
+
+const faqItems = [
+  {
+    question: "How long has the company been on the market?",
+    answer: "RUSTRADE LLC was founded in 2020, however, key specialists of our team have more than 15 years of experience in power engineering and implementation of major projects."
+  },
+  {
+    question: "Do you have the necessary licenses and certificates?",
+    answer: "Yes, our activities are fully licensed. We are a member of SRO, have permits for design and construction work at hazardous production facilities, as well as ISO 9001 certificates."
+  },
+  {
+    question: "Which manufacturers do you work with?",
+    answer: "We work with a proven pool of manufacturing plants in Russia and friendly countries. Each partner undergoes a thorough quality control system audit before starting cooperation."
+  }
+];
+
+const stats = [
+  { value: 57, unit: 'MW', label: 'Total installed capacity', icon: '/img/icons/effective.svg' },
+  { value: 8, unit: 'pcs', label: 'Successfully completed projects', icon: '/img/icons/checked_bookmark.svg' },
+  { value: 10, unit: 'pcs', label: 'Projects in progress', icon: '/img/settings.svg' },
+  { value: 5, unit: 'years', label: 'Market experience', icon: '/img/icons/quality.svg' }
+];
+
+
+const partners = [
+  { name: "Gazprom", logo: "/img/partners/gazprom.png" },
+  { name: "Tatneft", logo: "/img/partners/tatneft.png" },
+  { name: "Ural Steel", logo: "/img/partners/ural_steel.png" },
+  { name: "URALCHEM", logo: "/img/partners/uralchem.png" },
+  { name: "Severstal", logo: "/img/partners/severstal.png" },
+  { name: "SIBUR", logo: "/img/partners/sibur.png" },
+  { name: "Rosneft", logo: "/img/partners/rosneft.png" },
+  { name: "Segezha Group", logo: "/img/partners/segezha.png" },
+  { name: "EuroChem", logo: "/img/partners/Evrohim.svg" },
+  { name: "Lukoil", logo: "/img/partners/LUK_OIL.svg" },
+  { name: "NLMK", logo: "/img/partners/NLMK.svg" },
+  { name: "Gubakhinsky Coke", logo: "/img/partners/Gubahinskiy Koks.svg" }
+];
 ---
 
 <BaseLayout 
   lang={lang} 
-  title="About Us"
-  description="Rustrade LLC — design and supply of steam turbines, turbogenerators and components"
-  activeMenu={t('nav.about', lang)}
+  title="About RUSTRADE — Steam Turbine Manufacturer"
+  description="RUSTRADE LLC — a Russian company founded in 2020. Design and supply of steam turbines from 25 kW to 40 MW, turbogenerators and power equipment. 57 MW total capacity, 8 completed projects."
+  keywords="about RUSTRADE, turbine manufacturer, power equipment Russia, RUSTRADE LLC"
+  image="/img/about/chairs.jpg"
+  faqData={faqItems}
+  breadcrumbs={[{ name: 'About', url: '/eng/about' }]}
 >
-  <main class="about-main fade_in_slow">
-    <div class="main_col">
-      <div class="team_img">
-        <img src="/img/cases/oil_1.webp" alt="Rustrade Team" />
-      </div>
-      
-      <div class="main_info">
-        <div class="description info_card">
-          <h4>About Us</h4>
+  <Breadcrumbs items={[{ label: 'About' }]} lang={lang} />
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-content">
+      <h1>About Us</h1>
+      <p>We provide customers with quality and efficient energy solutions based on steam turbines</p>
+    </div>
+  </section>
+
+  <!-- About Info Section -->
+  <section class="section about-info">
+    <div class="about-grid">
+      <div class="about-text">
+        <h2>Mission and Approach</h2>
+        <div class="text-content">
           <p>
-            Rustrade LLC was founded in 2020. The company's mission is to provide customers with the opportunity to acquire high-quality and cost-effective solutions based on steam turbines.
+            RUSTRADE LLC was founded in 2020. Our mission is to provide customers with the opportunity to acquire high-quality and cost-effective solutions based on steam turbines.
           </p>
           <p>
-            Rustrade designs and supplies backpressure and condensing steam turbines, extraction steam turbines that operate in a wide range of pressure and flow, with the ability to find individual solutions for each customer's needs.
+            We design and supply backpressure and condensing steam turbines, extraction steam turbines that operate in a wide range of pressure and flow, with the ability to find individual solutions for each customer's needs.
           </p>
           <p>
-            We provide our clients with the opportunity to obtain a reliable and high-quality solution based on steam turbines with a significant economic advantage compared to the options available on the Russian market.
+            We provide our clients with the opportunity to obtain reliable and high-quality solutions with significant economic advantages compared to options available on the Russian market.
           </p>
-        </div>
-
-        <div class="company_contacts info_card">
-          <h4>Contacts</h4>
-          <div class="contacts_cols">
-            <div class="contacts_col">
-              <div>
-                <h6>e-mail</h6>
-                <p>{currentCity?.email || 'office@rustrade.pro'}</p>
-              </div>
-
-              <div>
-                <h6>Social Networks</h6>
-                <p>Telegram / VKontakte</p>
-              </div>
-
-              <div>
-                <h6>Phone</h6>
-                <p>{currentCity?.phone || '8(916) 111-4-555'}</p>
-              </div>
-            </div>
-
-            <div class="contacts_col">
-              <div>
-                <h6>Address</h6>
-                <p>{currentCity?.address[lang] || 'Russia, Perm, Oleg Koshevoy st., 31, room 20'}</p>
-              </div>
-
-              <div>
-                <h6><a href="#">Yandex Maps</a></h6>
-              </div>
-            </div>
-          </div>
         </div>
       </div>
+      <div class="about-image">
+        <img src="/img/about/chairs.jpg" alt="RUSTRADE Office" />
+      </div>
+    </div>
+  </section>
 
-      <div class="stats">
-        <div class="stats_item">
-          <div class="stats_count">
-            <div class="stats_count_n">57</div>
-            <div class="stats_count_item">MW</div>
-          </div>
-          <h3>Total installed capacity</h3>
+  <!-- Stats Section -->
+  <section class="section stats">
+    <div class="stats-grid">
+      <!-- Power -->
+      <div class="stat-card">
+        <div class="stat-icon stat-icon-power">
+          <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="aboutPowerGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#3F9BD6"/>
+                <stop offset="55%" stop-color="#2E80C7"/>
+                <stop offset="100%" stop-color="#1D4ED8"/>
+              </linearGradient>
+              <filter id="aboutPowerGlow" x="-50%" y="-50%" width="200%" height="200%">
+                <feGaussianBlur stdDeviation="1.8" result="coloredBlur"/>
+                <feMerge>
+                  <feMergeNode in="coloredBlur"/>
+                  <feMergeNode in="SourceGraphic"/>
+                </feMerge>
+              </filter>
+            </defs>
+            <circle class="icon-bg" cx="32" cy="32" r="28" fill="url(#aboutPowerGrad)" opacity="0.14"/>
+            <circle class="power-ring" cx="32" cy="32" r="22" stroke="url(#aboutPowerGrad)" stroke-width="2" opacity="0.55"/>
+            <g class="turbine-rotor" filter="url(#aboutPowerGlow)">
+              <circle cx="32" cy="32" r="6" fill="url(#aboutPowerGrad)"/>
+              <g stroke="url(#aboutPowerGrad)" stroke-width="3.2" stroke-linecap="round">
+                <line x1="32" y1="10" x2="32" y2="20"/>
+                <line x1="32" y1="44" x2="32" y2="54"/>
+                <line x1="10" y1="32" x2="20" y2="32"/>
+                <line x1="44" y1="32" x2="54" y2="32"/>
+                <line x1="17.2" y1="17.2" x2="24.3" y2="24.3"/>
+                <line x1="39.7" y1="39.7" x2="46.8" y2="46.8"/>
+                <line x1="17.2" y1="46.8" x2="24.3" y2="39.7"/>
+                <line x1="39.7" y1="24.3" x2="46.8" y2="17.2"/>
+              </g>
+            </g>
+            <path class="energy-wave" d="M14 37c4-9 10-9 14 0s10 9 14 0 10-9 14 0" stroke="#E0F2FE" stroke-opacity="0.9" stroke-width="2.2" stroke-linecap="round"/>
+          </svg>
         </div>
-
-        <div class="stats_item">
-          <div class="stats_count">
-            <div class="stats_count_n">8</div>
-            <div class="stats_count_item">pcs</div>
+        <div class="stat-content-wrapper">
+          <div class="stat-value-wrapper">
+            <span class="stat-value" data-value="57">0</span>
+            <span class="stat-unit">MW</span>
           </div>
-          <h3>Successfully completed projects</h3>
+          <p class="stat-label">Total installed capacity</p>
         </div>
+      </div>
 
-        <div class="stats_item">
-          <div class="stats_count">
-            <div class="stats_count_n">10</div>
-            <div class="stats_count_item">pcs</div>
+      <!-- Completed Projects -->
+        <div class="stat-card">
+        <div class="stat-icon stat-icon-projects">
+          <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="aboutProjectGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#22C55E"/>
+                <stop offset="50%" stop-color="#16A34A"/>
+                <stop offset="100%" stop-color="#15803D"/>
+              </linearGradient>
+            </defs>
+            <circle class="icon-bg" cx="32" cy="32" r="28" fill="url(#aboutProjectGrad)" opacity="0.12"/>
+            <!-- Blueprint sheet -->
+            <path class="blueprint-sheet" d="M18 14h20l8 8v28a4 4 0 0 1-4 4H18a4 4 0 0 1-4-4V18a4 4 0 0 1 4-4Z" stroke="url(#aboutProjectGrad)" stroke-width="2.6" fill="none"/>
+            <path class="blueprint-fold" d="M38 14v8h8" stroke="url(#aboutProjectGrad)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+            <!-- Blueprint lines -->
+            <g class="blueprint-lines" stroke="url(#aboutProjectGrad)" stroke-width="2" stroke-linecap="round" opacity="0.9">
+              <path class="draw-line" d="M22 28h14"/>
+              <path class="draw-line" d="M22 34h20"/>
+              <path class="draw-line" d="M22 40h12"/>
+            </g>
+            <!-- Check badge -->
+            <circle class="check-circle" cx="42" cy="42" r="10" stroke="url(#aboutProjectGrad)" stroke-width="2.6" fill="rgba(240,253,244,0.6)" stroke-dasharray="64" stroke-dashoffset="64"/>
+            <path class="check-mark" d="M37.5 42l2.8 2.8 6.6-7" stroke="url(#aboutProjectGrad)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none" stroke-dasharray="24" stroke-dashoffset="24"/>
+          </svg>
+        </div>
+        <div class="stat-content-wrapper">
+          <div class="stat-value-wrapper">
+            <span class="stat-value" data-value="8">0</span>
+            <span class="stat-unit">pcs</span>
           </div>
-          <h3>Projects in progress</h3>
+          <p class="stat-label">Successfully completed projects</p>
+        </div>
+      </div>
+
+      <!-- In Progress -->
+      <div class="stat-card">
+        <div class="stat-icon stat-icon-progress">
+          <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="aboutProgressGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#3b82f6"/>
+                <stop offset="100%" stop-color="#1d4ed8"/>
+              </linearGradient>
+            </defs>
+            <circle class="icon-bg" cx="32" cy="32" r="28" fill="url(#aboutProgressGrad)" opacity="0.12"/>
+            <!-- Pipeline / roadmap -->
+            <path class="progress-track" d="M16 40c0-7 6-12 13-12h6c7 0 13-5 13-12" stroke="url(#aboutProgressGrad)" stroke-width="3.2" stroke-linecap="round" stroke-dasharray="6 6"/>
+            <circle cx="16" cy="40" r="4.5" fill="rgba(239,246,255,0.9)" stroke="url(#aboutProgressGrad)" stroke-width="2.2"/>
+            <circle cx="32" cy="28" r="4.5" fill="rgba(239,246,255,0.9)" stroke="url(#aboutProgressGrad)" stroke-width="2.2"/>
+            <circle cx="48" cy="16" r="4.5" fill="rgba(239,246,255,0.9)" stroke="url(#aboutProgressGrad)" stroke-width="2.2"/>
+            <!-- Moving dot -->
+            <circle class="progress-dot" cx="16" cy="40" r="2.6" fill="#E0F2FE"/>
+            <!-- Small bars -->
+            <g class="progress-bars" fill="url(#aboutProgressGrad)" opacity="0.85">
+              <rect x="18" y="46" width="6" height="6" rx="2"/>
+              <rect x="28" y="44" width="6" height="8" rx="2"/>
+              <rect x="38" y="42" width="6" height="10" rx="2"/>
+            </g>
+          </svg>
+          </div>
+          <div class="stat-content-wrapper">
+            <div class="stat-value-wrapper">
+            <span class="stat-value" data-value="10">0</span>
+            <span class="stat-unit">pcs</span>
+          </div>
+          <p class="stat-label">Projects in progress</p>
+        </div>
+      </div>
+
+      <!-- Experience -->
+      <div class="stat-card">
+        <div class="stat-icon stat-icon-experience">
+          <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="aboutExpGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#A78BFA"/>
+                <stop offset="55%" stop-color="#7C3AED"/>
+                <stop offset="100%" stop-color="#6D28D9"/>
+              </linearGradient>
+            </defs>
+            <circle class="icon-bg" cx="32" cy="32" r="28" fill="url(#aboutExpGrad)" opacity="0.11"/>
+            <!-- Hourglass -->
+            <path class="hourglass-frame" d="M22 14h20M22 50h20M24 14c0 9 8 10 8 18s-8 9-8 18M40 14c0 9-8 10-8 18s8 9 8 18" stroke="url(#aboutExpGrad)" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/>
+            <path class="sand-top" d="M27 18h10c0 5-3 7-5 9-2-2-5-4-5-9Z" fill="rgba(237,233,254,0.85)"/>
+            <path class="sand-bottom" d="M27 46h10c0-5-3-7-5-9-2 2-5 4-5 9Z" fill="rgba(237,233,254,0.55)"/>
+            <path class="sand-stream" d="M32 30v8" stroke="rgba(237,233,254,0.9)" stroke-width="2.2" stroke-linecap="round"/>
+          </svg>
+            </div>
+        <div class="stat-content-wrapper">
+          <div class="stat-value-wrapper">
+            <span class="stat-value" data-value="5">0</span>
+            <span class="stat-unit">years</span>
+          </div>
+          <p class="stat-label">Market experience</p>
         </div>
       </div>
     </div>
+  </section>
 
-    <div class="col">
-      <div class="values info_card">
-        <h4>Values</h4>
-        <div>
-          <div class="value_block">
-            <h6>Drive positive change.</h6>
-            <p>We stimulate systemic positive transformations for our clients.</p>
-          </div>
-          
-          <div class="value_block">
-            <h6>Lead with context.</h6>
-            <p>We are transparent and inclusive when making and explaining decisions.</p>
-            <p>We are all leaders.</p>
-          </div>
-
-          <div class="value_block">
-            <h6>Act with responsibility.</h6>
-            <p>We take pride in our work and take responsibility for its impact. We are empowered to take action to move forward.</p>
-          </div>
-
-          <div class="value_block">
-            <h6>Foster connections.</h6>
-            <p>We learn from each other and teach each other to build connections and amplify the results of our collective efforts. We create partnerships inside and outside the organization</p>
-          </div>
-
-          <div class="value_block">
-            <h6>Build trust.</h6>
-            <p>We listen, speak, and give candid feedback. We treat each other with respect. We collaborate - with intention and care.</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="clients info_card">
-        <h4>Partners</h4>
-        <div class="clients_cols">
-          <div class="clients_col">
-            <p>URALCHEM</p>
-            <p>Sokolsky Pulp Mill</p>
-            <p>Ural Steel</p>
-            <p>Lukoil</p>
-          </div>
-          <div class="clients_col">
-            <p>Gubakha Coke</p>
-            <p>Sibur</p>
-            <p>Rosneft</p>
-            <p>Tatneft</p>
-          </div>
-        </div>
-      </div>
-
-      <img src="/img/about/chairs.jpg" class="chairs_img" alt="About Rustrade" />
+  <!-- Values Section -->
+  <section class="section values">
+    <div class="section-header">
+      <h2>Our Values</h2>
+      <p>Principles that guide our work every day</p>
     </div>
-  </main>
+    <div class="values-grid">
+      <div class="value-card value-card-1">
+        <h3>Drive Positive Change</h3>
+        <ul>
+          <li>We stimulate systemic positive transformations for our clients</li>
+        </ul>
+      </div>
+      <div class="value-card value-card-2">
+        <h3>Lead with Context</h3>
+        <ul>
+          <li>We are transparent and inclusive when making and explaining decisions</li>
+          <li>We are all leaders</li>
+        </ul>
+      </div>
+      <div class="value-card value-card-3">
+        <h3>Build Trust</h3>
+        <ul>
+          <li>We listen, speak, and give candid feedback</li>
+          <li>We treat each other with respect</li>
+          <li>We collaborate - with intention and care</li>
+        </ul>
+        <div class="value-image">
+          <img src="/руки.webp" alt="Partnership" />
+        </div>
+      </div>
+      <div class="value-card value-card-4">
+        <h3>Annual Audit</h3>
+        <ul>
+          <li>We take pride in our work and take responsibility for its impact</li>
+          <li>We are empowered to take action to move forward</li>
+          <li>Act with responsibility to customers</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Partners Marquee Section -->
+  <section class="section partners">
+    <div class="section-header">
+      <h2>Trusted by</h2>
+    </div>
+    
+    <div class="marquee-container">
+      <div class="marquee-track">
+        {/* First set of partners */}
+        {partners.map(partner => (
+          <div class="partner-item">
+            <div class="partner-logo">
+              <img src={partner.logo} alt={partner.name} />
+            </div>
+          </div>
+        ))}
+        {/* Duplicate set for seamless loop */}
+        {partners.map(partner => (
+          <div class="partner-item">
+            <div class="partner-logo">
+              <img src={partner.logo} alt={partner.name} />
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <Faq items={faqItems} lang={lang} />
+
+  <CtaFaq lang={lang} />
 </BaseLayout>
 
+<script>
+  function animateStats() {
+    const stats = document.querySelectorAll('.stat-value');
+    
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const target = entry.target;
+          const endValue = parseInt(target.getAttribute('data-value') || '0');
+          const duration = 2000; // 2 seconds
+          const start = 0;
+          const startTime = performance.now();
+
+          function update(currentTime: number) {
+            const elapsed = currentTime - startTime;
+            const progress = Math.min(elapsed / duration, 1);
+            
+            // Ease out quart
+            const ease = 1 - Math.pow(1 - progress, 4);
+            
+            const current = Math.floor(start + (endValue - start) * ease);
+            target.textContent = current.toString();
+
+            if (progress < 1) {
+              requestAnimationFrame(update);
+            } else {
+              target.textContent = endValue.toString();
+            }
+          }
+
+          requestAnimationFrame(update);
+          observer.unobserve(target);
+        }
+      });
+    }, { threshold: 0.2 });
+
+    stats.forEach(stat => observer.observe(stat));
+  }
+
+  document.addEventListener('astro:page-load', animateStats);
+  document.addEventListener('DOMContentLoaded', animateStats);
+</script>
+
 <style>
-  .about-main {
-    display: flex;
+  /* Common Styles */
+  .section {
+    margin-bottom: var(--space-12);
   }
 
-  .main_col {
+  .section-header {
+    margin-bottom: var(--space-8);
+  }
+
+  .section-header h2 {
+    font-size: var(--text-3xl);
+    margin-bottom: var(--space-3);
+  }
+
+  .section-header p {
+    color: var(--color-text-muted);
+    font-size: var(--text-lg);
+    max-width: 600px;
+  }
+
+  /* Hero Section */
+  .hero {
+    background: linear-gradient(59deg, rgba(42, 45, 46, 0.85) 0%, rgba(0, 0, 0, 0.60) 31.59%, rgba(42, 45, 46, 0.85) 100%), 
+                url('/img/about/team.png') center/cover no-repeat;
+    border-radius: var(--radius-xl);
+    padding: var(--space-12) var(--space-8);
+    margin-bottom: var(--space-12);
+    min-height: 400px;
+    display: flex;
+    align-items: center;
+  }
+
+  .hero-content { max-width: 700px; color: var(--color-white); }
+  .hero h1 { font-size: clamp(32px, 5vw, 48px); color: var(--color-white); margin-bottom: var(--space-4); letter-spacing: -1px; }
+  .hero p { font-size: var(--text-lg); opacity: 0.9; margin-bottom: var(--space-8); line-height: 1.6; max-width: 600px; }
+
+  /* About Info Grid */
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-8);
+    align-items: center;
+  }
+
+  .about-text h2 {
+    font-size: var(--text-3xl);
+    margin-bottom: var(--space-6);
+  }
+
+  .text-content {
     display: flex;
     flex-direction: column;
+    gap: var(--space-4);
   }
 
-  .team_img {
-    border-radius: 10px;
-    height: 513px;
-    margin-bottom: 8px;
+  .text-content p {
+    font-size: var(--text-base);
+    line-height: 1.6;
+    color: var(--color-text-muted);
+  }
+
+  .about-image {
+    border-radius: var(--radius-xl);
     overflow: hidden;
-  }
-
-  .team_img img {
     height: 100%;
+    min-height: 400px;
+  }
+
+  .about-image img {
     width: 100%;
+    height: 100%;
     object-fit: cover;
-    border-radius: 10px;
+    transition: transform 0.5s ease;
   }
 
-  .main_info {
+  .about-image:hover img {
+    transform: scale(1.05);
+  }
+
+  /* Stats Section */
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: var(--space-4);
+  }
+
+  .stat-card {
+    background: var(--color-bg-card);
+    padding: var(--space-6);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--color-border);
+    transition: all 0.3s ease;
     display: flex;
-    gap: 8px;
-    margin-bottom: 8px;
-  }
-
-  .info_card {
-    padding: 16px;
-    border-radius: 10px;
-    background: #E9E9E9;
-  }
-
-  .info_card h4, .info_card h6 {
-    color: #000;
-    font-family: Manrope, sans-serif;
-    font-style: normal;
-    font-weight: 500;
-  }
-
-  .info_card h4 {
-    font-size: 14px;
-    line-height: 20px;
-    letter-spacing: -0.42px;
-  }
-
-  .info_card h6 {
-    font-size: 12px;
-    line-height: 18px;
-    margin-top: 8px;
-  }
-
-  .info_card p {
-    color: #5C5A5A;
-    font-family: Manrope, sans-serif;
-    font-size: 12px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 18px;
-  }
-
-  .info_card > p {
-    margin-top: 10px;
-  }
-
-  .description, .company_contacts {
-    width: 50%;
-  }
-
-  .contacts_cols {
-    display: flex;
-    justify-content: space-between;
-  }
-
-  .contacts_col > div {
-    margin-top: 8px;
-  }
-
-  .contacts_col > div:first-child {
-    margin-top: 10px;
-  }
-
-  .stats {
-    display: flex;
-    flex: 1;
-    gap: 8px;
-  }
-
-  .stats_item {
-    display: flex;
-    padding: 16px;
     flex-direction: column;
-    flex: 1 0 0;
-    border-radius: 10px;
-    background: #ECF3FD;
-    gap: 64px;
+    gap: var(--space-4);
   }
 
-  .stats_item h3 {
-    color: #2A2D2E;
-    font-family: Manrope, sans-serif;
-    font-size: 14px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 20px;
-    letter-spacing: -0.42px;
+  .stat-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-md);
+    background: var(--color-white);
+    border-color: var(--color-accent);
   }
 
-  .stats_count {
+  .stat-icon {
+    width: 80px;
+    height: 80px;
     display: flex;
-    align-items: flex-start;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border-radius: 0;
+    padding: 0;
+    margin: 0 auto 12px;
+    align-self: center;
+    box-shadow: none;
+    transition: all 0.3s ease;
   }
 
-  .stats_count_n {
-    color: #2A2D2E;
-    font-family: Onest, sans-serif;
-    font-size: 40px;
-    font-style: normal;
+  .stat-card:hover .stat-icon {
+    transform: translateY(-2px);
+  }
+
+  .stat-icon img,
+  .stat-icon svg {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  /* Icon animations */
+  .stat-icon .icon-bg {
+    animation: iconBgBreath 4.5s ease-in-out infinite;
+    transform-origin: 32px 32px;
+  }
+
+  .stat-icon-power .turbine-rotor {
+    animation: rotorSpin 7.5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+    transform-origin: 32px 32px;
+  }
+  .stat-icon-power .power-ring {
+    animation: ringPulse 2.8s ease-in-out infinite;
+    transform-origin: 32px 32px;
+  }
+  .stat-icon-power .energy-wave {
+    stroke-dasharray: 18 10;
+    animation: waveFlow 2.6s linear infinite;
+  }
+
+  .stat-icon-projects .draw-line {
+    stroke-dasharray: 40;
+    stroke-dashoffset: 40;
+    animation: lineDraw 2.2s ease-out infinite;
+  }
+  .stat-icon-projects .draw-line:nth-child(2) { animation-delay: 0.18s; }
+  .stat-icon-projects .draw-line:nth-child(3) { animation-delay: 0.34s; }
+  .stat-icon-projects .check-circle {
+    stroke-dashoffset: 64;
+    animation: drawCircle 2.2s ease-out infinite;
+  }
+  .stat-icon-projects .check-mark {
+    stroke-dashoffset: 24;
+    animation: drawCheck 2.2s ease-out infinite;
+  }
+
+  .stat-icon-progress .progress-track {
+    animation: dashMove 2.6s linear infinite;
+  }
+  .stat-icon-progress .progress-dot {
+    animation: dotTravel 2.6s ease-in-out infinite;
+    transform-origin: 0 0;
+  }
+  .stat-icon-progress .progress-bars rect {
+    animation: barPulse 1.8s ease-in-out infinite;
+    transform-origin: center bottom;
+  }
+  .stat-icon-progress .progress-bars rect:nth-child(2) { animation-delay: 0.12s; }
+  .stat-icon-progress .progress-bars rect:nth-child(3) { animation-delay: 0.24s; }
+
+  .stat-icon-experience .sand-top {
+    transform-origin: 32px 22px;
+    animation: sandTop 3.2s ease-in-out infinite;
+  }
+  .stat-icon-experience .sand-bottom {
+    transform-origin: 32px 44px;
+    animation: sandBottom 3.2s ease-in-out infinite;
+  }
+  .stat-icon-experience .sand-stream {
+    stroke-dasharray: 6 6;
+    animation: streamFlicker 1.6s linear infinite;
+  }
+
+  @keyframes iconBgBreath {
+    0%, 100% { opacity: 0.11; transform: scale(1); }
+    50% { opacity: 0.17; transform: scale(1.02); }
+  }
+
+  @keyframes rotorSpin {
+    0% { transform: rotate(0deg); }
+    70% { transform: rotate(360deg); }
+    100% { transform: rotate(420deg); }
+  }
+  @keyframes ringPulse {
+    0%, 100% { opacity: 0.55; transform: scale(1); }
+    50% { opacity: 0.9; transform: scale(1.03); }
+  }
+  @keyframes waveFlow {
+    from { stroke-dashoffset: 0; opacity: 0.85; }
+    to { stroke-dashoffset: -56; opacity: 1; }
+  }
+
+  @keyframes lineDraw {
+    0% { stroke-dashoffset: 40; opacity: 0.55; }
+    45% { stroke-dashoffset: 0; opacity: 1; }
+    100% { stroke-dashoffset: 0; opacity: 0.9; }
+  }
+  @keyframes drawCircle {
+    0% { stroke-dashoffset: 64; opacity: 0.8; }
+    55% { stroke-dashoffset: 0; opacity: 1; }
+    100% { stroke-dashoffset: 0; opacity: 0.9; }
+  }
+  @keyframes drawCheck {
+    0%, 20% { stroke-dashoffset: 24; opacity: 0.7; }
+    70% { stroke-dashoffset: 0; opacity: 1; }
+    100% { stroke-dashoffset: 0; opacity: 0.9; }
+  }
+
+  @keyframes dashMove {
+    from { stroke-dashoffset: 0; opacity: 0.9; }
+    to { stroke-dashoffset: -24; opacity: 1; }
+  }
+  @keyframes dotTravel {
+    0% { transform: translate(0, 0); opacity: 0.8; filter: drop-shadow(0 0 0 rgba(224,242,254,0)); }
+    45% { transform: translate(16px, -12px); opacity: 1; filter: drop-shadow(0 0 8px rgba(59,130,246,0.35)); }
+    100% { transform: translate(32px, -24px); opacity: 0.95; filter: drop-shadow(0 0 10px rgba(59,130,246,0.4)); }
+  }
+  @keyframes barPulse {
+    0%, 100% { transform: scaleY(1); opacity: 0.85; }
+    50% { transform: scaleY(1.18); opacity: 1; }
+  }
+
+  @keyframes sandTop {
+    0%, 100% { transform: scaleY(1); opacity: 0.9; }
+    60% { transform: scaleY(0.25); opacity: 0.35; }
+  }
+  @keyframes sandBottom {
+    0%, 100% { transform: scaleY(0.25); opacity: 0.45; }
+    60% { transform: scaleY(1); opacity: 0.85; }
+  }
+  @keyframes streamFlicker {
+    from { stroke-dashoffset: 0; opacity: 0.65; }
+    to { stroke-dashoffset: -12; opacity: 1; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .stat-icon .icon-bg,
+    .stat-icon-power .turbine-rotor,
+    .stat-icon-power .power-ring,
+    .stat-icon-power .energy-wave,
+    .stat-icon-projects .draw-line,
+    .stat-icon-projects .check-circle,
+    .stat-icon-projects .check-mark,
+    .stat-icon-progress .progress-track,
+    .stat-icon-progress .progress-dot,
+    .stat-icon-progress .progress-bars rect,
+    .stat-icon-experience .sand-top,
+    .stat-icon-experience .sand-bottom,
+    .stat-icon-experience .sand-stream {
+      animation: none !important;
+    }
+  }
+
+  .stat-card:hover .stat-icon svg {
+    transform: scale(1.1);
+    transition: transform 0.3s ease;
+  }
+  .stat-icon svg {
+    transition: transform 0.3s ease;
+  }
+
+  .stat-value-wrapper {
+    display: flex;
+    align-items: baseline;
+    gap: var(--space-2);
+  }
+
+  .stat-value {
+    font-size: var(--text-4xl);
     font-weight: 700;
-    line-height: 48px;
-    letter-spacing: -2px;
+    color: var(--color-primary);
+    font-family: var(--font-heading);
+    line-height: 1;
   }
 
-  .stats_count_item {
-    color: #2A2D2E;
-    font-family: Manrope, sans-serif;
-    font-size: 14px;
-    font-style: normal;
+  .stat-unit {
+    font-size: var(--text-lg);
+    color: var(--color-text-muted);
     font-weight: 500;
-    line-height: 20px;
-    letter-spacing: -0.42px;
-    position: relative;
-    top: 3px;
-    left: 8px;
   }
 
-  .col {
-    padding-left: 8px;
+  .stat-label {
+    font-size: var(--text-base);
+    color: var(--color-text-muted);
+    line-height: 1.4;
+  }
+
+  /* Values Section - Bento Grid */
+  .values-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1.2fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 16px;
+    min-height: 480px;
+  }
+
+  .value-card {
+    background: linear-gradient(145deg, 
+      rgba(255,255,255,0.9) 0%, 
+      rgba(250,250,250,0.85) 50%, 
+      rgba(245,245,245,0.8) 100%
+    );
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    padding: 32px;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    box-shadow: 
+      0 8px 32px rgba(0,0,0,0.08),
+      0 0 0 1px rgba(255,255,255,0.5),
+      inset 0 1px 0 rgba(255,255,255,0.6);
+    border: 1px solid rgba(255,255,255,0.3);
+  }
+
+  .value-card h3 {
+    font-size: var(--text-2xl);
+    font-weight: 700;
+    color: var(--color-primary);
+    margin-bottom: var(--space-5);
+    line-height: 1.3;
+  }
+
+  .value-card ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    margin-top: auto;
+  }
+
+  .value-card li {
+    position: relative;
+    padding-left: var(--space-4);
+    margin-bottom: var(--space-2);
+    font-size: var(--text-base);
+    color: var(--color-text-muted);
+    line-height: 1.6;
+  }
+
+  .value-card li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 8px;
+    width: 5px;
+    height: 5px;
+    background: var(--color-border);
+    border-radius: 50%;
+  }
+
+  .value-card-1 { 
+    grid-column: 1; 
+    grid-row: 1; 
+  }
+  
+  .value-card-2 { 
+    grid-column: 2; 
+    grid-row: 1; 
+  }
+  
+  .value-card-3 { 
+    grid-column: 3; 
+    grid-row: 1 / 3;
     display: flex;
     flex-direction: column;
   }
-
-  .values, .clients {
-    margin-bottom: 8px;
+  
+  .value-card-4 { 
+    grid-column: 1 / 3; 
+    grid-row: 2; 
   }
 
-  .values h4, .values .value_block {
-    margin-bottom: 10px;
-  }
-
-  .value_block h6 {
-    margin-bottom: 4px;
-  }
-
-  .clients_cols {
+  .value-image {
+    margin-top: auto;
+    padding-top: 24px;
+    flex-grow: 1;
     display: flex;
-    margin-top: 10px;
+    align-items: flex-end;
   }
 
-  .clients_col {
-    width: 50%;
-  }
-
-  .clients_col p {
-    margin-top: 2px;
-  }
-
-  .clients_col p:first-child {
-    margin-top: 0px;
-  }
-
-  .clients h4 {
-    margin-bottom: 10px;
-  }
-
-  .chairs_img {
+  .value-image img {
     width: 100%;
-    flex: 1;
-    border-radius: 10px;
-    object-fit: cover;
+    height: auto;
+    border-radius: 8px;
+    display: block;
+    object-fit: contain;
   }
 
-  /* Responsive */
+  /* Partners Marquee */
+  .marquee-container {
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+    padding: var(--space-6) 0;
+    mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+    -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+  }
+
+  .marquee-track {
+    display: flex;
+    gap: var(--space-8);
+    width: max-content;
+    animation: scroll 40s linear infinite;
+  }
+
+  .marquee-track:hover {
+    animation-play-state: paused;
+  }
+
+  .partner-item {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .partner-logo {
+    padding: var(--space-4) var(--space-8);
+    background: var(--color-white);
+    border: 1px solid var(--color-border);
+    border-radius: 20px;
+    transition: all 0.3s ease;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 200px;
+  }
+
+  .partner-logo img {
+    max-height: 100%;
+    max-width: 100%;
+    object-fit: contain;
+    filter: grayscale(100%);
+    transition: all 0.3s ease;
+    opacity: 0.7;
+  }
+
+  .partner-item:hover .partner-logo {
+    border-color: var(--color-accent);
+    transform: scale(1.05);
+    box-shadow: var(--shadow-sm);
+  }
+  
+  .partner-item:hover .partner-logo img {
+    filter: grayscale(0%);
+    opacity: 1;
+  }
+
+  @keyframes scroll {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+
+  /* Responsive Design */
+  @media (max-width: 1024px) {
+    .about-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .about-image {
+      min-height: 300px;
+      order: -1;
+    }
+
+    .values-grid {
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: auto auto auto;
+      min-height: auto;
+    }
+    
+    .value-card-1 { grid-column: 1; grid-row: 1; }
+    .value-card-2 { grid-column: 2; grid-row: 1; }
+    .value-card-3 { grid-column: 1 / 3; grid-row: 2; }
+    .value-card-4 { grid-column: 1 / 3; grid-row: 3; }
+  }
+
   @media (max-width: 768px) {
-    .team_img {
-      width: 100%;
-      height: 200px;
+    .hero {
+      padding: var(--space-8) var(--space-5);
+      min-height: 300px;
     }
 
-    .main_info {
-      flex-direction: column;
+    .values-grid {
+      grid-template-columns: 1fr;
+      min-height: auto;
+    }
+    
+    .value-card-1,
+    .value-card-2,
+    .value-card-3,
+    .value-card-4 { 
+      grid-column: 1 !important; 
+      grid-row: auto !important; 
     }
 
-    .description, .company_contacts {
-      width: unset;
-    }
-  }
-
-  @media (min-width: 420px) and (max-width: 768px) {
-    .team_img {
-      height: 350px;
-    }
-  }
-
-  @media (min-width: 768px) and (max-width: 992px) {
-    .team_img {
-      height: 450px;
-    }
-  }
-
-  @media (max-width: 1200px) {
-    .description, .company_contacts {
-      width: unset;
+    .value-card {
+      padding: 24px;
     }
 
-    .stats {
-      flex-direction: column;
-      margin-bottom: 8px;
+    .value-card h3 {
+      font-size: 18px;
     }
 
-    .about-main {
-      flex-direction: column;
-    }
-
-    .col {
-      padding-left: 0;
+    .stats-grid {
+      grid-template-columns: 1fr 1fr;
     }
   }
 
-  @media (min-width: 1200px) and (max-width: 1500px) {
-    .about-main {
-      flex-direction: column;
-    }
-
-    .contacts_cols {
-      flex-direction: column;
-    }
-
-    .stats {
-      margin-bottom: 8px;
-    }
-  }
-
-  @media (max-width: 1500px) {
-    .stats {
-      margin-bottom: 8px;
-    }
-  }
-
-  @media (max-width: 600px) {
-    .col {
-      padding-left: 0;
+  @media (max-width: 480px) {
+    .stats-grid {
+      grid-template-columns: 1fr;
     }
   }
 </style>

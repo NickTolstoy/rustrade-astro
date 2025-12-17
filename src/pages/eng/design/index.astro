@@ -1,0 +1,1235 @@
+---
+import type { Lang } from '@/i18n';
+import { getBaseUrl } from '@/i18n';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Breadcrumbs from '@/components/Breadcrumbs.astro';
+import CtaFaq from '@/components/CtaFaq.astro';
+import Faq from '@/components/Faq.astro';
+
+const lang: Lang = 'en';
+const base = getBaseUrl(lang);
+
+const faqItems = [
+  {
+    question: "What software do you use for design?",
+    answer: "We use modern CAD/CAE systems for 3D modeling and calculations (Kompas-3D, SolidWorks, Ansys). This allows eliminating conflicts at early stages and ensuring high documentation accuracy."
+  },
+  {
+    question: "Do you support expertise passage?",
+    answer: "Yes, supporting project documentation in state or non-state expertise bodies is part of our standard service package. We promptly address comments and defend adopted technical solutions."
+  },
+  {
+    question: "What documentation sections do you develop?",
+    answer: "We develop a complete documentation package: from feasibility study (FS) and basic technical solutions (BTS) to project (PD) and working documentation (WD) for all necessary sections."
+  }
+];
+
+const mainServices = [
+  {
+    title: 'Investment Justification',
+    description: 'Comprehensive analysis of project economic efficiency, including capital investment assessment, payback period calculation and investment attractiveness determination',
+    animation: '/img/design/docs-animation.svg'
+  },
+  {
+    title: 'Basic Technical Solutions',
+    description: 'Development of fundamental technical solutions meeting project objectives and ensuring optimal parameters for future energy facility',
+    animation: '/img/design/tech-solutions-animation.svg'
+  },
+  {
+    title: 'Project Documentation Development',
+    description: 'Preparation of complete document package for passing expertise and obtaining construction permits for energy facilities of any complexity',
+    animation: '/img/design/invest-animation.svg'
+  }
+];
+
+const additionalServices = [
+  {
+    title: 'Working Documentation Development',
+    description: 'Creation of detailed technical documentation for construction, including drawings, specifications and instructions for installation and construction work',
+    icon: '/img/Proektnaya_dokumentaciya/documents_files.svg'
+  },
+  {
+    title: 'Design Supervision',
+    description: 'Monitoring construction and installation for compliance with design solutions and timely modifications when necessary',
+    icon: '/img/Proektnaya_dokumentaciya/protection_security_finger_thumb_biometr.svg'
+  },
+  {
+    title: 'Surveys and Expertise',
+    description: 'Professional assessment of foundations and structures condition for modernization projects of existing energy facilities',
+    icon: '/img/Proektnaya_dokumentaciya/magnifier_search.svg'
+  },
+  {
+    title: 'Expertise Support',
+    description: 'Comprehensive support for approval of design solutions in expert organizations and local authorities',
+    icon: '/img/Proektnaya_dokumentaciya/people_group.svg'
+  }
+];
+
+const stages = [
+  {
+    title: 'Pre-project Research',
+    description: 'Analysis of initial data and technical specifications, performing necessary surveys, determining key technical parameters and preparing preliminary documentation. At this stage, we thoroughly study all requirements and conditions to create optimal design solution.',
+    image: '/img/Proektnaya_dokumentaciya/predproektnoe_issledovanie.webp',
+    step: 'First stage'
+  },
+  {
+    title: 'Project Documentation Development',
+    description: 'Creation of document package including architectural, technological, engineering solutions, structural calculations, cost estimates and other necessary materials for obtaining permits.',
+    image: '/img/Proektnaya_dokumentaciya/razrabotka_proektnoy_dokumentacii.webp',
+    step: 'Second stage'
+  },
+  {
+    title: 'Expertise and Approvals',
+    description: 'Passing state or non-state expertise and obtaining all necessary approvals in regulatory bodies with our full support.',
+    image: '/img/Proektnaya_dokumentaciya/soglasovanie_i_expertiza.webp',
+    step: 'Third stage'
+  },
+  {
+    title: 'Working Documentation Development',
+    description: 'Development of detailed drawings, specifications and instructions for construction and installation, ensuring accurate project implementation on site.',
+    image: '/img/Proektnaya_dokumentaciya/rabochaya_dokumentaciya.webp',
+    step: 'Fourth stage'
+  }
+];
+
+const benefits = [
+  {
+    title: 'Years of Experience',
+    description: 'Our company has significant experience in designing energy facilities of various complexity and purpose',
+    icon: '/img/design/icon-experience.png'
+  },
+  {
+    title: 'Comprehensive Approach',
+    description: 'We perform a full cycle of work from pre-project research to design supervision',
+    icon: '/img/design/icon-complex.png'
+  },
+  {
+    title: 'High Qualification',
+    description: 'The company employs highly qualified engineers and designers with extensive experience',
+    icon: '/img/design/icon-qualification.png'
+  },
+  {
+    title: 'Modern Technologies',
+    description: 'We use advanced software and design methods to achieve the best results',
+    icon: '/img/design/icon-technology.png'
+  }
+];
+
+const stats = [
+  { value: 8, label: 'Completed projects' },
+  { value: 10, label: 'Regular clients' },
+  { value: 5, label: 'Years of experience' },
+  { value: 25, label: 'Leading specialists' }
+];
+---
+
+<BaseLayout 
+  lang={lang} 
+  title="Energy Facility Design — RUSTRADE"
+  description="Development of project and working documentation for energy facilities. Investment justification, feasibility study, PD, WD. 8 completed projects, 5 years of experience. Full cycle from concept to commissioning."
+  keywords="energy facility design, project documentation, working documentation, turbine design, RUSTRADE"
+  image="/img/design/design_hero.webp"
+  faqData={faqItems}
+  breadcrumbs={[{ name: 'Design', url: '/eng/design' }]}
+  serviceData={{
+    name: 'Energy Facility Design',
+    description: 'Development of all types of project and working documentation for energy facilities with steam turbines',
+    image: '/img/design/design_hero.webp',
+    serviceType: 'Design services'
+  }}
+>
+  <Breadcrumbs items={[{ label: 'Design' }]} lang={lang} />
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-content">
+      <h1>Project and Working Documentation Development</h1>
+      <p>Professional development of all types of project documentation for implementing energy projects using advanced engineering solutions</p>
+      <div class="hero-buttons">
+        <button class="button-47" data-modal="design">
+          <span class="button-47__circle">
+            <svg class="button-47__icon-svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path class="icon-line" d="M2 20h20"/>
+              <path class="icon-pen" d="M15.5 3.5a2.121 2.121 0 0 1 3 3L7 18l-4 1 1-4L15.5 3.5z"/>
+            </svg>
+          </span>
+          <span class="button-47__text">Order Design</span>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services Section -->
+  <section class="section services">
+    <div class="section-header">
+      <h2>Проектные услуги</h2>
+      <p>Наша компания предлагает полный спектр услуг по разработке документации для проектов в энергетической отрасли, гарантируя высокое качество и соответствие всем нормативным требованиям.</p>
+    </div>
+
+    <!-- Main Services -->
+    <div class="main-services-grid">
+      {mainServices.map(service => (
+        <div class="main-service-card">
+          <div class="main-service-content">
+            <h3>{service.title}</h3>
+            <p>{service.description}</p>
+          </div>
+          <div class="main-service-animation">
+            <div class="animation-gradient"></div>
+            <object type="image/svg+xml" data={service.animation} aria-label={service.title}></object>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <!-- Additional Services -->
+    <div class="additional-services-grid">
+      {additionalServices.map(service => (
+        <div class="additional-service-card">
+          <div class="additional-service-header">
+            <div class="additional-service-icon">
+              <img src={service.icon} alt={service.title} />
+            </div>
+            <h3>{service.title}</h3>
+          </div>
+          <p>{service.description}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- Stages Section -->
+  <section class="section stages">
+    <div class="section-header">
+      <h2>Этапы проектирования</h2>
+      <p>Наш подход к проектированию гарантирует точность, качество и полное соответствие требованиям энергетической отрасли</p>
+    </div>
+
+    <div class="news">
+      <div class="large_news_card">
+        <div class="news_info">
+          <div class="news_card_head">
+            <span class="news_category">{stages[0].step}</span>
+            <img src="/img/main/news_icons/company_news.svg" alt="icon" />
+          </div>
+          <h4>{stages[0].title}</h4>
+          <div class="news_brief">
+            <p>{stages[0].description}</p>
+          </div>
+        </div>
+        <div class="news_img_area">
+          <img src={stages[0].image} alt={stages[0].title} loading="lazy" />
+        </div>
+      </div>
+
+      <div class="news_cards">
+        <div class="news_card">
+          <div class="news_card_head">
+            <span class="news_category">{stages[1].step}</span>
+            <img src="/img/main/news_icons/company_news.svg" alt="icon" />
+          </div>
+          <div class="news_card_content">
+            <div class="news_brief">
+              <h4>{stages[1].title}</h4>
+              <p>{stages[1].description}</p>
+            </div>
+            <div class="news_img_area">
+              <img src={stages[1].image} alt={stages[1].title} loading="lazy" />
+            </div>
+          </div>
+        </div>
+
+        <div class="news_card">
+          <div class="news_card_head">
+            <span class="news_category">{stages[2].step}</span>
+            <img src="/img/main/news_icons/company_news.svg" alt="icon" />
+          </div>
+          <div class="news_card_content">
+            <div class="news_brief">
+              <h4>{stages[2].title}</h4>
+              <p>{stages[2].description}</p>
+            </div>
+            <div class="news_img_area">
+              <img src={stages[2].image} alt={stages[2].title} loading="lazy" />
+            </div>
+          </div>
+        </div>
+
+        <div class="fourth_stage_card">
+          <div class="fourth_stage_header">
+            <span class="stage_label">{stages[3].step}</span>
+            <img src="/img/main/news_icons/company_news.svg" alt="icon" class="stage_icon" />
+          </div>
+          <div class="fourth_stage_content">
+            <div class="fourth_stage_text">
+              <h4>{stages[3].title}</h4>
+              <p>{stages[3].description}</p>
+            </div>
+            <div class="fourth_stage_image">
+              <img src={stages[3].image} alt={stages[3].title} loading="lazy" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats Section -->
+  <section class="section stats">
+    <div class="stats-grid">
+      {stats.map(stat => (
+        <div class="stat-card">
+          <div class="stat-value" data-value={stat.value}>0</div>
+          <div class="stat-label">{stat.label}</div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <script>
+    function animateCounters() {
+      const counters = document.querySelectorAll('.stat-value[data-value]');
+      
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const target = entry.target as HTMLElement;
+            const endValue = parseInt(target.getAttribute('data-value') || '0');
+            const duration = 2000;
+            const startTime = performance.now();
+
+            function update(currentTime: number) {
+              const elapsed = currentTime - startTime;
+              const progress = Math.min(elapsed / duration, 1);
+              const ease = 1 - Math.pow(1 - progress, 4);
+              const current = Math.floor(endValue * ease);
+              target.textContent = current.toString();
+
+              if (progress < 1) {
+                requestAnimationFrame(update);
+              } else {
+                target.textContent = endValue.toString();
+              }
+            }
+            requestAnimationFrame(update);
+            observer.unobserve(target);
+          }
+        });
+      }, { threshold: 0.3 });
+
+      counters.forEach(counter => observer.observe(counter));
+    }
+
+    document.addEventListener('astro:page-load', animateCounters);
+    document.addEventListener('DOMContentLoaded', animateCounters);
+  </script>
+
+  <!-- Benefits Section -->
+  <section class="section benefits">
+    <div class="section-header">
+      <h2>Advantages of Working With Us</h2>
+      <p>Professional team of engineers and designers with extensive experience in the energy industry</p>
+    </div>
+
+    <div class="benefits-grid">
+      {benefits.map(benefit => (
+        <div class="benefit-card">
+          <div class="benefit-icon">
+            <img src={benefit.icon} alt={benefit.title} />
+          </div>
+          <h3>{benefit.title}</h3>
+          <p>{benefit.description}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <Faq items={faqItems} lang={lang} />
+
+  <CtaFaq lang={lang} />
+</BaseLayout>
+
+<style>
+  /* Common Styles */
+  .section {
+    margin-bottom: var(--space-12);
+  }
+
+  .section-header {
+    margin-bottom: var(--space-8);
+  }
+
+  .section-header h2 {
+    font-size: var(--text-3xl);
+    margin-bottom: var(--space-3);
+  }
+
+  .section-header p {
+    color: var(--color-text-muted);
+    max-width: 800px;
+    font-size: var(--text-lg);
+  }
+
+  /* Hero Section */
+  .hero {
+    background: linear-gradient(59deg, rgba(42, 45, 46, 0.70) 0%, rgba(0, 0, 0, 0.20) 31.59%, rgba(42, 45, 46, 0.70) 100%), 
+                url('/img/Proektnaya_dokumentaciya/glavnaya.webp') center/cover no-repeat;
+    border-radius: var(--radius-xl);
+    padding: var(--space-12) var(--space-8);
+    margin-bottom: var(--space-12);
+    min-height: 400px;
+    display: flex;
+    align-items: center;
+  }
+
+  .hero-content { max-width: 700px; color: var(--color-white); }
+  .hero h1 { font-size: clamp(32px, 5vw, 48px); color: var(--color-white); margin-bottom: var(--space-4); letter-spacing: -1px; line-height: 1.1; }
+  .hero p { font-size: var(--text-lg); opacity: 0.9; margin-bottom: var(--space-8); line-height: 1.6; max-width: 600px; }
+  
+  /* Main Services */
+  .main-services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: var(--space-6);
+    margin-bottom: var(--space-6);
+  }
+
+  .main-service-card {
+    background: var(--color-white);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    transition: all var(--transition-base);
+    min-height: 180px;
+    display: flex;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .main-service-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+    border-color: var(--color-accent);
+  }
+
+  .main-service-card:hover .main-service-animation object {
+    transform: scale(1.05);
+    filter: drop-shadow(0 0 8px rgba(59, 130, 246, 0.6)) drop-shadow(0 0 16px rgba(59, 130, 246, 0.4)) drop-shadow(0 0 24px rgba(59, 130, 246, 0.2));
+    transition: filter 0.3s ease, transform 0.3s ease;
+  }
+  
+  .main-service-animation object {
+    transition: filter 0.3s ease, transform 0.3s ease;
+  }
+
+  .main-service-content {
+    position: relative;
+    z-index: 2;
+    padding: var(--space-5);
+    padding-right: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 80%;
+    flex-shrink: 0;
+  }
+
+  .main-service-card h3 {
+    font-size: var(--text-xl);
+    margin-bottom: var(--space-3);
+    font-weight: 700;
+    color: var(--color-text);
+  }
+
+  .main-service-card p {
+    color: var(--color-text-muted);
+    font-size: var(--text-base);
+    line-height: 1.5;
+  }
+
+  .main-service-animation {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 50%;
+    display: flex;
+    align-items: stretch;
+    justify-content: flex-end;
+    overflow: hidden;
+  }
+
+  .main-service-animation object {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center center;
+    transition: transform 0.5s ease;
+  }
+
+  .animation-gradient {
+    position: absolute;
+    top: -10%;
+    left: 0;
+    bottom: -10%;
+    width: 70%;
+    background: linear-gradient(90deg, 
+      var(--color-white) 0%, 
+      var(--color-white) 40%,
+      rgba(255, 255, 255, 0.95) 55%,
+      rgba(255, 255, 255, 0.7) 75%,
+      rgba(255, 255, 255, 0) 100%
+    );
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  /* Additional Services */
+  .additional-services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: var(--space-4);
+  }
+
+  .additional-service-card {
+    background: var(--color-bg-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: var(--space-5);
+    transition: all var(--transition-base);
+  }
+
+  .additional-service-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+    background: var(--color-white);
+  }
+
+  .additional-service-header {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    margin-bottom: var(--space-3);
+  }
+
+  .additional-service-icon {
+    width: 40px;
+    height: 40px;
+    flex-shrink: 0;
+  }
+
+  .additional-service-icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  .additional-service-card h3 {
+    font-size: var(--text-lg);
+    font-weight: 700;
+    line-height: 1.3;
+  }
+
+  .additional-service-card p {
+    color: var(--color-text-muted);
+    font-size: var(--text-sm);
+    line-height: 1.5;
+  }
+
+  /* Stages - Bento Grid Layout */
+  .news {
+    width: 100%;
+    max-width: 100%;
+    margin-bottom: 72px;
+    display: flex;
+    gap: 10px;
+    align-items: stretch;
+  }
+
+  .large_news_card {
+    display: flex;
+    width: 40%;
+    padding: 40px;
+    align-items: flex-start;
+    flex-direction: column;
+    border-radius: 10px;
+    background: #ffffff;
+    margin-bottom: 0;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    border: 1px solid var(--color-border);
+  }
+
+  .large_news_card:hover {
+    background-color: #ffffff;
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  }
+
+  .large_news_card .news_img_area {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    overflow: hidden;
+    border-radius: 10px;
+    margin-top: 30px;
+    order: 2;
+  }
+
+  .large_news_card .news_img_area img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    border-radius: 10px;
+    transition: transform 0.5s ease;
+  }
+
+  .large_news_card:hover .news_img_area img {
+    transform: scale(1.05);
+  }
+
+  .large_news_card .news_info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 24px;
+    width: 100%;
+    order: 1;
+  }
+
+  .large_news_card .news_info h4 {
+    align-self: stretch;
+    color: #0b002a;
+    font-size: 32px;
+    font-weight: 500;
+    line-height: 36px;
+    letter-spacing: -0.96px;
+    transition: all 0.3s ease;
+    position: relative;
+    margin: 0;
+  }
+
+  .large_news_card .news_info h4::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 0;
+    width: 40px;
+    height: 3px;
+    background: #A3DAF3;
+    transition: width 0.3s ease;
+  }
+
+  .large_news_card:hover .news_info h4::after {
+    width: 100px;
+  }
+
+  .large_news_card .news_brief {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    align-self: stretch;
+  }
+
+  .news_brief p {
+    color: #5C5A5A;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 20px;
+    letter-spacing: -0.36px;
+    transition: color 0.3s ease;
+    margin: 0;
+  }
+
+  .large_news_card:hover .news_brief p {
+    color: #333;
+  }
+
+  .news_card_head {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .news_card_head img {
+    width: 24px;
+    height: 24px;
+    transition: transform 0.3s ease;
+  }
+
+  .large_news_card:hover .news_card_head img,
+  .news_card:hover .news_card_head img,
+  .fourth_stage_card:hover .stage_icon {
+    transform: rotate(45deg);
+  }
+
+  .news_category {
+    display: flex;
+    padding: 4px 12px;
+    align-items: flex-start;
+    gap: 4px;
+    border-radius: 4px;
+    background: #A3DAF3;
+    color: #2A2D2E;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: normal;
+    transition: all 0.3s ease;
+  }
+
+  .news_card_head:hover .news_category {
+    background: #7FCBEC;
+  }
+
+  .news_cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 10px;
+    width: 60%;
+    height: 100%;
+  }
+
+  .news_card {
+    display: flex;
+    padding: 20px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+    border-radius: 10px;
+    background: #ffffff;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    position: relative;
+    overflow: hidden;
+    border: 1px solid var(--color-border);
+  }
+
+  .news_card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 3px;
+    height: 0;
+    background: #A3DAF3;
+    transition: height 0.3s ease;
+  }
+
+  .news_card:hover {
+    background: #FFFFFF;
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  }
+
+  .news_card:hover::before {
+    height: 100%;
+  }
+
+  .news_card_content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+    align-self: stretch;
+  }
+
+  .news_card_content h4 {
+    color: #2A2D2E;
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 22px;
+    letter-spacing: -0.6px;
+    transition: all 0.3s ease;
+    margin-bottom: 8px;
+  }
+
+  .news_card:hover .news_card_content h4 {
+    color: #000;
+  }
+
+  .news_card .news_img_area {
+    overflow: hidden;
+    border-radius: 10px;
+    width: 100%;
+  }
+
+  .news_card .news_img_area img {
+    width: 100%;
+    height: 120px;
+    background: #D9D9D9;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+  }
+
+  .news_card:hover .news_img_area img {
+    transform: scale(1.05);
+  }
+
+  /* Fourth Stage Card */
+  .fourth_stage_card {
+    grid-column: 1 / 3;
+    padding: 16px 24px;
+    border-radius: 10px;
+    background: #ffffff;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    position: relative;
+    overflow: hidden;
+    border: 1px solid var(--color-border);
+  }
+
+  .fourth_stage_card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 3px;
+    height: 0;
+    background: #A3DAF3;
+    transition: height 0.3s ease;
+  }
+
+  .fourth_stage_card:hover {
+    background: #FFFFFF;
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  }
+
+  .fourth_stage_card:hover::before {
+    height: 100%;
+  }
+
+  .fourth_stage_header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 10px;
+  }
+
+  .stage_label {
+    display: flex;
+    padding: 4px 12px;
+    align-items: flex-start;
+    border-radius: 4px;
+    background: #A3DAF3;
+    color: #2A2D2E;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: normal;
+    transition: all 0.3s ease;
+  }
+
+  .fourth_stage_card:hover .stage_label {
+    background: #7FCBEC;
+  }
+
+  .stage_icon {
+    width: 24px;
+    height: 24px;
+    transition: transform 0.3s ease;
+  }
+
+  .fourth_stage_content {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+  }
+
+  .fourth_stage_text {
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .fourth_stage_text h4 {
+    color: #2A2D2E;
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 24px;
+    letter-spacing: -0.6px;
+    transition: all 0.3s ease;
+    margin: 0;
+  }
+
+  .fourth_stage_card:hover .fourth_stage_text h4 {
+    color: #000;
+  }
+
+  .fourth_stage_text p {
+    color: #5C5A5A;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 20px;
+    letter-spacing: -0.36px;
+    transition: color 0.3s ease;
+    margin: 0;
+  }
+
+  .fourth_stage_card:hover .fourth_stage_text p {
+    color: #333;
+  }
+
+  .fourth_stage_image {
+    width: 35%;
+    overflow: hidden;
+    border-radius: 10px;
+    align-self: center;
+  }
+
+  .fourth_stage_image img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    border-radius: 10px;
+    transition: transform 0.5s ease;
+  }
+
+  .fourth_stage_card:hover .fourth_stage_image img {
+    transform: scale(1.05);
+  }
+
+  /* Stats */
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-4);
+    background: var(--color-white);
+    border-radius: var(--radius-xl);
+    padding: var(--space-8);
+    border: 1px solid var(--color-border);
+  }
+
+  .stat-card {
+    text-align: center;
+    padding: var(--space-4);
+    border-right: 1px solid var(--color-border);
+  }
+
+  .stat-card:last-child {
+    border-right: none;
+  }
+
+  .stat-value {
+    font-size: var(--text-4xl);
+    font-weight: 700;
+    margin-bottom: var(--space-2);
+    color: var(--color-primary);
+  }
+
+  .stat-label {
+    font-size: var(--text-base);
+    color: var(--color-text-muted);
+  }
+
+  /* Benefits */
+  .benefits-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: var(--space-6);
+  }
+
+  .benefit-card {
+    padding: var(--space-6);
+    background: var(--color-white);
+    border-radius: var(--radius-xl);
+    border: 1px solid var(--color-border);
+    transition: all 0.3s ease;
+  }
+
+  .benefit-card:hover {
+    border-color: var(--color-accent);
+    box-shadow: var(--shadow-md);
+    transform: translateY(-4px);
+  }
+
+  .benefit-icon {
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: var(--space-4);
+  }
+
+  .benefit-icon img {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+  }
+
+  .benefit-card h3 {
+    font-size: var(--text-lg);
+    margin-bottom: var(--space-3);
+    color: var(--color-primary);
+  }
+
+  .benefit-card p {
+    color: var(--color-text-muted);
+    font-size: var(--text-base);
+    line-height: 1.6;
+  }
+
+  /* CTA */
+  .cta {
+    background: var(--color-bg-card);
+    border-radius: var(--radius-xl);
+    padding: var(--space-12) var(--space-8);
+    text-align: center;
+  }
+
+  .cta-content {
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .cta h2 {
+    font-size: var(--text-3xl);
+    margin-bottom: var(--space-4);
+  }
+
+  .cta p {
+    font-size: var(--text-lg);
+    color: var(--color-text-muted);
+    margin-bottom: var(--space-8);
+  }
+
+  /* Responsive Styles */
+  @media (min-width: 1200px) {
+    .news {
+      display: flex;
+      align-items: stretch;
+    }
+    
+    .large_news_card {
+      display: flex;
+      flex-direction: column;
+      width: 40%;
+      height: auto;
+    }
+    
+    .news_cards {
+      display: grid;
+      grid-template-rows: max-content 1fr;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      width: 60%;
+    }
+    
+    .fourth_stage_card {
+      grid-column: 1 / 3;
+      height: 100%;
+      box-sizing: border-box;
+      padding: 16px 24px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    
+    .news_cards > .news_card:first-child,
+    .news_cards > .news_card:nth-child(2) {
+      height: 100%;
+    }
+    
+    .large_news_card .news_info {
+      flex: 1 0 auto;
+    }
+    
+    .large_news_card .news_img_area {
+      flex: 0 1 auto;
+      margin-top: auto; /* Push image to bottom if needed */
+    }
+    
+    .news_card .news_img_area img {
+      height: 100px;
+    }
+    
+    .fourth_stage_content {
+      height: 100%;
+      align-items: center;
+      gap: 15px;
+    }
+    
+    .fourth_stage_image {
+      width: calc(35% + 30px);
+      margin-left: -30px;
+      margin-top: -20px;
+      height: 100%;
+      display: flex;
+      align-items: center;
+    }
+    
+    .fourth_stage_image img {
+      max-height: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    
+    .fourth_stage_text {
+      gap: 10px;
+      justify-content: center;
+    }
+  }
+
+  @media (max-width: 1200px) {
+    .news {
+      flex-direction: column;
+    }
+    
+    .large_news_card {
+      width: 100%;
+      margin-bottom: 20px;
+      box-sizing: border-box;
+      padding: 20px;
+    }
+    
+    .large_news_card .news_info h4, 
+    .large_news_card .news_brief {
+      max-width: 100%;
+      width: 100%;
+    }
+    
+    .large_news_card .news_img_area {
+      max-width: 100%;
+      width: 100%;
+    }
+    
+    .news_cards {
+      width: 100%;
+    }
+  }
+
+  @media (max-width: 992px) {
+    .news {
+      flex-direction: column;
+    }
+
+    .large_news_card {
+      width: 100%;
+      padding: 20px;
+      margin-bottom: 20px;
+    }
+
+    .large_news_card .news_img_area img {
+      height: auto;
+      min-height: 200px;
+    }
+
+    .large_news_card .news_info h4 {
+      font-size: 20px;
+      line-height: 24px;
+    }
+
+    .large_news_card .news_brief {
+      margin-top: -12px;
+    }
+
+    .news_cards {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      gap: 12px;
+    }
+
+    .news_card {
+      padding: 20px;
+    }
+    
+    .news_card_content {
+      gap: 16px;
+    }
+
+    .news_card .news_brief {
+      gap: 8px;
+    }
+
+    .fourth_stage_card {
+      padding: 20px;
+    }
+    
+    .fourth_stage_content {
+      flex-direction: column;
+      gap: 20px;
+    }
+    
+    .fourth_stage_text {
+      width: 100%;
+      order: 0;
+    }
+    
+    .fourth_stage_image {
+      width: 100%;
+      order: 1;
+    }
+  }
+
+  @media (max-width: 1024px) {
+    .stats-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--space-4);
+    }
+
+    .stat-card {
+      border-right: none;
+      border-bottom: 1px solid var(--color-border);
+    }
+    
+    .stat-card:nth-child(3),
+    .stat-card:nth-child(4) {
+      border-bottom: none;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .hero {
+      padding: var(--space-8) var(--space-5);
+      min-height: 350px;
+    }
+
+    .section-header h2 {
+      font-size: var(--text-2xl);
+    }
+
+    .main-services-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .main-service-card {
+      flex-direction: column;
+      min-height: auto;
+    }
+
+    .main-service-content {
+      width: 100%;
+      padding: var(--space-5);
+      order: 1;
+    }
+
+    .main-service-animation {
+      position: relative;
+      width: 100%;
+      height: 180px;
+      order: 2;
+    }
+
+    .animation-gradient {
+      width: 100%;
+      height: 50%;
+      background: linear-gradient(180deg, 
+        var(--color-white) 0%, 
+        rgba(255, 255, 255, 0.8) 50%,
+        rgba(255, 255, 255, 0) 100%
+      );
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: auto;
+    }
+  }
+</style>
